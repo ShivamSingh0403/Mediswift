@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mediswift | Your Health, Delivered</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Essential layout styles to match your screenshot design */
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8fafc;
+            color: #0f172a;
+        }
+
+        /* Navbar */
+        .top-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #007bff;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+            list-style: none;
+            padding: 0;
+            font-weight: 600;
+            color: #475569;
+        }
+
+        .nav-links li {
+            cursor: pointer;
+        }
+
+        .nav-actions {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .btn-outline {
+            border: 1px solid #cbd5e1;
+            background: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .btn-solid {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .btn-solid:hover {
+            background: #0056b3;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 60px 5%;
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            color: #0f172a;
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: #64748b;
+            line-height: 1.6;
+        }
+
+        /* Category Cards */
+        .card-grid {
+            display: flex;
+            gap: 20px;
+            padding: 0 5%;
+            flex-wrap: wrap;
+            margin-bottom: 60px;
+        }
+
+        .category-card {
+            background: white;
+            padding: 25px;
+            border-radius: 16px;
+            width: 280px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+            border: 1px solid #e2e8f0;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .category-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+        }
+
+        .category-card h3 {
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+
+        .category-card p {
+            color: #64748b;
+            font-size: 14px;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        .consult-badge {
+            background: #ecfdf5;
+            color: #10b981;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: bold;
+            display: inline-block;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="top-nav">
+        <div class="logo">💊 Mediswift</div>
+        <ul class="nav-links">
+            <li>Home</li>
+            <li>Medicines</li>
+            <li>Offers</li>
+            <li>About</li>
+            <li>Contact</li>
+        </ul>
+        <div class="nav-actions">
+            <button class="btn-outline">Login</button>
+            <button class="btn-solid"
+                onclick="document.getElementById('signupModal').style.display='flex'">Signup</button>
+            <button class="btn-outline">Cart <span
+                    style="background:#10b981; color:white; border-radius:50%; padding:2px 6px; font-size:12px;">0</span></button>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <h1>Book online doctor consultations from the same dashboard</h1>
+        <p>Choose a specialist, schedule a frontend-only demo appointment, and explore a smooth healthcare booking flow
+            designed for pharmacy-led digital care.</p>
+    </section>
+
+    <div class="card-grid">
+        <div class="category-card" onclick="openDoctorModal('General Physician')">
+            <h3 style="color: #007bff;">👨‍⚕️ General Physician</h3>
+            <p>For fever, cold, pain, fatigue, minor infections, and everyday health concerns.</p>
+            <div class="consult-badge">Consultation from ₹399</div>
+        </div>
+
+        <div class="category-card" onclick="openDoctorModal('Pulmonologist')">
+            <h3 style="color: #007bff;">🫁 Pulmonologist</h3>
+            <p>Support for asthma, breathing difficulties, allergy-driven chest issues, and cough.</p>
+            <div class="consult-badge">Consultation from ₹599</div>
+        </div>
+
+        <div class="category-card" onclick="openDoctorModal('Cardiologist')">
+            <h3 style="color: #007bff;">❤️ Cardiologist</h3>
+            <p>Heart health guidance, blood pressure support, and medication follow-up planning.</p>
+            <div class="consult-badge">Consultation from ₹799</div>
+        </div>
+
+        <div class="category-card" onclick="openDoctorModal('Dermatologist')">
+            <h3 style="color: #007bff;">🧑‍🦲 Dermatologist</h3>
+            <p>Skin, acne, allergy, pigmentation, rash, and treatment follow-up consultations.</p>
+            <div class="consult-badge">Consultation from ₹649</div>
+        </div>
+    </div>
+
+
+    <div id="signupModal" class="modal-overlay"
+        style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 999; justify-content: center; align-items: center;">
+        <div class="modal-content"
+            style="background: white; padding: 30px; border-radius: 16px; width: 90%; max-width: 400px; position: relative;">
+            <span class="close-signup"
+                style="position: absolute; top: 15px; right: 20px; font-size: 24px; cursor: pointer; color: #888;">&times;</span>
+            <h2 style="margin-bottom: 20px;">Create an Account</h2>
+
+            <form id="signupFormBody">
+                <input type="text" id="signupName" placeholder="Full Name" required
+                    style="width: 100%; box-sizing: border-box; padding: 12px; margin-bottom: 15px; border-radius: 8px; border: 1px solid #ccc;">
+                <input type="email" id="signupEmail" placeholder="Email Address" required
+                    style="width: 100%; box-sizing: border-box; padding: 12px; margin-bottom: 15px; border-radius: 8px; border: 1px solid #ccc;">
+                <input type="password" id="signupPassword" placeholder="Password" required
+                    style="width: 100%; box-sizing: border-box; padding: 12px; margin-bottom: 15px; border-radius: 8px; border: 1px solid #ccc;">
+
+                <label style="font-size: 14px; color: #666; display: block; margin-bottom: 8px;">Profile Picture
+                    (Optional)</label>
+                <input type="file" id="profilePicInput" accept="image/*" style="margin-bottom: 15px;">
+
+                <div id="previewContainer" style="display: none; text-align: center; margin-bottom: 15px;">
+                    <img id="avatarPreview" src=""
+                        style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover; border: 2px solid #007bff;">
+                </div>
+
+                <button type="submit"
+                    style="width: 100%; padding: 14px; background: #007bff; color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer;">Sign
+                    Up</button>
+            </form>
+        </div>
+    </div>
+
+
+    <div id="doctorModal" class="modal-overlay"
+        style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 999; justify-content: center; align-items: center;">
+        <div class="modal-content"
+            style="background: white; padding: 30px; border-radius: 16px; width: 90%; max-width: 800px; max-height: 80vh; overflow-y: auto; position: relative;">
+            <span class="close-modal"
+                style="position: absolute; top: 15px; right: 20px; font-size: 24px; cursor: pointer; color: #888;">&times;</span>
+            <h2 id="modalTitle" style="margin-bottom: 20px;">Available Doctors</h2>
+
+            <div id="modalDoctorGrid"
+                style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px;">
+            </div>
+        </div>
+    </div>
+
+
+    <script src="script.js"></script>
+    <script>
+        // Emergency logic to close the signup modal from the 'X' button
+        document.querySelector('.close-signup').onclick = function () {
+            document.getElementById('signupModal').style.display = 'none';
+        }
+        // Emergency logic to close if clicking outside the signup box
+        window.onclick = function (event) {
+            const signupModal = document.getElementById('signupModal');
+            if (event.target == signupModal) {
+                signupModal.style.display = "none";
+            }
+        }
+    </script>
+</body>
+
+</html>
+<div class="prescription-card">
+    <form id="prescriptionForm" class="prescription-form" novalidate>
+        <div class="form-row">
+            <div class="input-group">
+                <label for="prescriptionName">Full Name</label>
+                <input type="text" id="prescriptionName" placeholder="Enter patient name">
+                <small class="error-text"></small>
+            </div>
+            <div class="input-group">
+                <label for="prescriptionPhone">Phone Number</label>
+                <input type="tel" id="prescriptionPhone" placeholder="Enter 10-digit mobile number">
+                <small class="error-text"></small>
+            </div>
+        </div>
+
+        <div class="input-group">
+            <label for="prescriptionNotes">Prescription Notes</label>
+            <textarea id="prescriptionNotes" rows="4"
+                placeholder="Mention medicines, dosage requirements, or delivery instructions"></textarea>
+            <small class="error-text"></small>
+        </div>
+
+        <div class="upload-zone" id="uploadZone">
+            <input type="file" id="prescriptionFile" accept=".pdf,.jpg,.jpeg,.png">
+            <div class="upload-content">
+                <i class="ri-upload-cloud-2-line"></i>
+                <h3>Upload Prescription</h3>
+                <p>Accepted formats: PDF, JPG, PNG</p>
+                <span id="filePreviewName">No file selected</span>
+            </div>
+        </div>
+
+        <button type="submit" class="primary-btn full-width-btn">
+            <i class="ri-file-list-3-line"></i>
+            Submit Prescription
+        </button>
+    </form>
+</div>
+</div>
+</section>
+function setupForms() {
+const loginForm = document.getElementById("loginForm");
+const signupForm = document.getElementById("signupForm");
+const contactForm = document.getElementById("contactForm");
+const newsletterForm = document.getElementById("newsletterForm");
+const prescriptionForm = document.getElementById("prescriptionForm");
+const consultancyForm = document.getElementById("consultancyForm");
+
+loginForm.addEventListener("submit", (event) => {
+event.preventDefault();
+
+const emailField = document.getElementById("loginEmail");
+const passwordField = document.getElementById("loginPassword");
+
+const valid = [validateEmail(emailField), validatePassword(passwordField)].every(Boolean);
+
+if (!valid) {
+return;
+}
+
+loginForm.reset();
+clearFieldError(emailField);
+clearFieldError(passwordField);
+closeAuthModal();
+showToast("Login successful", "Frontend validation passed. Welcome back to Mediswift.", "success");
+});
+
+signupForm.addEventListener("submit", (event) => {
+event.preventDefault();
+
+const nameField = document.getElementById("signupName");
+const emailField = document.getElementById("signupEmail");
+const passwordField = document.getElementById("signupPassword");
+const confirmField = document.getElementById("signupConfirmPassword");
+
+const validations = [
+validateName(nameField, "Full name"),
+validateEmail(emailField),
+validatePassword(passwordField, 8)
+];
+
+if (!confirmField.value.trim()) {
+setFieldError(confirmField, "Please confirm your password.");
+validations.push(false);
+} else if (confirmField.value !== passwordField.value) {
+setFieldError(confirmField, "Passwords do not match.");
+validations.push(false);
+} else {
+clearFieldError(confirmField);
+validations.push(true);
+}
+
+if (!validations.every(Boolean)) {
+return;
+}
+
+signupForm.reset();
+[nameField, emailField, passwordField, confirmField].forEach(clearFieldError);
+activateAuthTab("loginForm");
+showToast("Account created", "Your Mediswift signup form was validated successfully.", "success");
+});
+contactForm.addEventListener("submit", async (event) => {
+event.preventDefault();
+
+const nameField = document.getElementById("contactName");
+const emailField = document.getElementById("contactEmail");
+const messageField = document.getElementById("contactMessage");
+
+// Run your existing frontend validation
+const valid = [
+validateName(nameField, "Name"),
+validateEmail(emailField),
+validateTextarea(messageField, "Message", 15)
+].every(Boolean);
+
+if (!valid) return;
+
+// Package the data
+const formData = {
+name: nameField.value.trim(),
+email: emailField.value.trim(),
+message: messageField.value.trim()
+};
+
+try {
+// Send data to your custom backend
+const response = await fetch('http://localhost:5000/api/contact', {
+method: 'POST',
+headers: {
+'Content-Type': 'application/json'
+},
+body: JSON.stringify(formData)
+});
+
+const result = await response.json();
+
+if (response.ok) {
+contactForm.reset();
+[nameField, emailField, messageField].forEach(clearFieldError);
+showToast("Message sent", "Your contact request has been securely saved to the database!", "success");
+} else {
+showToast("Error", result.message || "Failed to send message.", "error");
+}
+} catch (error) {
+showToast("Connection Error", "Could not connect to the backend server.", "error");
+}
+});
+
+newsletterForm.addEventListener("submit", (event) => {
+event.preventDefault();
+
+const emailField = document.getElementById("newsletterEmail");
+const errorLabel = newsletterForm.querySelector(".error-text");
+
+if (!emailField.value.trim()) {
+newsletterForm.classList.add("newsletter-error");
+errorLabel.textContent = "Please enter your email.";
+return;
+}
+
+const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+if (!emailPattern.test(emailField.value.trim())) {
+newsletterForm.classList.add("newsletter-error");
+errorLabel.textContent = "Please enter a valid email address.";
+return;
+}
+
+newsletterForm.classList.remove("newsletter-error");
+errorLabel.textContent = "";
+newsletterForm.reset();
+showToast("Subscribed", "You will now receive Mediswift updates and offer alerts.", "success");
+});
+prescriptionForm.addEventListener("submit", async (event) => {
+event.preventDefault();
+
+const nameField = document.getElementById("prescriptionName");
+const phoneField = document.getElementById("prescriptionPhone");
+const notesField = document.getElementById("prescriptionNotes");
+
+// 1. Keep your awesome frontend validation
+const valid = [
+validateName(nameField, "Full name"),
+validatePhone(phoneField),
+validateTextarea(notesField, "Prescription notes", 10),
+validateFile(prescriptionFile)
+].every(Boolean);
+
+if (!valid) {
+return;
+}
+
+// 2. Package the data for Node.js using FormData
+const formData = new FormData();
+formData.append('patientName', nameField.value.trim());
+formData.append('phone', phoneField.value.trim());
+formData.append('notes', notesField.value.trim());
+formData.append('prescriptionFile', prescriptionFile.files[0]);
+
+// 3. Send it to your real backend!
+try {
+const response = await fetch('http://localhost:5000/api/upload-prescription', {
+method: 'POST',
+body: formData // No Content-Type header needed for FormData!
+});
+
+const result = await response.json();
+
+if (response.ok) {
+// Success: Clear the form and show your beautiful green toast
+prescriptionForm.reset();
+filePreviewName.textContent = "No file selected";
+[nameField, phoneField, notesField].forEach(clearFieldError);
+showToast("Prescription received", "Your prescription was sent to the database!", "success");
+} else {
+showToast("Upload Error", result.message, "error");
+}
+} catch (error) {
+console.error(error);
+showToast("Connection Error", "Could not connect to the backend server.", "error");
+}
+});
+
+function setupUploadPreview() {
+prescriptionFile.addEventListener("change", () => {
+const [file] = prescriptionFile.files;
+filePreviewName.textContent = file ? file.name : "No file selected";
+});
+
+["dragenter", "dragover"].forEach((eventName) => {
+uploadZone.addEventListener(eventName, (event) => {
+event.preventDefault();
+uploadZone.classList.add("active");
+});
+});
+
+["dragleave", "drop"].forEach((eventName) => {
+uploadZone.addEventListener(eventName, (event) => {
+event.preventDefault();
+uploadZone.classList.remove("active");
+});
+});
+}
+
+function setupNavigation() {
+navToggle.addEventListener("click", () => {
+const expanded = navToggle.getAttribute("aria-expanded") === "true";
+navToggle.setAttribute("aria-expanded", String(!expanded));
+navToggle.classList.toggle("active");
+navLinksWrap.classList.toggle("active");
+});
+
+document.querySelectorAll(".nav-links a").forEach((link) => {
+link.addEventListener("click", () => {
+navToggle.classList.remove("active");
+navToggle.setAttribute("aria-expanded", "false");
+navLinksWrap.classList.remove("active");
+});
+});
+
+focusSearchBtn.addEventListener("click", () => {
+highlightSection("#medicines");
+setTimeout(() => medicineSearch.focus(), 250);
+});
+
+openConsultBtn.addEventListener("click", () => {
+highlightSection("#consultancy");
+});
+
+document.querySelectorAll("[data-scroll-target]").forEach((button) => {
+button.addEventListener("click", () => {
+highlightSection(button.dataset.scrollTarget);
+});
+});
+}
+
+function setupModalActions() {
+cartTrigger.addEventListener("click", openCart);
+closeCartBtn.addEventListener("click", closeCart);
+closeAuthBtn.addEventListener("click", closeAuthModal);
+backdrop.addEventListener("click", handleBackDropClose);
+
+authButtons.forEach((button) => {
+button.addEventListener("click", () => {
+openAuthModal(button.dataset.authTarget);
+});
+});
+
+authTabs.forEach((tab) => {
+tab.addEventListener("click", () => {
+activateAuthTab(tab.dataset.authTab);
+});
+});
+
+document.addEventListener("keydown", (event) => {
+if (event.key === "Escape") {
+closeCart();
+closeAuthModal();
+}
+});
+}
+
+function setupDynamicListeners() {
+productGrid.addEventListener("click", handleProductGridClick);
+cartItems.addEventListener("click", handleCartActions);
+quickTags.addEventListener("click", handleQuickTagSelection);
+}
+
+function setupFilterListeners() {
+medicineSearch.addEventListener("input", renderProducts);
+categoryFilter.addEventListener("change", handleFilterChange);
+priceFilter.addEventListener("change", renderProducts);
+sortFilter.addEventListener("change", renderProducts);
+}
+
+function setupScrollFeatures() {
+window.addEventListener("scroll", () => {
+const scrollY = window.scrollY;
+navbar.classList.toggle("scrolled", scrollY > 20);
+scrollTopBtn.classList.toggle("visible", scrollY > 440);
+});
+
+scrollTopBtn.addEventListener("click", () => {
+window.scrollTo({
+top: 0,
+behavior: "smooth"
+});
+});
+}
+
+function setupCheckout() {
+checkoutBtn.addEventListener("click", () => {
+if (!cart.length) {
+showToast("Cart is empty", "Add medicines before proceeding to checkout.", "error");
+return;
+}
+
+showToast("Checkout demo", "This frontend demo does not process payments, but your cart is ready.", "success");
+});
+}
+
+function initializeApp() {
+populateCategoryFilter();
+renderQuickTags();
+renderProducts();
+updateCartUI();
+setupNavigation();
+setupModalActions();
+setupDynamicListeners();
+setupFilterListeners();
+setupForms();
+setupUploadPreview();
+setupScrollFeatures();
+setupCheckout();
+}
+
+window.addEventListener("load", () => {
+initializeApp();
+
+setTimeout(() => {
+pageLoader.classList.add("hidden");
+}, 200);
+
+// Fallback for any delays
+document.addEventListener('DOMContentLoaded', () => {
+setTimeout(() => pageLoader.classList.add("hidden"), 1500);
+});
+});
+prescriptionForm.addEventListener("submit", (event) => {
+event.preventDefault();
+
+const nameField = document.getElementById("prescriptionName");
+const phoneField = document.getElementById("prescriptionPhone");
+const notesField = document.getElementById("prescriptionNotes");
+
+const valid = [
+validateName(nameField, "Full name"),
+validatePhone(phoneField),
+validateTextarea(notesField, "Prescription notes", 10),
+validateFile(prescriptionFile)
+].every(Boolean);
+
+if (!valid) {
+return;
+}
+
+prescriptionForm.reset();
+filePreviewName.textContent = "No file selected";
+[nameField, phoneField, notesField].forEach(clearFieldError);
+showToast("Prescription received", "Your prescription upload request was submitted successfully.", "success");
+});

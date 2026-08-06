@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Mediswift - Doctor Portal</title>
+    <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+    <style>
+        body {
+            background: #0f172a;
+            color: white;
+            font-family: sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .video-container {
+            display: flex;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        video {
+            background: #1e293b;
+            border-radius: 12px;
+        }
+
+        /* The magical Answer Button (Hidden until called) */
+        #answerBtn {
+            background: #0fbe8a;
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-top: 20px;
+            display: none;
+            box-shadow: 0 4px 15px rgba(15, 190, 138, 0.4);
+            animation: pulse 1.5s infinite;
+        }
+
+        #answerBtn:hover {
+            background: #0da376;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>👨‍⚕️ Doctor's Portal</h1>
+    <h3 id="status" style="color: #94a3b8;">Waiting for patient to connect...</h3>
+
+    <button id="answerBtn" onclick="answerCall()">📞 Answer Incoming Call</button>
+
+    <div class="video-container">
+        <video id="doctorLocalVideo" autoplay muted style="width: 300px; border: 2px solid #0fbe8a;"></video>
+        <video id="patientRemoteVideo" autoplay style="width: 500px; border: 2px solid white;"></video>
+    </div>
+    <div class="dashboard-container" style="max-width: 800px; margin: 40px auto; font-family: sans-serif;">
+        <h2 style="color: #0b5cff; border-bottom: 2px solid #eee; padding-bottom: 10px;">📅 Today's Appointments</h2>
+
+        <div id="bookingList">
+            <p style="color: gray; font-style: italic;">Connecting to database...</p>
+        </div>
+    </div>
+    <div class="dashboard-container" style="max-width: 800px; margin: 40px auto; font-family: sans-serif;">
+        <h2 style="color: #0fbe8a; border-bottom: 2px solid #eee; padding-bottom: 10px;">💊 Patient Prescriptions</h2>
+        <div id="prescriptionList">
+            <p style="color: gray; font-style: italic;">Loading prescriptions from database...</p>
+        </div>
+    </div>
+
+    <script>
+        async function loadPrescriptions() {
+            try {
+                const response = await fetch('http://127.0.0.1:5000/api/prescriptions');
+                const prescriptions = await response.json();
+
+                const listContainer = document.getElementById('prescriptionList');
+                listContainer.innerHTML = '';
+
+                if (prescriptions.length === 0) {
+                    listContainer.innerHTML = '<p>No prescriptions uploaded yet.</p>';
+                    return;
+                }
+
+                prescriptions.forEach(rx => {
+                    const date = new Date(rx.date).toLocaleString();
+
+                    // Construct the full image URL pointing to your Node server
+                    const fullImageUrl = `http://127.0.0.1:5000${rx.prescriptionUrl}`;
+
+                    const card = `
+                        <div style="background: #ffffff; border-left: 5px solid #0fbe8a; box-shadow: 0 2px 10px rgba(0,0,0,0.05); padding: 20px; margin-bottom: 15px; border-radius: 6px;">
+                            <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                                <div>
+                                    <h3 style="margin: 0; color: #333;">${rx.patientName}</h3>
+                                    <p style="margin: 5px 0; color: #555;"><strong>Phone:</strong> ${rx.phone}</p>
+                                    <p style="margin: 5px 0 15px 0; color: #555;"><strong>Notes:</strong> ${rx.notes}</p>
+                                </div>
+                                
+                                <a href="${fullImageUrl}" target="_blank" style="background: #0b5cff; color: white; text-decoration: none; padding: 10px 15px; border-radius: 6px; font-weight: bold; font-size: 14px; box-shadow: 0 4px 10px rgba(11, 111, 218, 0.2);">
+                                    👁️ View File
+                                </a>
+                            </div>
+    
+                            <div style="border-top: 1px solid #eee; padding-top: 10px; font-size: 12px; color: #888;">
+                                Uploaded on: ${date}
+                            </div>
+                        </div>
+                    `;
+                    listContainer.innerHTML += card;
+                });
+            } catch (error) {
+                console.error("Error loading prescriptions:", error);
+                document.getElementById('prescriptionList').innerHTML = '<p style="color: red;">Failed to connect to the database.</p>';
+            }
+        }
+
+        // Run the function when the page loads
+        loadPrescriptions();
+    </script>
+
+    <script>
+        async function loadAppointments() {
+            try {
+                // 1. Ask the Node.js server for the data
+                const response = await fetch('http://127.0.0.1:5000/api/appointments');
+                const appointments = await response.json();
+
+                const listContainer = document.getElementById('bookingList');
+                listContainer.innerHTML = ''; // Clear the loading text
+
+                // 2. If the database is empty
+                if (appointments.length === 0) {
+                    listContainer.innerHTML = '<p>No appointments booked yet.</p>';
+                    return;
+                }
+
+                // 3. Loop through the database records and build the UI
+                appointments.forEach(app => {
+                    const date = new Date(app.createdAt).toLocaleString();
+
+                    const card = `
+                        <div style="background: #ffffff; border-left: 5px solid #0b5cff; box-shadow: 0 2px 10px rgba(0,0,0,0.05); padding: 20px; margin-bottom: 15px; border-radius: 6px;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <h3 style="margin: 0; color: #333;">${app.patientName}</h3>
+                                <span style="background: #e6f0ff; color: #0b5cff; padding: 5px 10px; border-radius: 20px; font-size: 12px; font-weight: bold;">
+                                    ${app.speciality}
+                                </span>
+                            </div>
+                            <p style="margin: 10px 0 5px 0; color: #555;"><strong>Email:</strong> ${app.patientEmail}</p>
+                            <p style="margin: 5px 0 15px 0; color: #555;"><strong>Issue:</strong> ${app.healthConcern}</p>
+                            <div style="border-top: 1px solid #eee; padding-top: 10px; font-size: 12px; color: #888;">
+                                Booked on: ${date}
+                            </div>
+                        </div>
+                    `;
+                    listContainer.innerHTML += card;
+                });
+            } catch (error) {
+                console.error("Error loading bookings:", error);
+                document.getElementById('bookingList').innerHTML = '<p style="color: red;">Failed to connect to the database. Is the server running?</p>';
+            }
+        }
+
+        // Run the engine as soon as the page loads!
+        loadAppointments();
+    </script>
+    <script>
+        // Connect to the Switchboard
+        const socket = io('http://127.0.0.1:5000');
+        let localStream;
+        let peerConnection;
+        let incomingOffer = null; // Will hold the patient's call data
+        const currentRoomId = "demo-room-1024";
+        const rtcSettings = { iceServers: [{ urls: 'stun:stun.l.google.com:19302' }] };
+
+        // 1. Tell the switchboard the doctor is ready and waiting
+        socket.emit('join-room', currentRoomId);
+
+        // 2. When the phone rings (Patient clicks "Turn On Camera")
+        socket.on('offer', (offer) => {
+            incomingOffer = offer; // Save the network handshake data
+
+            // Change the UI to alert the doctor!
+            document.getElementById('status').innerText = "🚨 INCOMING CALL FROM PATIENT...";
+            document.getElementById('status').style.color = "#ef4444"; // Red text
+            document.getElementById('answerBtn').style.display = "block"; // Show the Answer button
+        });
+
+        // 3. The Doctor Clicks "Answer Call"
+        async function answerCall() {
+            // Hide the button and update text
+            document.getElementById('answerBtn').style.display = "none";
+            document.getElementById('status').innerText = "Connecting secure video line...";
+            document.getElementById('status').style.color = "#e2e8f0";
+
+            try {
+                // Now that the user clicked, Chrome will happily allow the camera!
+                localStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+                document.getElementById('doctorLocalVideo').srcObject = localStream;
+
+                // Create the WebRTC Connection
+                peerConnection = new RTCPeerConnection(rtcSettings);
+                localStream.getTracks().forEach(track => peerConnection.addTrack(track, localStream));
+
+                // Display the patient's video when it arrives
+                peerConnection.ontrack = (event) => {
+                    document.getElementById('patientRemoteVideo').srcObject = event.streams[0];
+                    document.getElementById('status').innerText = "🔴 Live Consultation Active";
+                };
+
+                // Send network coordinates back to patient
+                peerConnection.onicecandidate = (event) => {
+                    if (event.candidate) socket.emit('ice-candidate', currentRoomId, event.candidate);
+                };
+
+                // Complete the handshake!
+                await peerConnection.setRemoteDescription(new RTCSessionDescription(incomingOffer));
+                const answer = await peerConnection.createAnswer();
+                await peerConnection.setLocalDescription(answer);
+                socket.emit('answer', currentRoomId, answer);
+
+            } catch (err) {
+                alert("Camera access denied or failed! Check your browser permissions.");
+                console.error("Camera Error:", err);
+            }
+        }
+
+        // 4. Save patient's network coordinates
+        socket.on('ice-candidate', async (candidate) => {
+            if (peerConnection) await peerConnection.addIceCandidate(new RTCIceCandidate(candidate));
+        });
+
+        // 5. Handle Patient Hanging Up
+        socket.on('user-hung-up', () => {
+            document.getElementById('status').innerText = "Call Ended. Patient left the room.";
+            document.getElementById('status').style.color = "#94a3b8";
+
+            if (localStream) {
+                localStream.getTracks().forEach(track => track.stop());
+            }
+            document.getElementById('doctorLocalVideo').srcObject = null;
+            document.getElementById('patientRemoteVideo').srcObject = null;
+        });
+    </script>
+</body>
+
+</html>
