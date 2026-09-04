@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  postgres_db:
+    image: postgres:16-alpine
+    container_name: mediswift_postgres
+    restart: always
+    environment:
+      POSTGRES_DB: mediswift_db
+      POSTGRES_USER: mediswift_user
+      POSTGRES_PASSWORD: mediswift_secure_password_2026
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U mediswift_user -d mediswift_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  postgres_data:
+    driver: local
