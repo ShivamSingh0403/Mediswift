@@ -1,126 +1,119 @@
-# Mediswift Pro 🏥💊
+# MediSwift — Your Health, Delivered Smarter.
 
-> **Enterprise Healthcare E-Commerce & Telehealth Platform**  
-> Built with Next.js (App Router), Tailwind CSS, Framer Motion, Django REST Framework, SimpleJWT, PostgreSQL & Stripe.
-
----
-
-## 🌟 Key Platform Features
-
-### 1. 🇮🇳 India-Centric Medicine Formulary (250+ Verified Catalog)
-- **Authentic Indian Inventory**: Realistic brands including *Dolo 650, Pan 40, Shelcal 500, Azithral 500, Calpol, Allegra, Montair-LC, Augmentin 625 Duo, Volini, Becosules*.
-- **Accurate INR Localization**: Native Indian Rupee (`₹`) pricing, Maximum Retail Price (MRP), discount tracking, and 5% GST calculation.
-- **Smart Substitute Algorithm**: Automatically identifies and recommends cheaper generic alternatives with identical chemical salt compositions (e.g. suggesting *P-650* or *Pacimol* for *Crocin 650* with up to 45% savings).
-- **Dosage-Form Image Mapping**: Dynamic high-resolution photography mapped to specific medicine forms (*blister tablets, syrups, ointments, inhalers, diagnostic devices*).
-
-### 2. ⚡ High-Tech Modern Frontend
-- **3D Tilt Micro-Interactions**: Fluid, interactive product cards powered by `framer-motion` responding to cursor trajectory.
-- **Glassmorphic Quick-Add**: Frosted glass hover overlays for instantaneous cart additions.
-- **Cinematic Product Detail**: Macro image gallery, comprehensive chemical composition breakdown, and dosage guides.
-- **Dynamic Prescription Warning**: Visual pulsing `Rx Required` alerts with one-click direct routing to prescription verification.
-
-### 3. 🛡️ Secure Prescription Upload & Verification
-- **Multipart Upload Pipeline**: Secure `/api/prescriptions/upload/` DRF endpoint accepting PDF and high-res images (up to 10MB).
-- **Interactive Drag-and-Drop**: Built using `react-dropzone` with client-side preview and real-time status tracking (*Pending Review, Approved, Rejected*).
-
-### 4. 🩺 Telehealth Routing & Double-Booking Prevention
-- **Dynamic Slot Engine**: `/api/doctors/available-slots/` endpoint calculating open vs. reserved 30-minute intervals.
-- **Atomic Concurrency Protection**: Database-level unique constraints and transactions preventing double-booking race conditions.
-- **Specialist Directory**: Teleconsultation booking across Cardiology, Dermatology, General Medicine, Pediatrics, and Psychiatry.
-
-### 5. 💳 Cart, Checkout & Stripe Payment
-- **Zustand State Management**: Persistent client-side cart store with quantity controllers.
-- **Stripe Hosted Checkout**: Dynamic session generation with webhook order fulfillment and stock auto-deduction.
+MediSwift is a full-stack Indian healthcare ecosystem uniting online medicine e-commerce, healthcare products, secure prescription uploads, doctor discovery, telehealth appointment booking, medicine order management, delivery tracking, and a comprehensive patient dashboard.
 
 ---
 
-## 🏗️ Architecture & Tech Stack
+## 🛠 Tech Stack
+
+### Frontend
+- **Framework**: Next.js (App Router, React 19)
+- **Language**: TypeScript (Strict Mode)
+- **Styling**: Tailwind CSS & Vanilla CSS Design Tokens
+- **Icons**: Lucide React
+- **Animations**: Framer Motion
+- **State Management**: Zustand (with persistent storage where appropriate)
+- **Forms & Validation**: React Hook Form + Zod
+
+### Backend
+- **Framework**: Python 3.12+ & Django 5+
+- **API**: Django REST Framework & SimpleJWT
+- **Database**: PostgreSQL (with automatic zero-config SQLite development fallback)
+- **Architecture**: Modular Django applications
+- **Security**: Private prescription file isolation, custom role-based permissions, CORS, CSRF
+
+---
+
+## 📁 Repository Structure
 
 ```
-Mediswift/
-├── mediswift-frontend/       # Next.js 14 (React 18, Tailwind CSS, Framer Motion, Zustand, Axios)
-│   ├── app/                 # App Router pages (medicines, cart, checkout, consultation, upload-prescription)
-│   ├── components/          # Reusable UI components (MedicineCard, MedicineDetail, AlternativeBrands, etc.)
-│   └── lib/                 # Utilities (api.ts, currency.ts)
+mediswift/
+├── frontend/                     # Next.js App Router frontend
+│   ├── app/                      # Page routes (/medicines, /doctors, /cart, /prescriptions, etc.)
+│   ├── components/               # UI design system & layout components
+│   ├── features/                 # Domain-specific components
+│   ├── hooks/                    # Reusable React hooks
+│   ├── lib/                      # Axios client, utils, constants
+│   ├── services/                 # API service layer
+│   ├── store/                    # Zustand stores (auth, cart, wishlist, ui, etc.)
+│   ├── types/                    # Domain TypeScript types
+│   └── public/                   # Static assets
 │
-├── mediswift_backend/        # Python 3.11+, Django 5, Django REST Framework, SimpleJWT
-│   ├── core_api/            # Core business logic (models, views, serializers, urls)
-│   │   └── management/      # Management commands (seed_india_catalog.py)
-│   └── mediswift_backend/   # Project settings, WSGI/ASGI, routing
+├── backend/                      # Django REST API backend
+│   ├── config/                   # Django settings, URLs, WSGI, ASGI
+│   ├── apps/
+│   │   ├── common/               # Envelopes, pagination, base models
+│   │   ├── users/                # Auth, JWT, roles, addresses
+│   │   ├── products/             # Medicines, categories, inventory
+│   │   ├── prescriptions/        # Secure upload & pharmacist verification
+│   │   ├── doctors/              # Doctor profiles, specialties
+│   │   ├── appointments/         # Telehealth slots & bookings
+│   │   ├── cart/                 # Shopping cart & subtotal engine
+│   │   ├── orders/               # Order processing & delivery tracking
+│   │   ├── payments/             # Transactions & payment gateway abstraction
+│   │   ├── notifications/        # User alerts
+│   │   └── analytics/            # Operations & sales metrics
+│   ├── requirements/             # Pip requirements
+│   └── manage.py
 │
-├── nginx/                   # Reverse proxy configuration
-├── docker-compose.yml       # Local PostgreSQL database
-└── docker-compose.prod.yml  # Production multi-container deployment
+├── docs/                         # Architecture & API specifications
+├── docker/                       # Dockerfiles
+├── .env.example                  # Environment configuration template
+├── docker-compose.yml            # Docker orchestration
+└── README.md                     # Documentation
 ```
 
 ---
 
 ## 🚀 Quick Start Guide
 
-### Prerequisites
-- Node.js 18+ & npm
-- Python 3.10+
-- PostgreSQL or SQLite (local development defaults to SQLite)
+### 1. Prerequisites
+- Node.js v20+ & npm
+- Python 3.12+
+- (Optional) PostgreSQL 16 or Docker
 
-### 1. Backend Setup (Django REST Framework)
+### 2. Environment Setup
 ```bash
-cd mediswift_backend
+# Copy root environment variables
+cp .env.example .env
+```
 
-# Create & activate virtual environment (optional)
+### 3. Backend Setup
+```bash
+cd backend
+
+# Create and activate Python virtual environment
 python -m venv venv
-# Windows:
-venv\Scripts\activate
-# Linux/macOS:
-source venv/bin/activate
+# On Windows:
+.\venv\Scripts\activate
+# On Linux/macOS:
+# source venv/bin/activate
 
 # Install dependencies
-pip install django djangorestframework django-cors-headers djangorestframework-simplejwt stripe pillow
+pip install -r requirements/base.txt
 
-# Apply migrations
+# Run migrations
+python manage.py makemigrations
 python manage.py migrate
 
-# Seed 250 Indian Enterprise Medicines
-python manage.py seed_india_catalog
-
-# Run development server
+# Start backend server
 python manage.py runserver 8000
 ```
+API will be available at `http://localhost:8000/api/v1/` and admin at `http://localhost:8000/admin/`.
 
-### 2. Frontend Setup (Next.js)
+### 4. Frontend Setup
 ```bash
-cd mediswift-frontend
+cd frontend
 
-# Install dependencies
+# Install packages
 npm install
 
-# Start development server
+# Start Next.js development server
 npm run dev
 ```
+Open `http://localhost:3000` in your browser.
 
-Visit **http://localhost:3000** to explore the platform.
-
----
-
-## 📡 Key API Endpoints
-
-| Method | Endpoint | Description |
-| :--- | :--- | :--- |
-| `GET` | `/api/medicines/` | List medicine inventory with search & filter |
-| `GET` | `/api/medicines/<id>/substitutes/` | Smart Substitute AI algorithm returning generic equivalents |
-| `POST` | `/api/prescriptions/upload/` | Multipart prescription upload endpoint |
-| `GET` | `/api/doctors/available-slots/` | Real-time open time slots for date and doctor |
-| `POST` | `/api/appointments/` | Book telehealth consultation (concurrency safe) |
-| `POST` | `/api/checkout/create-session/` | Stripe checkout session initiator |
-| `POST` | `/api/token/` | Obtain JWT token pair |
-
----
-
-## 🔒 Security & Compliance
-- **Authentication**: JWT access & refresh token lifecycle.
-- **Clinical Governance**: Prescription validation before controlled drug dispatch.
-- **Idempotent Payments**: Cryptographic signature validation via Stripe webhooks.
-
----
-
-## 📄 License
-MIT License. Developed for **Mediswift Pro**.
+### 5. Running with Docker Compose
+```bash
+docker compose up --build
+```
