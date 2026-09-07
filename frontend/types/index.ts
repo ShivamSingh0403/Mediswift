@@ -41,7 +41,9 @@ export interface Category {
   slug: string;
   description?: string;
   image?: string;
+  image_url?: string;
   subcategories_count?: number;
+  products_count?: number;
 }
 
 export interface Brand {
@@ -49,6 +51,7 @@ export interface Brand {
   name: string;
   slug: string;
   logo?: string;
+  logo_url?: string;
 }
 
 export interface Product {
@@ -57,22 +60,44 @@ export interface Product {
   slug: string;
   generic_name: string;
   composition?: string;
+  ingredients?: string;
   category: string;
   category_name: string;
+  category_slug?: string;
   brand?: string;
   brand_name?: string;
   dosage_form: string;
+  strength?: string;
   pack_size: string;
   price: string;
+  price_inr?: string;
+  original_price_inr?: string;
   discount_percent: string;
+  discount_percentage?: string;
   discounted_price: string;
   stock_quantity: number;
   in_stock: boolean;
+  rating?: string;
+  review_count?: number;
   prescription_required: boolean;
+  requires_prescription?: boolean;
+  featured?: boolean;
+  trending?: boolean;
+  bestseller?: boolean;
   primary_image?: string;
+  image_url?: string;
+  additional_images?: string[];
+  gallery_images?: string[];
+  short_description?: string;
+  detailed_description?: string;
   description?: string;
   usage_instructions?: string;
+  directions?: string;
   side_effects?: string;
+  warnings?: string;
+  storage_information?: string;
+  tags?: string[];
+  related_products?: Product[];
   manufacturer?: string;
 }
 

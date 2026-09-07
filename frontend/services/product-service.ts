@@ -3,12 +3,19 @@ import { ApiResponse, PaginatedResponse, Product, Category } from '@/types';
 
 export interface ProductQueryParams {
   page?: number;
+  page_size?: number;
   search?: string;
   category?: string;
   brand?: string;
   prescription_required?: boolean;
   min_price?: number;
   max_price?: number;
+  min_rating?: number;
+  in_stock?: boolean;
+  featured?: boolean;
+  trending?: boolean;
+  bestseller?: boolean;
+  sort?: string;
   ordering?: string;
 }
 
@@ -20,6 +27,11 @@ export const productService = {
 
   async getProductBySlug(slug: string): Promise<ApiResponse<Product>> {
     const response = await apiClient.get<ApiResponse<Product>>(`/products/${slug}/`);
+    return response.data;
+  },
+
+  async getRelatedProducts(slug: string): Promise<ApiResponse<Product[]>> {
+    const response = await apiClient.get<ApiResponse<Product[]>>(`/products/${slug}/related/`);
     return response.data;
   },
 

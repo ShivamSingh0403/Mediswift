@@ -25,6 +25,7 @@ import { useNotificationStore } from '@/store/notification-store';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Card } from '@/components/ui/card';
+import { ProductCard } from '@/components/product-card';
 import { formatCurrency } from '@/lib/utils';
 
 export default function HomePage() {
@@ -212,54 +213,8 @@ export default function HomePage() {
 
         {/* Product Cards Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          {products.map((product) => (
-            <Card key={product.id} className="glass-card-hover flex flex-col justify-between">
-              <div>
-                <div className="flex items-center justify-between mb-3">
-                  {product.prescription_required ? (
-                    <Badge variant="rx">Rx Required</Badge>
-                  ) : (
-                    <Badge variant="success">OTC</Badge>
-                  )}
-                  {parseFloat(product.discount_percent) > 0 && (
-                    <span className="text-[11px] font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-md">
-                      {Math.round(parseFloat(product.discount_percent))}% OFF
-                    </span>
-                  )}
-                </div>
-
-                <Link href={`/medicines/${product.slug}`} className="block group">
-                  <h4 className="font-bold text-slate-900 group-hover:text-[#00A896] transition-colors line-clamp-1">
-                    {product.name}
-                  </h4>
-                  <p className="text-xs text-slate-500 line-clamp-1 mt-0.5">{product.generic_name}</p>
-                </Link>
-
-                <div className="text-[11px] text-slate-400 mt-2">{product.pack_size}</div>
-              </div>
-
-              <div className="pt-4 mt-4 border-t border-slate-100 flex items-center justify-between">
-                <div>
-                  <div className="text-lg font-bold text-[#0A2540]">
-                    {formatCurrency(product.discounted_price)}
-                  </div>
-                  {parseFloat(product.discount_percent) > 0 && (
-                    <div className="text-xs text-slate-400 line-through">
-                      {formatCurrency(product.price)}
-                    </div>
-                  )}
-                </div>
-
-                <Button
-                  size="sm"
-                  variant="primary"
-                  onClick={(e) => handleAddToCart(product, e)}
-                >
-                  <Plus className="h-3.5 w-3.5 mr-1" />
-                  <span>Add</span>
-                </Button>
-              </div>
-            </Card>
+          {products.slice(0, 8).map((product) => (
+            <ProductCard key={product.id} product={product} />
           ))}
         </div>
       </section>
