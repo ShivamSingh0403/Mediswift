@@ -6,11 +6,13 @@ import Image from 'next/image';
 import { Product } from '@/types';
 import { useCartStore } from '@/store/cart-store';
 import { useNotificationStore } from '@/store/notification-store';
+import { useWishlistStore } from '@/store/wishlist-store';
+import { useUiStore } from '@/store/ui-store';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Card } from '@/components/ui/card';
 import { formatCurrency } from '@/lib/utils';
-import { Plus, Star, Pill, Sparkles, TrendingUp } from 'lucide-react';
+import { Plus, Star, Pill, Sparkles, TrendingUp, Heart, Eye } from 'lucide-react';
 
 interface ProductCardProps {
   product: Product;
@@ -20,7 +22,11 @@ interface ProductCardProps {
 export function ProductCard({ product, className = '' }: ProductCardProps) {
   const { addItem } = useCartStore();
   const { addToast } = useNotificationStore();
+  const { hasProduct, toggleProduct } = useWishlistStore();
+  const { setQuickViewProduct, setCartDrawerOpen } = useUiStore();
   const [imgError, setImgError] = useState(false);
+
+  const isWishlisted = hasProduct(product.id);
 
   const handleAdd = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -29,8 +35,26 @@ export function ProductCard({ product, className = '' }: ProductCardProps) {
     addToast({
       type: 'success',
       title: 'Added to Cart',
-      message: `${product.name} added to cart.`,
+      message: `${product.name} added to your basket.`,
     });
+    setCartDrawerOpen(true);
+  };
+
+  const handleWishlist = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    toggleProduct(product.id);
+    addToast({
+      type: 'info',
+      title: isWishlisted ? 'Removed from Wishlist' : 'Saved to Wishlist',
+      message: `${product.name} ${isWishlisted ? 'removed from' : 'saved to'} your favorites.`,
+    });
+  };
+
+  const handleQuickView = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setQuickViewProduct(product);
   };
 
   const imageUrl = product.image_url || product.primary_image || (product.gallery_images && product.gallery_images[0]);
@@ -40,7 +64,7 @@ export function ProductCard({ product, className = '' }: ProductCardProps) {
 
   return (
     <Card className={`glass-card-hover flex flex-col justify-between overflow-hidden group p-0 border border-slate-200/80 bg-white hover:border-[#00A896]/40 transition-all duration-300 ${className}`}>
-      {/* Top Media & Badges Area */}
+      {/* Top Media & Floating Actions Area */}
       <div className="relative">
         <Link href={`/medicines/${product.slug}`} className="block relative h-48 w-full bg-slate-50 overflow-hidden">
           {imageUrl && !imgError ? (
@@ -49,7 +73,7 @@ export function ProductCard({ product, className = '' }: ProductCardProps) {
               alt={product.name}
               fill
               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-              className="object-cover group-hover:scale-105 transition-transform duration-500"
+              className="object-cover group-hover:scale-108 transition-transform duration-500 ease-out"
               onError={() => setImgError(true)}
             />
           ) : (
@@ -59,8 +83,8 @@ export function ProductCard({ product, className = '' }: ProductCardProps) {
             </div>
           )}
 
-          {/* Gradient Overlay */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+          {/* Gradient Overlay on hover */}
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0A2540]/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
         </Link>
 
         {/* Floating Badges */}
@@ -88,13 +112,39 @@ export function ProductCard({ product, className = '' }: ProductCardProps) {
           )}
         </div>
 
-        {discountVal > 0 && (
-          <div className="absolute top-2.5 right-2.5 z-10">
+        {/* Top Right Actions: Discount + Quick Icons */}
+        <div className="absolute top-2.5 right-2.5 flex flex-col items-end gap-1.5 z-10">
+          {discountVal > 0 && (
             <span className="text-[11px] font-extrabold text-emerald-700 bg-emerald-100/95 backdrop-blur-xs px-2 py-0.5 rounded-full shadow-xs">
               {Math.round(discountVal)}% OFF
             </span>
+          )}
+
+          {/* Quick Action Floating Buttons (appear on hover on desktop) */}
+          <div className="flex flex-col gap-1.5 opacity-90 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity">
+            <button
+              type="button"
+              onClick={handleWishlist}
+              className={`p-1.5 rounded-full shadow-sm backdrop-blur-md transition-all ${
+                isWishlisted
+                  ? 'bg-rose-50 text-rose-600'
+                  : 'bg-white/90 text-slate-600 hover:text-rose-600 hover:bg-white'
+              }`}
+              title={isWishlisted ? 'Remove from wishlist' : 'Add to wishlist'}
+            >
+              <Heart className={`h-3.5 w-3.5 ${isWishlisted ? 'fill-rose-500 text-rose-500' : ''}`} />
+            </button>
+
+            <button
+              type="button"
+              onClick={handleQuickView}
+              className="p-1.5 rounded-full bg-white/90 text-slate-600 hover:text-[#00A896] hover:bg-white shadow-sm backdrop-blur-md transition-all"
+              title="Quick preview"
+            >
+              <Eye className="h-3.5 w-3.5" />
+            </button>
           </div>
-        )}
+        </div>
       </div>
 
       {/* Card Content */}

@@ -1,13 +1,13 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { useUiStore } from '@/store/ui-store';
 import { useNotificationStore } from '@/store/notification-store';
 import { prescriptionService } from '@/services/prescription-service';
 import { Modal } from '@/components/ui/modal';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { UploadCloud, FileText, CheckCircle2, AlertCircle } from 'lucide-react';
+import { UploadCloud, FileText, CheckCircle2, AlertCircle, X, ShieldCheck } from 'lucide-react';
 
 export function PrescriptionModal() {
   const { isPrescriptionModalOpen, setPrescriptionModalOpen } = useUiStore();
@@ -17,20 +17,46 @@ export function PrescriptionModal() {
   const [doctorName, setDoctorName] = useState('');
   const [patientNotes, setPatientNotes] = useState('');
   const [isUploading, setIsUploading] = useState(false);
+  const [uploadProgress, setUploadProgress] = useState(0);
   const [uploadSuccess, setUploadSuccess] = useState(false);
+  const [isDragOver, setIsDragOver] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files[0]) {
-      const selected = e.target.files[0];
-      if (selected.size > 10 * 1024 * 1024) {
-        addToast({
-          type: 'error',
-          title: 'File too large',
-          message: 'Prescription document must be less than 10MB.',
-        });
-        return;
-      }
-      setFile(selected);
+  const handleFile = (selected: File) => {
+    if (selected.size > 10 * 1024 * 1024) {
+      addToast({
+        type: 'error',
+        title: 'File too large',
+        message: 'Prescription document must be less than 10MB.',
+      });
+      return;
+    }
+    const validTypes = ['image/jpeg', 'image/png', 'image/webp', 'application/pdf'];
+    if (!validTypes.includes(selected.type)) {
+      addToast({
+        type: 'error',
+        title: 'Invalid File Format',
+        message: 'Please upload a PDF, PNG, JPG, or WEBP image.',
+      });
+      return;
+    }
+    setFile(selected);
+  };
+
+  const handleDragOver = (e: React.DragEvent) => {
+    e.preventDefault();
+    setIsDragOver(true);
+  };
+
+  const handleDragLeave = () => {
+    setIsDragOver(false);
+  };
+
+  const handleDrop = (e: React.DragEvent) => {
+    e.preventDefault();
+    setIsDragOver(false);
+    if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+      handleFile(e.dataTransfer.files[0]);
     }
   };
 
@@ -39,133 +65,188 @@ export function PrescriptionModal() {
     if (!file) {
       addToast({
         type: 'warning',
-        message: 'Please choose a prescription document (PDF or image).',
+        message: 'Please select or drag a valid prescription file.',
       });
       return;
     }
 
     setIsUploading(true);
+    setUploadProgress(20);
+
     const formData = new FormData();
     formData.append('document', file);
     if (doctorName) formData.append('doctor_name', doctorName);
     if (patientNotes) formData.append('patient_notes', patientNotes);
 
     try {
+      const progressInterval = setInterval(() => {
+        setUploadProgress((prev) => (prev < 90 ? prev + 15 : prev));
+      }, 100);
+
       await prescriptionService.uploadPrescription(formData);
+      clearInterval(progressInterval);
+      setUploadProgress(100);
       setUploadSuccess(true);
       addToast({
         type: 'success',
         title: 'Prescription Uploaded',
-        message: 'A licensed pharmacist will review your prescription within 15 minutes.',
+        message: 'Our certified pharmacists will verify your prescription within minutes.',
       });
-      setTimeout(() => {
-        setUploadSuccess(false);
-        setFile(null);
-        setDoctorName('');
-        setPatientNotes('');
-        setPrescriptionModalOpen(false);
-      }, 1500);
     } catch {
       addToast({
         type: 'error',
         title: 'Upload Failed',
-        message: 'Please login to upload your prescription or verify network connection.',
+        message: 'Could not upload prescription document. Please try again.',
       });
     } finally {
       setIsUploading(false);
     }
   };
 
+  const handleClose = () => {
+    setPrescriptionModalOpen(false);
+    setFile(null);
+    setDoctorName('');
+    setPatientNotes('');
+    setUploadSuccess(false);
+    setUploadProgress(0);
+  };
+
   return (
     <Modal
       isOpen={isPrescriptionModalOpen}
-      onClose={() => setPrescriptionModalOpen(false)}
-      title="Secure Prescription Upload"
-      description="Upload your doctor's prescription for rapid pharmacist verification."
+      onClose={handleClose}
+      title="Upload Medical Prescription"
+      description="Secure encrypted upload for pharmacist verification compliant with CDSCO regulations."
     >
       {uploadSuccess ? (
-        <div className="py-8 flex flex-col items-center justify-center text-center space-y-3">
-          <div className="w-12 h-12 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center">
-            <CheckCircle2 className="h-7 w-7" />
+        <div className="py-8 text-center space-y-4">
+          <div className="w-16 h-16 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center mx-auto">
+            <CheckCircle2 className="h-10 w-10" />
           </div>
-          <h4 className="font-bold text-slate-800 text-base">Prescription Submitted!</h4>
-          <p className="text-xs text-slate-500 max-w-xs">
-            Your prescription has been securely uploaded to our encrypted vault.
+          <h3 className="text-lg font-bold text-slate-900">Prescription Received!</h3>
+          <p className="text-xs text-slate-500 max-w-sm mx-auto leading-relaxed">
+            Your prescription is now undergoing verification by our licensed Indian pharmacists. You can monitor its status anytime in your Prescription Vault.
           </p>
+          <div className="pt-4 flex justify-center gap-3">
+            <Button variant="primary" onClick={handleClose}>
+              Done
+            </Button>
+          </div>
         </div>
       ) : (
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div className="rounded-2xl border-2 border-dashed border-slate-200 p-6 text-center hover:border-[#00A896] transition-colors cursor-pointer bg-slate-50/50">
+        <form onSubmit={handleSubmit} className="space-y-4 pt-2">
+          {/* Drag and Drop Zone */}
+          <div
+            onDragOver={handleDragOver}
+            onDragLeave={handleDragLeave}
+            onDrop={handleDrop}
+            onClick={() => fileInputRef.current?.click()}
+            className={`border-2 border-dashed rounded-3xl p-6 text-center cursor-pointer transition-all ${
+              isDragOver
+                ? 'border-[#00A896] bg-teal-50/70 scale-102'
+                : file
+                ? 'border-emerald-300 bg-emerald-50/40'
+                : 'border-slate-200 hover:border-[#00A896]/60 hover:bg-slate-50'
+            }`}
+          >
             <input
+              ref={fileInputRef}
               type="file"
-              id="prescription-file-input"
-              accept=".pdf,.png,.jpg,.jpeg"
-              onChange={handleFileChange}
+              accept=".pdf,.jpg,.jpeg,.png,.webp"
+              onChange={(e) => e.target.files?.[0] && handleFile(e.target.files[0])}
               className="hidden"
             />
-            <label htmlFor="prescription-file-input" className="cursor-pointer block">
-              <div className="mx-auto w-12 h-12 rounded-full bg-[#00A896]/10 text-[#00A896] flex items-center justify-center mb-2">
-                <UploadCloud className="h-6 w-6" />
-              </div>
-              {file ? (
-                <div className="flex items-center justify-center gap-2 text-xs font-semibold text-[#0A2540]">
-                  <FileText className="h-4 w-4 text-[#00A896]" />
-                  <span>{file.name}</span>
+
+            {file ? (
+              <div className="flex items-center justify-center gap-3">
+                <FileText className="h-8 w-8 text-emerald-600 shrink-0" />
+                <div className="text-left min-w-0">
+                  <div className="text-xs font-bold text-slate-900 truncate max-w-xs">{file.name}</div>
+                  <div className="text-[10px] text-slate-400">{(file.size / (1024 * 1024)).toFixed(2)} MB</div>
                 </div>
-              ) : (
-                <>
-                  <div className="text-xs font-semibold text-slate-800">
-                    Click to browse or drop prescription file
-                  </div>
-                  <div className="text-[11px] text-slate-400 mt-1">
-                    Supports PDF, JPG, PNG (Max 10 MB)
-                  </div>
-                </>
-              )}
-            </label>
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setFile(null);
+                  }}
+                  className="p-1 rounded-full text-slate-400 hover:text-rose-500 hover:bg-slate-100"
+                >
+                  <X className="h-4 w-4" />
+                </button>
+              </div>
+            ) : (
+              <div className="space-y-2">
+                <div className="w-12 h-12 rounded-2xl bg-teal-50 text-[#00A896] flex items-center justify-center mx-auto shadow-xs">
+                  <UploadCloud className="h-6 w-6" />
+                </div>
+                <div>
+                  <span className="text-xs font-bold text-[#00A896]">Click to upload</span>
+                  <span className="text-xs text-slate-500"> or drag and drop</span>
+                </div>
+                <p className="text-[10px] text-slate-400">PDF, JPG, PNG, or WEBP (Max 10MB)</p>
+              </div>
+            )}
           </div>
 
-          <Input
-            label="Prescribing Doctor Name (Optional)"
-            placeholder="e.g., Dr. Rajesh Sharma"
-            value={doctorName}
-            onChange={(e) => setDoctorName(e.target.value)}
-          />
+          {/* Progress bar if uploading */}
+          {isUploading && (
+            <div className="space-y-1">
+              <div className="flex justify-between text-[11px] font-semibold text-slate-600">
+                <span>Encrypting and uploading...</span>
+                <span>{uploadProgress}%</span>
+              </div>
+              <div className="w-full h-1.5 rounded-full bg-slate-100 overflow-hidden">
+                <div
+                  className="h-full bg-[#00A896] transition-all duration-200 rounded-full"
+                  style={{ width: `${uploadProgress}%` }}
+                />
+              </div>
+            </div>
+          )}
 
-          <div className="space-y-1.5">
-            <label className="block text-xs font-semibold uppercase tracking-wider text-slate-600">
-              Special Instructions / Notes
-            </label>
-            <textarea
-              rows={2}
-              placeholder="e.g., Need 30 days dosage refill"
-              value={patientNotes}
-              onChange={(e) => setPatientNotes(e.target.value)}
-              className="w-full rounded-xl border border-slate-200 bg-white px-3.5 py-2 text-xs text-slate-800 placeholder-slate-400 focus:border-[#00A896] focus:outline-none focus:ring-2 focus:ring-[#00A896]/20"
-            />
+          {/* Optional metadata fields */}
+          <div className="space-y-3">
+            <div>
+              <label className="text-xs font-semibold text-slate-700 block mb-1">
+                Doctor / Clinic Name (Optional)
+              </label>
+              <Input
+                placeholder="e.g. Dr. Rajesh Sharma, Apollo Clinic"
+                value={doctorName}
+                onChange={(e) => setDoctorName(e.target.value)}
+                className="rounded-xl text-xs"
+              />
+            </div>
+
+            <div>
+              <label className="text-xs font-semibold text-slate-700 block mb-1">
+                Patient Instructions / Special Notes (Optional)
+              </label>
+              <Input
+                placeholder="e.g. Please deliver 30 days refill dosage"
+                value={patientNotes}
+                onChange={(e) => setPatientNotes(e.target.value)}
+                className="rounded-xl text-xs"
+              />
+            </div>
           </div>
 
-          <div className="flex items-center gap-2 rounded-xl bg-blue-50/60 p-3 text-[11px] text-slate-600 border border-blue-100">
-            <AlertCircle className="h-4 w-4 text-[#0A2540] shrink-0" />
-            <span>Prescriptions are encrypted and strictly accessed by certified pharmacists.</span>
+          {/* Regulatory Notice */}
+          <div className="p-3.5 rounded-2xl bg-slate-50 border border-slate-100 text-[11px] text-slate-500 flex items-start gap-2.5">
+            <ShieldCheck className="h-4 w-4 text-[#00A896] shrink-0 mt-0.5" />
+            <span>
+              Valid prescriptions must include Doctor&apos;s Name, Registration Number, Patient Details, Date, and Doctor&apos;s Signature.
+            </span>
           </div>
 
-          <div className="flex items-center justify-end gap-3 pt-2">
-            <Button
-              type="button"
-              variant="ghost"
-              size="sm"
-              onClick={() => setPrescriptionModalOpen(false)}
-            >
+          <div className="pt-2 flex justify-end gap-3">
+            <Button variant="outline" type="button" onClick={handleClose} disabled={isUploading}>
               Cancel
             </Button>
-            <Button
-              type="submit"
-              variant="secondary"
-              size="sm"
-              isLoading={isUploading}
-            >
-              Confirm Upload
+            <Button variant="primary" type="submit" disabled={isUploading || !file}>
+              {isUploading ? 'Uploading...' : 'Submit for Review'}
             </Button>
           </div>
         </form>
