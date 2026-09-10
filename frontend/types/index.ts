@@ -127,8 +127,10 @@ export interface Specialty {
 
 export interface Doctor {
   id: string;
+  slug: string;
   doctor_name: string;
   avatar?: string;
+  avatar_url?: string;
   specialties: Specialty[];
   qualifications: string;
   experience_years: number;
@@ -136,27 +138,61 @@ export interface Doctor {
   languages: string;
   hospital_affiliation: string;
   clinic_address?: string;
+  city?: string;
   bio?: string;
   rating: string;
   review_count: number;
   is_available_for_telehealth: boolean;
+  is_available_for_in_person?: boolean;
+  is_verified?: boolean;
 }
 
-export type AppointmentStatus = 'PENDING' | 'CONFIRMED' | 'COMPLETED' | 'CANCELLED' | 'RESCHEDULED';
+export type AppointmentStatus = 'PENDING' | 'CONFIRMED' | 'COMPLETED' | 'CANCELLED' | 'RESCHEDULED' | 'NO_SHOW';
 
 export interface Appointment {
   id: string;
+  booking_reference: string;
   doctor: Doctor;
   patient: User;
   scheduled_at: string;
+  appointment_date?: string;
+  start_time?: string;
+  end_time?: string;
   consultation_type: 'VIDEO' | 'IN_PERSON';
   consultation_type_display: string;
   status: AppointmentStatus;
   status_display: string;
   fee_amount: string;
   symptoms?: string;
-  meeting_link?: string;
+  doctor_notes?: string;
+  meeting_provider?: string;
+  meeting_room_id?: string;
+  meeting_url?: string;
+  meeting_status?: string;
+  cancellation_reason?: string;
+  cancelled_at?: string;
   created_at: string;
+  updated_at?: string;
+}
+
+export interface TimeSlot {
+  time: string;
+  time_display: string;
+  end_time: string;
+  period: 'Morning' | 'Afternoon' | 'Evening';
+  available: boolean;
+  reason?: string | null;
+}
+
+export interface AvailableSlotsData {
+  doctor_id: string;
+  doctor_name: string;
+  date: string;
+  weekday: string;
+  slot_duration_minutes: number;
+  total_slots: number;
+  available_count: number;
+  slots: TimeSlot[];
 }
 
 export interface CartItem {

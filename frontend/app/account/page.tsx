@@ -413,7 +413,7 @@ function AccountDashboardContent() {
             key={tab.id}
             type="button"
             onClick={() => setActiveTab(tab.id)}
-            className={`pb-3 px-4 text-xs font-bold transition-all border-b-2 whitespace-nowrap ${
+            className={`pb-3 px-4 text-xs font-bold transition-all border-b-2 whitespace-nowrap cursor-pointer ${
               activeTab === tab.id
                 ? 'border-[#00A896] text-[#00A896]'
                 : 'border-transparent text-slate-500 hover:text-slate-800'
@@ -422,6 +422,13 @@ function AccountDashboardContent() {
             {tab.label}
           </button>
         ))}
+        <Link
+          href="/account/appointments"
+          className="pb-3 px-4 text-xs font-bold transition-all border-b-2 border-transparent text-slate-500 hover:text-[#00A896] hover:border-[#00A896] whitespace-nowrap flex items-center gap-1.5"
+        >
+          <Calendar className="h-3.5 w-3.5 text-[#00A896]" />
+          <span>My Doctor Appointments</span>
+        </Link>
       </div>
 
       {/* Tab Content */}

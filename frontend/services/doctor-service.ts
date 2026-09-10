@@ -6,7 +6,15 @@ export interface DoctorQueryParams {
   search?: string;
   specialty?: string;
   telehealth_only?: boolean;
+  in_person_only?: boolean;
   min_rating?: number;
+  min_fee?: number;
+  max_fee?: number;
+  min_experience?: number;
+  max_experience?: number;
+  language?: string;
+  city?: string;
+  ordering?: string;
 }
 
 export const doctorService = {
@@ -20,8 +28,14 @@ export const doctorService = {
     return response.data;
   },
 
+  async getDoctorBySlug(slug: string): Promise<ApiResponse<Doctor>> {
+    const response = await apiClient.get<ApiResponse<Doctor>>(`/doctors/${slug}/`);
+    return response.data;
+  },
+
   async getSpecialties(): Promise<ApiResponse<PaginatedResponse<Specialty>>> {
     const response = await apiClient.get<ApiResponse<PaginatedResponse<Specialty>>>('/doctors/specialties/');
     return response.data;
   },
 };
+
