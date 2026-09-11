@@ -90,13 +90,16 @@ def run_telehealth_tests():
     print("\n--- TEST 3: Dynamic Slot Generation & Logic ---")
     view_slots = AppointmentViewSet.as_view({'get': 'available_slots'})
     
-    # Test tomorrow
-    tomorrow = (timezone.localtime().date() + timedelta(days=1)).strftime('%Y-%m-%d')
-    req = rf.get(f'/api/v1/appointments/available-slots/?doctor_id={doc_arjun.slug}&date={tomorrow}')
+    # Test next weekday with break
+    target_weekday = timezone.localtime().date() + timedelta(days=1)
+    while target_weekday.weekday() > 4: # Mon-Fri
+        target_weekday += timedelta(days=1)
+    test_date_str = target_weekday.strftime('%Y-%m-%d')
+    req = rf.get(f'/api/v1/appointments/available-slots/?doctor_id={doc_arjun.slug}&date={test_date_str}')
     res = view_slots(req)
     assert res.status_code == 200
     slots_payload = res.data['data']
-    print(f"[PASS] Date: {tomorrow} ({slots_payload['weekday']})")
+    print(f"[PASS] Date: {test_date_str} ({slots_payload['weekday']})")
     print(f"[PASS] Total slots: {slots_payload['total_slots']}, Available: {slots_payload['available_count']}")
     assert slots_payload['total_slots'] > 0
     

@@ -1,0 +1,14 @@
+{
+  "name": "mediswift",
+  "version": "1.0.0",
+  "private": true,
+  "description": "MediSwift — Your Health, Delivered Smarter.",
+  "scripts": {
+    "dev": "npm --prefix frontend run dev",
+    "dev:frontend": "npm --prefix frontend run dev",
+    "dev:backend": "powershell -NoProfile -ExecutionPolicy Bypass -Command \"cd backend; .\\venv\\Scripts\\python.exe manage.py runserver 8000\"",
+    "build": "npm --prefix frontend run build",
+    "start": "npm --prefix frontend run start",
+    "install:frontend": "npm --prefix frontend install"
+  }
+}

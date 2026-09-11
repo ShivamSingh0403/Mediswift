@@ -96,11 +96,29 @@ export function Footer() {
           </div>
         </div>
 
+        {/* Bottom Payment Badges & Regulatory Notice */}
+        <div className="py-6 border-b border-slate-800 flex flex-col md:flex-row items-center justify-between gap-4 text-xs">
+          <div className="flex flex-wrap items-center gap-2 text-slate-400">
+            <span className="text-white font-semibold mr-1">Payment Partners:</span>
+            <span className="px-2.5 py-1 rounded bg-white/5 border border-white/10 text-white font-medium text-[11px]">UPI (GPay / PhonePe / Paytm)</span>
+            <span className="px-2.5 py-1 rounded bg-white/5 border border-white/10 text-white font-medium text-[11px]">RuPay</span>
+            <span className="px-2.5 py-1 rounded bg-white/5 border border-white/10 text-white font-medium text-[11px]">Visa / Mastercard</span>
+            <span className="px-2.5 py-1 rounded bg-white/5 border border-white/10 text-white font-medium text-[11px]">NetBanking</span>
+            <span className="px-2.5 py-1 rounded bg-white/5 border border-white/10 text-emerald-400 font-medium text-[11px]">Cash on Delivery</span>
+          </div>
+          <div className="text-slate-400 text-[11px] text-center md:text-right">
+            <span>24x7 Customer Grievance: </span>
+            <span className="text-white font-semibold">care@mediswift.in</span>
+            <span className="mx-2">•</span>
+            <span>Toll-Free: <strong className="text-[#00A896]">1800-MEDISWIFT</strong></span>
+          </div>
+        </div>
+
         {/* Bottom copyright and regulatory notice */}
         <div className="pt-6 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-4">
           <p>© {new Date().getFullYear()} MediSwift Technologies Pvt Ltd. All rights reserved.</p>
-          <p className="text-[11px] text-slate-500 text-center sm:text-right">
-            Disclaimer: MediSwift is a technology platform facilitating fulfillment from licensed retail pharmacies and registered medical practitioners.
+          <p className="text-[11px] text-slate-500 text-center sm:text-right max-w-2xl">
+            Disclaimer: MediSwift is an Indian digital healthcare platform facilitating verified orders from CDSCO-licensed partner pharmacies and consultations with verified NMC-registered practitioners under Telemedicine Practice Guidelines 2020.
           </p>
         </div>
       </div>

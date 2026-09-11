@@ -30,6 +30,13 @@ import {
   Quote,
   Flame,
   Award,
+  Copy,
+  Check,
+  Truck,
+  Calendar,
+  Bell,
+  Tag,
+  X,
 } from 'lucide-react';
 import { productService } from '@/services/product-service';
 import { doctorService } from '@/services/doctor-service';
@@ -48,12 +55,20 @@ import { fadeUp, staggerContainer } from '@/lib/motion';
 const CURATED_CATEGORIES = [
   { name: 'Pain Relief', slug: 'pain-relief', icon: '⚡', color: 'from-amber-500/10 to-orange-500/10', count: '13+ Products' },
   { name: 'Fever & Cold', slug: 'fever-cold', icon: '🌡️', color: 'from-blue-500/10 to-cyan-500/10', count: '13+ Products' },
-  { name: 'Digestive Health', slug: 'digestive-health', icon: '🥗', color: 'from-emerald-500/10 to-teal-500/10', count: '13+ Products' },
+  { name: 'Vitamins & Supplements', slug: 'vitamins-supplements', icon: '🌿', color: 'from-teal-500/10 to-emerald-500/10', count: '13+ Products' },
   { name: 'Diabetes Care', slug: 'diabetes-care', icon: '🩸', color: 'from-rose-500/10 to-red-500/10', count: '13+ Products' },
   { name: 'Heart Care', slug: 'heart-care', icon: '❤️', color: 'from-pink-500/10 to-rose-500/10', count: '13+ Products' },
-  { name: 'Vitamins & Supplements', slug: 'vitamins-supplements', icon: '🌿', color: 'from-teal-500/10 to-emerald-500/10', count: '13+ Products' },
   { name: 'Skin Care', slug: 'skin-care', icon: '✨', color: 'from-purple-500/10 to-indigo-500/10', count: '13+ Products' },
+  { name: 'Hair Care', slug: 'hair-care', icon: '💇', color: 'from-violet-500/10 to-purple-500/10', count: '13+ Products' },
+  { name: 'Baby Care', slug: 'baby-care', icon: '👶', color: 'from-sky-500/10 to-blue-500/10', count: '13+ Products' },
+  { name: "Women's Health", slug: 'womens-health', icon: '🌸', color: 'from-rose-500/10 to-pink-500/10', count: '13+ Products' },
+  { name: 'Digestive Health', slug: 'digestive-health', icon: '🥗', color: 'from-emerald-500/10 to-teal-500/10', count: '13+ Products' },
+  { name: 'First Aid', slug: 'first-aid', icon: '🩹', color: 'from-red-500/10 to-rose-500/10', count: '13+ Products' },
+  { name: 'Medical Devices', slug: 'medical-devices', icon: '🩺', color: 'from-cyan-500/10 to-teal-500/10', count: '13+ Products' },
   { name: 'Ayurvedic Products', slug: 'ayurvedic-products', icon: '🍃', color: 'from-lime-500/10 to-green-500/10', count: '13+ Products' },
+  { name: 'Oral Care', slug: 'oral-care', icon: '🪥', color: 'from-teal-500/10 to-cyan-500/10', count: '13+ Products' },
+  { name: 'Eye Care', slug: 'eye-care', icon: '👁️', color: 'from-indigo-500/10 to-blue-500/10', count: '13+ Products' },
+  { name: 'Fitness & Wellness', slug: 'fitness-wellness', icon: '🏋️', color: 'from-amber-500/10 to-yellow-500/10', count: '13+ Products' },
 ];
 
 const FAQS = [
@@ -103,8 +118,48 @@ const TESTIMONIALS = [
   },
 ];
 
+const PROMO_COUPONS = [
+  {
+    code: 'FIRSTMED20',
+    title: 'Flat 20% OFF on 1st Order',
+    desc: 'Valid on prescription and OTC orders above ₹499. Max savings ₹300.',
+    category: 'Welcome Offer',
+    expires: 'Instant Apply',
+    gradient: 'from-teal-500/10 via-emerald-500/10 to-teal-600/10',
+    badgeColor: 'bg-teal-500/10 text-[#00A896] border-teal-500/20',
+  },
+  {
+    code: 'EXPRESS50',
+    title: 'Free 2-Hour Express Delivery',
+    desc: 'Zero shipping fee on cold-chain & urgent orders above ₹399.',
+    category: 'Express Shipping',
+    expires: 'High Speed',
+    gradient: 'from-blue-500/10 via-cyan-500/10 to-sky-600/10',
+    badgeColor: 'bg-blue-500/10 text-blue-600 border-blue-500/20',
+  },
+  {
+    code: 'HEARTCARE',
+    title: 'Extra 25% OFF Cardiac Meds',
+    desc: 'Special subsidy on chronic care, blood pressure & statins refills.',
+    category: 'Chronic Care',
+    expires: 'Doctor Recommended',
+    gradient: 'from-rose-500/10 via-pink-500/10 to-red-600/10',
+    badgeColor: 'bg-rose-500/10 text-rose-600 border-rose-500/20',
+  },
+  {
+    code: 'FAMILYPLUS',
+    title: 'Save ₹250 on Family Packs',
+    desc: 'Applicable on pediatric wellness, immunity & daily home first aid.',
+    category: 'Family Health',
+    expires: 'Limited Stock',
+    gradient: 'from-purple-500/10 via-indigo-500/10 to-violet-600/10',
+    badgeColor: 'bg-purple-500/10 text-purple-600 border-purple-500/20',
+  },
+];
+
 export default function HomePage() {
   const { setPrescriptionModalOpen, setSearchOverlayOpen, activePincode } = useUiStore();
+  const { addToast } = useNotificationStore();
 
   const [products, setProducts] = useState<Product[]>([]);
   const [featuredProducts, setFeaturedProducts] = useState<Product[]>([]);
@@ -114,6 +169,16 @@ export default function HomePage() {
   const [doctors, setDoctors] = useState<Doctor[]>([]);
   const [loading, setLoading] = useState(true);
 
+  // Top dismissible announcement
+  const [announcementDismissed, setAnnouncementDismissed] = useState(false);
+
+  // Coupon copy state
+  const [copiedCoupon, setCopiedCoupon] = useState<string | null>(null);
+
+  // Newsletter state
+  const [newsletterEmail, setNewsletterEmail] = useState('');
+  const [newsletterSubmitted, setNewsletterSubmitted] = useState(false);
+
   // Trending filter tab
   const [activeTrendingTab, setActiveTrendingTab] = useState('all');
 
@@ -122,6 +187,39 @@ export default function HomePage() {
 
   // FAQ Accordion open index
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0);
+
+  const handleCopyCoupon = (code: string) => {
+    if (typeof navigator !== 'undefined' && navigator.clipboard) {
+      navigator.clipboard.writeText(code);
+    }
+    setCopiedCoupon(code);
+    addToast({
+      type: 'success',
+      title: 'Coupon Copied!',
+      message: `Code "${code}" copied to clipboard. Apply at checkout for instant savings!`,
+    });
+    setTimeout(() => {
+      setCopiedCoupon((prev) => (prev === code ? null : prev));
+    }, 3000);
+  };
+
+  const handleNewsletterSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!newsletterEmail || !newsletterEmail.includes('@')) {
+      addToast({
+        type: 'error',
+        title: 'Invalid Email',
+        message: 'Please enter a valid email address to receive refills and health updates.',
+      });
+      return;
+    }
+    setNewsletterSubmitted(true);
+    addToast({
+      type: 'success',
+      title: 'Subscribed Successfully!',
+      message: 'You have been enrolled in MediSwift Health Updates & Refill Reminders.',
+    });
+  };
 
   useEffect(() => {
     async function loadCatalog() {
@@ -188,12 +286,59 @@ export default function HomePage() {
     if (activeTrendingTab === 'all') return true;
     if (activeTrendingTab === 'rx') return p.prescription_required;
     if (activeTrendingTab === 'otc') return !p.prescription_required;
+    if (activeTrendingTab === 'bestseller') return p.bestseller;
+    if (activeTrendingTab === 'deals') return Number(p.discount_percent || 0) >= 15;
     return true;
   });
 
   return (
     <div className="min-h-screen bg-slate-50 overflow-hidden">
-      {/* SECTION 1: HERO */}
+      {/* SECTION 1: TOP DISMISSIBLE ANNOUNCEMENT BAR */}
+      {!announcementDismissed && (
+        <div className="bg-gradient-to-r from-[#00A896] via-[#028090] to-[#0A2540] text-white py-2 px-4 text-xs relative z-40 border-b border-teal-400/20 shadow-xs">
+          <div className="max-w-[1536px] mx-auto flex items-center justify-between gap-4">
+            <div className="flex items-center gap-2 flex-wrap">
+              <span className="bg-amber-400 text-slate-950 font-black px-2 py-0.5 rounded-full text-[10px] tracking-wider uppercase inline-flex items-center gap-1">
+                <Tag className="h-3 w-3" /> Offer
+              </span>
+              <span className="font-semibold">
+                Get Flat 20% OFF on your 1st medicine order with code
+              </span>
+              <button
+                type="button"
+                onClick={() => handleCopyCoupon('FIRSTMED20')}
+                className="font-mono font-bold bg-white/20 hover:bg-white/30 px-2 py-0.5 rounded border border-white/30 text-amber-200 transition-colors inline-flex items-center gap-1 cursor-pointer"
+              >
+                <span>FIRSTMED20</span>
+                <Copy className="h-3 w-3" />
+              </button>
+              <span className="text-teal-200 hidden md:inline">|</span>
+              <span className="text-teal-100 hidden md:inline items-center gap-1">
+                ⚡ 2-Hour Express Delivery active for Pincode <strong>{activePincode}</strong>
+              </span>
+            </div>
+
+            <div className="flex items-center gap-3 shrink-0">
+              <Link
+                href="/medicines"
+                className="text-white hover:text-amber-300 font-bold underline underline-offset-2 hidden sm:inline text-[11px]"
+              >
+                Shop Medicines Now →
+              </Link>
+              <button
+                type="button"
+                onClick={() => setAnnouncementDismissed(true)}
+                className="text-teal-200 hover:text-white p-1 rounded-md hover:bg-white/10 transition-colors cursor-pointer"
+                aria-label="Dismiss banner"
+              >
+                <X className="h-4 w-4" />
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* SECTION 2: HERO */}
       <section className="relative overflow-hidden bg-gradient-to-b from-[#0A2540] via-[#0D3B66] to-[#0A2540] text-white pt-12 sm:pt-16 pb-20 sm:pb-24 px-4 sm:px-6 lg:px-8 xl:px-10">
         {/* Glow ambient backgrounds */}
         <div className="absolute -top-32 -left-32 w-[36rem] h-[36rem] rounded-full bg-[#00A896]/20 blur-3xl pointer-events-none" />
@@ -357,7 +502,139 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* SECTION 2: QUICK CATEGORY EXPLORER */}
+      {/* SECTION 3: QUICK HEALTHCARE ACTIONS STRIP */}
+      <section className="relative -mt-8 sm:-mt-10 z-20 px-4 sm:px-6 lg:px-8 xl:px-10 max-w-[1536px] mx-auto">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4">
+          <Link
+            href="/medicines"
+            className="group p-4 sm:p-5 rounded-2xl bg-white border border-slate-200/80 hover:border-teal-500/50 shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 flex flex-col justify-between"
+          >
+            <div>
+              <div className="w-11 h-11 rounded-xl bg-teal-50 text-[#00A896] flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                <Pill className="h-5 w-5" />
+              </div>
+              <h3 className="font-bold text-xs sm:text-sm text-slate-900 group-hover:text-[#00A896] transition-colors">
+                Order Medicines
+              </h3>
+              <p className="text-[11px] text-slate-500 mt-1 line-clamp-2">
+                260+ verified formulations, flat 20% off
+              </p>
+            </div>
+            <div className="mt-3 flex items-center text-[10px] font-bold text-[#00A896]">
+              <span>Explore</span>
+              <ChevronRight className="h-3 w-3 ml-0.5" />
+            </div>
+          </Link>
+
+          <Link
+            href="/doctors"
+            className="group p-4 sm:p-5 rounded-2xl bg-white border border-slate-200/80 hover:border-cyan-500/50 shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 flex flex-col justify-between"
+          >
+            <div>
+              <div className="w-11 h-11 rounded-xl bg-cyan-50 text-cyan-600 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                <Stethoscope className="h-5 w-5" />
+              </div>
+              <h3 className="font-bold text-xs sm:text-sm text-slate-900 group-hover:text-cyan-600 transition-colors">
+                Video Consult
+              </h3>
+              <p className="text-[11px] text-slate-500 mt-1 line-clamp-2">
+                500+ top Indian doctors in 10 mins
+              </p>
+            </div>
+            <div className="mt-3 flex items-center text-[10px] font-bold text-cyan-600">
+              <span>Consult Now</span>
+              <ChevronRight className="h-3 w-3 ml-0.5" />
+            </div>
+          </Link>
+
+          <button
+            type="button"
+            onClick={() => setPrescriptionModalOpen(true)}
+            className="group p-4 sm:p-5 rounded-2xl bg-white border border-slate-200/80 hover:border-indigo-500/50 shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 text-left flex flex-col justify-between cursor-pointer"
+          >
+            <div>
+              <div className="w-11 h-11 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                <UploadCloud className="h-5 w-5" />
+              </div>
+              <h3 className="font-bold text-xs sm:text-sm text-slate-900 group-hover:text-indigo-600 transition-colors">
+                Upload Rx
+              </h3>
+              <p className="text-[11px] text-slate-500 mt-1 line-clamp-2">
+                Pharmacist review & instant cart filling
+              </p>
+            </div>
+            <div className="mt-3 flex items-center text-[10px] font-bold text-indigo-600">
+              <span>Quick Upload</span>
+              <ChevronRight className="h-3 w-3 ml-0.5" />
+            </div>
+          </button>
+
+          <Link
+            href="/categories/medical-devices"
+            className="group p-4 sm:p-5 rounded-2xl bg-white border border-slate-200/80 hover:border-rose-500/50 shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 flex flex-col justify-between"
+          >
+            <div>
+              <div className="w-11 h-11 rounded-xl bg-rose-50 text-rose-600 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                <HeartPulse className="h-5 w-5" />
+              </div>
+              <h3 className="font-bold text-xs sm:text-sm text-slate-900 group-hover:text-rose-600 transition-colors">
+                Health Monitors
+              </h3>
+              <p className="text-[11px] text-slate-500 mt-1 line-clamp-2">
+                BP machines, glucometers & strips
+              </p>
+            </div>
+            <div className="mt-3 flex items-center text-[10px] font-bold text-rose-600">
+              <span>View Devices</span>
+              <ChevronRight className="h-3 w-3 ml-0.5" />
+            </div>
+          </Link>
+
+          <Link
+            href="/categories/ayurvedic-products"
+            className="group p-4 sm:p-5 rounded-2xl bg-white border border-slate-200/80 hover:border-emerald-500/50 shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 flex flex-col justify-between"
+          >
+            <div>
+              <div className="w-11 h-11 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                <Sparkles className="h-5 w-5" />
+              </div>
+              <h3 className="font-bold text-xs sm:text-sm text-slate-900 group-hover:text-emerald-600 transition-colors">
+                Ayurveda & Herbals
+              </h3>
+              <p className="text-[11px] text-slate-500 mt-1 line-clamp-2">
+                Pure herbs, Chyawanprash & tonics
+              </p>
+            </div>
+            <div className="mt-3 flex items-center text-[10px] font-bold text-emerald-600">
+              <span>Shop Natural</span>
+              <ChevronRight className="h-3 w-3 ml-0.5" />
+            </div>
+          </Link>
+
+          <Link
+            href="/orders"
+            className="group p-4 sm:p-5 rounded-2xl bg-white border border-slate-200/80 hover:border-amber-500/50 shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 flex flex-col justify-between"
+          >
+            <div>
+              <div className="w-11 h-11 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                <Truck className="h-5 w-5" />
+              </div>
+              <h3 className="font-bold text-xs sm:text-sm text-slate-900 group-hover:text-amber-600 transition-colors">
+                Track Orders
+              </h3>
+              <p className="text-[11px] text-slate-500 mt-1 line-clamp-2">
+                Live GPS delivery map & updates
+              </p>
+            </div>
+            <div className="mt-3 flex items-center text-[10px] font-bold text-amber-600">
+              <span>Track Now</span>
+              <ChevronRight className="h-3 w-3 ml-0.5" />
+            </div>
+          </Link>
+        </div>
+      </section>
+
+      {/* SECTION 4: QUICK CATEGORY EXPLORER */}
       <section className="py-16 px-4 sm:px-6 lg:px-8 xl:px-10 max-w-[1536px] mx-auto">
         <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-8 gap-4">
           <div>
@@ -610,7 +887,87 @@ export default function HomePage() {
         </section>
       )}
 
-      {/* SECTION 8: DOCTOR CONSULTATION SECTION */}
+      {/* SECTION 10: HEALTHCARE OFFERS & SAVINGS */}
+      <section className="py-14 px-4 sm:px-6 lg:px-8 xl:px-10 max-w-[1536px] mx-auto">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-8 gap-4">
+          <div>
+            <div className="flex items-center gap-1.5 text-xs font-bold text-[#00A896] uppercase tracking-wider mb-1">
+              <Tag className="h-4 w-4" /> Exclusive Pharmacy Discounts
+            </div>
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-[#0A2540] tracking-tight">
+              Healthcare Savings & Verified Coupons
+            </h2>
+            <p className="text-xs sm:text-sm text-slate-500 mt-1">
+              Maximize your medicine savings with active promotional vouchers valid across India.
+            </p>
+          </div>
+          <div className="text-xs font-semibold text-slate-500 bg-white border border-slate-200 px-3.5 py-1.5 rounded-xl shadow-xs inline-flex items-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+            <span>4 Active Coupons Verified Today</span>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          {PROMO_COUPONS.map((coupon, idx) => {
+            const isCopied = copiedCoupon === coupon.code;
+            return (
+              <div
+                key={idx}
+                className={`relative rounded-3xl p-6 bg-gradient-to-br ${coupon.gradient} border border-slate-200/80 hover:border-slate-300 shadow-xs hover:shadow-md transition-all duration-300 hover:-translate-y-1 flex flex-col justify-between overflow-hidden group`}
+              >
+                <div>
+                  <div className="flex items-center justify-between gap-2 mb-3">
+                    <span className={`text-[10px] font-bold px-2.5 py-0.5 rounded-full border ${coupon.badgeColor}`}>
+                      {coupon.category}
+                    </span>
+                    <span className="text-[10px] text-slate-400 font-medium">
+                      {coupon.expires}
+                    </span>
+                  </div>
+
+                  <h3 className="text-base font-extrabold text-slate-900 leading-snug">
+                    {coupon.title}
+                  </h3>
+
+                  <p className="text-xs text-slate-600 mt-2 leading-relaxed">
+                    {coupon.desc}
+                  </p>
+                </div>
+
+                <div className="pt-5 mt-5 border-t border-slate-200/60 flex items-center justify-between gap-2">
+                  <div className="font-mono font-black text-sm tracking-wider text-[#0A2540] bg-white/80 px-2.5 py-1 rounded-lg border border-slate-200 shadow-2xs">
+                    {coupon.code}
+                  </div>
+
+                  <button
+                    type="button"
+                    onClick={() => handleCopyCoupon(coupon.code)}
+                    className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer shadow-xs ${
+                      isCopied
+                        ? 'bg-emerald-600 text-white'
+                        : 'bg-[#00A896] hover:bg-[#028090] text-white'
+                    }`}
+                  >
+                    {isCopied ? (
+                      <>
+                        <Check className="h-3.5 w-3.5" />
+                        <span>Copied!</span>
+                      </>
+                    ) : (
+                      <>
+                        <Copy className="h-3.5 w-3.5" />
+                        <span>Copy Code</span>
+                      </>
+                    )}
+                  </button>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </section>
+
+      {/* SECTION 11: DOCTOR CONSULTATION SECTION */}
       <section className="py-16 px-4 sm:px-6 lg:px-8 xl:px-10 bg-slate-100/70 border-y border-slate-200/80">
         <div className="max-w-[1536px] mx-auto">
           <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-8 gap-4">
@@ -844,7 +1201,58 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* SECTION 13: MOBILE APP PROMOTION */}
+      {/* SECTION 16: HEALTH UPDATES & REFILL REMINDERS */}
+      <section className="py-14 px-4 sm:px-6 lg:px-8 xl:px-10 max-w-[1536px] mx-auto">
+        <div className="rounded-3xl bg-gradient-to-r from-teal-50 via-emerald-50 to-cyan-50 border border-teal-200/80 p-8 sm:p-12 shadow-xs flex flex-col lg:flex-row items-center justify-between gap-8">
+          <div className="max-w-2xl space-y-3 text-center lg:text-left">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-teal-600/10 text-teal-700 text-xs font-bold">
+              <Bell className="h-3.5 w-3.5" />
+              <span>Smart Chronic Refill Reminders</span>
+            </div>
+            <h2 className="text-2xl sm:text-3xl font-black text-[#0A2540] tracking-tight">
+              Never Run Out of Your Essential Daily Medicines
+            </h2>
+            <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+              Sign up for automated SMS/Email reminders 5 days before your prescriptions exhaust, plus verified health tips and exclusive refill discounts.
+            </p>
+          </div>
+
+          <div className="w-full lg:w-auto shrink-0">
+            {newsletterSubmitted ? (
+              <div className="flex items-center gap-3 p-4 rounded-2xl bg-white border border-emerald-300 shadow-sm text-emerald-800">
+                <CheckCircle2 className="h-6 w-6 text-emerald-600 shrink-0" />
+                <div>
+                  <h4 className="font-bold text-sm">You&apos;re Subscribed!</h4>
+                  <p className="text-xs text-slate-600">Refill reminders and health discounts are on the way.</p>
+                </div>
+              </div>
+            ) : (
+              <form
+                onSubmit={handleNewsletterSubmit}
+                className="flex flex-col sm:flex-row items-center gap-2.5 max-w-md w-full"
+              >
+                <input
+                  type="email"
+                  value={newsletterEmail}
+                  onChange={(e) => setNewsletterEmail(e.target.value)}
+                  placeholder="Enter your email for refill alerts..."
+                  className="w-full sm:w-80 px-4 py-3 rounded-2xl bg-white border border-slate-300 focus:outline-none focus:ring-2 focus:ring-[#00A896] text-xs sm:text-sm shadow-xs"
+                  required
+                />
+                <Button
+                  type="submit"
+                  variant="primary"
+                  className="w-full sm:w-auto rounded-2xl font-bold h-11 px-6 shadow-md shadow-teal-600/20 shrink-0 cursor-pointer"
+                >
+                  <span>Subscribe</span>
+                </Button>
+              </form>
+            )}
+          </div>
+        </div>
+      </section>
+
+      {/* SECTION 17: MOBILE APP PROMOTION */}
       <section className="px-4 sm:px-6 lg:px-8 xl:px-10 max-w-[1536px] mx-auto pb-16">
         <div className="rounded-3xl bg-gradient-to-br from-[#0A2540] via-[#0D3B66] to-[#0A2540] text-white p-8 sm:p-12 flex flex-col md:flex-row items-center justify-between gap-8 shadow-xl">
           <div className="max-w-xl space-y-4 text-center md:text-left">
