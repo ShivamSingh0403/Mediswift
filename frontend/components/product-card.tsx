@@ -57,7 +57,10 @@ export function ProductCard({ product, className = '' }: ProductCardProps) {
     setQuickViewProduct(product);
   };
 
-  const imageUrl = product.image_url || product.primary_image || (product.gallery_images && product.gallery_images[0]);
+  let resolvedImageUrl = product.image_url || product.primary_image || (product.gallery_images && product.gallery_images[0]);
+  if (resolvedImageUrl && resolvedImageUrl.startsWith('/media/')) {
+    resolvedImageUrl = `http://localhost:8000${resolvedImageUrl}`;
+  }
   const discountVal = parseFloat(product.discount_percent || product.discount_percentage || '0');
   const ratingVal = parseFloat(product.rating || '4.5');
   const reviewCount = product.review_count || 45;
@@ -67,19 +70,26 @@ export function ProductCard({ product, className = '' }: ProductCardProps) {
       {/* Top Media & Floating Actions Area */}
       <div className="relative">
         <Link href={`/medicines/${product.slug}`} className="block relative h-48 w-full bg-slate-50 overflow-hidden">
-          {imageUrl && !imgError ? (
+          {resolvedImageUrl && !imgError ? (
             <Image
-              src={imageUrl}
+              src={resolvedImageUrl}
               alt={product.name}
               fill
-              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1536px) 25vw, 20vw"
               className="object-cover group-hover:scale-108 transition-transform duration-500 ease-out"
               onError={() => setImgError(true)}
             />
           ) : (
-            <div className="w-full h-full flex flex-col items-center justify-center bg-gradient-to-br from-teal-50/70 to-slate-100 text-[#00A896]">
-              <Pill className="h-12 w-12 stroke-1 opacity-60 group-hover:scale-110 transition-transform" />
-              <span className="text-[11px] font-medium text-slate-400 mt-2">{product.dosage_form || 'Medicine'}</span>
+            <div className="w-full h-full flex flex-col items-center justify-center bg-gradient-to-br from-slate-50 via-teal-50/40 to-slate-100 border-b border-slate-100 p-4 text-center select-none">
+              <div className="w-14 h-14 rounded-2xl bg-white shadow-xs border border-teal-100/80 flex items-center justify-center text-[#00A896] group-hover:scale-110 group-hover:border-[#00A896]/40 transition-all duration-300">
+                <Pill className="h-7 w-7" />
+              </div>
+              <span className="text-[11px] font-bold text-slate-700 mt-2 tracking-tight line-clamp-1">
+                {product.brand_name || product.dosage_form || 'MediSwift Genuine'}
+              </span>
+              <span className="text-[10px] text-slate-400 font-medium line-clamp-1">
+                {product.pack_size || 'Verified Pharmaceutical'}
+              </span>
             </div>
           )}
 

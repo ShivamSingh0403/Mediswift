@@ -5,8 +5,10 @@ from apps.users.models import User
 class Notification(TimeStampedModel):
     class NotificationType(models.TextChoices):
         ORDER = 'ORDER', 'Order Update'
+        PAYMENT = 'PAYMENT', 'Payment Alert'
         APPOINTMENT = 'APPOINTMENT', 'Appointment Alert'
         PRESCRIPTION = 'PRESCRIPTION', 'Prescription Status'
+        PROMOTION = 'PROMOTION', 'Promotions & Offers'
         SYSTEM = 'SYSTEM', 'System Announcement'
 
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='notifications')

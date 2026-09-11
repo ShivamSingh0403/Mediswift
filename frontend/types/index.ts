@@ -211,12 +211,85 @@ export interface Cart {
   requires_prescription: boolean;
 }
 
-export type OrderStatus = 'PENDING' | 'CONFIRMED' | 'PROCESSING' | 'DISPATCHED' | 'OUT_FOR_DELIVERY' | 'DELIVERED' | 'CANCELLED';
+export type OrderStatus =
+  | 'PENDING'
+  | 'PLACED'
+  | 'CONFIRMED'
+  | 'PROCESSING'
+  | 'PACKED'
+  | 'SHIPPED'
+  | 'OUT_FOR_DELIVERY'
+  | 'DELIVERED'
+  | 'CANCELLED';
+
+export type PaymentProvider =
+  | 'RAZORPAY'
+  | 'PAYTM'
+  | 'PHONEPE'
+  | 'STRIPE'
+  | 'UPI'
+  | 'COD'
+  | 'CARD_MOCK';
+
+export type PaymentStatus =
+  | 'CREATED'
+  | 'PENDING'
+  | 'AUTHORIZED'
+  | 'PAID'
+  | 'SUCCESS'
+  | 'FAILED'
+  | 'REFUNDED'
+  | 'PARTIALLY_REFUNDED';
+
+export interface PaymentRecord {
+  id: string;
+  provider: PaymentProvider;
+  provider_display: string;
+  gateway?: string;
+  gateway_display?: string;
+  internal_transaction_id: string;
+  provider_transaction_id?: string;
+  transaction_id?: string;
+  gateway_order_id?: string;
+  amount: string;
+  currency: string;
+  status: PaymentStatus;
+  status_display: string;
+  payment_method_details?: Record<string, any>;
+  refund_id?: string;
+  error_message?: string;
+  created_at: string;
+}
+
+export interface Coupon {
+  id: string;
+  code: string;
+  description: string;
+  discount_type: 'PERCENTAGE' | 'FIXED';
+  discount_type_display?: string;
+  discount_value: string;
+  min_order_amount: string;
+  max_discount_amount?: string | null;
+  valid_from?: string;
+  valid_to?: string | null;
+  is_active: boolean;
+}
+
+export interface DeliveryTimelineCheckpoint {
+  status: OrderStatus;
+  title: string;
+  description: string;
+  timestamp: string | null;
+  completed: boolean;
+}
 
 export interface OrderItem {
   id: string;
   product: string;
   product_name: string;
+  product_slug?: string;
+  product_image?: string | null;
+  prescription_required?: boolean;
   unit_price: string;
   quantity: number;
   total_price: string;
@@ -230,12 +303,32 @@ export interface Order {
   subtotal: string;
   discount_amount: string;
   delivery_fee: string;
+  platform_fee?: string;
   total_amount: string;
   shipping_address: Address;
+  shipping_address_snapshot?: Partial<Address>;
+  coupon?: Coupon | null;
+  coupon_code?: string;
   prescription?: string;
+  courier_name?: string;
+  courier_tracking_url?: string;
   tracking_number?: string;
   estimated_delivery?: string;
+  delivery_notes?: string;
+  delivery_timeline?: DeliveryTimelineCheckpoint[];
   items: OrderItem[];
+  payments?: PaymentRecord[];
+  created_at: string;
+  updated_at?: string;
+}
+
+export interface NotificationItem {
+  id: string;
+  title: string;
+  message: string;
+  notification_type: 'ORDER' | 'PAYMENT' | 'APPOINTMENT' | 'PRESCRIPTION' | 'PROMOTION' | 'SYSTEM';
+  is_read: boolean;
+  action_url?: string;
   created_at: string;
 }
 

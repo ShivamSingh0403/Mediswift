@@ -73,7 +73,7 @@ export default function CartPage() {
   }
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-8 sm:py-10">
+    <div className="max-w-[1536px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 py-8 sm:py-10">
       <div className="mb-6 flex flex-col sm:flex-row sm:items-baseline justify-between gap-2">
         <h1 className="text-2xl sm:text-3xl font-black text-[#0A2540]">
           Shopping Basket ({totalItems} {totalItems === 1 ? 'item' : 'items'})

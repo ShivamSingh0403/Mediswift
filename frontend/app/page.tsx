@@ -126,24 +126,48 @@ export default function HomePage() {
   useEffect(() => {
     async function loadCatalog() {
       try {
-        const [prodRes, docRes, devRes, wellRes] = await Promise.all([
+        const extractResults = (val: unknown): unknown[] => {
+          if (!val || typeof val !== 'object') return [];
+          const record = val as Record<string, unknown>;
+          if (Array.isArray(record.data)) return record.data;
+          if (record.data && typeof record.data === 'object') {
+            const inner = record.data as Record<string, unknown>;
+            if (Array.isArray(inner.results)) return inner.results;
+          }
+          if (Array.isArray(record.results)) return record.results;
+          return [];
+        };
+
+        const [prodSettled, docSettled, devSettled, wellSettled] = await Promise.allSettled([
           productService.getProducts({ page_size: 40 }),
           doctorService.getDoctors(),
-          productService.getProducts({ category: 'medical-devices', page_size: 4 }),
-          productService.getProducts({ category: 'vitamins-supplements', page_size: 4 }),
+          productService.getProducts({ category: 'medical-devices', page_size: 10 }),
+          productService.getProducts({ category: 'vitamins-supplements', page_size: 10 }),
         ]);
 
-        if (prodRes?.data?.results) {
-          const all = prodRes.data.results;
+        if (prodSettled.status === 'fulfilled') {
+          const all = extractResults(prodSettled.value) as Product[];
           setProducts(all);
-          setFeaturedProducts(all.filter((p) => p.featured || p.bestseller).slice(0, 10));
-          setTrendingProducts(all.slice(0, 8));
+          const featured = all.filter((p) => p.featured || p.bestseller);
+          setFeaturedProducts(featured.length > 0 ? featured : all.slice(0, 10));
+          const trending = all.filter((p) => p.trending);
+          setTrendingProducts(trending.length > 0 ? trending : all.slice(0, 10));
         }
-        if (devRes?.data?.results) setDeviceProducts(devRes.data.results);
-        if (wellRes?.data?.results) setWellnessProducts(wellRes.data.results);
-        if (docRes?.data?.results) setDoctors(docRes.data.results.slice(0, 4));
-      } catch {
-        // Fallback gracefully
+
+        if (devSettled.status === 'fulfilled') {
+          setDeviceProducts(extractResults(devSettled.value) as Product[]);
+        }
+
+        if (wellSettled.status === 'fulfilled') {
+          setWellnessProducts(extractResults(wellSettled.value) as Product[]);
+        }
+
+        if (docSettled.status === 'fulfilled') {
+          const docs = extractResults(docSettled.value) as Doctor[];
+          setDoctors(docs.slice(0, 4));
+        }
+      } catch (err) {
+        console.error('Failed to load homepage catalog:', err);
       } finally {
         setLoading(false);
       }
@@ -170,13 +194,13 @@ export default function HomePage() {
   return (
     <div className="min-h-screen bg-slate-50 overflow-hidden">
       {/* SECTION 1: HERO */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-[#0A2540] via-[#0D3B66] to-[#0A2540] text-white pt-14 pb-24 px-4">
+      <section className="relative overflow-hidden bg-gradient-to-b from-[#0A2540] via-[#0D3B66] to-[#0A2540] text-white pt-12 sm:pt-16 pb-20 sm:pb-24 px-4 sm:px-6 lg:px-8 xl:px-10">
         {/* Glow ambient backgrounds */}
-        <div className="absolute -top-32 -left-32 w-[32rem] h-[32rem] rounded-full bg-[#00A896]/20 blur-3xl pointer-events-none" />
-        <div className="absolute -bottom-32 -right-32 w-[32rem] h-[32rem] rounded-full bg-cyan-500/15 blur-3xl pointer-events-none" />
+        <div className="absolute -top-32 -left-32 w-[36rem] h-[36rem] rounded-full bg-[#00A896]/20 blur-3xl pointer-events-none" />
+        <div className="absolute -bottom-32 -right-32 w-[36rem] h-[36rem] rounded-full bg-cyan-500/15 blur-3xl pointer-events-none" />
 
-        <div className="max-w-7xl mx-auto relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        <div className="max-w-[1536px] mx-auto relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 xl:gap-14 items-center">
             {/* Left Copy & Search */}
             <motion.div
               initial="hidden"
@@ -191,59 +215,52 @@ export default function HomePage() {
               </motion.div>
 
               {/* Main Headline */}
-              <motion.h1 variants={fadeUp} className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-[1.08]">
+              <motion.h1 variants={fadeUp} className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-black tracking-tight leading-[1.06]">
                 Your Health, <br />
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-300 via-[#00A896] to-cyan-300">
                   Delivered Smarter.
                 </span>
               </motion.h1>
 
-              <motion.p variants={fadeUp} className="text-slate-300 text-base sm:text-lg max-w-xl leading-relaxed">
-                India&apos;s leading digital healthcare ecosystem. Order genuine pharmaceuticals from 250+ catalog items with 2-hour express cold-chain delivery, upload prescriptions securely, and consult verified doctors.
+              {/* Subtitle */}
+              <motion.p variants={fadeUp} className="text-base sm:text-lg text-slate-200 font-normal leading-relaxed max-w-2xl">
+                Order genuine medicines with instant 20% discount, consult verified top doctors via video in minutes, and receive express delivery directly to your door.
               </motion.p>
 
-              {/* Hero Search Box Trigger */}
-              <motion.div variants={fadeUp} className="max-w-xl pt-2">
-                <button
-                  type="button"
+              {/* Hero Search Box */}
+              <motion.div variants={fadeUp} className="pt-2">
+                <div
                   onClick={() => setSearchOverlayOpen(true)}
-                  className="w-full flex items-center justify-between p-2 pl-4 rounded-2xl bg-white text-slate-800 shadow-xl shadow-black/20 hover:ring-2 hover:ring-[#00A896] transition-all text-left group"
+                  className="flex items-center rounded-2xl bg-white/10 backdrop-blur-xl border border-white/20 p-2 shadow-2xl hover:border-teal-400/60 hover:bg-white/15 transition-all cursor-text group max-w-2xl"
                 >
-                  <div className="flex items-center gap-3">
-                    <Search className="h-5 w-5 text-[#00A896]" />
-                    <span className="text-xs sm:text-sm text-slate-400">
-                      Search 250+ medicines, salt composition, or brands...
-                    </span>
+                  <div className="pl-3 pr-2 text-slate-300 group-hover:text-teal-300 transition-colors">
+                    <Search className="h-5 w-5" />
                   </div>
-                  <span className="bg-[#00A896] text-white px-4 py-2.5 rounded-xl font-bold text-xs flex items-center gap-1 group-hover:bg-[#008f80] transition-colors">
-                    <span>Search</span>
-                    <ArrowRight className="h-3.5 w-3.5" />
-                  </span>
-                </button>
+                  <div className="flex-1 text-xs sm:text-sm text-slate-300 truncate py-2">
+                    Search medicines, salts (e.g. Paracetamol, Metformin), or wellness products...
+                  </div>
+                  <Button
+                    size="sm"
+                    variant="primary"
+                    className="rounded-xl font-bold px-4 sm:px-6 shadow-md shadow-teal-500/30"
+                  >
+                    Search
+                  </Button>
+                </div>
               </motion.div>
 
-              {/* Hero Action CTAs */}
-              <motion.div variants={fadeUp} className="flex flex-wrap items-center gap-4 pt-1">
-                <Button
-                  size="lg"
-                  variant="secondary"
-                  onClick={() => setPrescriptionModalOpen(true)}
-                  className="rounded-2xl font-bold shadow-lg shadow-[#00A896]/25 h-12 px-6"
-                >
-                  <UploadCloud className="h-5 w-5 mr-2" />
-                  <span>Upload Prescription</span>
-                </Button>
-
+              {/* Action Buttons */}
+              <motion.div variants={fadeUp} className="flex flex-wrap items-center gap-4 pt-2">
                 <Link href="/medicines">
-                  <Button size="lg" variant="outline" className="rounded-2xl border-white/20 text-white bg-white/5 hover:bg-white/10 h-12 px-6">
-                    <Pill className="h-4 w-4 mr-2 text-[#00A896]" />
+                  <Button size="lg" variant="primary" className="rounded-2xl font-bold shadow-lg shadow-teal-500/25 h-12 px-6">
+                    <Pill className="h-5 w-5 mr-2" />
                     <span>Order Medicines</span>
                   </Button>
                 </Link>
 
                 <Link href="/doctors">
-                  <Button size="lg" variant="ghost" className="rounded-2xl text-cyan-200 hover:text-white hover:bg-white/5 h-12">
-                    <Stethoscope className="h-4 w-4 mr-2" />
+                  <Button size="lg" variant="ghost" className="rounded-2xl text-cyan-200 hover:text-white hover:bg-white/5 h-12 px-6">
+                    <Stethoscope className="h-5 w-5 mr-2" />
                     <span>Consult Doctor</span>
                   </Button>
                 </Link>
@@ -252,30 +269,32 @@ export default function HomePage() {
               {/* Trust Micro-Metrics */}
               <motion.div variants={fadeUp} className="pt-6 grid grid-cols-3 gap-4 border-t border-white/10 text-xs">
                 <div>
-                  <div className="font-extrabold text-xl text-white">2 Hours</div>
-                  <div className="text-slate-400 mt-0.5">Average Delivery Time</div>
+                  <div className="font-extrabold text-xl sm:text-2xl text-white">2 Hours</div>
+                  <div className="text-slate-300 mt-0.5">Average Delivery Time</div>
                 </div>
                 <div>
-                  <div className="font-extrabold text-xl text-white">100% Genuine</div>
-                  <div className="text-slate-400 mt-0.5">Licensed Rx Guarantee</div>
+                  <div className="font-extrabold text-xl sm:text-2xl text-white">100% Genuine</div>
+                  <div className="text-slate-300 mt-0.5">Licensed Rx Guarantee</div>
                 </div>
                 <div>
-                  <div className="font-extrabold text-xl text-white">500+ Specialists</div>
-                  <div className="text-slate-400 mt-0.5">NMC Verified Doctors</div>
+                  <div className="font-extrabold text-xl sm:text-2xl text-white">500+ Specialists</div>
+                  <div className="text-slate-300 mt-0.5">NMC Verified Doctors</div>
                 </div>
               </motion.div>
             </motion.div>
 
             {/* Right Interactive Highlights Cards */}
-            <div className="lg:col-span-5 grid grid-cols-2 gap-4">
+            <div className="lg:col-span-5 grid grid-cols-2 gap-4 sm:gap-5">
               <Link href="/medicines" className="group">
-                <div className="rounded-3xl p-5 bg-white/10 border border-white/15 backdrop-blur-md hover:bg-white/15 transition-all duration-300 hover:-translate-y-1">
-                  <div className="w-12 h-12 rounded-2xl bg-teal-500/20 text-teal-300 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
-                    <Pill className="h-6 w-6" />
+                <div className="rounded-3xl p-5 sm:p-6 bg-white/10 border border-white/15 backdrop-blur-md hover:bg-white/15 transition-all duration-300 hover:-translate-y-1 h-full flex flex-col justify-between">
+                  <div>
+                    <div className="w-12 h-12 rounded-2xl bg-teal-500/20 text-teal-300 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                      <Pill className="h-6 w-6" />
+                    </div>
+                    <h3 className="font-bold text-white text-base sm:text-lg">Order Medicines</h3>
+                    <p className="text-xs text-slate-300 mt-1.5 leading-relaxed">260+ catalog items with up to 25% savings</p>
                   </div>
-                  <h3 className="font-bold text-white text-base">Order Medicines</h3>
-                  <p className="text-xs text-slate-300 mt-1">260+ catalog items with up to 25% savings</p>
-                  <div className="mt-3 flex items-center text-xs font-semibold text-teal-300">
+                  <div className="mt-4 flex items-center text-xs font-semibold text-teal-300">
                     <span>Explore Catalog</span>
                     <ChevronRight className="h-3.5 w-3.5 ml-1" />
                   </div>
@@ -283,13 +302,15 @@ export default function HomePage() {
               </Link>
 
               <Link href="/doctors" className="group">
-                <div className="rounded-3xl p-5 bg-white/10 border border-white/15 backdrop-blur-md hover:bg-white/15 transition-all duration-300 hover:-translate-y-1">
-                  <div className="w-12 h-12 rounded-2xl bg-cyan-500/20 text-cyan-300 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
-                    <Stethoscope className="h-6 w-6" />
+                <div className="rounded-3xl p-5 sm:p-6 bg-white/10 border border-white/15 backdrop-blur-md hover:bg-white/15 transition-all duration-300 hover:-translate-y-1 h-full flex flex-col justify-between">
+                  <div>
+                    <div className="w-12 h-12 rounded-2xl bg-cyan-500/20 text-cyan-300 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                      <Stethoscope className="h-6 w-6" />
+                    </div>
+                    <h3 className="font-bold text-white text-base sm:text-lg">Instant Telehealth</h3>
+                    <p className="text-xs text-slate-300 mt-1.5 leading-relaxed">Video consult top specialists in 10 mins</p>
                   </div>
-                  <h3 className="font-bold text-white text-base">Instant Telehealth</h3>
-                  <p className="text-xs text-slate-300 mt-1">Video consult top specialists in 10 mins</p>
-                  <div className="mt-3 flex items-center text-xs font-semibold text-cyan-300">
+                  <div className="mt-4 flex items-center text-xs font-semibold text-cyan-300">
                     <span>Find Doctors</span>
                     <ChevronRight className="h-3.5 w-3.5 ml-1" />
                   </div>
@@ -301,13 +322,15 @@ export default function HomePage() {
                 onClick={() => setPrescriptionModalOpen(true)}
                 className="group text-left"
               >
-                <div className="rounded-3xl p-5 bg-white/10 border border-white/15 backdrop-blur-md hover:bg-white/15 transition-all duration-300 hover:-translate-y-1">
-                  <div className="w-12 h-12 rounded-2xl bg-indigo-500/20 text-indigo-300 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
-                    <UploadCloud className="h-6 w-6" />
+                <div className="rounded-3xl p-5 sm:p-6 bg-white/10 border border-white/15 backdrop-blur-md hover:bg-white/15 transition-all duration-300 hover:-translate-y-1 h-full flex flex-col justify-between">
+                  <div>
+                    <div className="w-12 h-12 rounded-2xl bg-indigo-500/20 text-indigo-300 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                      <UploadCloud className="h-6 w-6" />
+                    </div>
+                    <h3 className="font-bold text-white text-base sm:text-lg">Upload Rx</h3>
+                    <p className="text-xs text-slate-300 mt-1.5 leading-relaxed">Pharmacist reviews within 5 minutes</p>
                   </div>
-                  <h3 className="font-bold text-white text-base">Upload Rx</h3>
-                  <p className="text-xs text-slate-300 mt-1">Pharmacist reviews within 5 minutes</p>
-                  <div className="mt-3 flex items-center text-xs font-semibold text-indigo-300">
+                  <div className="mt-4 flex items-center text-xs font-semibold text-indigo-300">
                     <span>Upload Now</span>
                     <ChevronRight className="h-3.5 w-3.5 ml-1" />
                   </div>
@@ -315,13 +338,15 @@ export default function HomePage() {
               </button>
 
               <Link href="/categories/ayurvedic-products" className="group">
-                <div className="rounded-3xl p-5 bg-white/10 border border-white/15 backdrop-blur-md hover:bg-white/15 transition-all duration-300 hover:-translate-y-1">
-                  <div className="w-12 h-12 rounded-2xl bg-emerald-500/20 text-emerald-300 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
-                    <Sparkles className="h-6 w-6" />
+                <div className="rounded-3xl p-5 sm:p-6 bg-white/10 border border-white/15 backdrop-blur-md hover:bg-white/15 transition-all duration-300 hover:-translate-y-1 h-full flex flex-col justify-between">
+                  <div>
+                    <div className="w-12 h-12 rounded-2xl bg-emerald-500/20 text-emerald-300 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                      <Sparkles className="h-6 w-6" />
+                    </div>
+                    <h3 className="font-bold text-white text-base sm:text-lg">Wellness & Herbals</h3>
+                    <p className="text-xs text-slate-300 mt-1.5 leading-relaxed">Pure herbal tonics, vitamins & nutrition</p>
                   </div>
-                  <h3 className="font-bold text-white text-base">Wellness & Ayurveda</h3>
-                  <p className="text-xs text-slate-300 mt-1">Pure herbal tonics, vitamins & nutrition</p>
-                  <div className="mt-3 flex items-center text-xs font-semibold text-emerald-300">
+                  <div className="mt-4 flex items-center text-xs font-semibold text-emerald-300">
                     <span>Shop Wellness</span>
                     <ChevronRight className="h-3.5 w-3.5 ml-1" />
                   </div>
@@ -333,7 +358,7 @@ export default function HomePage() {
       </section>
 
       {/* SECTION 2: QUICK CATEGORY EXPLORER */}
-      <section className="py-16 px-4 max-w-7xl mx-auto">
+      <section className="py-16 px-4 sm:px-6 lg:px-8 xl:px-10 max-w-[1536px] mx-auto">
         <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-8 gap-4">
           <div>
             <Badge variant="accent" className="mb-2">Specialty Care</Badge>
@@ -372,7 +397,7 @@ export default function HomePage() {
       </section>
 
       {/* SECTION 3: PRESCRIPTION UPLOAD BANNER */}
-      <section className="px-4 max-w-7xl mx-auto mb-16">
+      <section className="px-4 sm:px-6 lg:px-8 xl:px-10 max-w-[1536px] mx-auto mb-16">
         <div className="relative rounded-3xl bg-gradient-to-r from-[#0A2540] via-[#123A63] to-[#00A896] text-white p-8 sm:p-12 overflow-hidden shadow-xl">
           <div className="absolute right-0 top-0 bottom-0 w-1/3 bg-white/5 skew-x-12 pointer-events-none" />
 
@@ -411,7 +436,7 @@ export default function HomePage() {
       </section>
 
       {/* SECTION 4: FEATURED PRODUCTS CAROUSEL */}
-      <section className="py-12 px-4 max-w-7xl mx-auto">
+      <section className="py-12 px-4 sm:px-6 lg:px-8 xl:px-10 max-w-[1536px] mx-auto">
         <div className="flex items-center justify-between mb-8">
           <div>
             <div className="flex items-center gap-1.5 text-xs font-bold text-amber-500 uppercase tracking-wider mb-1">
@@ -430,7 +455,7 @@ export default function HomePage() {
             <button
               type="button"
               onClick={handlePrevFeatured}
-              className="p-2 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-600 transition-colors"
+              className="p-2 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-600 transition-colors cursor-pointer"
               aria-label="Previous products"
             >
               <ChevronLeft className="h-5 w-5" />
@@ -438,7 +463,7 @@ export default function HomePage() {
             <button
               type="button"
               onClick={handleNextFeatured}
-              className="p-2 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-600 transition-colors"
+              className="p-2 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-600 transition-colors cursor-pointer"
               aria-label="Next products"
             >
               <ChevronRight className="h-5 w-5" />
@@ -447,14 +472,14 @@ export default function HomePage() {
         </div>
 
         {loading ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
-            {[1, 2, 3, 4].map((i) => (
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-6">
+            {[1, 2, 3, 4, 5].map((i) => (
               <ProductCardSkeleton key={i} />
             ))}
           </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
-            {featuredProducts.slice(featuredIndex, featuredIndex + 4).map((product) => (
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-6">
+            {featuredProducts.slice(featuredIndex, featuredIndex + 5).map((product) => (
               <ProductCard key={product.id} product={product} />
             ))}
           </div>
@@ -462,7 +487,7 @@ export default function HomePage() {
       </section>
 
       {/* SECTION 5: TRENDING PRODUCTS WITH TABS */}
-      <section className="py-12 px-4 max-w-7xl mx-auto">
+      <section className="py-12 px-4 sm:px-6 lg:px-8 xl:px-10 max-w-[1536px] mx-auto">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-8 gap-4">
           <div>
             <div className="flex items-center gap-1.5 text-xs font-bold text-rose-500 uppercase tracking-wider mb-1">
@@ -481,7 +506,7 @@ export default function HomePage() {
             <button
               type="button"
               onClick={() => setActiveTrendingTab('all')}
-              className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-colors ${
+              className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-colors cursor-pointer ${
                 activeTrendingTab === 'all'
                   ? 'bg-[#00A896] text-white shadow-xs'
                   : 'text-slate-600 hover:text-slate-900'
@@ -492,7 +517,7 @@ export default function HomePage() {
             <button
               type="button"
               onClick={() => setActiveTrendingTab('otc')}
-              className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-colors ${
+              className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-colors cursor-pointer ${
                 activeTrendingTab === 'otc'
                   ? 'bg-[#00A896] text-white shadow-xs'
                   : 'text-slate-600 hover:text-slate-900'
@@ -503,7 +528,7 @@ export default function HomePage() {
             <button
               type="button"
               onClick={() => setActiveTrendingTab('rx')}
-              className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-colors ${
+              className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-colors cursor-pointer ${
                 activeTrendingTab === 'rx'
                   ? 'bg-[#00A896] text-white shadow-xs'
                   : 'text-slate-600 hover:text-slate-900'
@@ -514,16 +539,24 @@ export default function HomePage() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          {filteredTrending.slice(0, 8).map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))}
-        </div>
+        {loading ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-6">
+            {[1, 2, 3, 4, 5].map((i) => (
+              <ProductCardSkeleton key={i} />
+            ))}
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-6">
+            {filteredTrending.slice(0, 10).map((product) => (
+              <ProductCard key={product.id} product={product} />
+            ))}
+          </div>
+        )}
       </section>
 
       {/* SECTION 6: MEDICAL DEVICES SHOWCASE */}
       {deviceProducts.length > 0 && (
-        <section className="py-12 px-4 max-w-7xl mx-auto">
+        <section className="py-12 px-4 sm:px-6 lg:px-8 xl:px-10 max-w-[1536px] mx-auto">
           <div className="flex items-center justify-between mb-8">
             <div>
               <Badge variant="default" className="mb-2">Diagnostic Hardware</Badge>
@@ -541,8 +574,8 @@ export default function HomePage() {
             </Link>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
-            {deviceProducts.map((product) => (
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-6">
+            {deviceProducts.slice(0, 5).map((product) => (
               <ProductCard key={product.id} product={product} />
             ))}
           </div>
@@ -551,7 +584,7 @@ export default function HomePage() {
 
       {/* SECTION 7: WELLNESS & LIFESTYLE */}
       {wellnessProducts.length > 0 && (
-        <section className="py-12 px-4 max-w-7xl mx-auto">
+        <section className="py-12 px-4 sm:px-6 lg:px-8 xl:px-10 max-w-[1536px] mx-auto">
           <div className="flex items-center justify-between mb-8">
             <div>
               <Badge variant="success" className="mb-2">Daily Vitality</Badge>
@@ -569,8 +602,8 @@ export default function HomePage() {
             </Link>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
-            {wellnessProducts.map((product) => (
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-6">
+            {wellnessProducts.slice(0, 5).map((product) => (
               <ProductCard key={product.id} product={product} />
             ))}
           </div>
@@ -578,8 +611,8 @@ export default function HomePage() {
       )}
 
       {/* SECTION 8: DOCTOR CONSULTATION SECTION */}
-      <section className="py-16 px-4 bg-slate-100/70 border-y border-slate-200/80">
-        <div className="max-w-7xl mx-auto">
+      <section className="py-16 px-4 sm:px-6 lg:px-8 xl:px-10 bg-slate-100/70 border-y border-slate-200/80">
+        <div className="max-w-[1536px] mx-auto">
           <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-8 gap-4">
             <div>
               <Badge variant="accent" className="mb-2">Instant Telehealth</Badge>
@@ -645,7 +678,7 @@ export default function HomePage() {
       </section>
 
       {/* SECTION 9: HOW MEDISWIFT WORKS */}
-      <section className="py-16 px-4 max-w-7xl mx-auto">
+      <section className="py-16 px-4 sm:px-6 lg:px-8 xl:px-10 max-w-[1536px] mx-auto">
         <div className="text-center max-w-2xl mx-auto mb-12">
           <Badge variant="default" className="mb-2">Unified Process</Badge>
           <h2 className="text-2xl sm:text-3xl font-extrabold text-[#0A2540] tracking-tight">
@@ -704,8 +737,8 @@ export default function HomePage() {
       </section>
 
       {/* SECTION 10: TRUST METRICS */}
-      <section className="py-12 px-4 bg-[#0A2540] text-white">
-        <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+      <section className="py-12 px-4 sm:px-6 lg:px-8 xl:px-10 bg-[#0A2540] text-white">
+        <div className="max-w-[1536px] mx-auto grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
           <div>
             <div className="text-3xl sm:text-4xl font-black text-[#00A896]">260+</div>
             <div className="text-xs text-slate-300 mt-1 font-semibold">Verified Medicines & Devices</div>
@@ -726,7 +759,7 @@ export default function HomePage() {
       </section>
 
       {/* SECTION 11: PATIENT TESTIMONIALS */}
-      <section className="py-16 px-4 max-w-7xl mx-auto">
+      <section className="py-16 px-4 sm:px-6 lg:px-8 xl:px-10 max-w-[1536px] mx-auto">
         <div className="text-center max-w-2xl mx-auto mb-12">
           <Badge variant="accent" className="mb-2">Real Stories</Badge>
           <h2 className="text-2xl sm:text-3xl font-extrabold text-[#0A2540] tracking-tight">
@@ -767,7 +800,7 @@ export default function HomePage() {
       </section>
 
       {/* SECTION 12: HEALTHCARE FAQ ACCORDION */}
-      <section className="py-16 px-4 max-w-4xl mx-auto">
+      <section className="py-16 px-4 sm:px-6 lg:px-8 xl:px-10 max-w-4xl mx-auto">
         <div className="text-center mb-10">
           <Badge variant="default" className="mb-2">Frequently Asked Questions</Badge>
           <h2 className="text-2xl sm:text-3xl font-extrabold text-[#0A2540] tracking-tight">
@@ -789,7 +822,7 @@ export default function HomePage() {
                 <button
                   type="button"
                   onClick={() => setOpenFaqIndex(isOpen ? null : idx)}
-                  className="w-full p-4 sm:p-5 flex items-center justify-between text-left gap-4 hover:bg-slate-50/50 transition-colors"
+                  className="w-full p-4 sm:p-5 flex items-center justify-between text-left gap-4 hover:bg-slate-50/50 transition-colors cursor-pointer"
                 >
                   <span className="font-bold text-xs sm:text-sm text-slate-900">
                     {faq.q}
@@ -812,7 +845,7 @@ export default function HomePage() {
       </section>
 
       {/* SECTION 13: MOBILE APP PROMOTION */}
-      <section className="px-4 max-w-7xl mx-auto pb-16">
+      <section className="px-4 sm:px-6 lg:px-8 xl:px-10 max-w-[1536px] mx-auto pb-16">
         <div className="rounded-3xl bg-gradient-to-br from-[#0A2540] via-[#0D3B66] to-[#0A2540] text-white p-8 sm:p-12 flex flex-col md:flex-row items-center justify-between gap-8 shadow-xl">
           <div className="max-w-xl space-y-4 text-center md:text-left">
             <Badge variant="accent">Coming Soon to iOS & Android</Badge>

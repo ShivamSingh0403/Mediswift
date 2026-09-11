@@ -30,6 +30,7 @@ import { useUiStore } from '@/store/ui-store';
 import { useWishlistStore } from '@/store/wishlist-store';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
+import { NotificationCenter } from '@/components/layout/NotificationCenter';
 
 const ALL_CATEGORIES = [
   { name: 'Pain Relief', slug: 'pain-relief', icon: '⚡' },
@@ -91,8 +92,8 @@ export function Navbar() {
       }`}
     >
       {/* Top Banner: Emergency helpline & express delivery note */}
-      <div className="bg-[#0A2540] text-white py-1.5 px-4 text-xs">
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
+      <div className="bg-[#0A2540] text-white py-1.5 px-4 sm:px-6 lg:px-8 xl:px-10 text-xs">
+        <div className="max-w-[1536px] mx-auto flex items-center justify-between">
           <div className="flex items-center gap-2">
             <span className="inline-flex items-center gap-1 font-bold text-[#00A896]">
               <Zap className="h-3 w-3 fill-[#00A896]" /> Express Delivery:
@@ -113,7 +114,7 @@ export function Navbar() {
       </div>
 
       {/* Main Navigation Bar */}
-      <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between gap-3 sm:gap-6">
+      <div className="max-w-[1536px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 py-3 flex items-center justify-between gap-3 sm:gap-6">
         {/* Brand Logo */}
         <div className="flex items-center gap-6">
           <Link href="/" className="flex flex-col group select-none">
@@ -197,6 +198,9 @@ export function Navbar() {
               )}
             </button>
           </Link>
+
+          {/* In-App Notifications */}
+          <NotificationCenter />
 
           {/* User Account Dropdown */}
           <div className="relative">
@@ -292,8 +296,8 @@ export function Navbar() {
       </div>
 
       {/* Secondary Category & Services Bar with Mega Menu */}
-      <nav className="border-t border-slate-200/60 bg-white/70 px-4 py-2 hidden md:block">
-        <div className="max-w-7xl mx-auto flex items-center justify-between text-xs font-semibold text-slate-600">
+      <nav className="border-t border-slate-200/60 bg-white/70 px-4 sm:px-6 lg:px-8 xl:px-10 py-2 hidden md:block">
+        <div className="max-w-[1536px] mx-auto flex items-center justify-between text-xs font-semibold text-slate-600">
           <div className="flex items-center gap-6">
             {/* Mega Categories Dropdown Trigger */}
             <div className="relative">

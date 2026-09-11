@@ -24,7 +24,10 @@ export default function OrdersListPage() {
       }
       try {
         const res = await orderService.getOrders();
-        if (res?.data?.results) setOrders(res.data.results);
+        if (res?.data) {
+          const list = Array.isArray(res.data) ? res.data : (res.data as any).results || [];
+          setOrders(list);
+        }
       } catch {
         // Handle error
       } finally {

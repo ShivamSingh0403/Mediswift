@@ -155,7 +155,7 @@ export default function MedicineDetailPage({ params }: { params: Promise<{ slug:
   const reviewCount = product.review_count || 58;
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-8 sm:py-10">
+    <div className="max-w-[1536px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 py-8 sm:py-10">
       {/* Breadcrumb */}
       <div className="flex flex-wrap items-center gap-2 text-xs text-slate-500 mb-6">
         <Link href="/" className="hover:text-[#00A896] transition-colors">Home</Link>

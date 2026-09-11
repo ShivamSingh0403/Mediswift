@@ -5,7 +5,7 @@ import { ShieldCheck, HeartPulse, Clock, Award } from 'lucide-react';
 export function Footer() {
   return (
     <footer className="bg-[#0A2540] text-slate-300 pt-14 pb-10 border-t border-slate-800">
-      <div className="max-w-7xl mx-auto px-4">
+      <div className="max-w-[1536px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10">
         {/* Value Prop Badges */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 pb-12 border-b border-slate-800">
           <div className="flex items-center gap-3">

@@ -81,8 +81,14 @@ function AccountDashboardContent() {
             orderService.getOrders(),
             prescriptionService.getPrescriptions(),
           ]);
-          if (orderRes?.data?.results) setOrders(orderRes.data.results);
-          if (rxRes?.data?.results) setPrescriptions(rxRes.data.results);
+          if (orderRes?.data) {
+            const list = Array.isArray(orderRes.data) ? orderRes.data : (orderRes.data as any).results || [];
+            setOrders(list);
+          }
+          if (rxRes?.data) {
+            const list = Array.isArray(rxRes.data) ? rxRes.data : (rxRes.data as any).results || [];
+            setPrescriptions(list);
+          }
         } catch {
           // Ignore
         }

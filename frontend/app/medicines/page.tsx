@@ -109,8 +109,13 @@ function MedicinesMarketplaceContent() {
           page_size: 60,
         });
 
-        if (res?.data?.results) {
-          setProducts(res.data.results);
+        if (res?.data) {
+          const items = Array.isArray(res.data)
+            ? res.data
+            : Array.isArray(res.data?.results)
+            ? res.data.results
+            : [];
+          setProducts(items);
         }
       } catch {
         // Handle gracefully
@@ -343,7 +348,7 @@ function MedicinesMarketplaceContent() {
   );
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-8">
+    <div className="max-w-[1536px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 py-8">
       {/* Header */}
       <div className="mb-6">
         <h1 className="text-3xl font-black text-[#0A2540] tracking-tight">
@@ -564,7 +569,7 @@ function MedicinesMarketplaceContent() {
               <button
                 type="button"
                 onClick={handleResetFilters}
-                className="text-[11px] font-semibold text-slate-400 hover:text-rose-500"
+                className="text-[11px] font-semibold text-slate-400 hover:text-rose-500 cursor-pointer"
               >
                 Reset
               </button>
@@ -582,8 +587,8 @@ function MedicinesMarketplaceContent() {
 
           {loading ? (
             viewMode === 'grid' ? (
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-                {[1, 2, 3, 4, 5, 6].map((i) => (
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6">
+                {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
                   <ProductCardSkeleton key={i} />
                 ))}
               </div>
@@ -603,7 +608,7 @@ function MedicinesMarketplaceContent() {
               onAction={handleResetFilters}
             />
           ) : viewMode === 'grid' ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6">
               {products.map((product) => (
                 <ProductCard key={product.id} product={product} />
               ))}

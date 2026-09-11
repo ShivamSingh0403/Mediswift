@@ -50,7 +50,7 @@ export default function CategoriesIndexPage() {
   }, []);
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-8 sm:py-10">
+    <div className="max-w-[1536px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 py-8 sm:py-10">
       <div className="mb-10 text-center max-w-2xl mx-auto">
         <Badge variant="accent" className="mb-2">Specialty Catalog</Badge>
         <h1 className="text-3xl sm:text-4xl font-black text-[#0A2540] tracking-tight">

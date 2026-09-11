@@ -172,8 +172,8 @@ export default function DoctorsPage() {
   return (
     <div className="min-h-screen bg-[#F8FAFC]">
       {/* Hero Banner */}
-      <div className="bg-gradient-to-b from-[#0A2540] via-[#0D3156] to-[#0A2540] text-white py-12 px-4 sm:px-6 lg:px-8 border-b border-slate-800">
-        <div className="max-w-7xl mx-auto">
+      <div className="bg-gradient-to-b from-[#0A2540] via-[#0D3156] to-[#0A2540] text-white py-12 px-4 sm:px-6 lg:px-8 xl:px-10 border-b border-slate-800">
+        <div className="max-w-[1536px] mx-auto">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
             <div className="space-y-2">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-teal-500/20 text-[#00E5BE] text-xs font-semibold backdrop-blur-md border border-teal-500/30">
@@ -203,7 +203,7 @@ export default function DoctorsPage() {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="max-w-[1536px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 py-8">
         {/* Specialty Selector Strip */}
         <div className="mb-8">
           <div className="flex items-center justify-between mb-3">

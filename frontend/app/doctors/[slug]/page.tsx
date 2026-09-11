@@ -225,7 +225,7 @@ export default function DoctorDetailPage({ params }: { params: Promise<{ slug: s
 
   if (loading) {
     return (
-      <div className="max-w-7xl mx-auto px-4 py-20 text-center space-y-4">
+      <div className="max-w-[1536px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 py-20 text-center space-y-4">
         <div className="animate-spin h-10 w-10 border-4 border-[#00A896] border-t-transparent rounded-full mx-auto" />
         <p className="text-slate-500 font-medium text-sm">Loading Doctor Profile & Calendars...</p>
       </div>
@@ -255,7 +255,7 @@ export default function DoctorDetailPage({ params }: { params: Promise<{ slug: s
     <div className="min-h-screen bg-[#F8FAFC] pb-16">
       {/* Top Breadcrumbs */}
       <div className="bg-white border-b border-slate-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex items-center gap-2 text-xs text-slate-500">
+        <div className="max-w-[1536px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 py-3.5 flex items-center gap-2 text-xs text-slate-500">
           <Link href="/doctors" className="hover:text-[#00A896] flex items-center gap-1">
             <ArrowLeft className="h-3.5 w-3.5" />
             <span>Doctors</span>
@@ -267,7 +267,7 @@ export default function DoctorDetailPage({ params }: { params: Promise<{ slug: s
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="max-w-[1536px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 py-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
           {/* Left Column: Doctor Profile & Credentials */}
           <div className="lg:col-span-7 space-y-6">
