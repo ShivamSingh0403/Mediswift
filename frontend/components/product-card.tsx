@@ -12,7 +12,9 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Card } from '@/components/ui/card';
 import { formatCurrency } from '@/lib/utils';
-import { Plus, Star, Pill, Sparkles, TrendingUp, Heart, Eye } from 'lucide-react';
+import { resolveProductImage } from '@/lib/image-mapper';
+import { MedicineImage } from '@/components/ui/medicine-image';
+import { Plus, Star, Sparkles, TrendingUp, Heart, Eye } from 'lucide-react';
 
 interface ProductCardProps {
   product: Product;
@@ -24,7 +26,6 @@ export function ProductCard({ product, className = '' }: ProductCardProps) {
   const { addToast } = useNotificationStore();
   const { hasProduct, toggleProduct } = useWishlistStore();
   const { setQuickViewProduct, setCartDrawerOpen } = useUiStore();
-  const [imgError, setImgError] = useState(false);
 
   const isWishlisted = hasProduct(product.id);
 
@@ -57,10 +58,6 @@ export function ProductCard({ product, className = '' }: ProductCardProps) {
     setQuickViewProduct(product);
   };
 
-  let resolvedImageUrl = product.image_url || product.primary_image || (product.gallery_images && product.gallery_images[0]);
-  if (resolvedImageUrl && resolvedImageUrl.startsWith('/media/')) {
-    resolvedImageUrl = `http://localhost:8000${resolvedImageUrl}`;
-  }
   const discountVal = parseFloat(product.discount_percent || product.discount_percentage || '0');
   const ratingVal = parseFloat(product.rating || '4.5');
   const reviewCount = product.review_count || 45;
@@ -70,31 +67,13 @@ export function ProductCard({ product, className = '' }: ProductCardProps) {
       {/* Top Media & Floating Actions Area */}
       <div className="relative">
         <Link href={`/medicines/${product.slug}`} className="block relative h-48 w-full bg-slate-50 overflow-hidden">
-          {resolvedImageUrl && !imgError ? (
-            <Image
-              src={resolvedImageUrl}
-              alt={product.name}
-              fill
-              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1536px) 25vw, 20vw"
-              className="object-cover group-hover:scale-108 transition-transform duration-500 ease-out"
-              onError={() => setImgError(true)}
-            />
-          ) : (
-            <div className="w-full h-full flex flex-col items-center justify-center bg-gradient-to-br from-slate-50 via-teal-50/40 to-slate-100 border-b border-slate-100 p-4 text-center select-none">
-              <div className="w-14 h-14 rounded-2xl bg-white shadow-xs border border-teal-100/80 flex items-center justify-center text-[#00A896] group-hover:scale-110 group-hover:border-[#00A896]/40 transition-all duration-300">
-                <Pill className="h-7 w-7" />
-              </div>
-              <span className="text-[11px] font-bold text-slate-700 mt-2 tracking-tight line-clamp-1">
-                {product.brand_name || product.dosage_form || 'MediSwift Genuine'}
-              </span>
-              <span className="text-[10px] text-slate-400 font-medium line-clamp-1">
-                {product.pack_size || 'Verified Pharmaceutical'}
-              </span>
-            </div>
-          )}
-
-          {/* Gradient Overlay on hover */}
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0A2540]/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+          <MedicineImage
+            product={product}
+            className="w-full h-full"
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1536px) 25vw, 20vw"
+          />
+          {/* Subtle gradient overlay on hover */}
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0A2540]/15 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
         </Link>
 
         {/* Floating Badges */}

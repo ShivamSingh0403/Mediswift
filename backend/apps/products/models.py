@@ -100,9 +100,25 @@ class Product(TimeStampedModel):
     requires_prescription = models.BooleanField(default=False, db_index=True)
     is_active = models.BooleanField(default=True, db_index=True)
 
+    class ImageStatus(models.TextChoices):
+        VERIFIED = 'VERIFIED', 'Verified Authentic Photograph'
+        NEEDS_VERIFIED_IMAGE = 'NEEDS_VERIFIED_IMAGE', 'Awaiting Verified Packshot'
+        FALLBACK_GENERATED = 'FALLBACK_GENERATED', 'Clinical Specification Fallback'
+
     # Media & Visuals
     image_url = models.URLField(max_length=500, blank=True, help_text="Primary product image URL")
     additional_images = models.JSONField(default=list, blank=True, help_text="List of gallery image URLs")
+    image_status = models.CharField(
+        max_length=50,
+        choices=ImageStatus.choices,
+        default=ImageStatus.NEEDS_VERIFIED_IMAGE,
+        blank=True,
+        db_index=True
+    )
+    image_source = models.CharField(max_length=255, blank=True, help_text="Origin e.g. Manufacturer Official / Authorized Distributor")
+    image_alt_text = models.CharField(max_length=255, blank=True, help_text="Descriptive pharmaceutical packaging alt text")
+    image_license = models.CharField(max_length=255, blank=True, help_text="e.g. Proprietary / Authorized Distributor / Editorial")
+    is_demo_data = models.BooleanField(default=False, db_index=True)
 
     # Clinical & Usage Information
     composition = models.CharField(max_length=255, blank=True, help_text="Active pharmaceutical ingredients")
@@ -204,8 +220,11 @@ class ProductImage(TimeStampedModel):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='images')
     image = models.ImageField(upload_to='products/', null=True, blank=True)
     image_url = models.URLField(max_length=500, blank=True)
-    alt_text = models.CharField(max_length=150, blank=True)
+    alt_text = models.CharField(max_length=255, blank=True)
     is_primary = models.BooleanField(default=False)
+    source = models.CharField(max_length=255, blank=True)
+    status = models.CharField(max_length=50, default='NEEDS_VERIFIED_IMAGE', blank=True)
+    license = models.CharField(max_length=255, blank=True)
 
     class Meta:
         ordering = ['-is_primary', '-created_at']

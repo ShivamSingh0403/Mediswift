@@ -12,6 +12,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Card } from '@/components/ui/card';
 import { formatCurrency } from '@/lib/utils';
+import { MedicineImage } from '@/components/ui/medicine-image';
 import {
   Trash2,
   Plus,
@@ -144,11 +145,12 @@ export default function CartPage() {
                     {/* Media & Details */}
                     <div className="flex items-start gap-4 min-w-0 flex-1">
                       <div className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-2xl bg-slate-50 border border-slate-100 overflow-hidden shrink-0 flex items-center justify-center">
-                        {imgUrl ? (
-                          <Image src={imgUrl} alt={prod.name} fill sizes="96px" className="object-cover" />
-                        ) : (
-                          <Pill className="h-8 w-8 text-[#00A896] stroke-1" />
-                        )}
+                        <MedicineImage
+                          product={prod}
+                          className="w-full h-full"
+                          sizes="96px"
+                          compact={false}
+                        />
                       </div>
 
                       <div className="flex-1 min-w-0">

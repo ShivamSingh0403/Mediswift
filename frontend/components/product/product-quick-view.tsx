@@ -11,6 +11,7 @@ import { useWishlistStore } from '@/store/wishlist-store';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { formatCurrency } from '@/lib/utils';
+import { MedicineImage } from '@/components/ui/medicine-image';
 import {
   X,
   Plus,
@@ -35,7 +36,6 @@ export function ProductQuickViewModal() {
 
   const product = quickViewProduct;
   const isWishlisted = hasProduct(product.id);
-  const imageUrl = product.image_url || product.primary_image || (product.gallery_images && product.gallery_images[0]);
   const discountVal = parseFloat(product.discount_percent || product.discount_percentage || '0');
   const ratingVal = parseFloat(product.rating || '4.5');
   const reviewCount = product.review_count || 48;
@@ -79,23 +79,12 @@ export function ProductQuickViewModal() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2">
             {/* Image section */}
-            <div className="relative aspect-square sm:aspect-auto bg-slate-50 flex items-center justify-center p-6 border-b sm:border-b-0 sm:border-r border-slate-100">
-              {imageUrl ? (
-                <div className="relative w-full h-full min-h-[240px]">
-                  <Image
-                    src={imageUrl}
-                    alt={product.name}
-                    fill
-                    sizes="(max-width: 640px) 100vw, 50vw"
-                    className="object-cover rounded-2xl"
-                  />
-                </div>
-              ) : (
-                <div className="flex flex-col items-center justify-center text-[#00A896]">
-                  <Pill className="h-16 w-16 stroke-1 opacity-70 mb-2" />
-                  <span className="text-xs font-semibold text-slate-500">{product.dosage_form}</span>
-                </div>
-              )}
+            <div className="relative aspect-square sm:aspect-auto bg-slate-50 flex items-center justify-center border-b sm:border-b-0 sm:border-r border-slate-100 min-h-[260px] overflow-hidden">
+              <MedicineImage
+                product={product}
+                className="w-full h-full"
+                sizes="(max-width: 640px) 100vw, 50vw"
+              />
 
               {/* Rx Badge */}
               <div className="absolute top-4 left-4 flex flex-col gap-1.5">

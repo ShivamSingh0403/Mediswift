@@ -15,6 +15,8 @@ import { Badge } from '@/components/ui/badge';
 import { Card } from '@/components/ui/card';
 import { ProductCard } from '@/components/product-card';
 import { formatCurrency } from '@/lib/utils';
+import { MedicineImage } from '@/components/ui/medicine-image';
+import { resolveProductImage } from '@/lib/image-mapper';
 import {
   ShieldCheck,
   Truck,
@@ -51,7 +53,7 @@ export default function MedicineDetailPage({ params }: { params: Promise<{ slug:
   const [product, setProduct] = useState<Product | null>(null);
   const [selectedImage, setSelectedImage] = useState<string>('');
   const [quantity, setQuantity] = useState(1);
-  const [activeTab, setActiveTab] = useState<'description' | 'ingredients' | 'usage' | 'warnings' | 'storage' | 'reviews'>('description');
+  const [activeTab, setActiveTab] = useState<'description' | 'ingredients' | 'usage' | 'packaging' | 'warnings' | 'storage' | 'reviews'>('description');
   const [loading, setLoading] = useState(true);
   const [relatedProducts, setRelatedProducts] = useState<Product[]>([]);
   const [frequentlyBought, setFrequentlyBought] = useState<Product | null>(null);
@@ -65,7 +67,8 @@ export default function MedicineDetailPage({ params }: { params: Promise<{ slug:
           const prod = res.data;
           setProduct(prod);
 
-          const primary = prod.image_url || prod.primary_image || (prod.gallery_images && prod.gallery_images[0]) || '';
+          const imageMeta = resolveProductImage(prod);
+          const primary = imageMeta.imageUrl || '';
           setSelectedImage(primary);
 
           // Load related products
@@ -162,9 +165,13 @@ export default function MedicineDetailPage({ params }: { params: Promise<{ slug:
         <span>/</span>
         <Link href="/medicines" className="hover:text-[#00A896] transition-colors">Medicines</Link>
         <span>/</span>
-        <Link href={`/categories/${product.category_slug || product.category}`} className="hover:text-[#00A896] transition-colors">
-          {product.category_name || 'Category'}
-        </Link>
+        {typeof product.category_slug === 'string' && product.category_slug ? (
+          <Link href={`/categories/${product.category_slug}`} className="hover:text-[#00A896] transition-colors">
+            {product.category_name || 'Category'}
+          </Link>
+        ) : (
+          <span>{product.category_name || 'Category'}</span>
+        )}
         <span>/</span>
         <span className="text-slate-800 font-bold truncate max-w-xs">{product.name}</span>
       </div>
@@ -175,22 +182,16 @@ export default function MedicineDetailPage({ params }: { params: Promise<{ slug:
           <div className="sticky top-24 space-y-4">
             {/* Primary Large Display */}
             <div className="relative w-full aspect-square rounded-3xl border border-slate-200/80 bg-white overflow-hidden shadow-xs flex items-center justify-center group">
-              {selectedImage ? (
-                <Image
-                  src={selectedImage}
-                  alt={product.name}
-                  fill
-                  priority
-                  sizes="(max-width: 1024px) 100vw, 40vw"
-                  className="object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-              ) : (
-                <div className="flex flex-col items-center justify-center text-[#00A896] p-8 text-center">
-                  <Pill className="h-20 w-20 stroke-1 opacity-70 mb-3" />
-                  <span className="font-bold text-slate-700">{product.name}</span>
-                  <span className="text-xs text-slate-400 mt-1">{product.pack_size}</span>
-                </div>
-              )}
+              <MedicineImage
+                product={{
+                  ...product,
+                  image_url: selectedImage || product.image_url,
+                  primary_image: selectedImage || product.primary_image,
+                }}
+                className="w-full h-full"
+                sizes="(max-width: 1024px) 100vw, 40vw"
+                priority
+              />
 
               {/* Floating Top Badges */}
               <div className="absolute top-4 left-4 flex flex-col gap-2 z-10">
@@ -249,8 +250,12 @@ export default function MedicineDetailPage({ params }: { params: Promise<{ slug:
             <div className="grid grid-cols-3 gap-3 p-4 rounded-3xl bg-slate-50 border border-slate-200/80 text-center">
               <div className="flex flex-col items-center">
                 <ShieldCheck className="h-5 w-5 text-[#00A896] mb-1" />
-                <span className="text-[11px] font-bold text-slate-800">100% Genuine</span>
-                <span className="text-[10px] text-slate-400">Direct from mfr</span>
+                <span className="text-[11px] font-bold text-slate-800">
+                  {product.is_demo_data ? 'Catalog Item' : '100% Genuine'}
+                </span>
+                <span className="text-[10px] text-slate-400">
+                  {product.is_demo_data ? 'Product Catalog' : 'Direct from mfr'}
+                </span>
               </div>
               <div className="flex flex-col items-center">
                 <Thermometer className="h-5 w-5 text-[#00A896] mb-1" />
@@ -435,6 +440,7 @@ export default function MedicineDetailPage({ params }: { params: Promise<{ slug:
                 { id: 'description', label: 'Description & Uses' },
                 { id: 'ingredients', label: 'Salt Composition' },
                 { id: 'usage', label: 'Directions & Dosage' },
+                { id: 'packaging', label: 'Packaging & Verification' },
                 { id: 'warnings', label: 'Safety & Warnings' },
                 { id: 'storage', label: 'Storage' },
                 { id: 'reviews', label: 'Patient Reviews' },
@@ -494,6 +500,63 @@ export default function MedicineDetailPage({ params }: { params: Promise<{ slug:
                   <p className="text-xs sm:text-sm text-rose-900 leading-relaxed bg-rose-50/60 p-4 rounded-2xl border border-rose-100">
                     {product.warnings || product.side_effects || 'Consult your doctor before use if you are pregnant, planning to become pregnant, or breastfeeding. Avoid alcohol consumption during this medication course.'}
                   </p>
+                </div>
+              )}
+
+              {activeTab === 'packaging' && (
+                <div className="space-y-4">
+                  <h4 className="font-bold text-slate-900 text-sm">Packaging Specification & Asset Verification</h4>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-1">
+                      <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">Verification Status</span>
+                      <div className="flex items-center gap-1.5 font-bold text-sm">
+                        {product.image_status === 'VERIFIED' ? (
+                          <span className="text-emerald-600 flex items-center gap-1">
+                            <ShieldCheck className="h-4 w-4" /> Verified Authentic Packshot
+                          </span>
+                        ) : (
+                          <span className="text-amber-600 flex items-center gap-1">
+                            <AlertCircle className="h-4 w-4" /> Clinical Specification Card (Awaiting Packshot)
+                          </span>
+                        )}
+                      </div>
+                      <p className="text-[11px] text-slate-500 mt-1">
+                        {product.image_status === 'VERIFIED'
+                          ? 'This product photograph has been verified against authorized pharmaceutical distributor packaging.'
+                          : 'MediSwift strictly displays clinical formulation specification cards until verified physical packaging is uploaded.'}
+                      </p>
+                    </div>
+
+                    <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-1">
+                      <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">Asset License & Source</span>
+                      <span className="font-bold text-sm text-slate-800 block">
+                        {product.image_source || (product.image_status === 'VERIFIED' ? 'Authorized Distributor' : 'MediSwift Clinical Specification')}
+                      </span>
+                      <span className="text-xs text-slate-500 font-mono block">
+                        License: {product.image_license || (product.image_status === 'VERIFIED' ? 'Authorized Distribution Asset' : 'MediSwift Formulation Card')}
+                      </span>
+                    </div>
+
+                    <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-1">
+                      <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">Dosage Form & Strength</span>
+                      <span className="font-bold text-sm text-slate-800 block">
+                        {product.dosage_form} {product.strength ? `• ${product.strength}` : ''}
+                      </span>
+                      <span className="text-xs text-slate-500 block">
+                        Standard Pack: {product.pack_size || 'Retail Unit'}
+                      </span>
+                    </div>
+
+                    <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-1">
+                      <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">SKU / Item Reference</span>
+                      <span className="font-mono text-sm font-bold text-[#0A2540] block">
+                        {product.sku || 'SKU-PENDING'}
+                      </span>
+                      <span className="text-xs text-slate-500 block">
+                        Category: {product.category_name || 'Healthcare'}
+                      </span>
+                    </div>
+                  </div>
                 </div>
               )}
 
@@ -572,19 +635,21 @@ export default function MedicineDetailPage({ params }: { params: Promise<{ slug:
               <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
                 <div className="flex items-center gap-3">
                   <div className="relative w-16 h-16 rounded-xl bg-white border border-slate-200 overflow-hidden shrink-0">
-                    {selectedImage ? (
-                      <Image src={selectedImage} alt={product.name} fill className="object-cover" />
-                    ) : (
-                      <Pill className="h-8 w-8 text-[#00A896] m-auto" />
-                    )}
+                    <MedicineImage
+                      product={product}
+                      className="w-full h-full"
+                      sizes="64px"
+                      compact={true}
+                    />
                   </div>
                   <Plus className="h-4 w-4 text-slate-400 shrink-0" />
                   <div className="relative w-16 h-16 rounded-xl bg-white border border-slate-200 overflow-hidden shrink-0">
-                    {frequentlyBought.image_url ? (
-                      <Image src={frequentlyBought.image_url} alt={frequentlyBought.name} fill className="object-cover" />
-                    ) : (
-                      <Pill className="h-8 w-8 text-[#00A896] m-auto" />
-                    )}
+                    <MedicineImage
+                      product={frequentlyBought}
+                      className="w-full h-full"
+                      sizes="64px"
+                      compact={true}
+                    />
                   </div>
                   <div className="text-xs">
                     <div className="font-bold text-slate-900 truncate max-w-[180px]">{frequentlyBought.name}</div>

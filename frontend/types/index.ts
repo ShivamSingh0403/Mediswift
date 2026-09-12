@@ -58,6 +58,7 @@ export interface Product {
   id: string;
   name: string;
   slug: string;
+  sku?: string;
   generic_name: string;
   composition?: string;
   ingredients?: string;
@@ -86,6 +87,11 @@ export interface Product {
   bestseller?: boolean;
   primary_image?: string;
   image_url?: string;
+  image_status?: string;
+  image_source?: string;
+  image_alt_text?: string;
+  image_license?: string;
+  is_demo_data?: boolean;
   additional_images?: string[];
   gallery_images?: string[];
   short_description?: string;

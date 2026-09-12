@@ -6,13 +6,15 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export function formatCurrency(amount: string | number | undefined | null): string {
-  if (amount === undefined || amount === null) return '₹0.00';
+  if (amount === undefined || amount === null) return '₹0';
   const num = typeof amount === 'string' ? parseFloat(amount) : amount;
-  if (isNaN(num)) return '₹0.00';
+  if (isNaN(num)) return '₹0';
+  const isWhole = num % 1 === 0;
   return new Intl.NumberFormat('en-IN', {
     style: 'currency',
     currency: 'INR',
-    maximumFractionDigits: 2,
+    minimumFractionDigits: isWhole ? 0 : 2,
+    maximumFractionDigits: isWhole ? 0 : 2,
   }).format(num);
 }
 

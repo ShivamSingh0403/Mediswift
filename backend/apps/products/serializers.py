@@ -6,7 +6,7 @@ class ProductImageSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = ProductImage
-        fields = ('id', 'image', 'image_url', 'url', 'alt_text', 'is_primary')
+        fields = ('id', 'image', 'image_url', 'url', 'alt_text', 'is_primary', 'source', 'status', 'license')
 
     def get_url(self, obj):
         if obj.image_url:
@@ -79,12 +79,13 @@ class ProductListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
         fields = (
-            'id', 'name', 'slug', 'generic_name', 'category', 'category_name', 'category_slug',
+            'id', 'name', 'slug', 'generic_name', 'sku', 'category', 'category_name', 'category_slug',
             'brand', 'brand_name', 'dosage_form', 'strength', 'pack_size',
             'price', 'price_inr', 'original_price_inr', 'discount_percent', 'discount_percentage',
             'discounted_price', 'stock_quantity', 'in_stock', 'rating', 'review_count',
             'prescription_required', 'requires_prescription', 'featured', 'trending', 'bestseller',
-            'primary_image', 'image_url', 'short_description', 'tags'
+            'primary_image', 'image_url', 'image_status', 'image_source', 'image_alt_text', 'image_license', 'is_demo_data',
+            'short_description', 'tags'
         )
 
     def get_primary_image(self, obj):
@@ -103,6 +104,8 @@ class ProductListSerializer(serializers.ModelSerializer):
 
 class ProductDetailSerializer(serializers.ModelSerializer):
     category = CategorySerializer(read_only=True)
+    category_slug = serializers.CharField(source='category.slug', read_only=True)
+    category_name = serializers.CharField(source='category.name', read_only=True)
     brand = BrandSerializer(read_only=True)
     images = ProductImageSerializer(many=True, read_only=True)
     discounted_price = serializers.DecimalField(max_digits=10, decimal_places=2, read_only=True)
@@ -118,12 +121,12 @@ class ProductDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
         fields = (
-            'id', 'name', 'slug', 'generic_name', 'sku', 'category', 'brand',
+            'id', 'name', 'slug', 'generic_name', 'sku', 'category', 'category_slug', 'category_name', 'brand',
             'manufacturer', 'dosage_form', 'strength', 'pack_size',
             'price', 'price_inr', 'original_price_inr', 'discount_percent', 'discount_percentage',
             'discounted_price', 'stock_quantity', 'in_stock', 'rating', 'review_count',
             'prescription_required', 'requires_prescription', 'featured', 'trending', 'bestseller',
-            'image_url', 'additional_images', 'primary_image', 'gallery_images', 'images',
+            'image_url', 'image_status', 'image_source', 'image_alt_text', 'image_license', 'is_demo_data', 'additional_images', 'primary_image', 'gallery_images', 'images',
             'short_description', 'detailed_description', 'description',
             'composition', 'ingredients', 'usage_instructions', 'directions',
             'side_effects', 'warnings', 'storage_information', 'tags',

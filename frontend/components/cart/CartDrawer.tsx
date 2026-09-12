@@ -9,6 +9,7 @@ import { useCartStore } from '@/store/cart-store';
 import { useUiStore } from '@/store/ui-store';
 import { Button } from '@/components/ui/button';
 import { formatCurrency } from '@/lib/utils';
+import { MedicineImage } from '@/components/ui/medicine-image';
 import {
   X,
   ShoppingBag,
@@ -147,7 +148,6 @@ export function CartDrawer() {
               ) : (
                 items.map((item) => {
                   const prod = item.product;
-                  const itemImg = prod.image_url || prod.primary_image || (prod.gallery_images && prod.gallery_images[0]);
                   return (
                     <div
                       key={item.id}
@@ -155,17 +155,12 @@ export function CartDrawer() {
                     >
                       {/* Thumbnail */}
                       <div className="relative w-16 h-16 rounded-xl bg-white border border-slate-200/80 overflow-hidden shrink-0 flex items-center justify-center">
-                        {itemImg ? (
-                          <Image
-                            src={itemImg}
-                            alt={prod.name}
-                            fill
-                            sizes="64px"
-                            className="object-cover"
-                          />
-                        ) : (
-                          <Pill className="h-7 w-7 text-[#00A896] stroke-1" />
-                        )}
+                        <MedicineImage
+                          product={prod}
+                          className="w-full h-full"
+                          sizes="64px"
+                          compact={true}
+                        />
                       </div>
 
                       {/* Info */}

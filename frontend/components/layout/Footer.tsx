@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { ShieldCheck, HeartPulse, Clock, Award } from 'lucide-react';
+import { MediSwiftLogo } from '@/components/brand/MediSwiftLogo';
 
 export function Footer() {
   return (
@@ -49,14 +50,7 @@ export function Footer() {
         {/* Links Column Grid */}
         <div className="grid grid-cols-2 md:grid-cols-5 gap-8 py-12 border-b border-slate-800 text-xs">
           <div className="col-span-2 space-y-4">
-            <div className="flex items-center gap-1.5">
-              <div className="w-7 h-7 rounded-lg bg-[#00A896] flex items-center justify-center text-white font-black text-base">
-                +
-              </div>
-              <span className="text-xl font-bold tracking-tight text-white">
-                MEDI<span className="text-[#00A896]">SWIFT</span>
-              </span>
-            </div>
+            <MediSwiftLogo variant="header" size="md" theme="dark" href="/" />
             <p className="text-slate-400 max-w-sm leading-relaxed">
               MediSwift is India&apos;s smarter digital healthcare network, combining high-speed medicine e-commerce, automated prescription verification, and top-tier doctor consultations.
             </p>

@@ -9,6 +9,7 @@ import { useUiStore } from '@/store/ui-store';
 import { productService } from '@/services/product-service';
 import { Product } from '@/types';
 import { formatCurrency } from '@/lib/utils';
+import { MedicineImage } from '@/components/ui/medicine-image';
 import {
   Search,
   X,
@@ -242,17 +243,12 @@ export function SearchOverlay() {
                         className="group flex items-center gap-3.5 p-3 rounded-2xl border border-slate-100 bg-slate-50/50 hover:bg-white hover:border-[#00A896]/30 hover:shadow-xs transition-all"
                       >
                         <div className="relative w-14 h-14 rounded-xl bg-white border border-slate-100 shrink-0 overflow-hidden flex items-center justify-center">
-                          {product.image_url || product.primary_image ? (
-                            <Image
-                              src={product.image_url || product.primary_image || ''}
-                              alt={product.name}
-                              fill
-                              sizes="56px"
-                              className="object-cover group-hover:scale-105 transition-transform"
-                            />
-                          ) : (
-                            <Pill className="h-6 w-6 text-[#00A896] stroke-1" />
-                          )}
+                          <MedicineImage
+                            product={product}
+                            className="w-full h-full"
+                            sizes="56px"
+                            compact={true}
+                          />
                         </div>
 
                         <div className="flex-1 min-w-0">

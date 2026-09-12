@@ -31,6 +31,7 @@ import { useWishlistStore } from '@/store/wishlist-store';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { NotificationCenter } from '@/components/layout/NotificationCenter';
+import { MediSwiftLogo } from '@/components/brand/MediSwiftLogo';
 
 const ALL_CATEGORIES = [
   { name: 'Pain Relief', slug: 'pain-relief', icon: '⚡' },
@@ -117,19 +118,7 @@ export function Navbar() {
       <div className="max-w-[1536px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 py-3 flex items-center justify-between gap-3 sm:gap-6">
         {/* Brand Logo */}
         <div className="flex items-center gap-6">
-          <Link href="/" className="flex flex-col group select-none">
-            <div className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-[#0A2540] via-[#0D3B66] to-[#00A896] flex items-center justify-center text-white font-black text-lg shadow-sm group-hover:scale-105 transition-transform">
-                +
-              </div>
-              <span className="text-xl sm:text-2xl font-black tracking-tight text-[#0A2540]">
-                MEDI<span className="text-[#00A896]">SWIFT</span>
-              </span>
-            </div>
-            <span className="text-[9px] font-semibold tracking-wider text-slate-400 uppercase hidden sm:block">
-              Healthcare Technology
-            </span>
-          </Link>
+          <MediSwiftLogo variant="header" size="md" theme="light" href="/" />
 
           {/* Delivery Location Pincode Pill */}
           <div className="hidden xl:flex items-center gap-2 px-3 py-1.5 rounded-xl border border-slate-200 bg-slate-50/70 text-xs text-slate-700 hover:border-[#00A896] transition-colors cursor-pointer">
@@ -219,12 +208,19 @@ export function Navbar() {
                 <ChevronDown className="h-3.5 w-3.5 text-slate-400" />
               </button>
             ) : (
-              <Link href="/account">
-                <Button variant="outline" size="sm" className="rounded-xl">
-                  <UserIcon className="h-4 w-4 mr-1 sm:mr-1.5" />
-                  <span className="hidden sm:inline">Sign In</span>
-                </Button>
-              </Link>
+              <div className="flex items-center gap-1.5">
+                <Link href="/login">
+                  <Button variant="outline" size="sm" className="rounded-xl">
+                    <UserIcon className="h-4 w-4 mr-1 sm:mr-1.5" />
+                    <span>Sign In</span>
+                  </Button>
+                </Link>
+                <Link href="/signup" className="hidden xl:inline-block">
+                  <Button variant="primary" size="sm" className="rounded-xl font-semibold">
+                    <span>Register</span>
+                  </Button>
+                </Link>
+              </div>
             )}
 
             {/* Account dropdown */}

@@ -9,6 +9,7 @@ import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Heart, ShoppingBag, Trash2, ArrowRight } from 'lucide-react';
 import { formatCurrency } from '@/lib/utils';
+import { MedicineImage } from '@/components/ui/medicine-image';
 
 export default function WishlistPage() {
   const { products, removeProduct, moveToCart, clearWishlist } = useWishlistStore();
@@ -71,12 +72,18 @@ export default function WishlistPage() {
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {products.map((product) => (
-            <Card key={product.id} className="p-4 rounded-2xl border border-slate-200 bg-white flex flex-col justify-between shadow-xs">
+            <Card key={product.id} className="p-4 rounded-2xl border border-slate-200 bg-white flex flex-col justify-between shadow-xs overflow-hidden">
               <div>
-                <div className="h-40 bg-teal-50/40 rounded-xl flex items-center justify-center mb-3">
-                  <span className="text-4xl">💊</span>
-                </div>
-                <h3 className="font-bold text-slate-900 text-sm line-clamp-1">{product.name}</h3>
+                <Link href={`/medicines/${product.slug}`} className="block relative h-40 rounded-xl overflow-hidden mb-3 border border-slate-100">
+                  <MedicineImage
+                    product={product}
+                    className="w-full h-full"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  />
+                </Link>
+                <Link href={`/medicines/${product.slug}`}>
+                  <h3 className="font-bold text-slate-900 text-sm line-clamp-1 hover:text-[#00A896] transition-colors">{product.name}</h3>
+                </Link>
                 <p className="text-xs text-slate-400 mt-0.5">{product.dosage_form} • {product.pack_size}</p>
                 <div className="mt-2 text-sm font-black text-[#0A2540]">
                   {formatCurrency(parseFloat(product.discounted_price || product.price))}

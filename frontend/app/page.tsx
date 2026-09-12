@@ -86,7 +86,7 @@ const FAQS = [
   },
   {
     q: 'How do digital doctor tele-consultations work?',
-    a: 'You can choose from over 500+ verified, NMC-registered specialists across 25+ medical departments. Once booked, you join an encrypted, HIPAA-compliant video session. Post-consultation, your digital prescription is automatically saved to your MediSwift Prescription Vault.',
+    a: 'You can consult verified, NMC-registered physicians and specialists across 25+ medical departments. Once booked, you join an encrypted, HIPAA-compliant video session. Post-consultation, your digital prescription is automatically saved to your MediSwift Prescription Vault.',
   },
   {
     q: 'What is your return and refund policy for medicines?',
@@ -422,8 +422,8 @@ export default function HomePage() {
                   <div className="text-slate-300 mt-0.5">Licensed Rx Guarantee</div>
                 </div>
                 <div>
-                  <div className="font-extrabold text-xl sm:text-2xl text-white">500+ Specialists</div>
-                  <div className="text-slate-300 mt-0.5">NMC Verified Doctors</div>
+                  <div className="font-extrabold text-xl sm:text-2xl text-white">Verified Specialists</div>
+                  <div className="text-slate-300 mt-0.5">NMC Registered Doctors</div>
                 </div>
               </motion.div>
             </motion.div>

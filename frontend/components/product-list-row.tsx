@@ -11,7 +11,8 @@ import { useUiStore } from '@/store/ui-store';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { formatCurrency } from '@/lib/utils';
-import { Plus, Star, Pill, Sparkles, TrendingUp, Heart, Eye } from 'lucide-react';
+import { MedicineImage } from '@/components/ui/medicine-image';
+import { Plus, Star, Sparkles, TrendingUp, Heart, Eye } from 'lucide-react';
 
 interface ProductListRowProps {
   product: Product;
@@ -22,10 +23,7 @@ export function ProductListRow({ product }: ProductListRowProps) {
   const { addToast } = useNotificationStore();
   const { hasProduct, toggleProduct } = useWishlistStore();
   const { setQuickViewProduct, setCartDrawerOpen } = useUiStore();
-  const [imgError, setImgError] = useState(false);
-
   const isWishlisted = hasProduct(product.id);
-  const imageUrl = product.image_url || product.primary_image || (product.gallery_images && product.gallery_images[0]);
   const discountVal = parseFloat(product.discount_percent || product.discount_percentage || '0');
   const ratingVal = parseFloat(product.rating || '4.5');
   const reviewCount = product.review_count || 45;
@@ -59,18 +57,12 @@ export function ProductListRow({ product }: ProductListRowProps) {
       <div className="flex items-start gap-4 min-w-0 flex-1">
         {/* Thumbnail */}
         <Link href={`/medicines/${product.slug}`} className="relative w-24 h-24 sm:w-28 sm:h-28 rounded-xl bg-slate-50 border border-slate-100 overflow-hidden shrink-0 flex items-center justify-center">
-          {imageUrl && !imgError ? (
-            <Image
-              src={imageUrl}
-              alt={product.name}
-              fill
-              sizes="112px"
-              className="object-cover group-hover:scale-105 transition-transform"
-              onError={() => setImgError(true)}
-            />
-          ) : (
-            <Pill className="h-8 w-8 text-[#00A896] stroke-1" />
-          )}
+          <MedicineImage
+            product={product}
+            className="w-full h-full"
+            sizes="112px"
+            compact={false}
+          />
         </Link>
 
         {/* Metadata */}
@@ -79,12 +71,17 @@ export function ProductListRow({ product }: ProductListRowProps) {
             <span className="text-[11px] font-bold text-[#00A896] uppercase tracking-wider">
               {product.brand_name || product.category_name}
             </span>
+            {product.is_demo_data && (
+              <span className="text-[9px] font-medium text-slate-500 bg-slate-100 px-1.5 py-0.5 rounded border border-slate-200">
+                Catalog Sample
+              </span>
+            )}
             {product.prescription_required ? (
               <Badge variant="rx" className="text-[9px] px-1.5 py-0">Rx Required</Badge>
             ) : (
               <Badge variant="success" className="text-[9px] px-1.5 py-0">OTC</Badge>
             )}
-            {product.bestseller && (
+            {product.bestseller && !product.is_demo_data && (
               <span className="text-[9px] font-black uppercase bg-amber-500 text-white px-1.5 py-0.5 rounded">
                 Bestseller
               </span>

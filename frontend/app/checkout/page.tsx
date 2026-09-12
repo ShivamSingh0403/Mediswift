@@ -187,14 +187,14 @@ export default function CheckoutPage() {
   const handleOpenNewAddress = () => {
     setEditingAddressId(null);
     setAddressForm({
-      full_name: `${user?.first_name || ''} ${user?.last_name || ''}`.trim() || 'Aarav Patel',
-      phone: user?.phone_number || '+91 9876543210',
+      full_name: `${user?.first_name || ''} ${user?.last_name || ''}`.trim(),
+      phone: user?.phone_number || '',
       address_line1: '',
       address_line2: '',
       landmark: '',
-      city: 'Ahmedabad',
-      state: 'Gujarat',
-      postal_code: '380054',
+      city: '',
+      state: '',
+      postal_code: '',
       address_type: 'HOME',
       is_default: addresses.length === 0,
     });
