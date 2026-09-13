@@ -512,19 +512,25 @@ export default function MedicineDetailPage({ params }: { params: Promise<{ slug:
                       <div className="flex items-center gap-1.5 font-bold text-sm">
                         {product.image_status === 'VERIFIED' ? (
                           <span className="text-emerald-600 flex items-center gap-1">
-                            <ShieldCheck className="h-4 w-4" /> Verified Authentic Packshot
+                            <ShieldCheck className="h-4 w-4" /> Verified image
                           </span>
                         ) : (
-                          <span className="text-amber-600 flex items-center gap-1">
-                            <AlertCircle className="h-4 w-4" /> Clinical Specification Card (Awaiting Packshot)
+                          <span className="text-amber-700 flex items-center gap-1">
+                            <Clock className="h-4 w-4" /> Image under review
                           </span>
                         )}
                       </div>
                       <p className="text-[11px] text-slate-500 mt-1">
                         {product.image_status === 'VERIFIED'
                           ? 'This product photograph has been verified against authorized pharmaceutical distributor packaging.'
-                          : 'MediSwift strictly displays clinical formulation specification cards until verified physical packaging is uploaded.'}
+                          : 'Product image under verification. An authentic packaging photograph will be displayed once verified against authorized distributor inventory.'}
                       </p>
+                      {product.image_status === 'VERIFIED' && product.verified_by && (
+                        <div className="text-[11px] text-slate-600 pt-1 font-medium">
+                          Verified by: <span className="font-semibold text-slate-800">{product.verified_by}</span>
+                          {product.verified_at && <span> • {new Date(product.verified_at).toLocaleDateString()}</span>}
+                        </div>
+                      )}
                     </div>
 
                     <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-1">
@@ -532,6 +538,16 @@ export default function MedicineDetailPage({ params }: { params: Promise<{ slug:
                       <span className="font-bold text-sm text-slate-800 block">
                         {product.image_source || (product.image_status === 'VERIFIED' ? 'Authorized Distributor' : 'MediSwift Clinical Specification')}
                       </span>
+                      {product.source_url && (
+                        <a
+                          href={product.source_url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-[11px] text-[#00A896] hover:underline block truncate"
+                        >
+                          Source: {product.source_url}
+                        </a>
+                      )}
                       <span className="text-xs text-slate-500 font-mono block">
                         License: {product.image_license || (product.image_status === 'VERIFIED' ? 'Authorized Distribution Asset' : 'MediSwift Formulation Card')}
                       </span>

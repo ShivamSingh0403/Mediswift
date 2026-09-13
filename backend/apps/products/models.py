@@ -1,6 +1,12 @@
+import os
 import uuid
+import shutil
+import hashlib
+from pathlib import Path
 from decimal import Decimal
 from django.db import models
+from django.utils import timezone
+from django.conf import settings
 from django.utils.text import slugify
 from apps.common.models import TimeStampedModel
 
@@ -101,9 +107,13 @@ class Product(TimeStampedModel):
     is_active = models.BooleanField(default=True, db_index=True)
 
     class ImageStatus(models.TextChoices):
+        MISSING = 'MISSING', 'Missing Image'
+        DOWNLOADED = 'DOWNLOADED', 'Downloaded'
+        PENDING_REVIEW = 'PENDING_REVIEW', 'Pending Review'
         VERIFIED = 'VERIFIED', 'Verified Authentic Photograph'
-        NEEDS_VERIFIED_IMAGE = 'NEEDS_VERIFIED_IMAGE', 'Awaiting Verified Packshot'
-        FALLBACK_GENERATED = 'FALLBACK_GENERATED', 'Clinical Specification Fallback'
+        REJECTED = 'REJECTED', 'Rejected Image'
+        BROKEN = 'BROKEN', 'Broken Image URL / Asset'
+        DUPLICATE = 'DUPLICATE', 'Duplicate Image Mapping'
 
     # Media & Visuals
     image_url = models.URLField(max_length=500, blank=True, help_text="Primary product image URL")
@@ -111,13 +121,16 @@ class Product(TimeStampedModel):
     image_status = models.CharField(
         max_length=50,
         choices=ImageStatus.choices,
-        default=ImageStatus.NEEDS_VERIFIED_IMAGE,
+        default=ImageStatus.MISSING,
         blank=True,
         db_index=True
     )
     image_source = models.CharField(max_length=255, blank=True, help_text="Origin e.g. Manufacturer Official / Authorized Distributor")
     image_alt_text = models.CharField(max_length=255, blank=True, help_text="Descriptive pharmaceutical packaging alt text")
     image_license = models.CharField(max_length=255, blank=True, help_text="e.g. Proprietary / Authorized Distributor / Editorial")
+    source_url = models.URLField(max_length=500, blank=True, help_text="Official source link e.g. brand portal or catalog")
+    verified_by = models.CharField(max_length=150, blank=True, help_text="Verifier name or employee ID")
+    verified_at = models.DateTimeField(null=True, blank=True, help_text="Date & time when image was verified")
     is_demo_data = models.BooleanField(default=False, db_index=True)
 
     # Clinical & Usage Information
@@ -218,16 +231,216 @@ class Product(TimeStampedModel):
 
 class ProductImage(TimeStampedModel):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='images')
-    image = models.ImageField(upload_to='products/', null=True, blank=True)
+    sku = models.CharField(max_length=100, blank=True, db_index=True)
+    image_file = models.ImageField(upload_to='product_images/pending_review/', null=True, blank=True)
+    image = models.ImageField(upload_to='product_images/pending_review/', null=True, blank=True)
     image_url = models.URLField(max_length=500, blank=True)
-    alt_text = models.CharField(max_length=255, blank=True)
-    is_primary = models.BooleanField(default=False)
+    source_url = models.URLField(max_length=500, blank=True)
+    source_name = models.CharField(max_length=255, blank=True)
     source = models.CharField(max_length=255, blank=True)
-    status = models.CharField(max_length=50, default='NEEDS_VERIFIED_IMAGE', blank=True)
+    license_note = models.CharField(max_length=255, blank=True)
     license = models.CharField(max_length=255, blank=True)
+    image_status = models.CharField(
+        max_length=50,
+        choices=Product.ImageStatus.choices,
+        default=Product.ImageStatus.PENDING_REVIEW,
+        db_index=True
+    )
+    status = models.CharField(
+        max_length=50,
+        choices=Product.ImageStatus.choices,
+        default=Product.ImageStatus.PENDING_REVIEW,
+        blank=True
+    )
+    image_hash = models.CharField(
+        max_length=64,
+        blank=True,
+        db_index=True,
+        help_text="SHA-256 hash of image file"
+    )
+    mime_type = models.CharField(max_length=50, blank=True)
+    width = models.PositiveIntegerField(null=True, blank=True)
+    height = models.PositiveIntegerField(null=True, blank=True)
+    source_page_url = models.URLField(max_length=1000, blank=True)
+    source_domain = models.CharField(max_length=255, blank=True)
+    is_primary = models.BooleanField(default=False)
+    alt_text = models.CharField(max_length=255, blank=True)
+    verified_by = models.CharField(max_length=150, blank=True)
+    verified_at = models.DateTimeField(null=True, blank=True)
 
     class Meta:
         ordering = ['-is_primary', '-created_at']
 
+    def save(self, *args, **kwargs):
+        if not self.sku and self.product:
+            self.sku = self.product.sku
+
+        # Sync legacy aliases
+        if self.source_name and not self.source:
+            self.source = self.source_name
+        elif self.source and not self.source_name:
+            self.source_name = self.source
+
+        if self.license_note and not self.license:
+            self.license = self.license_note
+        elif self.license and not self.license_note:
+            self.license_note = self.license
+
+        if self.image_status and not self.status:
+            self.status = self.image_status
+        elif self.status and not self.image_status:
+            self.image_status = self.status
+
+        if self.image_file and not self.image:
+            self.image = self.image_file
+        elif self.image and not self.image_file:
+            self.image_file = self.image
+
+        # Compute SHA-256 hash if image file is set and hash missing
+        target_file = self.image_file or self.image
+        if target_file and not self.image_hash:
+            try:
+                target_file.seek(0)
+                self.image_hash = hashlib.sha256(target_file.read()).hexdigest()
+                target_file.seek(0)
+            except Exception:
+                pass
+
+        super().save(*args, **kwargs)
+
+    def mark_verified(self, verified_by="Administrator"):
+        """
+        Moves image to verified/ directory safely without deleting original without backup.
+        Updates status to VERIFIED and sets verified_at and verified_by.
+        """
+        target_field = self.image_file or self.image
+        if target_field and target_field.name:
+            src_path = Path(settings.MEDIA_ROOT) / target_field.name
+            if src_path.exists():
+                verified_dir = Path(settings.MEDIA_ROOT) / 'product_images' / 'verified'
+                verified_dir.mkdir(parents=True, exist_ok=True)
+                ext = src_path.suffix
+                dest_filename = f"{self.sku or self.product.sku}{ext}"
+                dest_path = verified_dir / dest_filename
+                
+                # Copy safely with backup
+                shutil.copy2(src_path, dest_path)
+                new_rel_name = f"product_images/verified/{dest_filename}"
+                self.image_file.name = new_rel_name
+                self.image.name = new_rel_name
+
+        self.image_status = Product.ImageStatus.VERIFIED
+        self.status = Product.ImageStatus.VERIFIED
+        self.verified_by = verified_by
+        self.verified_at = timezone.now()
+        self.save()
+
+        # Update product primary URL
+        target_f = self.image_file or self.image
+        if target_f:
+            self.product.image_url = target_f.url
+        elif self.image_url:
+            self.product.image_url = self.image_url
+            
+        self.product.image_status = Product.ImageStatus.VERIFIED
+        self.product.verified_by = verified_by
+        self.product.verified_at = self.verified_at
+        self.product.save(update_fields=['image_url', 'image_status', 'verified_by', 'verified_at'])
+
+    def mark_rejected(self, rejected_by="Administrator", reason=""):
+        """
+        Moves image to rejected/ directory safely and marks as REJECTED.
+        """
+        target_field = self.image_file or self.image
+        if target_field and target_field.name:
+            src_path = Path(settings.MEDIA_ROOT) / target_field.name
+            if src_path.exists():
+                rejected_dir = Path(settings.MEDIA_ROOT) / 'product_images' / 'rejected'
+                rejected_dir.mkdir(parents=True, exist_ok=True)
+                ext = src_path.suffix
+                dest_filename = f"{self.sku or self.product.sku}{ext}"
+                dest_path = rejected_dir / dest_filename
+                shutil.copy2(src_path, dest_path)
+                new_rel_name = f"product_images/rejected/{dest_filename}"
+                self.image_file.name = new_rel_name
+                self.image.name = new_rel_name
+
+        self.image_status = Product.ImageStatus.REJECTED
+        self.status = Product.ImageStatus.REJECTED
+        self.save()
+
+        if self.product.images.filter(image_status=Product.ImageStatus.VERIFIED).exists():
+            next_ver = self.product.images.filter(image_status=Product.ImageStatus.VERIFIED).first()
+            f = next_ver.image_file or next_ver.image
+            self.product.image_url = f.url if f else next_ver.image_url
+            self.product.image_status = Product.ImageStatus.VERIFIED
+        else:
+            self.product.image_url = ''
+            self.product.image_status = Product.ImageStatus.REJECTED
+        self.product.save(update_fields=['image_url', 'image_status'])
+
     def __str__(self):
-        return f"Image for {self.product.name}"
+        return f"Image for {self.product.name} ({self.sku})"
+
+
+class ProductImageCandidate(TimeStampedModel):
+    class CandidateStatus(models.TextChoices):
+        DISCOVERED = 'DISCOVERED', 'Discovered'
+        PENDING_REVIEW = 'PENDING_REVIEW', 'Pending Review'
+        APPROVED_FOR_DOWNLOAD = 'APPROVED_FOR_DOWNLOAD', 'Approved for Download'
+        DOWNLOADED = 'DOWNLOADED', 'Downloaded'
+        VERIFIED = 'VERIFIED', 'Verified'
+        REJECTED = 'REJECTED', 'Rejected'
+        BROKEN = 'BROKEN', 'Broken'
+        DUPLICATE = 'DUPLICATE', 'Duplicate'
+        RIGHTS_UNKNOWN = 'RIGHTS_UNKNOWN', 'Rights Unknown'
+        PRODUCT_MISMATCH = 'PRODUCT_MISMATCH', 'Product Mismatch'
+        BLOCKED_SOURCE = 'BLOCKED_SOURCE', 'Blocked Source'
+
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='image_candidates')
+    sku = models.CharField(max_length=100, blank=True, db_index=True)
+    product_name = models.CharField(max_length=255, blank=True)
+    brand = models.CharField(max_length=255, blank=True)
+    candidate_image_url = models.URLField(max_length=1000)
+    source_page_url = models.URLField(max_length=1000, blank=True)
+    source_domain = models.CharField(max_length=255, blank=True, db_index=True)
+    source_type = models.CharField(max_length=100, blank=True)
+    image_title = models.CharField(max_length=255, blank=True)
+    detected_alt_text = models.CharField(max_length=500, blank=True)
+    rights_note = models.TextField(blank=True, help_text="Rights/license advisory, e.g. Usage permission has not been confirmed.")
+    license_url = models.URLField(max_length=1000, blank=True)
+    matching_confidence = models.FloatField(default=0.0, help_text="Confidence score 0.0 to 1.0")
+    status = models.CharField(
+        max_length=50,
+        choices=CandidateStatus.choices,
+        default=CandidateStatus.DISCOVERED,
+        db_index=True
+    )
+    review_reason = models.TextField(blank=True)
+    downloaded_image = models.ForeignKey(
+        ProductImage,
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='candidate_origin'
+    )
+    discovered_at = models.DateTimeField(default=timezone.now)
+
+    class Meta:
+        ordering = ['-matching_confidence', '-discovered_at']
+        indexes = [
+            models.Index(fields=['sku', 'status']),
+            models.Index(fields=['status', 'matching_confidence']),
+        ]
+
+    def save(self, *args, **kwargs):
+        if not self.sku and self.product:
+            self.sku = self.product.sku
+        if not self.product_name and self.product:
+            self.product_name = self.product.name
+        if not self.brand and self.product and self.product.brand:
+            self.brand = self.product.brand.name
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return f"Candidate {self.sku} ({self.status}) - {self.candidate_image_url[:40]}"

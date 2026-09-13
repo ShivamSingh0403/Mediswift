@@ -126,6 +126,36 @@ export default function AdminDashboardPage() {
           </div>
         </Card>
       </div>
+
+      {/* Catalog & Image Management Hub Quick Action */}
+      <div className="mt-8">
+        <Link href="/admin/images">
+          <Card className="p-6 bg-gradient-to-r from-teal-500/10 via-slate-50 to-emerald-500/10 border-teal-200 hover:border-[#00A896] transition-all cursor-pointer group">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 rounded-2xl bg-[#00A896] text-white flex items-center justify-center shrink-0 shadow-md shadow-[#00A896]/20">
+                  <ShoppingBag className="h-6 w-6" />
+                </div>
+                <div>
+                  <div className="flex items-center gap-2">
+                    <h3 className="font-extrabold text-[#0A2540] text-base group-hover:text-[#00A896] transition-colors">
+                      Product Image Management & Verification Hub
+                    </h3>
+                    <Badge variant="accent">New Workflow</Badge>
+                  </div>
+                  <p className="text-xs text-slate-500 mt-1">
+                    Verify official pharmaceutical packaging photos, inspect placeholders, and batch-import image archives by exact SKU.
+                  </p>
+                </div>
+              </div>
+              <div className="text-xs font-bold text-[#00A896] flex items-center gap-1 group-hover:translate-x-1 transition-transform whitespace-nowrap">
+                <span>Open Image Hub</span>
+                <span>→</span>
+              </div>
+            </div>
+          </Card>
+        </Link>
+      </div>
     </div>
   );
 }

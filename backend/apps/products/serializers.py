@@ -6,7 +6,7 @@ class ProductImageSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = ProductImage
-        fields = ('id', 'image', 'image_url', 'url', 'alt_text', 'is_primary', 'source', 'status', 'license')
+        fields = ('id', 'image', 'image_url', 'url', 'alt_text', 'is_primary', 'source', 'source_url', 'status', 'license', 'verified_by', 'verified_at')
 
     def get_url(self, obj):
         if obj.image_url:
@@ -84,7 +84,8 @@ class ProductListSerializer(serializers.ModelSerializer):
             'price', 'price_inr', 'original_price_inr', 'discount_percent', 'discount_percentage',
             'discounted_price', 'stock_quantity', 'in_stock', 'rating', 'review_count',
             'prescription_required', 'requires_prescription', 'featured', 'trending', 'bestseller',
-            'primary_image', 'image_url', 'image_status', 'image_source', 'image_alt_text', 'image_license', 'is_demo_data',
+            'primary_image', 'image_url', 'image_status', 'image_source', 'source_url', 'image_alt_text', 'image_license',
+            'verified_by', 'verified_at', 'is_demo_data',
             'short_description', 'tags'
         )
 
@@ -126,7 +127,8 @@ class ProductDetailSerializer(serializers.ModelSerializer):
             'price', 'price_inr', 'original_price_inr', 'discount_percent', 'discount_percentage',
             'discounted_price', 'stock_quantity', 'in_stock', 'rating', 'review_count',
             'prescription_required', 'requires_prescription', 'featured', 'trending', 'bestseller',
-            'image_url', 'image_status', 'image_source', 'image_alt_text', 'image_license', 'is_demo_data', 'additional_images', 'primary_image', 'gallery_images', 'images',
+            'image_url', 'image_status', 'image_source', 'source_url', 'image_alt_text', 'image_license',
+            'verified_by', 'verified_at', 'is_demo_data', 'additional_images', 'primary_image', 'gallery_images', 'images',
             'short_description', 'detailed_description', 'description',
             'composition', 'ingredients', 'usage_instructions', 'directions',
             'side_effects', 'warnings', 'storage_information', 'tags',
@@ -163,3 +165,21 @@ class ProductDetailSerializer(serializers.ModelSerializer):
         ).exclude(id=obj.id).order_by('-rating', '-review_count')[:6]
 
         return RelatedProductSerializer(related, many=True, context=self.context).data
+
+
+class ProductImageCandidateSerializer(serializers.ModelSerializer):
+    product_sku = serializers.CharField(source='product.sku', read_only=True)
+    catalog_product_name = serializers.CharField(source='product.name', read_only=True)
+    catalog_brand_name = serializers.CharField(source='product.brand.name', read_only=True, default='')
+
+    class Meta:
+        from apps.products.models import ProductImageCandidate
+        model = ProductImageCandidate
+        fields = (
+            'id', 'product', 'product_sku', 'catalog_product_name', 'catalog_brand_name',
+            'sku', 'product_name', 'brand', 'candidate_image_url', 'source_page_url',
+            'source_domain', 'source_type', 'image_title', 'detected_alt_text',
+            'rights_note', 'license_url', 'matching_confidence', 'status',
+            'review_reason', 'downloaded_image', 'discovered_at', 'created_at'
+        )
+
