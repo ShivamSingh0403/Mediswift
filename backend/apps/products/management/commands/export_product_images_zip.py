@@ -10,203 +10,207 @@ from django.utils import timezone
 from apps.products.models import Product, ProductImage
 
 class Command(BaseCommand):
-    help = "Exports all MediSwift product packaging photographs, reports, and manifests into a standardized ZIP archive."
+    help = "Exports all MediSwift AI demo and verified product images, metadata, and reports into a standardized ZIP archive."
 
     def add_arguments(self, parser):
         parser.add_argument(
             '--output',
             type=str,
             default=None,
-            help="Custom output path for the exported ZIP file (defaults to exports/mediswift_product_images.zip)"
+            help="Custom output path for exported ZIP (defaults to exports/mediswift_ai_demo_product_images.zip)"
         )
 
     def handle(self, *args, **options):
-        self.stdout.write(self.style.MIGRATE_HEADING("\n=== MEDISWIFT PRODUCT IMAGE ZIP EXPORTER ==="))
+        self.stdout.write(self.style.MIGRATE_HEADING("\n=== MEDISWIFT BULK PRODUCT IMAGE ZIP EXPORTER ==="))
 
         exports_dir = settings.BASE_DIR.parent / 'exports'
         exports_dir.mkdir(parents=True, exist_ok=True)
 
-        if options['output']:
+        if options.get('output'):
             zip_path = Path(options['output'])
         else:
-            zip_path = exports_dir / 'mediswift_product_images.zip'
-
-        json_report_path = exports_dir / 'mediswift_product_images_report.json'
+            zip_path = exports_dir / 'mediswift_ai_demo_product_images.zip'
 
         self.stdout.write(f"Export target: {zip_path}")
 
-        # Gather database records
-        all_products = Product.objects.all().select_related('category', 'brand').prefetch_related('images')
+        all_products = Product.objects.all().select_related('category', 'brand').prefetch_related('images').order_by('sku')
         total_count = all_products.count()
 
-        imported_rows = []
-        missing_rows = []
-        pending_review_rows = []
-        verified_rows = []
-        duplicate_rows = []
+        images_to_archive = []  # (disk_path, arcname)
+        mapping_rows = []
+        mapping_dict = {}
 
-        images_to_archive = []  # list of (full_path, arcname)
+        generated_rows = []
+        missing_rows = []
+        duplicate_rows = []
+        failed_rows = []
+        inventory_rows = []
 
         seen_hashes = {}
-        duplicates_set = set()
+        archive_root = "mediswift_ai_demo_product_images"
+
+        media_root = Path(settings.MEDIA_ROOT)
+        demo_dir = media_root / 'product_images' / 'ai_demo'
 
         for p in all_products:
-            # Check primary image or image_url
+            sku = p.sku or f"SKU-{p.id}"
             pimg = p.images.filter(is_primary=True).first() or p.images.first()
 
-            if p.image_status == 'VERIFIED' or (pimg and pimg.image_status == 'VERIFIED'):
-                img_status = 'VERIFIED'
-            elif p.image_status == 'DUPLICATE' or (pimg and pimg.image_status == 'DUPLICATE'):
-                img_status = 'DUPLICATE'
-            elif p.image_status in ('PENDING_REVIEW', 'DOWNLOADED') or (pimg and pimg.image_status in ('PENDING_REVIEW', 'DOWNLOADED')):
-                img_status = 'PENDING_REVIEW'
-            elif p.image_status == 'REJECTED' or (pimg and pimg.image_status == 'REJECTED'):
-                img_status = 'REJECTED'
-            elif p.image_url or (pimg and (pimg.image_file or pimg.image)):
-                img_status = p.image_status or 'PENDING_REVIEW'
-            else:
-                img_status = 'MISSING'
+            # Find actual disk file
+            disk_file = None
+            if demo_dir.exists():
+                candidate_webp = demo_dir / f"{sku}.webp"
+                if candidate_webp.exists():
+                    disk_file = candidate_webp
 
-            # Missing check
-            if img_status == 'MISSING':
-                missing_rows.append({
-                    'sku': p.sku,
+            if not disk_file and pimg and (pimg.image_file or pimg.image):
+                f = pimg.image_file or pimg.image
+                if f and f.name:
+                    fp = media_root / f.name
+                    if fp.exists():
+                        disk_file = fp
+
+            # Status & mapping data
+            status = p.image_status or (pimg.image_status if pimg else 'MISSING')
+            has_image = bool(disk_file)
+
+            # Metadata mapping entry
+            img_rel_url = f"/media/product_images/ai_demo/{sku}.webp" if disk_file and "ai_demo" in str(disk_file) else (p.image_url or "")
+            img_hash = pimg.image_hash if pimg else ""
+
+            if disk_file:
+                arcname = f"{archive_root}/images/{sku}{disk_file.suffix}"
+                images_to_archive.append((disk_file, arcname))
+
+                if img_hash:
+                    if img_hash in seen_hashes:
+                        duplicate_rows.append({
+                            'sku': sku,
+                            'original_sku': seen_hashes[img_hash],
+                            'hash': img_hash
+                        })
+                    else:
+                        seen_hashes[img_hash] = sku
+
+                generated_rows.append({
+                    'sku': sku,
                     'name': p.name,
-                    'brand': p.brand.name if p.brand else '',
                     'category': p.category.name if p.category else '',
-                    'dosage_form': p.dosage_form,
-                    'price_inr': str(p.price_inr or p.price or ''),
+                    'file': f"{sku}{disk_file.suffix}",
+                    'hash': img_hash,
+                    'status': status
                 })
-                continue
+            else:
+                missing_rows.append({
+                    'sku': sku,
+                    'name': p.name,
+                    'category': p.category.name if p.category else '',
+                    'reason': 'No visual asset generated or linked'
+                })
 
-            # Found an image
-            file_field = None
-            if pimg:
-                file_field = pimg.image_file or pimg.image
-            
-            file_rel_path = file_field.name if file_field else p.image_url
-            img_hash = pimg.image_hash if pimg else ''
-            src_name = p.image_source or (pimg.source_name if pimg else '')
-            src_url = p.source_url or (pimg.source_url if pimg else '')
-            lic_note = p.image_license or (pimg.license_note if pimg else '')
-            ver_by = p.verified_by or (pimg.verified_by if pimg else '')
-            ver_at = p.verified_at or (pimg.verified_at if pimg else None)
-
-            row_data = {
-                'sku': p.sku,
+            map_entry = {
+                'sku': sku,
                 'name': p.name,
                 'brand': p.brand.name if p.brand else '',
-                'status': img_status,
-                'file_path': file_rel_path,
-                'image_url': p.image_url,
+                'category': p.category.name if p.category else '',
+                'image_url': img_rel_url,
+                'image_status': status,
+                'is_real_product_photo': p.is_real_product_photo,
                 'image_hash': img_hash,
-                'source_name': src_name,
-                'source_url': src_url,
-                'license_note': lic_note,
-                'verified_by': ver_by,
-                'verified_at': ver_at.isoformat() if ver_at else '',
             }
-            imported_rows.append(row_data)
+            mapping_rows.append(map_entry)
+            mapping_dict[sku] = map_entry
 
-            if img_status == 'VERIFIED':
-                verified_rows.append(row_data)
-            elif img_status in ('PENDING_REVIEW', 'DOWNLOADED'):
-                pending_review_rows.append(row_data)
-            elif img_status == 'DUPLICATE':
-                duplicate_rows.append(row_data)
+            inventory_rows.append({
+                'sku': sku,
+                'product_name': p.name,
+                'brand': p.brand.name if p.brand else '',
+                'category': p.category.name if p.category else '',
+                'strength': p.strength or '',
+                'pack_size': p.pack_size or '',
+                'existing_image': img_rel_url if has_image else '',
+                'image_status': status,
+                'demo_image_required': 'NO' if (status == 'VERIFIED' and p.is_real_product_photo) else 'YES'
+            })
 
-            # Check if file exists on disk to include in zip
-            if file_field and file_field.name:
-                disk_path = Path(settings.MEDIA_ROOT) / file_field.name
-                if disk_path.exists() and disk_path.is_file():
-                    ext = disk_path.suffix
-                    arcname = f"mediswift_product_images/images/{p.sku}{ext}"
-                    images_to_archive.append((disk_path, arcname))
-
-        # Check existing failed_downloads.csv in exports
-        failed_csv_source = exports_dir / 'failed_downloads.csv'
-        failed_rows = []
-        if failed_csv_source.exists():
-            with open(failed_csv_source, 'r', encoding='utf-8', errors='replace') as f_fail:
-                reader = csv.DictReader(f_fail)
-                for r in reader:
-                    failed_rows.append(r)
-
-        # Build README text
+        # README content
         readme_text = f"""======================================================================
-MEDISWIFT PHARMACEUTICAL PRODUCT IMAGE REPOSITORY & AUDIT ARCHIVE
+MEDISWIFT AI DEMO PRODUCT IMAGES ARCHIVE
 ======================================================================
 Generated at: {timezone.now().isoformat()}
-Platform: MediSwift Healthcare 2.0 (Indian E-Commerce & Telehealth)
+Total Products in Catalog: {total_count}
+Total Visuals Archived: {len(images_to_archive)}
 
-DIRECTORY STRUCTURE:
-├── images/             High-resolution authorized pharmaceutical packshots named by SKU
-├── reports/            Complete audit logs & tracking CSVs
-│   ├── imported_images.csv     All catalog items with active image mappings
-│   ├── missing_images.csv      Products awaiting packaging photography
-│   ├── verified_images.csv     Officially authenticated photographs
-│   ├── pending_review.csv      Downloaded/imported images awaiting audit
-│   ├── duplicate_images.csv    Redundant or identical image hashes
-│   └── failed_downloads.csv    Download attempts that failed validation
-└── README.txt          This compliance and metadata reference
+ARCHIVE STRUCTURE:
+mediswift_ai_demo_product_images/
+│
+├── images/
+│   ├── MS-DEMO-0001.webp
+│   └── ... (Unique ecommerce studio packshots named strictly by SKU)
+│
+├── metadata/
+│   ├── image_mapping.csv
+│   └── image_mapping.json
+│
+├── reports/
+│   ├── generated.csv
+│   ├── failed.csv
+│   ├── duplicates.csv
+│   ├── missing.csv
+│   └── inventory.csv
+│
+└── README.txt
 
-COMPLIANCE RULES:
-1. Strict Exact SKU Matching: Images must strictly be named `<SKU>.<ext>` (e.g. `MS-0001.jpg`).
-2. No Artificial Packaging: MediSwift strictly forbids fake/AI-generated medicine packaging.
-3. Separation of Storage: Product packshots are strictly isolated from private prescription records.
+REGULATORY NOTICE & COMPLIANCE RULES:
+1. These visuals are AI-GENERATED DEMO VISUALS for catalogue presentation only.
+2. They are NOT genuine manufacturer medicine photographs.
+3. They must never be represented as real medicine packaging.
+4. Each image visibly displays 'AI-GENERATED DEMO' and 'NOT A REAL PRODUCT PHOTO'.
 ======================================================================
 """
 
-        # Write ZIP archive
+        # Write ZIP
         with zipfile.ZipFile(zip_path, 'w', compression=zipfile.ZIP_DEFLATED) as zf:
-            # 1. Add images
+            # 1. Images
             for disk_path, arcname in images_to_archive:
                 zf.write(disk_path, arcname)
 
-            # 2. Add reports
-            def add_csv(report_filename, fieldnames, rows):
+            # Helper for writing CSV into zip
+            def write_csv_to_zip(subpath, fieldnames, rows):
                 buf = io.StringIO()
                 writer = csv.DictWriter(buf, fieldnames=fieldnames)
                 writer.writeheader()
                 writer.writerows(rows)
-                zf.writestr(f"mediswift_product_images/reports/{report_filename}", buf.getvalue().encode('utf-8'))
+                zf.writestr(f"{archive_root}/{subpath}", buf.getvalue().encode('utf-8'))
 
-            report_fields = [
-                'sku', 'name', 'brand', 'status', 'file_path', 'image_url',
-                'image_hash', 'source_name', 'source_url', 'license_note', 'verified_by', 'verified_at'
-            ]
+            # 2. Metadata
+            mapping_fields = ['sku', 'name', 'brand', 'category', 'image_url', 'image_status', 'is_real_product_photo', 'image_hash']
+            write_csv_to_zip('metadata/image_mapping.csv', mapping_fields, mapping_rows)
+            zf.writestr(
+                f"{archive_root}/metadata/image_mapping.json",
+                json.dumps(mapping_dict, indent=2).encode('utf-8')
+            )
 
-            add_csv('imported_images.csv', report_fields, imported_rows)
-            add_csv('missing_images.csv', ['sku', 'name', 'brand', 'category', 'dosage_form', 'price_inr'], missing_rows)
-            add_csv('verified_images.csv', report_fields, verified_rows)
-            add_csv('pending_review.csv', report_fields, pending_review_rows)
-            add_csv('duplicate_images.csv', report_fields, duplicate_rows)
-            add_csv('failed_downloads.csv', ['sku', 'url', 'reason'], failed_rows)
+            # 3. Reports
+            write_csv_to_zip('reports/generated.csv', ['sku', 'name', 'category', 'file', 'hash', 'status'], generated_rows)
+            write_csv_to_zip('reports/failed.csv', ['sku', 'name', 'error'], failed_rows)
+            write_csv_to_zip('reports/duplicates.csv', ['sku', 'original_sku', 'hash'], duplicate_rows)
+            write_csv_to_zip('reports/missing.csv', ['sku', 'name', 'category', 'reason'], missing_rows)
+            inv_fields = ['sku', 'product_name', 'brand', 'category', 'strength', 'pack_size', 'existing_image', 'image_status', 'demo_image_required']
+            write_csv_to_zip('reports/inventory.csv', inv_fields, inventory_rows)
 
-            # 3. Add README
-            zf.writestr("mediswift_product_images/README.txt", readme_text.encode('utf-8'))
+            # 4. README
+            zf.writestr(f"{archive_root}/README.txt", readme_text.encode('utf-8'))
 
-        # Also write JSON summary report to exports/
-        summary_report = {
-            'generated_at': timezone.now().isoformat(),
-            'zip_file_path': str(zip_path),
-            'zip_size_bytes': os.path.getsize(zip_path),
-            'metrics': {
-                'total_products': total_count,
-                'imported_images': len(imported_rows),
-                'verified_images': len(verified_rows),
-                'pending_review_images': len(pending_review_rows),
-                'missing_images': len(missing_rows),
-                'duplicate_images': len(duplicate_rows),
-                'failed_downloads': len(failed_rows),
-                'images_archived_in_zip': len(images_to_archive),
-            }
-        }
-        with open(json_report_path, 'w', encoding='utf-8') as f_json:
-            json.dump(summary_report, f_json, indent=2)
+        # Also mirror files into exports/reports for local inspection
+        reports_dir = exports_dir / 'reports'
+        reports_dir.mkdir(parents=True, exist_ok=True)
+        with open(reports_dir / 'inventory.csv', 'w', newline='', encoding='utf-8') as f:
+            writer = csv.DictWriter(f, fieldnames=inv_fields)
+            writer.writeheader()
+            writer.writerows(inventory_rows)
 
-        self.stdout.write(self.style.SUCCESS(f"\n[OK] ZIP archive generated successfully:"))
-        self.stdout.write(self.style.SUCCESS(f"     Path: {zip_path}"))
-        self.stdout.write(self.style.SUCCESS(f"     Size: {os.path.getsize(zip_path) // 1024} KB"))
-        self.stdout.write(f"JSON summary report: {json_report_path}")
-        self.stdout.write(f"\nArchived {len(images_to_archive)} images and 6 report manifests into ZIP.\n")
+        self.stdout.write(self.style.SUCCESS(f"\n[OK] Bulk ZIP export finished successfully:"))
+        self.stdout.write(self.style.SUCCESS(f"     Archive: {zip_path}"))
+        self.stdout.write(self.style.SUCCESS(f"     File Size: {os.path.getsize(zip_path) // 1024} KB"))
+        self.stdout.write(f"     Archived {len(images_to_archive)} images, 2 metadata manifests, and 5 report CSVs.\n")

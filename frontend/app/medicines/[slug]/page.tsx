@@ -514,6 +514,10 @@ export default function MedicineDetailPage({ params }: { params: Promise<{ slug:
                           <span className="text-emerald-600 flex items-center gap-1">
                             <ShieldCheck className="h-4 w-4" /> Verified image
                           </span>
+                        ) : product.image_status === 'AI_DEMO_ONLY' ? (
+                          <span className="text-indigo-600 flex items-center gap-1">
+                            <Sparkles className="h-4 w-4" /> AI Demo Visual
+                          </span>
                         ) : (
                           <span className="text-amber-700 flex items-center gap-1">
                             <Clock className="h-4 w-4" /> Image under review
@@ -523,6 +527,8 @@ export default function MedicineDetailPage({ params }: { params: Promise<{ slug:
                       <p className="text-[11px] text-slate-500 mt-1">
                         {product.image_status === 'VERIFIED'
                           ? 'This product photograph has been verified against authorized pharmaceutical distributor packaging.'
+                          : product.image_status === 'AI_DEMO_ONLY'
+                          ? 'AI-generated demo visual. For illustration only. Not a real product photo. Authentic packaging photograph pending distributor verification.'
                           : 'Product image under verification. An authentic packaging photograph will be displayed once verified against authorized distributor inventory.'}
                       </p>
                       {product.image_status === 'VERIFIED' && product.verified_by && (

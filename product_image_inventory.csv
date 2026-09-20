@@ -1,0 +1,513 @@
+sku,product_name,brand,category,strength,pack_size,existing_image,image_status,demo_image_required
+MED-AID-001,Hansaplast Regular Bandages 100s,Beiersdorf / Hansaplast,First Aid,Standard 19mm x 72mm,Dispenser Box of 100 Strips,product_images/ai_demo/MED-AID-001.webp,AI_DEMO_ONLY,YES
+MED-AID-002,Betadine 10% First Aid Solution,Win-Medicare,First Aid,10% w/v 100ml,Bottle of 100ml,product_images/ai_demo/MED-AID-002.webp,AI_DEMO_ONLY,YES
+MED-AID-003,Burnol Antiseptic Burn Cream,Morepen Laboratories,First Aid,Yellow Burn Cream 20g,Tube of 20g,product_images/ai_demo/MED-AID-003.webp,AI_DEMO_ONLY,YES
+MED-AID-004,Soframycin Skin Cream,Sanofi India,First Aid,1% w/w 30g,Tube of 30g,product_images/ai_demo/MED-AID-004.webp,AI_DEMO_ONLY,YES
+MED-AID-005,3M Micropore Surgical Paper Tape 1 Inch,3M Healthcare,First Aid,1 Inch x 9.14 Meters,Roll of 1 Inch x 9.14m with Dispenser,product_images/ai_demo/MED-AID-005.webp,AI_DEMO_ONLY,YES
+MED-AID-006,Dettol Antiseptic Plaster Bandages 50s,Reckitt Benckiser,First Aid,Waterproof 50 Strips,Box of 50 Bandages,product_images/ai_demo/MED-AID-006.webp,AI_DEMO_ONLY,YES
+MED-AID-007,Sterile Absorbent Gauze Swabs 10x10cm,Romsons,First Aid,10cm x 10cm,Pack of 10 Individually Wrapped Sterile Pouches,product_images/ai_demo/MED-AID-007.webp,AI_DEMO_ONLY,YES
+MED-AID-008,Dr. Morepen Crepe Bandage 10cm x 4m,Dr. Morepen,First Aid,10cm Width x 4m Stretched,Roll of 10cm x 4m with 2 Metal Clips,product_images/ai_demo/MED-AID-008.webp,AI_DEMO_ONLY,YES
+MED-AID-009,Moov Pain Relief Ointment 50g,Reckitt Benckiser,First Aid,Warmth Formula 50g,Tube of 50g,product_images/ai_demo/MED-AID-009.webp,AI_DEMO_ONLY,YES
+MED-AID-010,Cipladine 5% Ointment,Cipla,First Aid,5% w/w 20g,Tube of 20g,product_images/ai_demo/MED-AID-010.webp,AI_DEMO_ONLY,YES
+MED-AID-011,Silverex Ionic Gel,Sun Pharma,First Aid,0.2% w/w 20g,Tube of 20g,product_images/ai_demo/MED-AID-011.webp,AI_DEMO_ONLY,YES
+MED-AID-012,Relispray Fast Pain Relief Spray,Midas Care,First Aid,85g Aerosol Can,Canister of 85g,product_images/ai_demo/MED-AID-012.webp,AI_DEMO_ONLY,YES
+MED-AID-013,Gauze Bandage Roll 7.5cm x 3m (Pack of 12),Romsons,First Aid,7.5cm x 3m Roll,Box of 12 Rolls,product_images/ai_demo/MED-AID-013.webp,AI_DEMO_ONLY,YES
+MED-AYU-001,Himalaya Ashvagandha General Wellness Tablets,Himalaya Wellness,Ayurvedic Products,250mg Pure Extract,Bottle of 60 tablets,product_images/ai_demo/MED-AYU-001.webp,AI_DEMO_ONLY,YES
+MED-AYU-002,Baidyanath Triphala Churna,Baidyanath,Ayurvedic Products,500g Jar,Jar of 500g,product_images/ai_demo/MED-AYU-002.webp,AI_DEMO_ONLY,YES
+MED-AYU-003,Dabur Shilajit Gold Capsules,Dabur,Ayurvedic Products,Gold Enriched Formula,Bottle of 20 capsules,product_images/ai_demo/MED-AYU-003.webp,AI_DEMO_ONLY,YES
+MED-AYU-004,Patanjali Divya Medha Vati Extra Power,Patanjali Ayurved,Ayurvedic Products,Brain & Memory Support,Bottle of 120 tablets,product_images/ai_demo/MED-AYU-004.webp,AI_DEMO_ONLY,YES
+MED-AYU-005,Zandu Kesari Jivan Chyawanprash,Emami,Ayurvedic Products,900g Jar,Jar of 900g,product_images/ai_demo/MED-AYU-005.webp,AI_DEMO_ONLY,YES
+MED-AYU-006,Himalaya Liv.52 DS Tablets,Himalaya Wellness,Ayurvedic Products,Double Strength (DS),Bottle of 60 tablets,product_images/ai_demo/MED-AYU-006.webp,AI_DEMO_ONLY,YES
+MED-AYU-007,Baidyanath Mahabhringraj Tel,Baidyanath,Ayurvedic Products,200ml Bottle,Bottle of 200ml,product_images/ai_demo/MED-AYU-007.webp,AI_DEMO_ONLY,YES
+MED-AYU-008,Patanjali Divya Kayakalp Vati,Patanjali Ayurved,Ayurvedic Products,Herbal Blood Purifier,Bottle of 80 tablets,product_images/ai_demo/MED-AYU-008.webp,AI_DEMO_ONLY,YES
+MED-AYU-009,Dabur Lal Tail Baby Massage Oil,Dabur,Ayurvedic Products,500ml Family Pack,Bottle of 500ml,product_images/ai_demo/MED-AYU-009.webp,AI_DEMO_ONLY,YES
+MED-AYU-010,Baidyanath Brahmi Ghrita,Baidyanath,Ayurvedic Products,100g Jar,Jar of 100g,product_images/ai_demo/MED-AYU-010.webp,AI_DEMO_ONLY,YES
+MED-AYU-011,Safi Natural Blood Purifier Syrup,Hamdard Laboratories,Ayurvedic Products,500ml Bottle,Bottle of 500ml,product_images/ai_demo/MED-AYU-011.webp,AI_DEMO_ONLY,YES
+MED-AYU-012,Zandu Balm Original 50ml,Emami,Ayurvedic Products,Classic 50ml Jar,Jar of 50ml,product_images/ai_demo/MED-AYU-012.webp,AI_DEMO_ONLY,YES
+MED-AYU-013,Dabur Ashokarishta Uterine Tonic,Dabur,Ayurvedic Products,450ml Tonic,Bottle of 450ml,product_images/ai_demo/MED-AYU-013.webp,AI_DEMO_ONLY,YES
+MED-BAB-001,Sebamed Baby Diaper Rash Cream,Sebapharma / Sebamed,Baby Care,pH 5.5 Formula,Tube of 100ml,product_images/ai_demo/MED-BAB-001.webp,AI_DEMO_ONLY,YES
+MED-BAB-002,Himalaya Baby Massage Oil,Himalaya Wellness,Baby Care,200ml Bottle,Bottle of 200ml,product_images/ai_demo/MED-BAB-002.webp,AI_DEMO_ONLY,YES
+MED-BAB-003,Woodward's Gripe Water,TTK Healthcare,Baby Care,Alcohol Free 130ml,Bottle of 130ml,product_images/ai_demo/MED-BAB-003.webp,AI_DEMO_ONLY,YES
+MED-BAB-004,Cetaphil Baby Daily Lotion with Shea Butter,Galderma India,Baby Care,Hypoallergenic 400ml,Pump Bottle of 400ml,product_images/ai_demo/MED-BAB-004.webp,AI_DEMO_ONLY,YES
+MED-BAB-005,Pampers Premium Care Diaper Pants (L),Procter & Gamble,Baby Care,Size L (9-14 kg),Pack of 34 Pants,product_images/ai_demo/MED-BAB-005.webp,AI_DEMO_ONLY,YES
+MED-BAB-006,Nasoclear Saline Nasal Drops for Infants,Zydus Lifesciences,Baby Care,0.65% w/v Saline,Dropper Bottle of 20ml,product_images/ai_demo/MED-BAB-006.webp,AI_DEMO_ONLY,YES
+MED-BAB-007,Sebamed Baby Cleansing Bar,Sebapharma / Sebamed,Baby Care,100g Bar,Bar of 100g,product_images/ai_demo/MED-BAB-007.webp,AI_DEMO_ONLY,YES
+MED-BAB-008,Himalaya Gentle Baby Shampoo,Himalaya Wellness,Baby Care,200ml Bottle,Bottle of 200ml,product_images/ai_demo/MED-BAB-008.webp,AI_DEMO_ONLY,YES
+MED-BAB-009,Bonnisan Drops for Digestive Complaints,Himalaya Wellness,Baby Care,30ml Dropper Bottle,Bottle of 30ml with Dropper,product_images/ai_demo/MED-BAB-009.webp,AI_DEMO_ONLY,YES
+MED-BAB-010,Mamaearth Gentle Cleansing Shampoo for Babies,Mamaearth,Baby Care,200ml Pump Bottle,Bottle of 200ml,product_images/ai_demo/MED-BAB-010.webp,AI_DEMO_ONLY,YES
+MED-BAB-011,Aveeno Baby Daily Moisture Bath Wash,Johnson & Johnson,Baby Care,Oat Wash 354ml,Bottle of 354ml,product_images/ai_demo/MED-BAB-011.webp,AI_DEMO_ONLY,YES
+MED-BAB-012,MamyPoko Extra Absorb Diaper Pants (M),Unicharm,Baby Care,Size M (7-12 kg),Pack of 38 Pants,product_images/ai_demo/MED-BAB-012.webp,AI_DEMO_ONLY,YES
+MED-BAB-013,Chicco Baby Moments No-Tears Bath,Artsana / Chicco,Baby Care,200ml Bottle,Bottle of 200ml,product_images/ai_demo/MED-BAB-013.webp,AI_DEMO_ONLY,YES
+MED-CIP-001,Augmentin 625 Duo Tablet,Cipla,Prescription Medicines,,10 Tablets in 1 Strip,product_images/ai_demo/MED-CIP-001.webp,AI_DEMO_ONLY,YES
+MED-COU-001,Ascoril D Plus Syrup,Glenmark,Cough & Respiratory,10mg/5mg/2mg per 5ml,Bottle of 100ml,product_images/ai_demo/MED-COU-001.webp,AI_DEMO_ONLY,YES
+MED-COU-002,Benadryl Dry Cough Active Syrup,Johnson & Johnson,Cough & Respiratory,14mg/138mg per 5ml,Bottle of 150ml,product_images/ai_demo/MED-COU-002.webp,AI_DEMO_ONLY,YES
+MED-COU-003,Asthalin Inhaler 100mcg,Cipla,Cough & Respiratory,100mcg,Canister of 200 metered doses,product_images/ai_demo/MED-COU-003.webp,AI_DEMO_ONLY,YES
+MED-COU-004,Grilinctus BM Syrup,Franco-Indian,Cough & Respiratory,1.25mg/4mg per 5ml,Bottle of 100ml,product_images/ai_demo/MED-COU-004.webp,AI_DEMO_ONLY,YES
+MED-COU-005,Budecort 200 Inhaler,Cipla,Cough & Respiratory,200mcg,Canister of 200 metered actuations,product_images/ai_demo/MED-COU-005.webp,AI_DEMO_ONLY,YES
+MED-COU-006,Montair-LC Tablet,Cipla,Cough & Respiratory,10mg/5mg,Strip of 10 tablets,product_images/ai_demo/MED-COU-006.webp,AI_DEMO_ONLY,YES
+MED-COU-007,Koflet Syrup,Himalaya Wellness,Cough & Respiratory,100ml,Bottle of 100ml,product_images/ai_demo/MED-COU-007.webp,AI_DEMO_ONLY,YES
+MED-COU-008,Duolin Respules,Cipla,Cough & Respiratory,1.25mg/500mcg,Pack of 5 respules (2.5ml each),product_images/ai_demo/MED-COU-008.webp,AI_DEMO_ONLY,YES
+MED-COU-009,Honitus Herbal Cough Syrup,Dabur,Cough & Respiratory,100ml,Bottle of 100ml,product_images/ai_demo/MED-COU-009.webp,AI_DEMO_ONLY,YES
+MED-COU-010,Mucolite Drop,Dr. Reddy's,Cough & Respiratory,7.5mg/ml,Dropper Bottle of 15ml,product_images/ai_demo/MED-COU-010.webp,AI_DEMO_ONLY,YES
+MED-COU-011,Aerocort Forte Inhaler,Cipla,Cough & Respiratory,100mcg/50mcg,Canister of 200 metered actuations,product_images/ai_demo/MED-COU-011.webp,AI_DEMO_ONLY,YES
+MED-COU-012,Strepsils Honey & Lemon Lozenges,Reckitt Benckiser,Cough & Respiratory,Honey Lemon,Blister pack of 8 lozenges,product_images/ai_demo/MED-COU-012.webp,AI_DEMO_ONLY,YES
+MED-COU-013,Bresol Tablets,Himalaya Wellness,Cough & Respiratory,Herbal formulation,Bottle of 60 tablets,product_images/ai_demo/MED-COU-013.webp,AI_DEMO_ONLY,YES
+MED-DEV-001,Dr. Trust USA Professional Pulse Oximeter,Dr. Trust,Medical Devices,SpO2 & Pulse Rate with PI%,1 Unit with Lanyard and 2 AAA Batteries,product_images/ai_demo/MED-DEV-001.webp,AI_DEMO_ONLY,YES
+MED-DEV-002,Omron MC-246 Digital Thermometer,Omron Healthcare,Medical Devices,Oral & Axillary / 60-Second Reading,1 Unit with Storage Case,product_images/ai_demo/MED-DEV-002.webp,AI_DEMO_ONLY,YES
+MED-DEV-003,Dr. Morepen Compressor Nebulizer CN-10,Dr. Morepen,Medical Devices,Aerosol output 0.2ml/min,"Complete Kit (Machine, Tubing, Adult Mask, Child Mask, Mouthpiece)",product_images/ai_demo/MED-DEV-003.webp,AI_DEMO_ONLY,YES
+MED-DEV-004,Accu-Chek Instant Blood Glucose Meter Kit,Roche Diabetes Care,Medical Devices,Instant Target Range Display,Complete Starter Kit in Hard Case,product_images/ai_demo/MED-DEV-004.webp,AI_DEMO_ONLY,YES
+MED-DEV-005,Dr. Trust Non-Contact Infrared Forehead Thermometer,Dr. Trust,Medical Devices,1-Second Non-Contact Measurement,1 Device with 2 AAA Batteries,product_images/ai_demo/MED-DEV-005.webp,AI_DEMO_ONLY,YES
+MED-DEV-006,Tynor Orthopedic Lumbar Sacro Support Belt (L),Tynor Orthotics,Medical Devices,Size L (34-40 Inch Waist),1 Orthopedic Belt Box,product_images/ai_demo/MED-DEV-006.webp,AI_DEMO_ONLY,YES
+MED-DEV-007,Beurer FT 15/1 Digital Clinical Thermometer,Beurer Germany,Medical Devices,10-Second Express Reading,1 Unit with Protective Case,product_images/ai_demo/MED-DEV-007.webp,AI_DEMO_ONLY,YES
+MED-DEV-008,Dr. Morepen VP-06 Vaporizer Steam Inhaler,Dr. Morepen,Medical Devices,220V Electric Steam Generator,1 Unit with 3 Interchangeable Nozzles,product_images/ai_demo/MED-DEV-008.webp,AI_DEMO_ONLY,YES
+MED-DEV-009,Flamingo Heating Belt Orthopedic Heat Pad,Flamingo Orthopaedics,Medical Devices,Regular Size (30cm x 20cm),1 Heating Belt with Controller,product_images/ai_demo/MED-DEV-009.webp,AI_DEMO_ONLY,YES
+MED-DEV-010,Tynor Knee Support with Open Patella (L),Tynor Orthotics,Medical Devices,Size L (19.6 - 22 Inch Thigh),1 Knee Support Box,product_images/ai_demo/MED-DEV-010.webp,AI_DEMO_ONLY,YES
+MED-DEV-011,Diamond Mercurial Deluxe BP Apparatus,Diamond India,Medical Devices,0-300 mmHg Scale,1 Clinical BP Instrument,product_images/ai_demo/MED-DEV-011.webp,AI_DEMO_ONLY,YES
+MED-DEV-012,Romsons Spiro-Care Respiratory Exerciser,Romsons,Medical Devices,Triple Chamber 1200cc,1 Unit with Corrugated Tube & Mouthpiece,product_images/ai_demo/MED-DEV-012.webp,AI_DEMO_ONLY,YES
+MED-DEV-013,Dr. Morepen Digital Weighing Scale MS-01,Dr. Morepen,Medical Devices,Max 180kg / 100g Graduation,1 Scale with CR2032 Lithium Battery,product_images/ai_demo/MED-DEV-013.webp,AI_DEMO_ONLY,YES
+MED-DIA-001,Accu-Chek Active Test Strips 50s,Roche Diabetes Care,Diabetes Care,50 Test Strips,Box of 50 strips,product_images/ai_demo/MED-DIA-001.webp,AI_DEMO_ONLY,YES
+MED-DIA-002,Glycomet-GP 1 Tablet,USV Private Limited,Diabetes Care,1mg/500mg SR,Strip of 15 tablets,product_images/ai_demo/MED-DIA-002.webp,AI_DEMO_ONLY,YES
+MED-DIA-003,Januvia 100mg Tablet,MSD Pharmaceuticals,Diabetes Care,100mg,Strip of 14 tablets,product_images/ai_demo/MED-DIA-003.webp,AI_DEMO_ONLY,YES
+MED-DIA-004,OneTouch Select Plus Test Strips 50s,LifeScan,Diabetes Care,50 Test Strips,Vial of 50 strips,product_images/ai_demo/MED-DIA-004.webp,AI_DEMO_ONLY,YES
+MED-DIA-005,Galvus Met 50mg/500mg Tablet,Novartis India,Diabetes Care,50mg/500mg,Strip of 15 tablets,product_images/ai_demo/MED-DIA-005.webp,AI_DEMO_ONLY,YES
+MED-DIA-006,Karela Jamun Juice Diabetic Care,Baidyanath,Diabetes Care,1000ml,Bottle of 1000ml,product_images/ai_demo/MED-DIA-006.webp,AI_DEMO_ONLY,YES
+MED-DIA-007,Jardiance 10mg Tablet,Boehringer Ingelheim,Diabetes Care,10mg,Strip of 10 tablets,product_images/ai_demo/MED-DIA-007.webp,AI_DEMO_ONLY,YES
+MED-DIA-008,BD Ultra-Fine Insulin Pen Needles 4mm,Becton Dickinson,Diabetes Care,32G 4mm,Box of 100 pen needles,product_images/ai_demo/MED-DIA-008.webp,AI_DEMO_ONLY,YES
+MED-DIA-009,Diabecon DS Tablet,Himalaya Wellness,Diabetes Care,Double Strength,Bottle of 60 tablets,product_images/ai_demo/MED-DIA-009.webp,AI_DEMO_ONLY,YES
+MED-DIA-010,Diabexy Sugar Free Sweetener,NutroActive,Diabetes Care,200g Jar,Jar of 200g,product_images/ai_demo/MED-DIA-010.webp,AI_DEMO_ONLY,YES
+MED-DIA-011,Glucon-D Instant Energy Tangy Orange,Zydus Wellness,Diabetes Care,Orange 500g,Carton of 500g,product_images/ai_demo/MED-DIA-011.webp,AI_DEMO_ONLY,YES
+MED-DIA-012,Footmender Diabetic Foot Cream,Dr. Morepen,Diabetes Care,10% Urea,Tube of 100g,product_images/ai_demo/MED-DIA-012.webp,AI_DEMO_ONLY,YES
+MED-DIA-013,Forxiga 10mg Tablet,AstraZeneca,Diabetes Care,10mg,Strip of 14 tablets,product_images/ai_demo/MED-DIA-013.webp,AI_DEMO_ONLY,YES
+MED-DIG-001,Pan 40 Tablet,Alkem Laboratories,Digestive Health,40mg,Strip of 15 tablets,product_images/ai_demo/MED-DIG-001.webp,AI_DEMO_ONLY,YES
+MED-DIG-002,Gelusil MPS Antacid Liquid,Pfizer India,Digestive Health,Mint Flavor 200ml,Bottle of 200ml,product_images/ai_demo/MED-DIG-002.webp,AI_DEMO_ONLY,YES
+MED-DIG-003,Omez 20 Capsule,Dr. Reddy's,Digestive Health,20mg,Strip of 20 capsules,product_images/ai_demo/MED-DIG-003.webp,AI_DEMO_ONLY,YES
+MED-DIG-004,Eno Fruit Salt Regular,GlaxoSmithKline,Digestive Health,100g Bottle,Bottle of 100g,product_images/ai_demo/MED-DIG-004.webp,AI_DEMO_ONLY,YES
+MED-DIG-005,Sporlac DS Tablet,Sanzyme,Digestive Health,120 Million Spores,Strip of 20 tablets,product_images/ai_demo/MED-DIG-005.webp,AI_DEMO_ONLY,YES
+MED-DIG-006,Cremaffin Plus Emulsion,Abbott India,Digestive Health,Mint Flavor 225ml,Bottle of 225ml,product_images/ai_demo/MED-DIG-006.webp,AI_DEMO_ONLY,YES
+MED-DIG-007,Digene Acidity & Gas Relief Tablets,Abbott India,Digestive Health,Mixed Fruit Flavor,Strip of 15 chewable tablets,product_images/ai_demo/MED-DIG-007.webp,AI_DEMO_ONLY,YES
+MED-DIG-008,Pudin Hara Active Liquid Pearls,Dabur,Digestive Health,Pearls,Strip of 10 pearls,product_images/ai_demo/MED-DIG-008.webp,AI_DEMO_ONLY,YES
+MED-DIG-009,Razo 20 Tablet,Dr. Reddy's,Digestive Health,20mg,Strip of 15 tablets,product_images/ai_demo/MED-DIG-009.webp,AI_DEMO_ONLY,YES
+MED-DIG-010,Electral ORS Powder,FDC Limited,Digestive Health,21.8g Sachet,Sachet of 21.8g for 1 Liter,product_images/ai_demo/MED-DIG-010.webp,AI_DEMO_ONLY,YES
+MED-DIG-011,Dulcoflex 5mg Tablet,Sanofi India,Digestive Health,5mg,Strip of 10 tablets,product_images/ai_demo/MED-DIG-011.webp,AI_DEMO_ONLY,YES
+MED-DIG-012,Isabgol Husk Powder,Baidyanath,Digestive Health,100g Container,Tub of 100g,product_images/ai_demo/MED-DIG-012.webp,AI_DEMO_ONLY,YES
+MED-DIG-013,Eldoper 2mg Capsule,Micro Labs,Digestive Health,2mg,Strip of 10 capsules,product_images/ai_demo/MED-DIG-013.webp,AI_DEMO_ONLY,YES
+MED-EYE-001,Refresh Tears Eye Drops 10ml,Allergan India,Eye Care,0.5% w/v 10ml,Bottle of 10ml,product_images/ai_demo/MED-EYE-001.webp,AI_DEMO_ONLY,YES
+MED-EYE-002,Systane Ultra Lubricant Eye Drops,Alcon India,Eye Care,High Performance 10ml,Bottle of 10ml,product_images/ai_demo/MED-EYE-002.webp,AI_DEMO_ONLY,YES
+MED-EYE-003,Itone Ayurvedic Eye Drops 10ml,Dey's Medical,Eye Care,Herbal Ophthalmic 10ml,Bottle of 10ml with Dropper,product_images/ai_demo/MED-EYE-003.webp,AI_DEMO_ONLY,YES
+MED-EYE-004,Ciplox Eye Drops 10ml,Cipla,Eye Care,0.3% w/v 10ml,Bottle of 10ml,product_images/ai_demo/MED-EYE-004.webp,AI_DEMO_ONLY,YES
+MED-EYE-005,Optive Lubricant Eye Drops 10ml,Allergan India,Eye Care,Dual Action Osmoprotection 10ml,Bottle of 10ml,product_images/ai_demo/MED-EYE-005.webp,AI_DEMO_ONLY,YES
+MED-EYE-006,Patanjali Divya Drishti Eye Drops,Patanjali Ayurved,Eye Care,10ml Bottle,Bottle of 10ml,product_images/ai_demo/MED-EYE-006.webp,AI_DEMO_ONLY,YES
+MED-EYE-007,Olopatadine 0.1% Eye Drops (Winolap),Sun Pharma,Eye Care,0.1% w/v 5ml,Bottle of 5ml,product_images/ai_demo/MED-EYE-007.webp,AI_DEMO_ONLY,YES
+MED-EYE-008,Bausch & Lomb Renu Fresh Multi-Purpose Lens Solution,Bausch & Lomb,Eye Care,All-in-One 355ml Bottle with Lens Case,Bottle of 355ml with Free Lens Case,product_images/ai_demo/MED-EYE-008.webp,AI_DEMO_ONLY,YES
+MED-EYE-009,Tears Naturale II Lubricant Eye Drops,Alcon India,Eye Care,Polyquad Preserved 10ml,Bottle of 10ml,product_images/ai_demo/MED-EYE-009.webp,AI_DEMO_ONLY,YES
+MED-EYE-010,Ocutone Eye Tonic Drops,Baidyanath,Eye Care,Herbal Tonic 10ml,Bottle of 10ml,product_images/ai_demo/MED-EYE-010.webp,AI_DEMO_ONLY,YES
+MED-EYE-011,Moxicip Eye Drops (Moxifloxacin 0.5%),Cipla,Eye Care,4th Gen Fluoroquinolone 5ml,Bottle of 5ml,product_images/ai_demo/MED-EYE-011.webp,AI_DEMO_ONLY,YES
+MED-EYE-012,Genteal Gel Lubricant Eye Gel,Alcon India,Eye Care,Long Lasting Gel 10g,Tube of 10g,product_images/ai_demo/MED-EYE-012.webp,AI_DEMO_ONLY,YES
+MED-EYE-013,I-Site Plus Eye Antioxidant Tablets,Sun Pharma,Eye Care,AREDS 2 Eye Formula,Strip of 10 tablets,product_images/ai_demo/MED-EYE-013.webp,AI_DEMO_ONLY,YES
+MED-FEV-001,Dolo 650 Tablet,Micro Labs,Fever & Cold,650mg,Strip of 15 tablets,product_images/ai_demo/MED-FEV-001.webp,AI_DEMO_ONLY,YES
+MED-FEV-002,Crocin 650 Advance Tablet,GlaxoSmithKline,Fever & Cold,650mg,Strip of 15 tablets,product_images/ai_demo/MED-FEV-002.webp,AI_DEMO_ONLY,YES
+MED-FEV-003,Cheston Cold Tablet,Cipla,Fever & Cold,5mg/325mg/10mg,Strip of 10 tablets,product_images/ai_demo/MED-FEV-003.webp,AI_DEMO_ONLY,YES
+MED-FEV-004,Sinarest New Tablet,Centaur Pharmaceuticals,Fever & Cold,Combination,Strip of 10 tablets,product_images/ai_demo/MED-FEV-004.webp,AI_DEMO_ONLY,YES
+MED-FEV-005,Vicks VapoRub Balm,Procter & Gamble,Fever & Cold,50ml / 50g,Jar of 50ml,product_images/ai_demo/MED-FEV-005.webp,AI_DEMO_ONLY,YES
+MED-FEV-006,Calpol 500mg Tablet,GlaxoSmithKline,Fever & Cold,500mg,Strip of 15 tablets,product_images/ai_demo/MED-FEV-006.webp,AI_DEMO_ONLY,YES
+MED-FEV-007,Maxtra Oral Drops,Zuventus Healthcare,Fever & Cold,2.5mg/1mg per ml,Dropper Bottle of 15ml,product_images/ai_demo/MED-FEV-007.webp,AI_DEMO_ONLY,YES
+MED-FEV-008,Otrivin Oxy Fast Relief Nasal Spray,GlaxoSmithKline,Fever & Cold,0.05% w/v,Spray Bottle of 10ml,product_images/ai_demo/MED-FEV-008.webp,AI_DEMO_ONLY,YES
+MED-FEV-009,Solvin Cold Tablet,Ipca Laboratories,Fever & Cold,Combination,Strip of 10 tablets,product_images/ai_demo/MED-FEV-009.webp,AI_DEMO_ONLY,YES
+MED-FEV-010,Vicks Inhaler Keychain,Procter & Gamble,Fever & Cold,0.5ml,Pocket Inhaler Stick,product_images/ai_demo/MED-FEV-010.webp,AI_DEMO_ONLY,YES
+MED-FEV-011,Paracip 650 Tablet,Cipla,Fever & Cold,650mg,Strip of 10 tablets,product_images/ai_demo/MED-FEV-011.webp,AI_DEMO_ONLY,YES
+MED-FEV-012,Febrex Plus Syrup,Indoco Remedies,Fever & Cold,250mg/5mg/2mg per 5ml,Bottle of 60ml,product_images/ai_demo/MED-FEV-012.webp,AI_DEMO_ONLY,YES
+MED-FEV-013,Cofsils Cough & Cold Lozenges,Cipla,Fever & Cold,Ginger Lemon Flavor,Strip of 10 lozenges,product_images/ai_demo/MED-FEV-013.webp,AI_DEMO_ONLY,YES
+MED-FIT-001,MuscleBlaze MB Creatine Monohydrate 100g,MuscleBlaze,Fitness & Wellness,Unflavored 100g Pouch,Pouch of 100g (33 Servings),product_images/ai_demo/MED-FIT-001.webp,AI_DEMO_ONLY,YES
+MED-FIT-002,Vicks ZzzQuil Natura Melatonin Sleep Gummies,Procter & Gamble,Fitness & Wellness,Berry Flavor 24 Gummies,Bottle of 24 Chewable Gummies,product_images/ai_demo/MED-FIT-002.webp,AI_DEMO_ONLY,YES
+MED-FIT-003,Wellbeing Nutrition Marine Collagen Peptides,Wellbeing Nutrition,Fitness & Wellness,Pure Hydrolyzed 200g Tub,Tub of 200g with Scoop,product_images/ai_demo/MED-FIT-003.webp,AI_DEMO_ONLY,YES
+MED-FIT-004,Scivation Xtend BCAA Powder Blue Raspberry,Scivation / Xtend,Fitness & Wellness,Blue Raspberry 30 Servings,Tub of 420g,product_images/ai_demo/MED-FIT-004.webp,AI_DEMO_ONLY,YES
+MED-FIT-005,Tetley Green Tea Immune with Vitamin C,Tata Consumer Products,Fitness & Wellness,100 Tea Bags Pack,Box of 100 Tea Bags,product_images/ai_demo/MED-FIT-005.webp,AI_DEMO_ONLY,YES
+MED-FIT-006,Kapiva Apple Cider Vinegar with Mother,Kapiva Ayurveda,Fitness & Wellness,Raw & Unfiltered 500ml,Glass Bottle of 500ml,product_images/ai_demo/MED-FIT-006.webp,AI_DEMO_ONLY,YES
+MED-FIT-007,GNC Pro Performance L-Carnitine Liquid 1500mg,GNC India,Fitness & Wellness,Citrus Splash 450ml,Bottle of 450ml (30 Servings),product_images/ai_demo/MED-FIT-007.webp,AI_DEMO_ONLY,YES
+MED-FIT-008,Fast&Up Charge Effervescent Natural Vitamin C,Fast&Up,Fitness & Wellness,Orange Flavor 20 Tablets,Tube of 20 effervescent tablets,product_images/ai_demo/MED-FIT-008.webp,AI_DEMO_ONLY,YES
+MED-FIT-009,GNC Triple Strength Fish Oil 1500mg,GNC India,Fitness & Wellness,1500mg Triple Strength,Bottle of 60 softgels,product_images/ai_demo/MED-FIT-009.webp,AI_DEMO_ONLY,YES
+MED-FIT-010,Dr. Vaidya's Herbobuild Muscle Booster,Dr. Vaidya's,Fitness & Wellness,Herbal Anabolic Formula,Bottle of 30 veg capsules,product_images/ai_demo/MED-FIT-010.webp,AI_DEMO_ONLY,YES
+MED-FIT-011,Myfitness Chocolate Peanut Butter Crispy 1kg,Myfitness,Fitness & Wellness,Chocolate Crispy 1kg Tub,Tub of 1000g (1kg),product_images/ai_demo/MED-FIT-011.webp,AI_DEMO_ONLY,YES
+MED-FIT-012,HealthKart HK Vitals Biotin with Keratin,HealthKart,Fitness & Wellness,60 Tablets Pack,Bottle of 60 tablets,product_images/ai_demo/MED-FIT-012.webp,AI_DEMO_ONLY,YES
+MED-FIT-013,Dr. Vaidya's Plant Protein Powder Chocolate,Dr. Vaidya's,Fitness & Wellness,Dutch Chocolate 500g,Pouch of 500g,product_images/ai_demo/MED-FIT-013.webp,AI_DEMO_ONLY,YES
+MED-HAI-001,Tugain 5% Solution (Minoxidil),Cipla,Hair Care,5% w/v,Bottle of 60ml with Spray & Dropper,product_images/ai_demo/MED-HAI-001.webp,AI_DEMO_ONLY,YES
+MED-HAI-002,Scalpe Pro Anti-Dandruff Shampoo,Glenmark,Hair Care,2% / 1% w/v,Bottle of 100ml,product_images/ai_demo/MED-HAI-002.webp,AI_DEMO_ONLY,YES
+MED-HAI-003,"Biotin 10,000mcg Hair Growth Tablets",HealthKart,Hair Care,"10,000mcg",Bottle of 60 tablets,product_images/ai_demo/MED-HAI-003.webp,AI_DEMO_ONLY,YES
+MED-HAI-004,Indulekha Bringha Hair Oil,Hindustan Unilever,Hair Care,100ml Comb Bottle,Bottle of 100ml with Comb Nozzle,product_images/ai_demo/MED-HAI-004.webp,AI_DEMO_ONLY,YES
+MED-HAI-005,KeraXL Hair Growth Serum,Ipca Laboratories,Hair Care,Serum 60ml,Bottle of 60ml with Pump,product_images/ai_demo/MED-HAI-005.webp,AI_DEMO_ONLY,YES
+MED-HAI-006,Nizral 2% Dandruff Solution,Johnson & Johnson,Hair Care,2% w/v,Bottle of 50ml,product_images/ai_demo/MED-HAI-006.webp,AI_DEMO_ONLY,YES
+MED-HAI-007,Sesderma Seskavel Hair Repair Mask,Sesderma Laboratories,Hair Care,Intensive Repair 200ml,Jar of 200ml,product_images/ai_demo/MED-HAI-007.webp,AI_DEMO_ONLY,YES
+MED-HAI-008,Morr F 5% Solution,Intas Pharmaceuticals,Hair Care,5% / 0.1% w/v,Bottle of 60ml with Applicator,product_images/ai_demo/MED-HAI-008.webp,AI_DEMO_ONLY,YES
+MED-HAI-009,Mamaearth Onion Hair Oil,Mamaearth,Hair Care,250ml Comb Bottle,Bottle of 250ml with Applicator Comb,product_images/ai_demo/MED-HAI-009.webp,AI_DEMO_ONLY,YES
+MED-HAI-010,Keraglo Eva Hair Growth Tablets for Women,Ipca Laboratories,Hair Care,Female Hair Nutrition,Strip of 10 tablets,product_images/ai_demo/MED-HAI-010.webp,AI_DEMO_ONLY,YES
+MED-HAI-011,Sebamed Anti-Dandruff Shampoo,Sebapharma / Sebamed,Hair Care,pH 5.5 Formula,Bottle of 200ml,product_images/ai_demo/MED-HAI-011.webp,AI_DEMO_ONLY,YES
+MED-HAI-012,L'Oreal Paris Total Repair 5 Hair Serum,L'Oreal Paris,Hair Care,Smoothing Formula 80ml,Bottle of 80ml with Pump,product_images/ai_demo/MED-HAI-012.webp,AI_DEMO_ONLY,YES
+MED-HAI-013,Cipla 8X Anti-Dandruff Shampoo,Cipla,Hair Care,1% / 1% w/v,Bottle of 100ml,product_images/ai_demo/MED-HAI-013.webp,AI_DEMO_ONLY,YES
+MED-HRT-001,Telma 40 Tablet,Glenmark,Heart Care,40mg,Strip of 30 tablets,product_images/ai_demo/MED-HRT-001.webp,AI_DEMO_ONLY,YES
+MED-HRT-002,Atorva 10 Tablet,Zydus Lifesciences,Heart Care,10mg,Strip of 15 tablets,product_images/ai_demo/MED-HRT-002.webp,AI_DEMO_ONLY,YES
+MED-HRT-003,Ecosprin 75 Tablet,USV Private Limited,Heart Care,75mg,Strip of 14 tablets,product_images/ai_demo/MED-HRT-003.webp,AI_DEMO_ONLY,YES
+MED-HRT-004,Omron HEM 7120 Digital Blood Pressure Monitor,Omron Healthcare,Heart Care,Upper Arm 22-32cm Cuff,1 Unit with Cuff and 4 AA Batteries,product_images/ai_demo/MED-HRT-004.webp,AI_DEMO_ONLY,YES
+MED-HRT-005,Concor 5 Tablet,Merck India,Heart Care,5mg,Strip of 10 tablets,product_images/ai_demo/MED-HRT-005.webp,AI_DEMO_ONLY,YES
+MED-HRT-006,Rosuvas 10 Tablet,Sun Pharma,Heart Care,10mg,Strip of 15 tablets,product_images/ai_demo/MED-HRT-006.webp,AI_DEMO_ONLY,YES
+MED-HRT-007,Amlong 5 Tablet,Micro Labs,Heart Care,5mg,Strip of 15 tablets,product_images/ai_demo/MED-HRT-007.webp,AI_DEMO_ONLY,YES
+MED-HRT-008,Arjuna Heart Care Herbal Capsules,Himalaya Wellness,Heart Care,250mg Extract,Bottle of 60 capsules,product_images/ai_demo/MED-HRT-008.webp,AI_DEMO_ONLY,YES
+MED-HRT-009,Dr. Morepen BP-02 Blood Pressure Monitor,Dr. Morepen,Heart Care,Upper Arm 22-36cm,1 Device with Large Cuff,product_images/ai_demo/MED-HRT-009.webp,AI_DEMO_ONLY,YES
+MED-HRT-010,Brilinta 90mg Tablet,AstraZeneca,Heart Care,90mg,Strip of 14 tablets,product_images/ai_demo/MED-HRT-010.webp,AI_DEMO_ONLY,YES
+MED-HRT-011,Dytor 10 Tablet,Cipla,Heart Care,10mg,Strip of 15 tablets,product_images/ai_demo/MED-HRT-011.webp,AI_DEMO_ONLY,YES
+MED-HRT-012,Cardiokey CoQ10 100mg Softgels,Dr. Reddy's,Heart Care,100mg CoQ10,Strip of 10 softgels,product_images/ai_demo/MED-HRT-012.webp,AI_DEMO_ONLY,YES
+MED-HRT-013,Clopilet 75 Tablet,Sun Pharma,Heart Care,75mg,Strip of 15 tablets,product_images/ai_demo/MED-HRT-013.webp,AI_DEMO_ONLY,YES
+MED-IMM-001,Dabur Chyawanprash 2X Immunity,Dabur,Immunity Support,1kg Family Pack,Jar of 1000g (1kg),product_images/ai_demo/MED-IMM-001.webp,AI_DEMO_ONLY,YES
+MED-IMM-002,Celin 500 Chewable Tablet,GlaxoSmithKline,Immunity Support,500mg,Strip of 25 tablets,product_images/ai_demo/MED-IMM-002.webp,AI_DEMO_ONLY,YES
+MED-IMM-003,Himalaya Septilin Tablets,Himalaya Wellness,Immunity Support,Herbal Complex,Bottle of 60 tablets,product_images/ai_demo/MED-IMM-003.webp,AI_DEMO_ONLY,YES
+MED-IMM-004,Giloy Ghanvati Immunity Tablets,Patanjali Ayurved,Immunity Support,500mg Extract,Bottle of 60 tablets,product_images/ai_demo/MED-IMM-004.webp,AI_DEMO_ONLY,YES
+MED-IMM-005,Baidyanath Pure Shilajit Resin 20g,Baidyanath,Immunity Support,Pure Resin 20g,Glass Jar of 20g with Brass Spoon,product_images/ai_demo/MED-IMM-005.webp,AI_DEMO_ONLY,YES
+MED-IMM-006,Zingavita Vitamin C + Zinc Effervescent 20s,Zingavita,Immunity Support,Orange Fizz 20 Tablets,Tube of 20 effervescent tablets,product_images/ai_demo/MED-IMM-006.webp,AI_DEMO_ONLY,YES
+MED-IMM-007,Patanjali Chyawanprash Special,Patanjali Ayurved,Immunity Support,1kg Jar,Tub of 1000g (1kg),product_images/ai_demo/MED-IMM-007.webp,AI_DEMO_ONLY,YES
+MED-IMM-008,Curcumin 95% with Piperine Capsules,Organic India,Immunity Support,500mg/5mg,Bottle of 60 veg capsules,product_images/ai_demo/MED-IMM-008.webp,AI_DEMO_ONLY,YES
+MED-IMM-009,Dabur Honey 100% Pure,Dabur,Immunity Support,500g Bottle,Squeezy Bottle of 500g,product_images/ai_demo/MED-IMM-009.webp,AI_DEMO_ONLY,YES
+MED-IMM-010,Immune Shield Elderberry Gummies,Wellbeing Nutrition,Immunity Support,Berry Flavor Gummies,Bottle of 30 chewable gummies,product_images/ai_demo/MED-IMM-010.webp,AI_DEMO_ONLY,YES
+MED-IMM-011,Zandu Pure Tulsi Drops,Emami,Immunity Support,30ml Dropper Bottle,Bottle of 30ml,product_images/ai_demo/MED-IMM-011.webp,AI_DEMO_ONLY,YES
+MED-IMM-012,Kapiva Pure Aloe Vera Juice,Kapiva Ayurveda,Immunity Support,1000ml (1L),Bottle of 1000ml,product_images/ai_demo/MED-IMM-012.webp,AI_DEMO_ONLY,YES
+MED-IMM-013,Baidyanath Amla Juice,Baidyanath,Immunity Support,1000ml,Bottle of 1000ml,product_images/ai_demo/MED-IMM-013.webp,AI_DEMO_ONLY,YES
+MED-NUT-001,Ensure Complete Balanced Nutrition Vanilla,Abbott Nutrition,Nutrition,Vanilla 1kg Jar,Jar of 1000g (1kg),product_images/ai_demo/MED-NUT-001.webp,AI_DEMO_ONLY,YES
+MED-NUT-002,Optimum Nutrition Gold Standard 100% Whey Protein,Optimum Nutrition,Nutrition,Double Rich Chocolate 2 lbs (907g),Tub of 907g (2 lbs),product_images/ai_demo/MED-NUT-002.webp,AI_DEMO_ONLY,YES
+MED-NUT-003,Glucerna SR Diabetic Care Vanilla,Abbott Nutrition,Nutrition,Vanilla 400g Refill,Box of 400g Foil Pouch,product_images/ai_demo/MED-NUT-003.webp,AI_DEMO_ONLY,YES
+MED-NUT-004,Pediasure Complete Toddler Nutrition Chocolate,Abbott Nutrition,Nutrition,Chocolate 1kg Jar,Jar of 1000g (1kg),product_images/ai_demo/MED-NUT-004.webp,AI_DEMO_ONLY,YES
+MED-NUT-005,MuscleBlaze Biozyme Performance Whey 1kg,MuscleBlaze,Nutrition,Rich Chocolate 1kg,Tub of 1000g (1kg),product_images/ai_demo/MED-NUT-005.webp,AI_DEMO_ONLY,YES
+MED-NUT-006,Protinex Original High Protein Powder,Danone Nutricia,Nutrition,Original Flavor 400g Tin,Tin of 400g,product_images/ai_demo/MED-NUT-006.webp,AI_DEMO_ONLY,YES
+MED-NUT-007,GNC Mega Men One Daily Multivitamin,GNC India,Nutrition,One Daily 60 Tablets,Bottle of 60 caplets,product_images/ai_demo/MED-NUT-007.webp,AI_DEMO_ONLY,YES
+MED-NUT-008,Threptin Diskettes High Calorie Protein Biscuits,Raptakos Brett,Nutrition,Vanilla Butter 1kg Tin,Tin of 1000g (1kg),product_images/ai_demo/MED-NUT-008.webp,AI_DEMO_ONLY,YES
+MED-NUT-009,Isopure Zero Carb 100% Whey Protein Isolate,Isopure,Nutrition,Creamy Vanilla 3 lbs (1.36kg),Tub of 1.36kg,product_images/ai_demo/MED-NUT-009.webp,AI_DEMO_ONLY,YES
+MED-NUT-010,Horlicks Classic Malt Health Drink,Hindustan Unilever,Nutrition,Classic Malt 1kg Refill,Bag of 1000g (1kg),product_images/ai_demo/MED-NUT-010.webp,AI_DEMO_ONLY,YES
+MED-NUT-011,Dymatize ISO100 Hydrolyzed Whey Isolate,Dymatize,Nutrition,Gourmet Chocolate 5 lbs (2.3kg),Tub of 2.3kg,product_images/ai_demo/MED-NUT-011.webp,AI_DEMO_ONLY,YES
+MED-NUT-012,B-Protin Nutritional Powder Chocolate,British Biologicals,Nutrition,Chocolate 500g Jar,Jar of 500g,product_images/ai_demo/MED-NUT-012.webp,AI_DEMO_ONLY,YES
+MED-NUT-013,Prohance D Diabetic Nutritional Powder,Sun Pharma,Nutrition,Vanilla 400g Tin,Tin of 400g,product_images/ai_demo/MED-NUT-013.webp,AI_DEMO_ONLY,YES
+MED-ORA-001,Sensodyne Rapid Relief Toothpaste,GlaxoSmithKline,Oral Care,Fast Relief 100g,Tube of 100g,product_images/ai_demo/MED-ORA-001.webp,AI_DEMO_ONLY,YES
+MED-ORA-002,Hexidine Antimicrobial Mouthwash 160ml,ICPA Health Products,Oral Care,0.2% w/v 160ml,Bottle of 160ml,product_images/ai_demo/MED-ORA-002.webp,AI_DEMO_ONLY,YES
+MED-ORA-003,Colgate Total Whole Mouth Health Toothpaste,Colgate-Palmolive,Oral Care,Whole Mouth Protection 240g,Tube of 240g (Twin Pack),product_images/ai_demo/MED-ORA-003.webp,AI_DEMO_ONLY,YES
+MED-ORA-004,Listerine Cool Mint Antiseptic Mouthwash,Johnson & Johnson,Oral Care,Cool Mint 500ml,Bottle of 500ml,product_images/ai_demo/MED-ORA-004.webp,AI_DEMO_ONLY,YES
+MED-ORA-005,Dabur Red Ayurvedic Toothpaste,Dabur,Oral Care,Ayurvedic Formula 300g Combo,Pack of 300g (2 x 150g),product_images/ai_demo/MED-ORA-005.webp,AI_DEMO_ONLY,YES
+MED-ORA-006,Pyxistoma Gum Astringent Paint,ICPA Health Products,Oral Care,Astringent Paint 15ml,Bottle of 15ml with Applicator,product_images/ai_demo/MED-ORA-006.webp,AI_DEMO_ONLY,YES
+MED-ORA-007,Colgate PerioGard Chlorhexidine 0.12% Mouthwash,Colgate-Palmolive,Oral Care,0.12% w/v 300ml,Bottle of 300ml,product_images/ai_demo/MED-ORA-007.webp,AI_DEMO_ONLY,YES
+MED-ORA-008,Sensodyne Sensitive Toothbrush (Pack of 3),GlaxoSmithKline,Oral Care,Ultra Soft Bristles,Multipack of 3 Toothbrushes,product_images/ai_demo/MED-ORA-008.webp,AI_DEMO_ONLY,YES
+MED-ORA-009,Kenacort 0.1% Oral Paste for Mouth Ulcers,Abbott India,Oral Care,0.1% w/w 5g,Tube of 5g,product_images/ai_demo/MED-ORA-009.webp,AI_DEMO_ONLY,YES
+MED-ORA-010,Oral-B Essential Dental Floss 50m,Procter & Gamble,Oral Care,50 Meters Dispenser,Plastic Dispenser of 50m,product_images/ai_demo/MED-ORA-010.webp,AI_DEMO_ONLY,YES
+MED-ORA-011,Thermokind-F Gel Toothpaste,Mankind Pharma,Oral Care,Cooling Mint 100g,Tube of 100g,product_images/ai_demo/MED-ORA-011.webp,AI_DEMO_ONLY,YES
+MED-ORA-012,Himalaya Complete Care Herbal Toothpaste,Himalaya Wellness,Oral Care,150g Tube,Tube of 150g,product_images/ai_demo/MED-ORA-012.webp,AI_DEMO_ONLY,YES
+MED-ORA-013,Dologel CT Oral Gel for Mouth Ulcers,Dr. Reddy's,Oral Care,Fast Pain Relief 10g,Tube of 10g,product_images/ai_demo/MED-ORA-013.webp,AI_DEMO_ONLY,YES
+MED-PAIN-001,Combiflam Tablet,Sanofi India,Pain Relief,400mg/325mg,Strip of 20 tablets,product_images/ai_demo/MED-PAIN-001.webp,AI_DEMO_ONLY,YES
+MED-PAIN-002,Volini Pain Relief Gel,Sun Pharma,Pain Relief,1.16% w/w,Tube of 75g,product_images/ai_demo/MED-PAIN-002.webp,AI_DEMO_ONLY,YES
+MED-PAIN-003,Zerodol-SP Tablet,Ipca Laboratories,Pain Relief,100mg/325mg/15mg,Strip of 10 tablets,product_images/ai_demo/MED-PAIN-003.webp,AI_DEMO_ONLY,YES
+MED-PAIN-004,Moov Fast Pain Relief Spray,Reckitt Benckiser,Pain Relief,80g,Can of 80g,product_images/ai_demo/MED-PAIN-004.webp,AI_DEMO_ONLY,YES
+MED-PAIN-005,Brufen 400 Tablet,Abbott India,Pain Relief,400mg,Strip of 15 tablets,product_images/ai_demo/MED-PAIN-005.webp,AI_DEMO_ONLY,YES
+MED-PAIN-006,Omnigel Topical Gel,Cipla,Pain Relief,1.16% w/w,Tube of 50g,product_images/ai_demo/MED-PAIN-006.webp,AI_DEMO_ONLY,YES
+MED-PAIN-007,Ultracet Tablet,Johnson & Johnson,Pain Relief,37.5mg/325mg,Strip of 15 tablets,product_images/ai_demo/MED-PAIN-007.webp,AI_DEMO_ONLY,YES
+MED-PAIN-008,Ibugesic Plus Suspension,Cipla,Pain Relief,100mg/162.5mg per 5ml,Bottle of 100ml,product_images/ai_demo/MED-PAIN-008.webp,AI_DEMO_ONLY,YES
+MED-PAIN-009,Zandu Balm Ultra Power,Emami,Pain Relief,25ml / 25g,Pot of 25ml,product_images/ai_demo/MED-PAIN-009.webp,AI_DEMO_ONLY,YES
+MED-PAIN-010,Dynapar QPS Pain Relief Solution,Troikaa Pharmaceuticals,Pain Relief,4% w/v,Spray Bottle of 30ml,product_images/ai_demo/MED-PAIN-010.webp,AI_DEMO_ONLY,YES
+MED-PAIN-011,Amrutanjan Extra Power Pain Balm,Amrutanjan Health Care,Pain Relief,50ml,Jar of 50ml,product_images/ai_demo/MED-PAIN-011.webp,AI_DEMO_ONLY,YES
+MED-PAIN-012,Ketorol DT Tablet,Dr. Reddy's,Pain Relief,10mg,Strip of 15 tablets,product_images/ai_demo/MED-PAIN-012.webp,AI_DEMO_ONLY,YES
+MED-PAIN-013,Flamar 3D Tablet,Mankind Pharma,Pain Relief,Combination,Strip of 10 tablets,product_images/ai_demo/MED-PAIN-013.webp,AI_DEMO_ONLY,YES
+MED-PER-001,Dettol Original Antiseptic Liquid,Reckitt Benckiser,Personal Care,550ml Bottle,Bottle of 550ml,product_images/ai_demo/MED-PER-001.webp,AI_DEMO_ONLY,YES
+MED-PER-002,Savlon Moisture Shield Germ Protection Liquid,ITC Limited,Personal Care,1000ml (1L) Pack,Bottle of 1000ml,product_images/ai_demo/MED-PER-002.webp,AI_DEMO_ONLY,YES
+MED-PER-003,Lifebuoy Total 10 Hand Sanitizer,Hindustan Unilever,Personal Care,70% Alcohol 500ml,Pump Bottle of 500ml,product_images/ai_demo/MED-PER-003.webp,AI_DEMO_ONLY,YES
+MED-PER-004,Nivea Soft Light Moisturizing Cream,Beiersdorf / Nivea,Personal Care,300ml Tub,Tub of 300ml,product_images/ai_demo/MED-PER-004.webp,AI_DEMO_ONLY,YES
+MED-PER-005,Dettol Disinfectant Multi-Use Spray,Reckitt Benckiser,Personal Care,Spring Blossom 225ml,Aerosol Can of 225ml,product_images/ai_demo/MED-PER-005.webp,AI_DEMO_ONLY,YES
+MED-PER-006,Himalaya Pure Hands Antibacterial Hand Wash,Himalaya Wellness,Personal Care,250ml Pump Bottle,Pump Bottle of 250ml,product_images/ai_demo/MED-PER-006.webp,AI_DEMO_ONLY,YES
+MED-PER-007,Johnson's Pure Cotton Buds 100s,Johnson & Johnson,Personal Care,100 Swabs Container,Plastic Box of 100 Buds,product_images/ai_demo/MED-PER-007.webp,AI_DEMO_ONLY,YES
+MED-PER-008,Gillette Sensitive Skin Shaving Foam,Procter & Gamble,Personal Care,Sensitive Aloe 418g (45% Extra),Can of 418g,product_images/ai_demo/MED-PER-008.webp,AI_DEMO_ONLY,YES
+MED-PER-009,Old Spice Original After Shave Lotion,Procter & Gamble,Personal Care,Atomizer 100ml,Glass Bottle of 100ml with Atomizer,product_images/ai_demo/MED-PER-009.webp,AI_DEMO_ONLY,YES
+MED-PER-010,Dettol Skincare Germ Protection Bathing Bar,Reckitt Benckiser,Personal Care,Pack of 4 (125g each),Multipack of 4 bars,product_images/ai_demo/MED-PER-010.webp,AI_DEMO_ONLY,YES
+MED-PER-011,Carefree Plus Large Panty Liners,Johnson & Johnson,Personal Care,Large Daily Fresh,Box of 20 Liners,product_images/ai_demo/MED-PER-011.webp,AI_DEMO_ONLY,YES
+MED-PER-012,BoroPlus Soft Antiseptic Light Cream,Emami,Personal Care,100ml Tub,Tub of 100ml,product_images/ai_demo/MED-PER-012.webp,AI_DEMO_ONLY,YES
+MED-PER-013,Godrej Protekt Masterstroke Handwash Refill,Godrej Consumer,Personal Care,1500ml (1.5L) Value Pack,Pouch of 1500ml,product_images/ai_demo/MED-PER-013.webp,AI_DEMO_ONLY,YES
+MED-SKI-001,Cetaphil Gentle Skin Cleanser,Galderma India,Skin Care,For Dry to Normal Sensitive Skin,Pump Bottle of 250ml,product_images/ai_demo/MED-SKI-001.webp,AI_DEMO_ONLY,YES
+MED-SKI-002,Betnovate-N Cream,GlaxoSmithKline,Skin Care,0.1% / 0.5% w/w,Tube of 20g,product_images/ai_demo/MED-SKI-002.webp,AI_DEMO_ONLY,YES
+MED-SKI-003,Sebamed Clear Face Cleansing Foam,Sebapharma / Sebamed,Skin Care,pH 5.5 Formula,Pump Dispenser of 150ml,product_images/ai_demo/MED-SKI-003.webp,AI_DEMO_ONLY,YES
+MED-SKI-004,Photostable Gold Matte Finish Sunscreen SPF 55,Sun Pharma,Skin Care,SPF 55 PA++++,Tube of 50g,product_images/ai_demo/MED-SKI-004.webp,AI_DEMO_ONLY,YES
+MED-SKI-005,Candid Dusting Powder,Glenmark,Skin Care,1% w/w,Container of 100g,product_images/ai_demo/MED-SKI-005.webp,AI_DEMO_ONLY,YES
+MED-SKI-006,Karela Neem Skin Purifier Soap,Himalaya Wellness,Skin Care,125g Bar,Pack of 3 bars (125g each),product_images/ai_demo/MED-SKI-006.webp,AI_DEMO_ONLY,YES
+MED-SKI-007,Epiduo Gel,Galderma India,Skin Care,0.1% / 2.5%,Pump Tube of 15g,product_images/ai_demo/MED-SKI-007.webp,AI_DEMO_ONLY,YES
+MED-SKI-008,Boroline Antiseptic Ayurvedic Cream,G.D. Pharmaceuticals,Skin Care,Classic Green Tube,Tube of 40g,product_images/ai_demo/MED-SKI-008.webp,AI_DEMO_ONLY,YES
+MED-SKI-009,Moiz Cleansing Lotion,Glowderma Laboratories,Skin Care,Gentle Non-Foaming 200ml,Bottle of 200ml,product_images/ai_demo/MED-SKI-009.webp,AI_DEMO_ONLY,YES
+MED-SKI-010,Acrofy Anti-Acne Lotion,Dr. Reddy's,Skin Care,Oil Control 50g,Bottle of 50g,product_images/ai_demo/MED-SKI-010.webp,AI_DEMO_ONLY,YES
+MED-SKI-011,Lulican 1% Cream,Glenmark,Skin Care,1% w/w,Tube of 30g,product_images/ai_demo/MED-SKI-011.webp,AI_DEMO_ONLY,YES
+MED-SKI-012,Saslic DS Foaming Face Wash,Cipla,Skin Care,2% BHA Solution,Pump Dispenser of 100ml,product_images/ai_demo/MED-SKI-012.webp,AI_DEMO_ONLY,YES
+MED-SKI-013,Vaseline Intensive Care Cocoa Glow Lotion,Hindustan Unilever,Skin Care,400ml Family Pump,Bottle of 400ml,product_images/ai_demo/MED-SKI-013.webp,AI_DEMO_ONLY,YES
+MED-VIT-001,Becosules Z Capsules,Pfizer India,Vitamins & Supplements,Therapeutic Complex,Strip of 20 capsules,product_images/ai_demo/MED-VIT-001.webp,AI_DEMO_ONLY,YES
+MED-VIT-002,Shelcal 500 Tablet,Torrent Pharmaceuticals,Vitamins & Supplements,500mg/250 IU,Strip of 15 tablets,product_images/ai_demo/MED-VIT-002.webp,AI_DEMO_ONLY,YES
+MED-VIT-003,D-Rise 60K Softgel Capsule,USV Private Limited,Vitamins & Supplements,"60,000 IU",Strip of 4 softgel capsules,product_images/ai_demo/MED-VIT-003.webp,AI_DEMO_ONLY,YES
+MED-VIT-004,Neurobion Forte Tablet,Procter & Gamble Health,Vitamins & Supplements,Neurotropic Complex,Strip of 30 tablets,product_images/ai_demo/MED-VIT-004.webp,AI_DEMO_ONLY,YES
+MED-VIT-005,Limcee 500mg Chewable Vitamin C,Abbott India,Vitamins & Supplements,500mg Orange Flavor,Strip of 15 chewable tablets,product_images/ai_demo/MED-VIT-005.webp,AI_DEMO_ONLY,YES
+MED-VIT-006,Supradyn Daily Multivitamin Tablet,Bayer Pharmaceuticals,Vitamins & Supplements,Comprehensive Daily Formula,Strip of 15 tablets,product_images/ai_demo/MED-VIT-006.webp,AI_DEMO_ONLY,YES
+MED-VIT-007,Revital H Daily Health Supplement,Sun Pharma,Vitamins & Supplements,Ginseng Fortified,Bottle of 60 capsules,product_images/ai_demo/MED-VIT-007.webp,AI_DEMO_ONLY,YES
+MED-VIT-008,Zincovit Tablet,Apex Laboratories,Vitamins & Supplements,Grape Seed Formula,Strip of 15 tablets,product_images/ai_demo/MED-VIT-008.webp,AI_DEMO_ONLY,YES
+MED-VIT-009,Folvite 5mg Tablet,Pfizer India,Vitamins & Supplements,5mg,Strip of 45 tablets,product_images/ai_demo/MED-VIT-009.webp,AI_DEMO_ONLY,YES
+MED-VIT-010,HealthKart HK Vitals Fish Oil 1000mg,HealthKart,Vitamins & Supplements,1000mg Softgel,Bottle of 60 softgels,product_images/ai_demo/MED-VIT-010.webp,AI_DEMO_ONLY,YES
+MED-VIT-011,Carbamide Forte Multivitamin for Men,Novus Life Sciences,Vitamins & Supplements,Men Formula,Bottle of 60 tablets,product_images/ai_demo/MED-VIT-011.webp,AI_DEMO_ONLY,YES
+MED-VIT-012,Livogen Adult Tonic,Procter & Gamble Health,Vitamins & Supplements,Adult Tonic 200ml,Bottle of 200ml,product_images/ai_demo/MED-VIT-012.webp,AI_DEMO_ONLY,YES
+MED-VIT-013,Wellwoman 50+ Health Supplement,Meyer Organics / Vitabiotics,Vitamins & Supplements,50+ Formula,Box of 30 tablets,product_images/ai_demo/MED-VIT-013.webp,AI_DEMO_ONLY,YES
+MED-VIT-CHEW-500,Vitamin C 500mg Chewable,,Pain Relief,,Bottle of 60,product_images/ai_demo/MED-VIT-CHEW-500.webp,AI_DEMO_ONLY,YES
+MED-WOM-001,Meftal-Spas Tablet,Blue Cross Laboratories,Women's Health,250mg/10mg,Strip of 10 tablets,product_images/ai_demo/MED-WOM-001.webp,AI_DEMO_ONLY,YES
+MED-WOM-002,Stayfree Secure Cottony Sanitary Pads (XL),Johnson & Johnson,Women's Health,XL (Extra Large Wings),Pack of 28 Pads,product_images/ai_demo/MED-WOM-002.webp,AI_DEMO_ONLY,YES
+MED-WOM-003,Vwash Plus Intimate Hygiene Wash,Glenmark,Women's Health,pH 3.5 Formula 100ml,Bottle of 100ml,product_images/ai_demo/MED-WOM-003.webp,AI_DEMO_ONLY,YES
+MED-WOM-004,SBL Femipink Syrup for Women,SBL Homeopathy,Women's Health,200ml Tonic,Bottle of 200ml,product_images/ai_demo/MED-WOM-004.webp,AI_DEMO_ONLY,YES
+MED-WOM-005,Supradyn Daily for Women,Bayer Pharmaceuticals,Women's Health,Women Specific Formula,Strip of 30 tablets,product_images/ai_demo/MED-WOM-005.webp,AI_DEMO_ONLY,YES
+MED-WOM-006,Pee Safe Toilet Seat Sanitizer Spray,Pee Safe,Women's Health,Mint Fragrance 75ml,Aerosol Can of 75ml,product_images/ai_demo/MED-WOM-006.webp,AI_DEMO_ONLY,YES
+MED-WOM-007,Cranberry Extract + D-Mannose Tablets,Carbamide Forte,Women's Health,Urinary Tract Defense,Bottle of 60 tablets,product_images/ai_demo/MED-WOM-007.webp,AI_DEMO_ONLY,YES
+MED-WOM-008,Shatavari Hormonal Balance Capsules,Himalaya Wellness,Women's Health,250mg Pure Extract,Bottle of 60 veg capsules,product_images/ai_demo/MED-WOM-008.webp,AI_DEMO_ONLY,YES
+MED-WOM-009,i-can One Step Pregnancy Test Kit,Piramal Healthcare,Women's Health,Rapid Test Device with Dropper,Pouch with 1 Card and 1 Disposable Dropper,product_images/ai_demo/MED-WOM-009.webp,AI_DEMO_ONLY,YES
+MED-WOM-010,Carmesi Biodegradable Sanitary Pads,Carmesi,Women's Health,L + XL Combo Pack,Pack of 30 Pads with Resealable Disposal Bags,product_images/ai_demo/MED-WOM-010.webp,AI_DEMO_ONLY,YES
+MED-WOM-011,Primosa 1000 Evening Primrose Oil Softgels,Sun Pharma,Women's Health,1000mg Softgel,Strip of 15 softgels,product_images/ai_demo/MED-WOM-011.webp,AI_DEMO_ONLY,YES
+MED-WOM-012,Whisper Choice Ultra Sanitary Pads (XL),Procter & Gamble,Women's Health,XL Wings 6 Pads,Pack of 6 Pads,product_images/ai_demo/MED-WOM-012.webp,AI_DEMO_ONLY,YES
+MED-WOM-013,Nua Cramp Comfort Heat Patches,Nua Woman,Women's Health,8 Hours Continuous Heat,Box of 3 Self-Adhesive Patches,product_images/ai_demo/MED-WOM-013.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0001,Adhesive Bandage Pack - Variant 1,Demo Catalog Brand,First Aid,,,product_images/ai_demo/MS-DEMO-0001.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0002,Adhesive Bandage Pack - Variant 2,Demo Catalog Brand,First Aid,,,product_images/ai_demo/MS-DEMO-0002.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0003,Adhesive Bandage Pack - Variant 3,Demo Catalog Brand,First Aid,,,product_images/ai_demo/MS-DEMO-0003.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0004,Adhesive Bandage Pack - Variant 4,Demo Catalog Brand,First Aid,,,product_images/ai_demo/MS-DEMO-0004.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0005,Adhesive Bandage Pack - Variant 5,Demo Catalog Brand,First Aid,,,product_images/ai_demo/MS-DEMO-0005.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0006,Sterile Gauze Pads - Variant 1,Demo Catalog Brand,First Aid,,,product_images/ai_demo/MS-DEMO-0006.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0007,Sterile Gauze Pads - Variant 2,Demo Catalog Brand,First Aid,,,product_images/ai_demo/MS-DEMO-0007.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0008,Sterile Gauze Pads - Variant 3,Demo Catalog Brand,First Aid,,,product_images/ai_demo/MS-DEMO-0008.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0009,Sterile Gauze Pads - Variant 4,Demo Catalog Brand,First Aid,,,product_images/ai_demo/MS-DEMO-0009.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0010,Sterile Gauze Pads - Variant 5,Demo Catalog Brand,First Aid,,,product_images/ai_demo/MS-DEMO-0010.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0011,Elastic Crepe Bandage - Variant 1,Demo Catalog Brand,First Aid,,,product_images/ai_demo/MS-DEMO-0011.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0012,Elastic Crepe Bandage - Variant 2,Demo Catalog Brand,First Aid,,,product_images/ai_demo/MS-DEMO-0012.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0013,Elastic Crepe Bandage - Variant 3,Demo Catalog Brand,First Aid,,,product_images/ai_demo/MS-DEMO-0013.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0014,Elastic Crepe Bandage - Variant 4,Demo Catalog Brand,First Aid,,,product_images/ai_demo/MS-DEMO-0014.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0015,Elastic Crepe Bandage - Variant 5,Demo Catalog Brand,First Aid,,,product_images/ai_demo/MS-DEMO-0015.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0016,Antiseptic Wound Dressing - Variant 1,Demo Catalog Brand,First Aid,,,product_images/ai_demo/MS-DEMO-0016.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0017,Antiseptic Wound Dressing - Variant 2,Demo Catalog Brand,First Aid,,,product_images/ai_demo/MS-DEMO-0017.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0018,Antiseptic Wound Dressing - Variant 3,Demo Catalog Brand,First Aid,,,product_images/ai_demo/MS-DEMO-0018.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0019,Antiseptic Wound Dressing - Variant 4,Demo Catalog Brand,First Aid,,,product_images/ai_demo/MS-DEMO-0019.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0020,Antiseptic Wound Dressing - Variant 5,Demo Catalog Brand,First Aid,,,product_images/ai_demo/MS-DEMO-0020.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0021,First Aid Kit - Variant 1,Demo Catalog Brand,First Aid,,,product_images/ai_demo/MS-DEMO-0021.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0022,First Aid Kit - Variant 2,Demo Catalog Brand,First Aid,,,product_images/ai_demo/MS-DEMO-0022.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0023,First Aid Kit - Variant 3,Demo Catalog Brand,First Aid,,,product_images/ai_demo/MS-DEMO-0023.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0024,First Aid Kit - Variant 4,Demo Catalog Brand,First Aid,,,product_images/ai_demo/MS-DEMO-0024.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0025,First Aid Kit - Variant 5,Demo Catalog Brand,First Aid,,,product_images/ai_demo/MS-DEMO-0025.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0026,Digital Thermometer - Variant 1,Demo Catalog Brand,Medical Devices,,,product_images/ai_demo/MS-DEMO-0026.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0027,Digital Thermometer - Variant 2,Demo Catalog Brand,Medical Devices,,,product_images/ai_demo/MS-DEMO-0027.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0028,Digital Thermometer - Variant 3,Demo Catalog Brand,Medical Devices,,,product_images/ai_demo/MS-DEMO-0028.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0029,Digital Thermometer - Variant 4,Demo Catalog Brand,Medical Devices,,,product_images/ai_demo/MS-DEMO-0029.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0030,Digital Thermometer - Variant 5,Demo Catalog Brand,Medical Devices,,,product_images/ai_demo/MS-DEMO-0030.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0031,Pulse Oximeter - Variant 1,Demo Catalog Brand,Medical Devices,,,product_images/ai_demo/MS-DEMO-0031.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0032,Pulse Oximeter - Variant 2,Demo Catalog Brand,Medical Devices,,,product_images/ai_demo/MS-DEMO-0032.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0033,Pulse Oximeter - Variant 3,Demo Catalog Brand,Medical Devices,,,product_images/ai_demo/MS-DEMO-0033.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0034,Pulse Oximeter - Variant 4,Demo Catalog Brand,Medical Devices,,,product_images/ai_demo/MS-DEMO-0034.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0035,Pulse Oximeter - Variant 5,Demo Catalog Brand,Medical Devices,,,product_images/ai_demo/MS-DEMO-0035.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0036,Blood Pressure Monitor - Variant 1,Demo Catalog Brand,Medical Devices,,,product_images/ai_demo/MS-DEMO-0036.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0037,Blood Pressure Monitor - Variant 2,Demo Catalog Brand,Medical Devices,,,product_images/ai_demo/MS-DEMO-0037.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0038,Blood Pressure Monitor - Variant 3,Demo Catalog Brand,Medical Devices,,,product_images/ai_demo/MS-DEMO-0038.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0039,Blood Pressure Monitor - Variant 4,Demo Catalog Brand,Medical Devices,,,product_images/ai_demo/MS-DEMO-0039.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0040,Blood Pressure Monitor - Variant 5,Demo Catalog Brand,Medical Devices,,,product_images/ai_demo/MS-DEMO-0040.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0041,Nebulizer Machine - Variant 1,Demo Catalog Brand,Medical Devices,,,product_images/ai_demo/MS-DEMO-0041.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0042,Nebulizer Machine - Variant 2,Demo Catalog Brand,Medical Devices,,,product_images/ai_demo/MS-DEMO-0042.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0043,Nebulizer Machine - Variant 3,Demo Catalog Brand,Medical Devices,,,product_images/ai_demo/MS-DEMO-0043.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0044,Nebulizer Machine - Variant 4,Demo Catalog Brand,Medical Devices,,,product_images/ai_demo/MS-DEMO-0044.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0045,Nebulizer Machine - Variant 5,Demo Catalog Brand,Medical Devices,,,product_images/ai_demo/MS-DEMO-0045.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0046,Heating Pad - Variant 1,Demo Catalog Brand,Medical Devices,,,product_images/ai_demo/MS-DEMO-0046.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0047,Heating Pad - Variant 2,Demo Catalog Brand,Medical Devices,,,product_images/ai_demo/MS-DEMO-0047.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0048,Heating Pad - Variant 3,Demo Catalog Brand,Medical Devices,,,product_images/ai_demo/MS-DEMO-0048.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0049,Heating Pad - Variant 4,Demo Catalog Brand,Medical Devices,,,product_images/ai_demo/MS-DEMO-0049.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0050,Heating Pad - Variant 5,Demo Catalog Brand,Medical Devices,,,product_images/ai_demo/MS-DEMO-0050.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0051,Hand Sanitizer - Variant 1,Demo Catalog Brand,Personal Care,,,product_images/ai_demo/MS-DEMO-0051.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0052,Hand Sanitizer - Variant 2,Demo Catalog Brand,Personal Care,,,product_images/ai_demo/MS-DEMO-0052.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0053,Hand Sanitizer - Variant 3,Demo Catalog Brand,Personal Care,,,product_images/ai_demo/MS-DEMO-0053.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0054,Hand Sanitizer - Variant 4,Demo Catalog Brand,Personal Care,,,product_images/ai_demo/MS-DEMO-0054.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0055,Hand Sanitizer - Variant 5,Demo Catalog Brand,Personal Care,,,product_images/pending_review/ms-demo-0055_6a5e6254-91d3-4575-b059-6d53fb7d8571.jpg,PENDING_REVIEW,YES
+MS-DEMO-0056,Disposable Face Masks - Variant 1,Demo Catalog Brand,Personal Care,,,product_images/ai_demo/MS-DEMO-0056.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0057,Disposable Face Masks - Variant 2,Demo Catalog Brand,Personal Care,,,product_images/ai_demo/MS-DEMO-0057.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0058,Disposable Face Masks - Variant 3,Demo Catalog Brand,Personal Care,,,product_images/ai_demo/MS-DEMO-0058.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0059,Disposable Face Masks - Variant 4,Demo Catalog Brand,Personal Care,,,product_images/ai_demo/MS-DEMO-0059.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0060,Disposable Face Masks - Variant 5,Demo Catalog Brand,Personal Care,,,product_images/ai_demo/MS-DEMO-0060.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0061,Cotton Swabs - Variant 1,Demo Catalog Brand,Personal Care,,,product_images/ai_demo/MS-DEMO-0061.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0062,Cotton Swabs - Variant 2,Demo Catalog Brand,Personal Care,,,product_images/ai_demo/MS-DEMO-0062.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0063,Cotton Swabs - Variant 3,Demo Catalog Brand,Personal Care,,,product_images/ai_demo/MS-DEMO-0063.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0064,Cotton Swabs - Variant 4,Demo Catalog Brand,Personal Care,,,product_images/ai_demo/MS-DEMO-0064.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0065,Cotton Swabs - Variant 5,Demo Catalog Brand,Personal Care,,,product_images/ai_demo/MS-DEMO-0065.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0066,Wet Wipes - Variant 1,Demo Catalog Brand,Personal Care,,,product_images/ai_demo/MS-DEMO-0066.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0067,Wet Wipes - Variant 2,Demo Catalog Brand,Personal Care,,,product_images/ai_demo/MS-DEMO-0067.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0068,Wet Wipes - Variant 3,Demo Catalog Brand,Personal Care,,,product_images/ai_demo/MS-DEMO-0068.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0069,Wet Wipes - Variant 4,Demo Catalog Brand,Personal Care,,,product_images/ai_demo/MS-DEMO-0069.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0070,Wet Wipes - Variant 5,Demo Catalog Brand,Personal Care,,,product_images/ai_demo/MS-DEMO-0070.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0071,Travel Hygiene Kit - Variant 1,Demo Catalog Brand,Personal Care,,,product_images/ai_demo/MS-DEMO-0071.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0072,Travel Hygiene Kit - Variant 2,Demo Catalog Brand,Personal Care,,,product_images/ai_demo/MS-DEMO-0072.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0073,Travel Hygiene Kit - Variant 3,Demo Catalog Brand,Personal Care,,,product_images/ai_demo/MS-DEMO-0073.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0074,Travel Hygiene Kit - Variant 4,Demo Catalog Brand,Personal Care,,,product_images/ai_demo/MS-DEMO-0074.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0075,Travel Hygiene Kit - Variant 5,Demo Catalog Brand,Personal Care,,,product_images/ai_demo/MS-DEMO-0075.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0076,Soft Toothbrush - Variant 1,Demo Catalog Brand,Oral Care,,,product_images/ai_demo/MS-DEMO-0076.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0077,Soft Toothbrush - Variant 2,Demo Catalog Brand,Oral Care,,,product_images/ai_demo/MS-DEMO-0077.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0078,Soft Toothbrush - Variant 3,Demo Catalog Brand,Oral Care,,,product_images/ai_demo/MS-DEMO-0078.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0079,Soft Toothbrush - Variant 4,Demo Catalog Brand,Oral Care,,,product_images/ai_demo/MS-DEMO-0079.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0080,Soft Toothbrush - Variant 5,Demo Catalog Brand,Oral Care,,,product_images/ai_demo/MS-DEMO-0080.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0081,Sensitive Care Toothpaste - Variant 1,Demo Catalog Brand,Oral Care,,,product_images/ai_demo/MS-DEMO-0081.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0082,Sensitive Care Toothpaste - Variant 2,Demo Catalog Brand,Oral Care,,,product_images/ai_demo/MS-DEMO-0082.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0083,Sensitive Care Toothpaste - Variant 3,Demo Catalog Brand,Oral Care,,,product_images/ai_demo/MS-DEMO-0083.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0084,Sensitive Care Toothpaste - Variant 4,Demo Catalog Brand,Oral Care,,,product_images/ai_demo/MS-DEMO-0084.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0085,Sensitive Care Toothpaste - Variant 5,Demo Catalog Brand,Oral Care,,,product_images/ai_demo/MS-DEMO-0085.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0086,Dental Floss - Variant 1,Demo Catalog Brand,Oral Care,,,product_images/ai_demo/MS-DEMO-0086.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0087,Dental Floss - Variant 2,Demo Catalog Brand,Oral Care,,,product_images/ai_demo/MS-DEMO-0087.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0088,Dental Floss - Variant 3,Demo Catalog Brand,Oral Care,,,product_images/ai_demo/MS-DEMO-0088.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0089,Dental Floss - Variant 4,Demo Catalog Brand,Oral Care,,,product_images/ai_demo/MS-DEMO-0089.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0090,Dental Floss - Variant 5,Demo Catalog Brand,Oral Care,,,product_images/ai_demo/MS-DEMO-0090.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0091,Mouthwash - Variant 1,Demo Catalog Brand,Oral Care,,,product_images/ai_demo/MS-DEMO-0091.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0092,Mouthwash - Variant 2,Demo Catalog Brand,Oral Care,,,product_images/ai_demo/MS-DEMO-0092.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0093,Mouthwash - Variant 3,Demo Catalog Brand,Oral Care,,,product_images/ai_demo/MS-DEMO-0093.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0094,Mouthwash - Variant 4,Demo Catalog Brand,Oral Care,,,product_images/ai_demo/MS-DEMO-0094.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0095,Mouthwash - Variant 5,Demo Catalog Brand,Oral Care,,,product_images/ai_demo/MS-DEMO-0095.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0096,Tongue Cleaner - Variant 1,Demo Catalog Brand,Oral Care,,,product_images/ai_demo/MS-DEMO-0096.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0097,Tongue Cleaner - Variant 2,Demo Catalog Brand,Oral Care,,,product_images/ai_demo/MS-DEMO-0097.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0098,Tongue Cleaner - Variant 3,Demo Catalog Brand,Oral Care,,,product_images/ai_demo/MS-DEMO-0098.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0099,Tongue Cleaner - Variant 4,Demo Catalog Brand,Oral Care,,,product_images/ai_demo/MS-DEMO-0099.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0100,Tongue Cleaner - Variant 5,Demo Catalog Brand,Oral Care,,,product_images/ai_demo/MS-DEMO-0100.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0101,Gentle Face Cleanser - Variant 1,Demo Catalog Brand,Skin Care,,,product_images/ai_demo/MS-DEMO-0101.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0102,Gentle Face Cleanser - Variant 2,Demo Catalog Brand,Skin Care,,,product_images/ai_demo/MS-DEMO-0102.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0103,Gentle Face Cleanser - Variant 3,Demo Catalog Brand,Skin Care,,,product_images/ai_demo/MS-DEMO-0103.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0104,Gentle Face Cleanser - Variant 4,Demo Catalog Brand,Skin Care,,,product_images/ai_demo/MS-DEMO-0104.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0105,Gentle Face Cleanser - Variant 5,Demo Catalog Brand,Skin Care,,,product_images/ai_demo/MS-DEMO-0105.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0106,Moisturizing Lotion - Variant 1,Demo Catalog Brand,Skin Care,,,product_images/ai_demo/MS-DEMO-0106.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0107,Moisturizing Lotion - Variant 2,Demo Catalog Brand,Skin Care,,,product_images/ai_demo/MS-DEMO-0107.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0108,Moisturizing Lotion - Variant 3,Demo Catalog Brand,Skin Care,,,product_images/ai_demo/MS-DEMO-0108.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0109,Moisturizing Lotion - Variant 4,Demo Catalog Brand,Skin Care,,,product_images/ai_demo/MS-DEMO-0109.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0110,Moisturizing Lotion - Variant 5,Demo Catalog Brand,Skin Care,,,product_images/ai_demo/MS-DEMO-0110.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0111,Sunscreen Lotion - Variant 1,Demo Catalog Brand,Skin Care,,,product_images/ai_demo/MS-DEMO-0111.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0112,Sunscreen Lotion - Variant 2,Demo Catalog Brand,Skin Care,,,product_images/ai_demo/MS-DEMO-0112.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0113,Sunscreen Lotion - Variant 3,Demo Catalog Brand,Skin Care,,,product_images/ai_demo/MS-DEMO-0113.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0114,Sunscreen Lotion - Variant 4,Demo Catalog Brand,Skin Care,,,product_images/ai_demo/MS-DEMO-0114.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0115,Sunscreen Lotion - Variant 5,Demo Catalog Brand,Skin Care,,,product_images/ai_demo/MS-DEMO-0115.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0116,Aloe Vera Gel - Variant 1,Demo Catalog Brand,Skin Care,,,product_images/ai_demo/MS-DEMO-0116.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0117,Aloe Vera Gel - Variant 2,Demo Catalog Brand,Skin Care,,,product_images/ai_demo/MS-DEMO-0117.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0118,Aloe Vera Gel - Variant 3,Demo Catalog Brand,Skin Care,,,product_images/ai_demo/MS-DEMO-0118.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0119,Aloe Vera Gel - Variant 4,Demo Catalog Brand,Skin Care,,,product_images/ai_demo/MS-DEMO-0119.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0120,Aloe Vera Gel - Variant 5,Demo Catalog Brand,Skin Care,,,product_images/ai_demo/MS-DEMO-0120.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0121,Lip Care Balm - Variant 1,Demo Catalog Brand,Skin Care,,,product_images/ai_demo/MS-DEMO-0121.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0122,Lip Care Balm - Variant 2,Demo Catalog Brand,Skin Care,,,product_images/ai_demo/MS-DEMO-0122.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0123,Lip Care Balm - Variant 3,Demo Catalog Brand,Skin Care,,,product_images/ai_demo/MS-DEMO-0123.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0124,Lip Care Balm - Variant 4,Demo Catalog Brand,Skin Care,,,product_images/ai_demo/MS-DEMO-0124.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0125,Lip Care Balm - Variant 5,Demo Catalog Brand,Skin Care,,,product_images/ai_demo/MS-DEMO-0125.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0126,Mild Shampoo - Variant 1,Demo Catalog Brand,Hair Care,,,product_images/ai_demo/MS-DEMO-0126.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0127,Mild Shampoo - Variant 2,Demo Catalog Brand,Hair Care,,,product_images/ai_demo/MS-DEMO-0127.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0128,Mild Shampoo - Variant 3,Demo Catalog Brand,Hair Care,,,product_images/ai_demo/MS-DEMO-0128.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0129,Mild Shampoo - Variant 4,Demo Catalog Brand,Hair Care,,,product_images/ai_demo/MS-DEMO-0129.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0130,Mild Shampoo - Variant 5,Demo Catalog Brand,Hair Care,,,product_images/ai_demo/MS-DEMO-0130.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0131,Conditioner - Variant 1,Demo Catalog Brand,Hair Care,,,product_images/ai_demo/MS-DEMO-0131.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0132,Conditioner - Variant 2,Demo Catalog Brand,Hair Care,,,product_images/ai_demo/MS-DEMO-0132.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0133,Conditioner - Variant 3,Demo Catalog Brand,Hair Care,,,product_images/ai_demo/MS-DEMO-0133.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0134,Conditioner - Variant 4,Demo Catalog Brand,Hair Care,,,product_images/ai_demo/MS-DEMO-0134.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0135,Conditioner - Variant 5,Demo Catalog Brand,Hair Care,,,product_images/ai_demo/MS-DEMO-0135.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0136,Hair Oil - Variant 1,Demo Catalog Brand,Hair Care,,,product_images/ai_demo/MS-DEMO-0136.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0137,Hair Oil - Variant 2,Demo Catalog Brand,Hair Care,,,product_images/ai_demo/MS-DEMO-0137.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0138,Hair Oil - Variant 3,Demo Catalog Brand,Hair Care,,,product_images/ai_demo/MS-DEMO-0138.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0139,Hair Oil - Variant 4,Demo Catalog Brand,Hair Care,,,product_images/ai_demo/MS-DEMO-0139.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0140,Hair Oil - Variant 5,Demo Catalog Brand,Hair Care,,,product_images/ai_demo/MS-DEMO-0140.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0141,Scalp Care Lotion - Variant 1,Demo Catalog Brand,Hair Care,,,product_images/ai_demo/MS-DEMO-0141.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0142,Scalp Care Lotion - Variant 2,Demo Catalog Brand,Hair Care,,,product_images/ai_demo/MS-DEMO-0142.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0143,Scalp Care Lotion - Variant 3,Demo Catalog Brand,Hair Care,,,product_images/ai_demo/MS-DEMO-0143.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0144,Scalp Care Lotion - Variant 4,Demo Catalog Brand,Hair Care,,,product_images/ai_demo/MS-DEMO-0144.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0145,Scalp Care Lotion - Variant 5,Demo Catalog Brand,Hair Care,,,product_images/ai_demo/MS-DEMO-0145.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0146,Wide Tooth Comb - Variant 1,Demo Catalog Brand,Hair Care,,,product_images/ai_demo/MS-DEMO-0146.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0147,Wide Tooth Comb - Variant 2,Demo Catalog Brand,Hair Care,,,product_images/ai_demo/MS-DEMO-0147.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0148,Wide Tooth Comb - Variant 3,Demo Catalog Brand,Hair Care,,,product_images/ai_demo/MS-DEMO-0148.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0149,Wide Tooth Comb - Variant 4,Demo Catalog Brand,Hair Care,,,product_images/ai_demo/MS-DEMO-0149.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0150,Wide Tooth Comb - Variant 5,Demo Catalog Brand,Hair Care,,,product_images/ai_demo/MS-DEMO-0150.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0151,Baby Wipes - Variant 1,Demo Catalog Brand,Baby Care,,,product_images/ai_demo/MS-DEMO-0151.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0152,Baby Wipes - Variant 2,Demo Catalog Brand,Baby Care,,,product_images/ai_demo/MS-DEMO-0152.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0153,Baby Wipes - Variant 3,Demo Catalog Brand,Baby Care,,,product_images/ai_demo/MS-DEMO-0153.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0154,Baby Wipes - Variant 4,Demo Catalog Brand,Baby Care,,,product_images/ai_demo/MS-DEMO-0154.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0155,Baby Wipes - Variant 5,Demo Catalog Brand,Baby Care,,,product_images/ai_demo/MS-DEMO-0155.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0156,Baby Lotion - Variant 1,Demo Catalog Brand,Baby Care,,,product_images/ai_demo/MS-DEMO-0156.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0157,Baby Lotion - Variant 2,Demo Catalog Brand,Baby Care,,,product_images/ai_demo/MS-DEMO-0157.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0158,Baby Lotion - Variant 3,Demo Catalog Brand,Baby Care,,,product_images/ai_demo/MS-DEMO-0158.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0159,Baby Lotion - Variant 4,Demo Catalog Brand,Baby Care,,,product_images/ai_demo/MS-DEMO-0159.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0160,Baby Lotion - Variant 5,Demo Catalog Brand,Baby Care,,,product_images/ai_demo/MS-DEMO-0160.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0161,Baby Shampoo - Variant 1,Demo Catalog Brand,Baby Care,,,product_images/ai_demo/MS-DEMO-0161.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0162,Baby Shampoo - Variant 2,Demo Catalog Brand,Baby Care,,,product_images/ai_demo/MS-DEMO-0162.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0163,Baby Shampoo - Variant 3,Demo Catalog Brand,Baby Care,,,product_images/ai_demo/MS-DEMO-0163.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0164,Baby Shampoo - Variant 4,Demo Catalog Brand,Baby Care,,,product_images/ai_demo/MS-DEMO-0164.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0165,Baby Shampoo - Variant 5,Demo Catalog Brand,Baby Care,,,product_images/ai_demo/MS-DEMO-0165.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0166,Baby Diaper Pack - Variant 1,Demo Catalog Brand,Baby Care,,,product_images/ai_demo/MS-DEMO-0166.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0167,Baby Diaper Pack - Variant 2,Demo Catalog Brand,Baby Care,,,product_images/ai_demo/MS-DEMO-0167.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0168,Baby Diaper Pack - Variant 3,Demo Catalog Brand,Baby Care,,,product_images/ai_demo/MS-DEMO-0168.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0169,Baby Diaper Pack - Variant 4,Demo Catalog Brand,Baby Care,,,product_images/ai_demo/MS-DEMO-0169.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0170,Baby Diaper Pack - Variant 5,Demo Catalog Brand,Baby Care,,,product_images/ai_demo/MS-DEMO-0170.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0171,Baby Bath Wash - Variant 1,Demo Catalog Brand,Baby Care,,,product_images/ai_demo/MS-DEMO-0171.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0172,Baby Bath Wash - Variant 2,Demo Catalog Brand,Baby Care,,,product_images/ai_demo/MS-DEMO-0172.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0173,Baby Bath Wash - Variant 3,Demo Catalog Brand,Baby Care,,,product_images/ai_demo/MS-DEMO-0173.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0174,Baby Bath Wash - Variant 4,Demo Catalog Brand,Baby Care,,,product_images/ai_demo/MS-DEMO-0174.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0175,Baby Bath Wash - Variant 5,Demo Catalog Brand,Baby Care,,,product_images/ai_demo/MS-DEMO-0175.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0176,Cotton Sanitary Pads - Variant 1,Demo Catalog Brand,Women's Wellness,,,product_images/ai_demo/MS-DEMO-0176.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0177,Cotton Sanitary Pads - Variant 2,Demo Catalog Brand,Women's Wellness,,,product_images/ai_demo/MS-DEMO-0177.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0178,Cotton Sanitary Pads - Variant 3,Demo Catalog Brand,Women's Wellness,,,product_images/ai_demo/MS-DEMO-0178.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0179,Cotton Sanitary Pads - Variant 4,Demo Catalog Brand,Women's Wellness,,,product_images/ai_demo/MS-DEMO-0179.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0180,Cotton Sanitary Pads - Variant 5,Demo Catalog Brand,Women's Wellness,,,product_images/ai_demo/MS-DEMO-0180.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0181,Panty Liners - Variant 1,Demo Catalog Brand,Women's Wellness,,,product_images/ai_demo/MS-DEMO-0181.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0182,Panty Liners - Variant 2,Demo Catalog Brand,Women's Wellness,,,product_images/ai_demo/MS-DEMO-0182.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0183,Panty Liners - Variant 3,Demo Catalog Brand,Women's Wellness,,,product_images/ai_demo/MS-DEMO-0183.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0184,Panty Liners - Variant 4,Demo Catalog Brand,Women's Wellness,,,product_images/ai_demo/MS-DEMO-0184.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0185,Panty Liners - Variant 5,Demo Catalog Brand,Women's Wellness,,,product_images/ai_demo/MS-DEMO-0185.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0186,Menstrual Heat Patch - Variant 1,Demo Catalog Brand,Women's Wellness,,,product_images/ai_demo/MS-DEMO-0186.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0187,Menstrual Heat Patch - Variant 2,Demo Catalog Brand,Women's Wellness,,,product_images/ai_demo/MS-DEMO-0187.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0188,Menstrual Heat Patch - Variant 3,Demo Catalog Brand,Women's Wellness,,,product_images/ai_demo/MS-DEMO-0188.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0189,Menstrual Heat Patch - Variant 4,Demo Catalog Brand,Women's Wellness,,,product_images/ai_demo/MS-DEMO-0189.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0190,Menstrual Heat Patch - Variant 5,Demo Catalog Brand,Women's Wellness,,,product_images/ai_demo/MS-DEMO-0190.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0191,Intimate Care Wash - Variant 1,Demo Catalog Brand,Women's Wellness,,,product_images/ai_demo/MS-DEMO-0191.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0192,Intimate Care Wash - Variant 2,Demo Catalog Brand,Women's Wellness,,,product_images/ai_demo/MS-DEMO-0192.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0193,Intimate Care Wash - Variant 3,Demo Catalog Brand,Women's Wellness,,,product_images/ai_demo/MS-DEMO-0193.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0194,Intimate Care Wash - Variant 4,Demo Catalog Brand,Women's Wellness,,,product_images/ai_demo/MS-DEMO-0194.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0195,Intimate Care Wash - Variant 5,Demo Catalog Brand,Women's Wellness,,,product_images/ai_demo/MS-DEMO-0195.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0196,Reusable Hot Water Bag - Variant 1,Demo Catalog Brand,Women's Wellness,,,product_images/ai_demo/MS-DEMO-0196.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0197,Reusable Hot Water Bag - Variant 2,Demo Catalog Brand,Women's Wellness,,,product_images/ai_demo/MS-DEMO-0197.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0198,Reusable Hot Water Bag - Variant 3,Demo Catalog Brand,Women's Wellness,,,product_images/ai_demo/MS-DEMO-0198.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0199,Reusable Hot Water Bag - Variant 4,Demo Catalog Brand,Women's Wellness,,,product_images/ai_demo/MS-DEMO-0199.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0200,Reusable Hot Water Bag - Variant 5,Demo Catalog Brand,Women's Wellness,,,product_images/ai_demo/MS-DEMO-0200.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0201,Reusable Water Bottle - Variant 1,Demo Catalog Brand,Fitness & Wellness,,,product_images/ai_demo/MS-DEMO-0201.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0202,Reusable Water Bottle - Variant 2,Demo Catalog Brand,Fitness & Wellness,,,product_images/ai_demo/MS-DEMO-0202.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0203,Reusable Water Bottle - Variant 3,Demo Catalog Brand,Fitness & Wellness,,,product_images/ai_demo/MS-DEMO-0203.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0204,Reusable Water Bottle - Variant 4,Demo Catalog Brand,Fitness & Wellness,,,product_images/ai_demo/MS-DEMO-0204.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0205,Reusable Water Bottle - Variant 5,Demo Catalog Brand,Fitness & Wellness,,,product_images/ai_demo/MS-DEMO-0205.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0206,Yoga Mat - Variant 1,Demo Catalog Brand,Fitness & Wellness,,,product_images/ai_demo/MS-DEMO-0206.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0207,Yoga Mat - Variant 2,Demo Catalog Brand,Fitness & Wellness,,,product_images/ai_demo/MS-DEMO-0207.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0208,Yoga Mat - Variant 3,Demo Catalog Brand,Fitness & Wellness,,,product_images/ai_demo/MS-DEMO-0208.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0209,Yoga Mat - Variant 4,Demo Catalog Brand,Fitness & Wellness,,,product_images/ai_demo/MS-DEMO-0209.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0210,Yoga Mat - Variant 5,Demo Catalog Brand,Fitness & Wellness,,,product_images/ai_demo/MS-DEMO-0210.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0211,Resistance Band - Variant 1,Demo Catalog Brand,Fitness & Wellness,,,product_images/ai_demo/MS-DEMO-0211.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0212,Resistance Band - Variant 2,Demo Catalog Brand,Fitness & Wellness,,,product_images/ai_demo/MS-DEMO-0212.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0213,Resistance Band - Variant 3,Demo Catalog Brand,Fitness & Wellness,,,product_images/ai_demo/MS-DEMO-0213.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0214,Resistance Band - Variant 4,Demo Catalog Brand,Fitness & Wellness,,,product_images/ai_demo/MS-DEMO-0214.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0215,Resistance Band - Variant 5,Demo Catalog Brand,Fitness & Wellness,,,product_images/ai_demo/MS-DEMO-0215.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0216,Foam Roller - Variant 1,Demo Catalog Brand,Fitness & Wellness,,,product_images/ai_demo/MS-DEMO-0216.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0217,Foam Roller - Variant 2,Demo Catalog Brand,Fitness & Wellness,,,product_images/ai_demo/MS-DEMO-0217.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0218,Foam Roller - Variant 3,Demo Catalog Brand,Fitness & Wellness,,,product_images/ai_demo/MS-DEMO-0218.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0219,Foam Roller - Variant 4,Demo Catalog Brand,Fitness & Wellness,,,product_images/ai_demo/MS-DEMO-0219.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0220,Foam Roller - Variant 5,Demo Catalog Brand,Fitness & Wellness,,,product_images/ai_demo/MS-DEMO-0220.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0221,Sleep Mask - Variant 1,Demo Catalog Brand,Fitness & Wellness,,,product_images/ai_demo/MS-DEMO-0221.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0222,Sleep Mask - Variant 2,Demo Catalog Brand,Fitness & Wellness,,,product_images/ai_demo/MS-DEMO-0222.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0223,Sleep Mask - Variant 3,Demo Catalog Brand,Fitness & Wellness,,,product_images/ai_demo/MS-DEMO-0223.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0224,Sleep Mask - Variant 4,Demo Catalog Brand,Fitness & Wellness,,,product_images/ai_demo/MS-DEMO-0224.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0225,Sleep Mask - Variant 5,Demo Catalog Brand,Fitness & Wellness,,,product_images/ai_demo/MS-DEMO-0225.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0226,Herbal Tea Blend - Variant 1,Demo Catalog Brand,Ayurveda & Wellness,,,product_images/ai_demo/MS-DEMO-0226.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0227,Herbal Tea Blend - Variant 2,Demo Catalog Brand,Ayurveda & Wellness,,,product_images/ai_demo/MS-DEMO-0227.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0228,Herbal Tea Blend - Variant 3,Demo Catalog Brand,Ayurveda & Wellness,,,product_images/ai_demo/MS-DEMO-0228.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0229,Herbal Tea Blend - Variant 4,Demo Catalog Brand,Ayurveda & Wellness,,,product_images/ai_demo/MS-DEMO-0229.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0230,Herbal Tea Blend - Variant 5,Demo Catalog Brand,Ayurveda & Wellness,,,product_images/ai_demo/MS-DEMO-0230.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0231,Aromatic Balm - Variant 1,Demo Catalog Brand,Ayurveda & Wellness,,,product_images/ai_demo/MS-DEMO-0231.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0232,Aromatic Balm - Variant 2,Demo Catalog Brand,Ayurveda & Wellness,,,product_images/ai_demo/MS-DEMO-0232.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0233,Aromatic Balm - Variant 3,Demo Catalog Brand,Ayurveda & Wellness,,,product_images/ai_demo/MS-DEMO-0233.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0234,Aromatic Balm - Variant 4,Demo Catalog Brand,Ayurveda & Wellness,,,product_images/ai_demo/MS-DEMO-0234.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0235,Aromatic Balm - Variant 5,Demo Catalog Brand,Ayurveda & Wellness,,,product_images/ai_demo/MS-DEMO-0235.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0236,Herbal Bath Powder - Variant 1,Demo Catalog Brand,Ayurveda & Wellness,,,product_images/ai_demo/MS-DEMO-0236.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0237,Herbal Bath Powder - Variant 2,Demo Catalog Brand,Ayurveda & Wellness,,,product_images/ai_demo/MS-DEMO-0237.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0238,Herbal Bath Powder - Variant 3,Demo Catalog Brand,Ayurveda & Wellness,,,product_images/ai_demo/MS-DEMO-0238.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0239,Herbal Bath Powder - Variant 4,Demo Catalog Brand,Ayurveda & Wellness,,,product_images/ai_demo/MS-DEMO-0239.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0240,Herbal Bath Powder - Variant 5,Demo Catalog Brand,Ayurveda & Wellness,,,product_images/ai_demo/MS-DEMO-0240.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0241,Neem Soap - Variant 1,Demo Catalog Brand,Ayurveda & Wellness,,,product_images/ai_demo/MS-DEMO-0241.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0242,Neem Soap - Variant 2,Demo Catalog Brand,Ayurveda & Wellness,,,product_images/ai_demo/MS-DEMO-0242.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0243,Neem Soap - Variant 3,Demo Catalog Brand,Ayurveda & Wellness,,,product_images/ai_demo/MS-DEMO-0243.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0244,Neem Soap - Variant 4,Demo Catalog Brand,Ayurveda & Wellness,,,product_images/ai_demo/MS-DEMO-0244.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0245,Neem Soap - Variant 5,Demo Catalog Brand,Ayurveda & Wellness,,,product_images/ai_demo/MS-DEMO-0245.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0246,Herbal Massage Oil - Variant 1,Demo Catalog Brand,Ayurveda & Wellness,,,product_images/ai_demo/MS-DEMO-0246.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0247,Herbal Massage Oil - Variant 2,Demo Catalog Brand,Ayurveda & Wellness,,,product_images/ai_demo/MS-DEMO-0247.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0248,Herbal Massage Oil - Variant 3,Demo Catalog Brand,Ayurveda & Wellness,,,product_images/ai_demo/MS-DEMO-0248.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0249,Herbal Massage Oil - Variant 4,Demo Catalog Brand,Ayurveda & Wellness,,,product_images/ai_demo/MS-DEMO-0249.webp,AI_DEMO_ONLY,YES
+MS-DEMO-0250,Herbal Massage Oil - Variant 5,Demo Catalog Brand,Ayurveda & Wellness,,,product_images/ai_demo/MS-DEMO-0250.webp,AI_DEMO_ONLY,YES

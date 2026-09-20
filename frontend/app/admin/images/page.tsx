@@ -95,9 +95,10 @@ interface AdminProductItem {
 
 const STATUS_CHOICES: { value: ProductImageStatus | 'ALL'; label: string }[] = [
   { value: 'ALL', label: 'All Statuses' },
-  { value: 'MISSING', label: 'Missing' },
-  { value: 'PENDING_REVIEW', label: 'Pending Review' },
+  { value: 'AI_DEMO_ONLY', label: 'AI Demo Only' },
   { value: 'VERIFIED', label: 'Verified' },
+  { value: 'PENDING_REVIEW', label: 'Pending Review' },
+  { value: 'MISSING', label: 'Missing' },
   { value: 'REJECTED', label: 'Rejected' },
   { value: 'BROKEN', label: 'Broken' },
   { value: 'DUPLICATE', label: 'Duplicate' },

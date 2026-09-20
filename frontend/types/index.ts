@@ -61,6 +61,7 @@ export type ProductImageStatus =
   | 'APPROVED_FOR_DOWNLOAD'
   | 'DOWNLOADED'
   | 'VERIFIED'
+  | 'AI_DEMO_ONLY'
   | 'REJECTED'
   | 'BROKEN'
   | 'DUPLICATE'
@@ -103,9 +104,11 @@ export interface Product {
   primary_image?: string;
   image_url?: string;
   image_status?: ProductImageStatus;
+  image_alt?: string;
+  image_alt_text?: string;
+  is_real_product_photo?: boolean;
   image_source?: string;
   source_url?: string;
-  image_alt_text?: string;
   image_license?: string;
   verified_by?: string;
   verified_at?: string | null;

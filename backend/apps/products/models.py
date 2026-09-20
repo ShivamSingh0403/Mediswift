@@ -111,6 +111,7 @@ class Product(TimeStampedModel):
         DOWNLOADED = 'DOWNLOADED', 'Downloaded'
         PENDING_REVIEW = 'PENDING_REVIEW', 'Pending Review'
         VERIFIED = 'VERIFIED', 'Verified Authentic Photograph'
+        AI_DEMO_ONLY = 'AI_DEMO_ONLY', 'AI Generated Demo Visual'
         REJECTED = 'REJECTED', 'Rejected Image'
         BROKEN = 'BROKEN', 'Broken Image URL / Asset'
         DUPLICATE = 'DUPLICATE', 'Duplicate Image Mapping'
@@ -125,6 +126,7 @@ class Product(TimeStampedModel):
         blank=True,
         db_index=True
     )
+    is_real_product_photo = models.BooleanField(default=False, db_index=True, help_text="True strictly when photo is an authentic verified physical packaging photo")
     image_source = models.CharField(max_length=255, blank=True, help_text="Origin e.g. Manufacturer Official / Authorized Distributor")
     image_alt_text = models.CharField(max_length=255, blank=True, help_text="Descriptive pharmaceutical packaging alt text")
     image_license = models.CharField(max_length=255, blank=True, help_text="e.g. Proprietary / Authorized Distributor / Editorial")
@@ -211,6 +213,12 @@ class Product(TimeStampedModel):
         elif self.side_effects and not self.warnings:
             self.warnings = self.side_effects
 
+        # Keep is_real_product_photo synced with VERIFIED status
+        if self.image_status == self.ImageStatus.VERIFIED:
+            self.is_real_product_photo = True
+        else:
+            self.is_real_product_photo = False
+
         super().save(*args, **kwargs)
 
     @property
@@ -235,11 +243,14 @@ class ProductImage(TimeStampedModel):
     image_file = models.ImageField(upload_to='product_images/pending_review/', null=True, blank=True)
     image = models.ImageField(upload_to='product_images/pending_review/', null=True, blank=True)
     image_url = models.URLField(max_length=500, blank=True)
+    source_type = models.CharField(max_length=100, default='MANUAL_UPLOAD', blank=True, help_text="e.g. AI_GENERATED_DEMO, MANUAL_UPLOAD, OFFICIAL_PORTAL")
     source_url = models.URLField(max_length=500, blank=True)
     source_name = models.CharField(max_length=255, blank=True)
     source = models.CharField(max_length=255, blank=True)
     license_note = models.CharField(max_length=255, blank=True)
     license = models.CharField(max_length=255, blank=True)
+    is_real_product_photo = models.BooleanField(default=False, help_text="True strictly when photo is an authentic verified physical packaging photo")
+    requires_real_photo_replacement = models.BooleanField(default=True, help_text="True if this asset is a temporary demo visual requiring replacement")
     image_status = models.CharField(
         max_length=50,
         choices=Product.ImageStatus.choices,
@@ -258,7 +269,7 @@ class ProductImage(TimeStampedModel):
         db_index=True,
         help_text="SHA-256 hash of image file"
     )
-    mime_type = models.CharField(max_length=50, blank=True)
+    mime_type = models.CharField(max_length=50, blank=True, default='image/webp')
     width = models.PositiveIntegerField(null=True, blank=True)
     height = models.PositiveIntegerField(null=True, blank=True)
     source_page_url = models.URLField(max_length=1000, blank=True)
@@ -296,6 +307,20 @@ class ProductImage(TimeStampedModel):
         elif self.image and not self.image_file:
             self.image_file = self.image
 
+        # Handle AI Demo constraints
+        if self.image_status == Product.ImageStatus.AI_DEMO_ONLY:
+            if not self.source_type or self.source_type == 'MANUAL_UPLOAD':
+                self.source_type = 'AI_GENERATED_DEMO'
+            if not self.source_name:
+                self.source_name = 'MediSwift Demo Generator'
+                self.source = 'MediSwift Demo Generator'
+            self.is_real_product_photo = False
+            self.requires_real_photo_replacement = True
+            self.is_primary = False
+        elif self.image_status == Product.ImageStatus.VERIFIED:
+            self.is_real_product_photo = True
+            self.requires_real_photo_replacement = False
+
         # Compute SHA-256 hash if image file is set and hash missing
         target_file = self.image_file or self.image
         if target_file and not self.image_hash:
@@ -331,6 +356,8 @@ class ProductImage(TimeStampedModel):
 
         self.image_status = Product.ImageStatus.VERIFIED
         self.status = Product.ImageStatus.VERIFIED
+        self.is_real_product_photo = True
+        self.requires_real_photo_replacement = False
         self.verified_by = verified_by
         self.verified_at = timezone.now()
         self.save()
@@ -343,9 +370,10 @@ class ProductImage(TimeStampedModel):
             self.product.image_url = self.image_url
             
         self.product.image_status = Product.ImageStatus.VERIFIED
+        self.product.is_real_product_photo = True
         self.product.verified_by = verified_by
         self.product.verified_at = self.verified_at
-        self.product.save(update_fields=['image_url', 'image_status', 'verified_by', 'verified_at'])
+        self.product.save(update_fields=['image_url', 'image_status', 'is_real_product_photo', 'verified_by', 'verified_at'])
 
     def mark_rejected(self, rejected_by="Administrator", reason=""):
         """

@@ -178,6 +178,7 @@ class ProductViewSet(viewsets.ReadOnlyModelViewSet):
         """Returns comprehensive image metrics matching validate_product_images."""
         total = Product.objects.count()
         verified = Product.objects.filter(image_status='VERIFIED').count()
+        ai_demo = Product.objects.filter(image_status='AI_DEMO_ONLY').count()
         missing = Product.objects.filter(image_status='MISSING').count()
         pending_review = Product.objects.filter(image_status='PENDING_REVIEW').count()
         rejected = Product.objects.filter(image_status='REJECTED').count()
@@ -209,6 +210,7 @@ class ProductViewSet(viewsets.ReadOnlyModelViewSet):
 
         return api_response(data={
             "total_products": total,
+            "ai_demo_images": ai_demo,
             "verified_images": verified,
             "missing_images": missing,
             "pending_review_images": pending_review,
@@ -315,7 +317,7 @@ class ProductViewSet(viewsets.ReadOnlyModelViewSet):
             return api_response(success=False, message="Product not found by SKU or ID.", status_code=status.HTTP_404_NOT_FOUND)
 
         new_status = request.data.get('image_status', '').strip().upper()
-        valid_statuses = {'MISSING', 'PENDING_REVIEW', 'VERIFIED', 'REJECTED', 'BROKEN', 'DUPLICATE'}
+        valid_statuses = {'MISSING', 'PENDING_REVIEW', 'VERIFIED', 'AI_DEMO_ONLY', 'REJECTED', 'BROKEN', 'DUPLICATE'}
         if new_status and new_status in valid_statuses:
             product.image_status = new_status
 
@@ -638,6 +640,49 @@ class ProductViewSet(viewsets.ReadOnlyModelViewSet):
             "status": "REJECTED",
         }, message=f"Product {product.sku} image rejected and moved to rejected/ directory.")
 
+    @action(detail=False, methods=['post'], url_path='delete-ai-demo')
+    def delete_ai_demo(self, request):
+        """Deletes AI demo image for product and resets status to MISSING."""
+        sku = request.data.get('sku')
+        product = Product.objects.filter(sku__iexact=sku.strip()).first() if sku else None
+        if not product:
+            return api_response(success=False, message="Product not found.", status_code=status.HTTP_404_NOT_FOUND)
+
+        demo_file = Path(settings.MEDIA_ROOT) / 'product_images' / 'ai_demo' / f"{product.sku}.webp"
+        if demo_file.exists():
+            try:
+                demo_file.unlink()
+            except Exception:
+                pass
+
+        product.images.filter(image_status='AI_DEMO_ONLY').delete()
+        product.image_url = ''
+        product.image_status = 'MISSING'
+        product.is_real_product_photo = False
+        product.save(update_fields=['image_url', 'image_status', 'is_real_product_photo'])
+
+        return api_response(data={"sku": product.sku, "status": "MISSING"}, message="AI demo visual deleted.")
+
+    @action(detail=False, methods=['post'], url_path='regenerate-ai-demo')
+    def regenerate_ai_demo(self, request):
+        """Regenerates AI demo image for a product."""
+        from django.core.management import call_command
+        sku = request.data.get('sku')
+        product = Product.objects.filter(sku__iexact=sku.strip()).first() if sku else None
+        if not product:
+            return api_response(success=False, message="Product not found.", status_code=status.HTTP_404_NOT_FOUND)
+
+        try:
+            call_command('generate_ai_demo_product_images', sku=product.sku)
+            product.refresh_from_db()
+            return api_response(data={
+                "sku": product.sku,
+                "image_url": product.image_url,
+                "image_status": product.image_status,
+            }, message=f"AI demo visual regenerated for {product.sku}.")
+        except Exception as e:
+            return api_response(success=False, message=str(e), status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
     @action(detail=False, methods=['post'], url_path='export-zip')
     def export_zip(self, request):
         """Triggers export_product_images_zip command and returns download metadata."""
@@ -645,19 +690,12 @@ class ProductViewSet(viewsets.ReadOnlyModelViewSet):
         try:
             call_command('export_product_images_zip')
             exports_dir = settings.BASE_DIR.parent / 'exports'
-            zip_path = exports_dir / 'mediswift_product_images.zip'
-            report_path = exports_dir / 'mediswift_product_images_report.json'
-
-            report_data = {}
-            if report_path.exists():
-                with open(report_path, 'r', encoding='utf-8') as f:
-                    report_data = json.load(f)
+            zip_path = exports_dir / 'mediswift_ai_demo_product_images.zip'
 
             return api_response(data={
                 "zip_file": str(zip_path),
                 "zip_size_bytes": os.path.getsize(zip_path) if zip_path.exists() else 0,
-                "report": report_data
-            }, message="ZIP archive and audit reports successfully generated.")
+            }, message="AI Demo product images ZIP archive successfully generated.")
         except Exception as e:
             return api_response(success=False, message=f"Failed to generate ZIP: {str(e)}", status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
 

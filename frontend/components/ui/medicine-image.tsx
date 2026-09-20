@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import { Product, ProductImageStatus } from '@/types';
-import { ShieldCheck, ShieldAlert, Clock, Info } from 'lucide-react';
+import { ShieldCheck, Clock, Sparkles } from 'lucide-react';
 
 interface MedicineImageProps {
   product: Partial<Product> & {
@@ -20,9 +20,11 @@ interface MedicineImageProps {
     image_url?: string;
     primary_image?: string;
     image_status?: ProductImageStatus | string;
+    image_alt?: string;
+    image_alt_text?: string;
+    is_real_product_photo?: boolean;
     image_source?: string;
     source_url?: string;
-    image_alt_text?: string;
     image_license?: string;
     verified_by?: string;
     verified_at?: string | null;
@@ -119,42 +121,94 @@ export function MedicineImage({
   // Authoritative URL determination
   let rawUrl = product.image_url || product.primary_image || '';
   if (rawUrl.startsWith('/media/')) {
-    rawUrl = `http://localhost:8000${rawUrl}`;
+    rawUrl = `http://127.0.0.1:8000${rawUrl}`;
+  } else if (rawUrl.startsWith('http://localhost:8000/media/')) {
+    rawUrl = rawUrl.replace('http://localhost:8000', 'http://127.0.0.1:8000');
   }
 
-  // Display priority:
-  // 1) VERIFIED packaging photo with green Verified badge
-  // 2) PENDING_REVIEW packaging photo with amber Under Review badge
-  // 3) Fallback to custom MediSwift clinical placeholder
-  const isVerified = product.image_status === 'VERIFIED' && Boolean(rawUrl) && !hasError;
-  const isPendingReviewWithPhoto =
-    (product.image_status === 'PENDING_REVIEW' || product.image_status === 'DOWNLOADED') &&
+  // Authoritative 4-tier display priority:
+  // 1) VERIFIED real packaging photo (Green Verified badge)
+  // 2) PENDING_REVIEW / DOWNLOADED authorized photo (Amber Under Review badge)
+  // 3) AI_DEMO_ONLY demo visual (Indigo AI DEMO badge + "Demo visual — real product photo pending")
+  // 4) Fallback to custom MediSwift clinical placeholder (only if no image or network error)
+  const isVerified =
+    (product.image_status === 'VERIFIED' || product.is_real_product_photo === true) &&
     Boolean(rawUrl) &&
     !hasError;
 
-  const hasPhotoToDisplay = (isVerified || isPendingReviewWithPhoto) && Boolean(rawUrl);
+  const isPendingReview =
+    (product.image_status === 'PENDING_REVIEW' || product.image_status === 'DOWNLOADED') &&
+    Boolean(rawUrl) &&
+    !hasError &&
+    !isVerified;
+
+  const isAiDemo =
+    (product.image_status === 'AI_DEMO_ONLY' || rawUrl.includes('ai_demo')) &&
+    Boolean(rawUrl) &&
+    !hasError &&
+    !isVerified &&
+    !isPendingReview;
+
+  const hasImageToDisplay = (isVerified || isPendingReview || isAiDemo) && Boolean(rawUrl);
 
   const theme = getCategoryTheme(product.category_slug);
   const categoryLabel = product.category_name || 'Pharmaceutical Care';
 
   const altText =
+    product.image_alt ||
     product.image_alt_text ||
-    `${product.name || 'Medicine'} ${product.strength || ''} by ${product.brand_name || 'MediSwift'} - ${product.pack_size || product.dosage_form || 'Healthcare'}`;
+    (isAiDemo
+      ? `AI-generated demo visual for ${product.name || 'Medicine'} (${product.sku || 'N/A'})`
+      : `${product.name || 'Medicine'} ${product.strength || ''} by ${product.brand_name || 'MediSwift'} - ${product.pack_size || product.dosage_form || 'Healthcare'}`);
 
-  // Error handler: never show broken image icon, fallback seamlessly to custom verification placeholder
+  // Error handler: fallback seamlessly without showing broken image icon
   const handleError = () => {
     setHasError(true);
     if (process.env.NODE_ENV !== 'production') {
       console.warn(
-        `[MediSwift Image System] Packaging photo failed to load for Product "${product.name || 'N/A'}" (SKU: "${product.sku || 'N/A'}"). URL: "${rawUrl}". Reverting to verification placeholder.`
+        `[MediSwift Image System] Image failed to load for Product "${product.name || 'N/A'}" (SKU: "${product.sku || 'N/A'}"). URL: "${rawUrl}". Reverting to clinical placeholder.`
       );
     }
   };
 
-  // 1. REAL PACKAGING PHOTOGRAPH (VERIFIED OR PENDING REVIEW)
-  if (hasPhotoToDisplay && rawUrl) {
+  // 1. COMPACT MODE WITH ACTIVE IMAGE (e.g. cart drawer, quick search, order item summary)
+  if (compact && hasImageToDisplay && rawUrl) {
     return (
-      <div className={`relative w-full h-full bg-white overflow-hidden flex items-center justify-center ${className}`}>
+      <div className={`relative w-full h-full bg-slate-50 overflow-hidden flex items-center justify-center ${className}`}>
+        <Image
+          src={rawUrl}
+          alt={altText}
+          fill={fill}
+          sizes="64px"
+          unoptimized
+          onError={handleError}
+          className="object-contain p-1"
+        />
+        {showBadge && (
+          <div className="absolute top-0.5 right-0.5 z-10">
+            {isAiDemo ? (
+              <span className="inline-flex items-center text-[7px] font-extrabold px-1 py-0.2 rounded bg-indigo-600 text-white shadow-2xs">
+                AI
+              </span>
+            ) : isVerified ? (
+              <span className="inline-flex items-center text-[7px] font-extrabold px-1 py-0.2 rounded bg-emerald-600 text-white shadow-2xs">
+                ✓
+              </span>
+            ) : (
+              <span className="inline-flex items-center text-[7px] font-extrabold px-1 py-0.2 rounded bg-amber-500 text-white shadow-2xs">
+                ◷
+              </span>
+            )}
+          </div>
+        )}
+      </div>
+    );
+  }
+
+  // 2. FULL CARD IMAGE DISPLAY (For cards, catalog, marketplace, and detail views)
+  if (hasImageToDisplay && rawUrl) {
+    return (
+      <div className={`relative w-full h-full bg-slate-50/50 overflow-hidden flex flex-col items-center justify-center ${className}`}>
         {!isLoaded && (
           <div className="absolute inset-0 bg-gradient-to-r from-slate-100 via-slate-200/70 to-slate-100 animate-pulse motion-reduce:animate-none z-0" />
         )}
@@ -165,6 +219,7 @@ export function MedicineImage({
           fill={fill}
           sizes={sizes}
           priority={priority}
+          unoptimized
           onLoad={() => setIsLoaded(true)}
           onError={handleError}
           className={`object-contain p-2 transition-opacity duration-300 motion-reduce:transition-none ${
@@ -172,28 +227,41 @@ export function MedicineImage({
           }`}
         />
 
-        {/* Clear status badge */}
+        {/* Status badges */}
         {showBadge && (
-          <div className="absolute top-2.5 left-2.5 z-10">
+          <div className="absolute top-2.5 left-2.5 z-10 flex flex-col gap-1">
             {isVerified ? (
               <span className="inline-flex items-center gap-1 text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-emerald-600 text-white shadow-xs border border-emerald-400/60 backdrop-blur-xs">
                 <ShieldCheck className="h-3 w-3 stroke-[2.5]" />
                 <span>Verified image</span>
               </span>
-            ) : (
+            ) : isPendingReview ? (
               <span className="inline-flex items-center gap-1 text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-amber-500 text-white shadow-xs border border-amber-400/60 backdrop-blur-xs">
                 <Clock className="h-3 w-3 stroke-[2.5]" />
                 <span>Image under review</span>
               </span>
+            ) : (
+              <span className="inline-flex items-center gap-1 text-[9.5px] font-extrabold px-2.5 py-0.5 rounded-full bg-indigo-600/95 text-white shadow-xs border border-indigo-400/50 backdrop-blur-xs tracking-wide">
+                <Sparkles className="h-2.5 w-2.5 text-indigo-200" />
+                <span>AI DEMO</span>
+              </span>
             )}
+          </div>
+        )}
+
+        {/* AI Demo Mandatory Disclaimer Footer on Card */}
+        {isAiDemo && (
+          <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-slate-900/80 via-slate-900/50 to-transparent py-1 px-2 text-center z-10">
+            <span className="text-[9px] font-bold text-slate-100 tracking-tight drop-shadow-xs block truncate">
+              Demo visual — real product photo pending
+            </span>
           </div>
         )}
       </div>
     );
   }
 
-
-  // 2. COMPACT MODE (e.g. cart drawer, quick search, order item summary)
+  // 3. COMPACT FALLBACK (when no photo exists or network load failed)
   if (compact) {
     return (
       <div
@@ -212,14 +280,7 @@ export function MedicineImage({
     );
   }
 
-  // 3. FULL CUSTOM PLACEHOLDER (For cards, catalog, marketplace, and detail views)
-  // Requirements:
-  // - Medical cross icon
-  // - Product category label
-  // - Exact text: “Product image under verification”
-  // - “Image under review” label for all unverified statuses
-  // - No random medicine packaging
-  // - No broken-image icon
+  // 4. FULL CUSTOM PLACEHOLDER (Only when no image exists or failed network load)
   return (
     <div
       className={`relative w-full h-full flex flex-col justify-between p-3.5 sm:p-4 bg-gradient-to-br ${theme.bg} border-b ${theme.border} select-none transition-all duration-300 motion-reduce:transition-none ${className}`}
@@ -227,7 +288,7 @@ export function MedicineImage({
       role="img"
       aria-label={`Product image under verification for ${product.name || 'Medicine'}`}
     >
-      {/* Top Header: Category Label & "Image under review" badge */}
+      {/* Top Header: Category Label & Status badge */}
       <div className="w-full flex items-center justify-between gap-1.5 text-[10px] font-semibold text-slate-500">
         <span className="inline-flex items-center gap-1 font-bold text-slate-700 bg-white/95 px-2.5 py-0.5 rounded-full border border-slate-200/80 shadow-2xs truncate max-w-[65%]">
           {categoryLabel}
@@ -239,7 +300,7 @@ export function MedicineImage({
         </span>
       </div>
 
-      {/* Center Hero: Medical Cross Icon + Exact required text */}
+      {/* Center Hero: Medical Cross Icon + Placeholder Notice */}
       <div className="flex flex-col items-center justify-center my-auto py-3 text-center px-1">
         <div
           className={`w-14 h-14 sm:w-16 sm:h-16 rounded-2xl ${theme.iconBg} border flex items-center justify-center ${theme.iconColor} shadow-sm ring-4 ${theme.accentRing} transition-transform duration-300 motion-reduce:transition-none group-hover:scale-105`}
@@ -247,7 +308,6 @@ export function MedicineImage({
           <MedicalCrossIcon className="h-7 w-7 sm:h-8 sm:w-8" />
         </div>
 
-        {/* Exact required text: “Product image under verification” */}
         <p className="text-[11px] sm:text-xs font-bold text-slate-800 mt-2.5 tracking-tight line-clamp-1">
           Product image under verification
         </p>
