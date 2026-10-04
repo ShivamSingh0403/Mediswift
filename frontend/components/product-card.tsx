@@ -1,8 +1,7 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import { Product } from '@/types';
 import { useCartStore } from '@/store/cart-store';
 import { useNotificationStore } from '@/store/notification-store';
@@ -12,8 +11,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Card } from '@/components/ui/card';
 import { formatCurrency } from '@/lib/utils';
-import { resolveProductImage } from '@/lib/image-mapper';
-import { MedicineImage } from '@/components/ui/medicine-image';
+import { ProductImage } from '@/components/ProductImage';
 import { Plus, Star, Sparkles, TrendingUp, Heart, Eye } from 'lucide-react';
 
 interface ProductCardProps {
@@ -63,21 +61,21 @@ export function ProductCard({ product, className = '' }: ProductCardProps) {
   const reviewCount = product.review_count || 45;
 
   return (
-    <Card className={`glass-card-hover flex flex-col justify-between overflow-hidden group p-0 border border-slate-200/80 bg-white hover:border-[#00A896]/40 transition-all duration-300 ${className}`}>
+    <Card className={`group flex flex-col justify-between overflow-hidden rounded-2xl border border-slate-200/90 bg-white hover:border-[#00A896]/50 hover:shadow-lg hover:shadow-slate-200/50 hover:-translate-y-1 transition-all duration-300 p-0 ${className}`}>
       {/* Top Media & Floating Actions Area */}
       <div className="relative">
-        <Link href={`/medicines/${product.slug}`} className="block relative h-48 w-full bg-slate-50 overflow-hidden">
-          <MedicineImage
+        <Link href={`/medicines/${product.slug}`} className="block relative h-52 w-full bg-gradient-to-b from-slate-50/90 via-slate-50/50 to-slate-100/40 overflow-hidden">
+          <ProductImage
             product={product}
-            className="w-full h-full"
+            className="w-full h-full rounded-none"
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1536px) 25vw, 20vw"
           />
           {/* Subtle gradient overlay on hover */}
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0A2540]/15 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0A2540]/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
         </Link>
 
         {/* Floating Badges */}
-        <div className="absolute top-2.5 left-2.5 flex flex-col gap-1.5 z-10">
+        <div className="absolute top-2.5 left-2.5 flex flex-col gap-1.5 z-10 pointer-events-none">
           {product.prescription_required ? (
             <Badge variant="rx" className="shadow-xs backdrop-blur-md bg-rose-600/90 text-white border-0 font-bold text-[10px]">
               Rx Required
@@ -199,3 +197,5 @@ export function ProductCard({ product, className = '' }: ProductCardProps) {
     </Card>
   );
 }
+
+export default ProductCard;

@@ -224,45 +224,53 @@ export function Navbar() {
             )}
 
             {/* Account dropdown */}
-            {isUserMenuOpen && isAuthenticated && (
-              <div className="absolute right-0 mt-2 w-52 rounded-2xl border border-slate-100 bg-white p-2 shadow-xl z-50 text-xs">
-                <div className="px-3 py-2 border-b border-slate-100 text-slate-500">
-                  <span className="text-[10px] uppercase font-bold text-slate-400 block">Signed In As</span>
-                  <span className="font-semibold text-slate-800 block truncate">{user?.email}</span>
-                </div>
-                <Link
-                  href="/account"
-                  onClick={() => setIsUserMenuOpen(false)}
-                  className="flex items-center gap-2 px-3 py-2 rounded-xl hover:bg-slate-50 text-slate-700 font-medium"
+            <AnimatePresence>
+              {isUserMenuOpen && isAuthenticated && (
+                <motion.div
+                  initial={{ opacity: 0, y: 6, scale: 0.96 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: 4, scale: 0.96 }}
+                  transition={{ duration: 0.14, ease: 'easeOut' }}
+                  className="absolute right-0 mt-2 w-52 rounded-2xl border border-slate-100 bg-white p-2 shadow-xl z-50 text-xs"
                 >
-                  <UserIcon className="h-4 w-4 text-slate-400" /> My Profile
-                </Link>
-                <Link
-                  href="/orders"
-                  onClick={() => setIsUserMenuOpen(false)}
-                  className="flex items-center gap-2 px-3 py-2 rounded-xl hover:bg-slate-50 text-slate-700 font-medium"
-                >
-                  <Package className="h-4 w-4 text-slate-400" /> My Orders
-                </Link>
-                <Link
-                  href="/prescriptions"
-                  onClick={() => setIsUserMenuOpen(false)}
-                  className="flex items-center gap-2 px-3 py-2 rounded-xl hover:bg-slate-50 text-slate-700 font-medium"
-                >
-                  <FileText className="h-4 w-4 text-slate-400" /> Prescriptions
-                </Link>
-                <button
-                  type="button"
-                  onClick={() => {
-                    logout();
-                    setIsUserMenuOpen(false);
-                  }}
-                  className="w-full flex items-center gap-2 text-left px-3 py-2 rounded-xl hover:bg-rose-50 text-rose-600 font-semibold mt-1 border-t border-slate-100"
-                >
-                  <LogOut className="h-4 w-4" /> Sign Out
-                </button>
-              </div>
-            )}
+                  <div className="px-3 py-2 border-b border-slate-100 text-slate-500">
+                    <span className="text-[10px] uppercase font-bold text-slate-400 block">Signed In As</span>
+                    <span className="font-semibold text-slate-800 block truncate">{user?.email}</span>
+                  </div>
+                  <Link
+                    href="/account"
+                    onClick={() => setIsUserMenuOpen(false)}
+                    className="flex items-center gap-2 px-3 py-2 rounded-xl hover:bg-slate-50 text-slate-700 font-medium"
+                  >
+                    <UserIcon className="h-4 w-4 text-slate-400" /> My Profile
+                  </Link>
+                  <Link
+                    href="/orders"
+                    onClick={() => setIsUserMenuOpen(false)}
+                    className="flex items-center gap-2 px-3 py-2 rounded-xl hover:bg-slate-50 text-slate-700 font-medium"
+                  >
+                    <Package className="h-4 w-4 text-slate-400" /> My Orders
+                  </Link>
+                  <Link
+                    href="/prescriptions"
+                    onClick={() => setIsUserMenuOpen(false)}
+                    className="flex items-center gap-2 px-3 py-2 rounded-xl hover:bg-slate-50 text-slate-700 font-medium"
+                  >
+                    <FileText className="h-4 w-4 text-slate-400" /> Prescriptions
+                  </Link>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      logout();
+                      setIsUserMenuOpen(false);
+                    }}
+                    className="w-full flex items-center gap-2 text-left px-3 py-2 rounded-xl hover:bg-rose-50 text-rose-600 font-semibold mt-1 border-t border-slate-100"
+                  >
+                    <LogOut className="h-4 w-4" /> Sign Out
+                  </button>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
 
           {/* Cart Icon with bouncing count badge */}
@@ -285,6 +293,7 @@ export function Navbar() {
             type="button"
             onClick={() => setMobileMenuOpen(!isMobileMenuOpen)}
             className="md:hidden p-2 rounded-xl text-slate-700 hover:bg-slate-100"
+            aria-label="Toggle navigation menu"
           >
             {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
           </button>
@@ -313,37 +322,43 @@ export function Navbar() {
               </button>
 
               {/* Mega Categories Menu Overlay */}
-              {isCategoryMenuOpen && (
-                <div
-                  onMouseLeave={() => setIsCategoryMenuOpen(false)}
-                  className="absolute left-0 top-full mt-2 w-[720px] bg-white rounded-3xl shadow-2xl border border-slate-200 p-6 z-50 grid grid-cols-4 gap-3 animate-in fade-in zoom-in-95 duration-150"
-                >
-                  <div className="col-span-4 flex items-center justify-between pb-3 mb-2 border-b border-slate-100">
-                    <span className="text-xs font-bold text-slate-400 uppercase tracking-wider">
-                      20 Specialized Healthcare Categories
-                    </span>
-                    <Link
-                      href="/medicines"
-                      onClick={() => setIsCategoryMenuOpen(false)}
-                      className="text-xs font-bold text-[#00A896] hover:underline"
-                    >
-                      View All Products →
-                    </Link>
-                  </div>
+              <AnimatePresence>
+                {isCategoryMenuOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 8, scale: 0.98 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: 6, scale: 0.98 }}
+                    transition={{ duration: 0.16, ease: 'easeOut' }}
+                    onMouseLeave={() => setIsCategoryMenuOpen(false)}
+                    className="absolute left-0 top-full mt-2 w-[720px] bg-white rounded-3xl shadow-2xl border border-slate-200 p-6 z-50 grid grid-cols-4 gap-3"
+                  >
+                    <div className="col-span-4 flex items-center justify-between pb-3 mb-2 border-b border-slate-100">
+                      <span className="text-xs font-bold text-slate-400 uppercase tracking-wider">
+                        20 Specialized Healthcare Categories
+                      </span>
+                      <Link
+                        href="/medicines"
+                        onClick={() => setIsCategoryMenuOpen(false)}
+                        className="text-xs font-bold text-[#00A896] hover:underline"
+                      >
+                        View All Products →
+                      </Link>
+                    </div>
 
-                  {ALL_CATEGORIES.map((cat, idx) => (
-                    <Link
-                      key={idx}
-                      href={`/categories/${cat.slug}`}
-                      onClick={() => setIsCategoryMenuOpen(false)}
-                      className="flex items-center gap-2 p-2 rounded-xl hover:bg-teal-50/70 hover:text-[#00A896] text-slate-700 text-xs font-medium transition-colors"
-                    >
-                      <span className="text-base shrink-0">{cat.icon}</span>
-                      <span className="truncate">{cat.name}</span>
-                    </Link>
-                  ))}
-                </div>
-              )}
+                    {ALL_CATEGORIES.map((cat, idx) => (
+                      <Link
+                        key={idx}
+                        href={`/categories/${cat.slug}`}
+                        onClick={() => setIsCategoryMenuOpen(false)}
+                        className="flex items-center gap-2 p-2 rounded-xl hover:bg-teal-50/70 hover:text-[#00A896] text-slate-700 text-xs font-medium transition-colors"
+                      >
+                        <span className="text-base shrink-0">{cat.icon}</span>
+                        <span className="truncate">{cat.name}</span>
+                      </Link>
+                    ))}
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
 
             <Link
@@ -405,46 +420,54 @@ export function Navbar() {
         </div>
       </nav>
 
-      {/* Mobile Menu Drawer */}
-      {isMobileMenuOpen && (
-        <div className="md:hidden border-t border-slate-200 bg-white px-4 py-4 space-y-3">
-          <Link
-            href="/medicines"
-            onClick={() => setMobileMenuOpen(false)}
-            className="flex items-center gap-2.5 py-2.5 text-sm font-bold text-slate-800 border-b border-slate-100"
+      {/* Mobile Menu Drawer with Framer Motion */}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.2, ease: 'easeInOut' }}
+            className="overflow-hidden md:hidden border-t border-slate-200 bg-white px-4 py-4 space-y-3"
           >
-            <Pill className="h-4 w-4 text-[#00A896]" /> Order Medicines
-          </Link>
-          <Link
-            href="/doctors"
-            onClick={() => setMobileMenuOpen(false)}
-            className="flex items-center gap-2.5 py-2.5 text-sm font-bold text-slate-800 border-b border-slate-100"
-          >
-            <Stethoscope className="h-4 w-4 text-[#00A896]" /> Consult Doctors (Telehealth)
-          </Link>
-          <Link
-            href="/prescriptions"
-            onClick={() => setMobileMenuOpen(false)}
-            className="flex items-center gap-2.5 py-2.5 text-sm font-bold text-slate-800 border-b border-slate-100"
-          >
-            <UploadCloud className="h-4 w-4 text-[#00A896]" /> Upload Prescription
-          </Link>
-          <Link
-            href="/orders"
-            onClick={() => setMobileMenuOpen(false)}
-            className="flex items-center gap-2.5 py-2.5 text-sm font-bold text-slate-800 border-b border-slate-100"
-          >
-            <Package className="h-4 w-4 text-[#00A896]" /> Track Orders
-          </Link>
-          <Link
-            href="/account"
-            onClick={() => setMobileMenuOpen(false)}
-            className="flex items-center gap-2.5 py-2.5 text-sm font-bold text-slate-800"
-          >
-            <UserIcon className="h-4 w-4 text-[#00A896]" /> My Account
-          </Link>
-        </div>
-      )}
+            <Link
+              href="/medicines"
+              onClick={() => setMobileMenuOpen(false)}
+              className="flex items-center gap-2.5 py-2.5 text-sm font-bold text-slate-800 border-b border-slate-100"
+            >
+              <Pill className="h-4 w-4 text-[#00A896]" /> Order Medicines
+            </Link>
+            <Link
+              href="/doctors"
+              onClick={() => setMobileMenuOpen(false)}
+              className="flex items-center gap-2.5 py-2.5 text-sm font-bold text-slate-800 border-b border-slate-100"
+            >
+              <Stethoscope className="h-4 w-4 text-[#00A896]" /> Consult Doctors (Telehealth)
+            </Link>
+            <Link
+              href="/prescriptions"
+              onClick={() => setMobileMenuOpen(false)}
+              className="flex items-center gap-2.5 py-2.5 text-sm font-bold text-slate-800 border-b border-slate-100"
+            >
+              <UploadCloud className="h-4 w-4 text-[#00A896]" /> Upload Prescription
+            </Link>
+            <Link
+              href="/orders"
+              onClick={() => setMobileMenuOpen(false)}
+              className="flex items-center gap-2.5 py-2.5 text-sm font-bold text-slate-800 border-b border-slate-100"
+            >
+              <Package className="h-4 w-4 text-[#00A896]" /> Track Orders
+            </Link>
+            <Link
+              href="/account"
+              onClick={() => setMobileMenuOpen(false)}
+              className="flex items-center gap-2.5 py-2.5 text-sm font-bold text-slate-800"
+            >
+              <UserIcon className="h-4 w-4 text-[#00A896]" /> My Account
+            </Link>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </header>
   );
 }

@@ -16,7 +16,10 @@ backend/prescriptions_private/
 backend/staticfiles/
 .env
 .env.local
+.env.production
 .env.*.local
+*.key
+*.pem
 
 # Node & Next.js
 node_modules/

@@ -1,0 +1,3074 @@
+{
+  "MED-AID-001": {
+    "image": "/products/MED-AID-001.webp",
+    "status": "DEMO",
+    "name": "Hansaplast Regular Bandages 100s",
+    "category": "First Aid"
+  },
+  "MED-AID-002": {
+    "image": "/products/MED-AID-002.webp",
+    "status": "DEMO",
+    "name": "Betadine 10% First Aid Solution",
+    "category": "First Aid"
+  },
+  "MED-AID-003": {
+    "image": "/products/MED-AID-003.webp",
+    "status": "DEMO",
+    "name": "Burnol Antiseptic Burn Cream",
+    "category": "First Aid"
+  },
+  "MED-AID-004": {
+    "image": "/products/MED-AID-004.webp",
+    "status": "DEMO",
+    "name": "Soframycin Skin Cream",
+    "category": "First Aid"
+  },
+  "MED-AID-005": {
+    "image": "/products/MED-AID-005.webp",
+    "status": "DEMO",
+    "name": "3M Micropore Surgical Paper Tape 1 Inch",
+    "category": "First Aid"
+  },
+  "MED-AID-006": {
+    "image": "/products/MED-AID-006.webp",
+    "status": "DEMO",
+    "name": "Dettol Antiseptic Plaster Bandages 50s",
+    "category": "First Aid"
+  },
+  "MED-AID-007": {
+    "image": "/products/MED-AID-007.webp",
+    "status": "DEMO",
+    "name": "Sterile Absorbent Gauze Swabs 10x10cm",
+    "category": "First Aid"
+  },
+  "MED-AID-008": {
+    "image": "/products/MED-AID-008.webp",
+    "status": "DEMO",
+    "name": "Dr. Morepen Crepe Bandage 10cm x 4m",
+    "category": "First Aid"
+  },
+  "MED-AID-009": {
+    "image": "/products/MED-AID-009.webp",
+    "status": "DEMO",
+    "name": "Moov Pain Relief Ointment 50g",
+    "category": "First Aid"
+  },
+  "MED-AID-010": {
+    "image": "/products/MED-AID-010.webp",
+    "status": "DEMO",
+    "name": "Cipladine 5% Ointment",
+    "category": "First Aid"
+  },
+  "MED-AID-011": {
+    "image": "/products/MED-AID-011.webp",
+    "status": "DEMO",
+    "name": "Silverex Ionic Gel",
+    "category": "First Aid"
+  },
+  "MED-AID-012": {
+    "image": "/products/MED-AID-012.webp",
+    "status": "DEMO",
+    "name": "Relispray Fast Pain Relief Spray",
+    "category": "First Aid"
+  },
+  "MED-AID-013": {
+    "image": "/products/MED-AID-013.webp",
+    "status": "DEMO",
+    "name": "Gauze Bandage Roll 7.5cm x 3m (Pack of 12)",
+    "category": "First Aid"
+  },
+  "MED-AYU-001": {
+    "image": "/products/MED-AYU-001.webp",
+    "status": "DEMO",
+    "name": "Himalaya Ashvagandha General Wellness Tablets",
+    "category": "Ayurvedic Products"
+  },
+  "MED-AYU-002": {
+    "image": "/products/MED-AYU-002.webp",
+    "status": "DEMO",
+    "name": "Baidyanath Triphala Churna",
+    "category": "Ayurvedic Products"
+  },
+  "MED-AYU-003": {
+    "image": "/products/MED-AYU-003.webp",
+    "status": "DEMO",
+    "name": "Dabur Shilajit Gold Capsules",
+    "category": "Ayurvedic Products"
+  },
+  "MED-AYU-004": {
+    "image": "/products/MED-AYU-004.webp",
+    "status": "DEMO",
+    "name": "Patanjali Divya Medha Vati Extra Power",
+    "category": "Ayurvedic Products"
+  },
+  "MED-AYU-005": {
+    "image": "/products/MED-AYU-005.webp",
+    "status": "DEMO",
+    "name": "Zandu Kesari Jivan Chyawanprash",
+    "category": "Ayurvedic Products"
+  },
+  "MED-AYU-006": {
+    "image": "/products/MED-AYU-006.webp",
+    "status": "DEMO",
+    "name": "Himalaya Liv.52 DS Tablets",
+    "category": "Ayurvedic Products"
+  },
+  "MED-AYU-007": {
+    "image": "/products/MED-AYU-007.webp",
+    "status": "DEMO",
+    "name": "Baidyanath Mahabhringraj Tel",
+    "category": "Ayurvedic Products"
+  },
+  "MED-AYU-008": {
+    "image": "/products/MED-AYU-008.webp",
+    "status": "DEMO",
+    "name": "Patanjali Divya Kayakalp Vati",
+    "category": "Ayurvedic Products"
+  },
+  "MED-AYU-009": {
+    "image": "/products/MED-AYU-009.webp",
+    "status": "DEMO",
+    "name": "Dabur Lal Tail Baby Massage Oil",
+    "category": "Ayurvedic Products"
+  },
+  "MED-AYU-010": {
+    "image": "/products/MED-AYU-010.webp",
+    "status": "DEMO",
+    "name": "Baidyanath Brahmi Ghrita",
+    "category": "Ayurvedic Products"
+  },
+  "MED-AYU-011": {
+    "image": "/products/MED-AYU-011.webp",
+    "status": "DEMO",
+    "name": "Safi Natural Blood Purifier Syrup",
+    "category": "Ayurvedic Products"
+  },
+  "MED-AYU-012": {
+    "image": "/products/MED-AYU-012.webp",
+    "status": "DEMO",
+    "name": "Zandu Balm Original 50ml",
+    "category": "Ayurvedic Products"
+  },
+  "MED-AYU-013": {
+    "image": "/products/MED-AYU-013.webp",
+    "status": "DEMO",
+    "name": "Dabur Ashokarishta Uterine Tonic",
+    "category": "Ayurvedic Products"
+  },
+  "MED-BAB-001": {
+    "image": "/products/MED-BAB-001.webp",
+    "status": "DEMO",
+    "name": "Sebamed Baby Diaper Rash Cream",
+    "category": "Baby Care"
+  },
+  "MED-BAB-002": {
+    "image": "/products/MED-BAB-002.webp",
+    "status": "DEMO",
+    "name": "Himalaya Baby Massage Oil",
+    "category": "Baby Care"
+  },
+  "MED-BAB-003": {
+    "image": "/products/MED-BAB-003.webp",
+    "status": "DEMO",
+    "name": "Woodward's Gripe Water",
+    "category": "Baby Care"
+  },
+  "MED-BAB-004": {
+    "image": "/products/MED-BAB-004.webp",
+    "status": "DEMO",
+    "name": "Cetaphil Baby Daily Lotion with Shea Butter",
+    "category": "Baby Care"
+  },
+  "MED-BAB-005": {
+    "image": "/products/MED-BAB-005.webp",
+    "status": "DEMO",
+    "name": "Pampers Premium Care Diaper Pants (L)",
+    "category": "Baby Care"
+  },
+  "MED-BAB-006": {
+    "image": "/products/MED-BAB-006.webp",
+    "status": "DEMO",
+    "name": "Nasoclear Saline Nasal Drops for Infants",
+    "category": "Baby Care"
+  },
+  "MED-BAB-007": {
+    "image": "/products/MED-BAB-007.webp",
+    "status": "DEMO",
+    "name": "Sebamed Baby Cleansing Bar",
+    "category": "Baby Care"
+  },
+  "MED-BAB-008": {
+    "image": "/products/MED-BAB-008.webp",
+    "status": "DEMO",
+    "name": "Himalaya Gentle Baby Shampoo",
+    "category": "Baby Care"
+  },
+  "MED-BAB-009": {
+    "image": "/products/MED-BAB-009.webp",
+    "status": "DEMO",
+    "name": "Bonnisan Drops for Digestive Complaints",
+    "category": "Baby Care"
+  },
+  "MED-BAB-010": {
+    "image": "/products/MED-BAB-010.webp",
+    "status": "DEMO",
+    "name": "Mamaearth Gentle Cleansing Shampoo for Babies",
+    "category": "Baby Care"
+  },
+  "MED-BAB-011": {
+    "image": "/products/MED-BAB-011.webp",
+    "status": "DEMO",
+    "name": "Aveeno Baby Daily Moisture Bath Wash",
+    "category": "Baby Care"
+  },
+  "MED-BAB-012": {
+    "image": "/products/MED-BAB-012.webp",
+    "status": "DEMO",
+    "name": "MamyPoko Extra Absorb Diaper Pants (M)",
+    "category": "Baby Care"
+  },
+  "MED-BAB-013": {
+    "image": "/products/MED-BAB-013.webp",
+    "status": "DEMO",
+    "name": "Chicco Baby Moments No-Tears Bath",
+    "category": "Baby Care"
+  },
+  "MED-CIP-001": {
+    "image": "/products/MED-CIP-001.webp",
+    "status": "DEMO",
+    "name": "Augmentin 625 Duo Tablet",
+    "category": "Prescription Medicines"
+  },
+  "MED-COU-001": {
+    "image": "/products/MED-COU-001.webp",
+    "status": "DEMO",
+    "name": "Ascoril D Plus Syrup",
+    "category": "Cough & Respiratory"
+  },
+  "MED-COU-002": {
+    "image": "/products/MED-COU-002.webp",
+    "status": "DEMO",
+    "name": "Benadryl Dry Cough Active Syrup",
+    "category": "Cough & Respiratory"
+  },
+  "MED-COU-003": {
+    "image": "/products/MED-COU-003.webp",
+    "status": "DEMO",
+    "name": "Asthalin Inhaler 100mcg",
+    "category": "Cough & Respiratory"
+  },
+  "MED-COU-004": {
+    "image": "/products/MED-COU-004.webp",
+    "status": "DEMO",
+    "name": "Grilinctus BM Syrup",
+    "category": "Cough & Respiratory"
+  },
+  "MED-COU-005": {
+    "image": "/products/MED-COU-005.webp",
+    "status": "DEMO",
+    "name": "Budecort 200 Inhaler",
+    "category": "Cough & Respiratory"
+  },
+  "MED-COU-006": {
+    "image": "/products/MED-COU-006.webp",
+    "status": "DEMO",
+    "name": "Montair-LC Tablet",
+    "category": "Cough & Respiratory"
+  },
+  "MED-COU-007": {
+    "image": "/products/MED-COU-007.webp",
+    "status": "DEMO",
+    "name": "Koflet Syrup",
+    "category": "Cough & Respiratory"
+  },
+  "MED-COU-008": {
+    "image": "/products/MED-COU-008.webp",
+    "status": "DEMO",
+    "name": "Duolin Respules",
+    "category": "Cough & Respiratory"
+  },
+  "MED-COU-009": {
+    "image": "/products/MED-COU-009.webp",
+    "status": "DEMO",
+    "name": "Honitus Herbal Cough Syrup",
+    "category": "Cough & Respiratory"
+  },
+  "MED-COU-010": {
+    "image": "/products/MED-COU-010.webp",
+    "status": "DEMO",
+    "name": "Mucolite Drop",
+    "category": "Cough & Respiratory"
+  },
+  "MED-COU-011": {
+    "image": "/products/MED-COU-011.webp",
+    "status": "DEMO",
+    "name": "Aerocort Forte Inhaler",
+    "category": "Cough & Respiratory"
+  },
+  "MED-COU-012": {
+    "image": "/products/MED-COU-012.webp",
+    "status": "DEMO",
+    "name": "Strepsils Honey & Lemon Lozenges",
+    "category": "Cough & Respiratory"
+  },
+  "MED-COU-013": {
+    "image": "/products/MED-COU-013.webp",
+    "status": "DEMO",
+    "name": "Bresol Tablets",
+    "category": "Cough & Respiratory"
+  },
+  "MED-DEV-001": {
+    "image": "/products/MED-DEV-001.webp",
+    "status": "DEMO",
+    "name": "Dr. Trust USA Professional Pulse Oximeter",
+    "category": "Medical Devices"
+  },
+  "MED-DEV-002": {
+    "image": "/products/MED-DEV-002.webp",
+    "status": "DEMO",
+    "name": "Omron MC-246 Digital Thermometer",
+    "category": "Medical Devices"
+  },
+  "MED-DEV-003": {
+    "image": "/products/MED-DEV-003.webp",
+    "status": "DEMO",
+    "name": "Dr. Morepen Compressor Nebulizer CN-10",
+    "category": "Medical Devices"
+  },
+  "MED-DEV-004": {
+    "image": "/products/MED-DEV-004.webp",
+    "status": "DEMO",
+    "name": "Accu-Chek Instant Blood Glucose Meter Kit",
+    "category": "Medical Devices"
+  },
+  "MED-DEV-005": {
+    "image": "/products/MED-DEV-005.webp",
+    "status": "DEMO",
+    "name": "Dr. Trust Non-Contact Infrared Forehead Thermometer",
+    "category": "Medical Devices"
+  },
+  "MED-DEV-006": {
+    "image": "/products/MED-DEV-006.webp",
+    "status": "DEMO",
+    "name": "Tynor Orthopedic Lumbar Sacro Support Belt (L)",
+    "category": "Medical Devices"
+  },
+  "MED-DEV-007": {
+    "image": "/products/MED-DEV-007.webp",
+    "status": "DEMO",
+    "name": "Beurer FT 15/1 Digital Clinical Thermometer",
+    "category": "Medical Devices"
+  },
+  "MED-DEV-008": {
+    "image": "/products/MED-DEV-008.webp",
+    "status": "DEMO",
+    "name": "Dr. Morepen VP-06 Vaporizer Steam Inhaler",
+    "category": "Medical Devices"
+  },
+  "MED-DEV-009": {
+    "image": "/products/MED-DEV-009.webp",
+    "status": "DEMO",
+    "name": "Flamingo Heating Belt Orthopedic Heat Pad",
+    "category": "Medical Devices"
+  },
+  "MED-DEV-010": {
+    "image": "/products/MED-DEV-010.webp",
+    "status": "DEMO",
+    "name": "Tynor Knee Support with Open Patella (L)",
+    "category": "Medical Devices"
+  },
+  "MED-DEV-011": {
+    "image": "/products/MED-DEV-011.webp",
+    "status": "DEMO",
+    "name": "Diamond Mercurial Deluxe BP Apparatus",
+    "category": "Medical Devices"
+  },
+  "MED-DEV-012": {
+    "image": "/products/MED-DEV-012.webp",
+    "status": "DEMO",
+    "name": "Romsons Spiro-Care Respiratory Exerciser",
+    "category": "Medical Devices"
+  },
+  "MED-DEV-013": {
+    "image": "/products/MED-DEV-013.webp",
+    "status": "DEMO",
+    "name": "Dr. Morepen Digital Weighing Scale MS-01",
+    "category": "Medical Devices"
+  },
+  "MED-DIA-001": {
+    "image": "/products/MED-DIA-001.webp",
+    "status": "DEMO",
+    "name": "Accu-Chek Active Test Strips 50s",
+    "category": "Diabetes Care"
+  },
+  "MED-DIA-002": {
+    "image": "/products/MED-DIA-002.webp",
+    "status": "DEMO",
+    "name": "Glycomet-GP 1 Tablet",
+    "category": "Diabetes Care"
+  },
+  "MED-DIA-003": {
+    "image": "/products/MED-DIA-003.webp",
+    "status": "DEMO",
+    "name": "Januvia 100mg Tablet",
+    "category": "Diabetes Care"
+  },
+  "MED-DIA-004": {
+    "image": "/products/MED-DIA-004.webp",
+    "status": "DEMO",
+    "name": "OneTouch Select Plus Test Strips 50s",
+    "category": "Diabetes Care"
+  },
+  "MED-DIA-005": {
+    "image": "/products/MED-DIA-005.webp",
+    "status": "DEMO",
+    "name": "Galvus Met 50mg/500mg Tablet",
+    "category": "Diabetes Care"
+  },
+  "MED-DIA-006": {
+    "image": "/products/MED-DIA-006.webp",
+    "status": "DEMO",
+    "name": "Karela Jamun Juice Diabetic Care",
+    "category": "Diabetes Care"
+  },
+  "MED-DIA-007": {
+    "image": "/products/MED-DIA-007.webp",
+    "status": "DEMO",
+    "name": "Jardiance 10mg Tablet",
+    "category": "Diabetes Care"
+  },
+  "MED-DIA-008": {
+    "image": "/products/MED-DIA-008.webp",
+    "status": "DEMO",
+    "name": "BD Ultra-Fine Insulin Pen Needles 4mm",
+    "category": "Diabetes Care"
+  },
+  "MED-DIA-009": {
+    "image": "/products/MED-DIA-009.webp",
+    "status": "DEMO",
+    "name": "Diabecon DS Tablet",
+    "category": "Diabetes Care"
+  },
+  "MED-DIA-010": {
+    "image": "/products/MED-DIA-010.webp",
+    "status": "DEMO",
+    "name": "Diabexy Sugar Free Sweetener",
+    "category": "Diabetes Care"
+  },
+  "MED-DIA-011": {
+    "image": "/products/MED-DIA-011.webp",
+    "status": "DEMO",
+    "name": "Glucon-D Instant Energy Tangy Orange",
+    "category": "Diabetes Care"
+  },
+  "MED-DIA-012": {
+    "image": "/products/MED-DIA-012.webp",
+    "status": "DEMO",
+    "name": "Footmender Diabetic Foot Cream",
+    "category": "Diabetes Care"
+  },
+  "MED-DIA-013": {
+    "image": "/products/MED-DIA-013.webp",
+    "status": "DEMO",
+    "name": "Forxiga 10mg Tablet",
+    "category": "Diabetes Care"
+  },
+  "MED-DIG-001": {
+    "image": "/products/MED-DIG-001.webp",
+    "status": "DEMO",
+    "name": "Pan 40 Tablet",
+    "category": "Digestive Health"
+  },
+  "MED-DIG-002": {
+    "image": "/products/MED-DIG-002.webp",
+    "status": "DEMO",
+    "name": "Gelusil MPS Antacid Liquid",
+    "category": "Digestive Health"
+  },
+  "MED-DIG-003": {
+    "image": "/products/MED-DIG-003.webp",
+    "status": "DEMO",
+    "name": "Omez 20 Capsule",
+    "category": "Digestive Health"
+  },
+  "MED-DIG-004": {
+    "image": "/products/MED-DIG-004.webp",
+    "status": "DEMO",
+    "name": "Eno Fruit Salt Regular",
+    "category": "Digestive Health"
+  },
+  "MED-DIG-005": {
+    "image": "/products/MED-DIG-005.webp",
+    "status": "DEMO",
+    "name": "Sporlac DS Tablet",
+    "category": "Digestive Health"
+  },
+  "MED-DIG-006": {
+    "image": "/products/MED-DIG-006.webp",
+    "status": "DEMO",
+    "name": "Cremaffin Plus Emulsion",
+    "category": "Digestive Health"
+  },
+  "MED-DIG-007": {
+    "image": "/products/MED-DIG-007.webp",
+    "status": "DEMO",
+    "name": "Digene Acidity & Gas Relief Tablets",
+    "category": "Digestive Health"
+  },
+  "MED-DIG-008": {
+    "image": "/products/MED-DIG-008.webp",
+    "status": "DEMO",
+    "name": "Pudin Hara Active Liquid Pearls",
+    "category": "Digestive Health"
+  },
+  "MED-DIG-009": {
+    "image": "/products/MED-DIG-009.webp",
+    "status": "DEMO",
+    "name": "Razo 20 Tablet",
+    "category": "Digestive Health"
+  },
+  "MED-DIG-010": {
+    "image": "/products/MED-DIG-010.webp",
+    "status": "DEMO",
+    "name": "Electral ORS Powder",
+    "category": "Digestive Health"
+  },
+  "MED-DIG-011": {
+    "image": "/products/MED-DIG-011.webp",
+    "status": "DEMO",
+    "name": "Dulcoflex 5mg Tablet",
+    "category": "Digestive Health"
+  },
+  "MED-DIG-012": {
+    "image": "/products/MED-DIG-012.webp",
+    "status": "DEMO",
+    "name": "Isabgol Husk Powder",
+    "category": "Digestive Health"
+  },
+  "MED-DIG-013": {
+    "image": "/products/MED-DIG-013.webp",
+    "status": "DEMO",
+    "name": "Eldoper 2mg Capsule",
+    "category": "Digestive Health"
+  },
+  "MED-EYE-001": {
+    "image": "/products/MED-EYE-001.webp",
+    "status": "DEMO",
+    "name": "Refresh Tears Eye Drops 10ml",
+    "category": "Eye Care"
+  },
+  "MED-EYE-002": {
+    "image": "/products/MED-EYE-002.webp",
+    "status": "DEMO",
+    "name": "Systane Ultra Lubricant Eye Drops",
+    "category": "Eye Care"
+  },
+  "MED-EYE-003": {
+    "image": "/products/MED-EYE-003.webp",
+    "status": "DEMO",
+    "name": "Itone Ayurvedic Eye Drops 10ml",
+    "category": "Eye Care"
+  },
+  "MED-EYE-004": {
+    "image": "/products/MED-EYE-004.webp",
+    "status": "DEMO",
+    "name": "Ciplox Eye Drops 10ml",
+    "category": "Eye Care"
+  },
+  "MED-EYE-005": {
+    "image": "/products/MED-EYE-005.webp",
+    "status": "DEMO",
+    "name": "Optive Lubricant Eye Drops 10ml",
+    "category": "Eye Care"
+  },
+  "MED-EYE-006": {
+    "image": "/products/MED-EYE-006.webp",
+    "status": "DEMO",
+    "name": "Patanjali Divya Drishti Eye Drops",
+    "category": "Eye Care"
+  },
+  "MED-EYE-007": {
+    "image": "/products/MED-EYE-007.webp",
+    "status": "DEMO",
+    "name": "Olopatadine 0.1% Eye Drops (Winolap)",
+    "category": "Eye Care"
+  },
+  "MED-EYE-008": {
+    "image": "/products/MED-EYE-008.webp",
+    "status": "DEMO",
+    "name": "Bausch & Lomb Renu Fresh Multi-Purpose Lens Solution",
+    "category": "Eye Care"
+  },
+  "MED-EYE-009": {
+    "image": "/products/MED-EYE-009.webp",
+    "status": "DEMO",
+    "name": "Tears Naturale II Lubricant Eye Drops",
+    "category": "Eye Care"
+  },
+  "MED-EYE-010": {
+    "image": "/products/MED-EYE-010.webp",
+    "status": "DEMO",
+    "name": "Ocutone Eye Tonic Drops",
+    "category": "Eye Care"
+  },
+  "MED-EYE-011": {
+    "image": "/products/MED-EYE-011.webp",
+    "status": "DEMO",
+    "name": "Moxicip Eye Drops (Moxifloxacin 0.5%)",
+    "category": "Eye Care"
+  },
+  "MED-EYE-012": {
+    "image": "/products/MED-EYE-012.webp",
+    "status": "DEMO",
+    "name": "Genteal Gel Lubricant Eye Gel",
+    "category": "Eye Care"
+  },
+  "MED-EYE-013": {
+    "image": "/products/MED-EYE-013.webp",
+    "status": "DEMO",
+    "name": "I-Site Plus Eye Antioxidant Tablets",
+    "category": "Eye Care"
+  },
+  "MED-FEV-001": {
+    "image": "/products/MED-FEV-001.webp",
+    "status": "DEMO",
+    "name": "Dolo 650 Tablet",
+    "category": "Fever & Cold"
+  },
+  "MED-FEV-002": {
+    "image": "/products/MED-FEV-002.webp",
+    "status": "DEMO",
+    "name": "Crocin 650 Advance Tablet",
+    "category": "Fever & Cold"
+  },
+  "MED-FEV-003": {
+    "image": "/products/MED-FEV-003.webp",
+    "status": "DEMO",
+    "name": "Cheston Cold Tablet",
+    "category": "Fever & Cold"
+  },
+  "MED-FEV-004": {
+    "image": "/products/MED-FEV-004.webp",
+    "status": "DEMO",
+    "name": "Sinarest New Tablet",
+    "category": "Fever & Cold"
+  },
+  "MED-FEV-005": {
+    "image": "/products/MED-FEV-005.webp",
+    "status": "DEMO",
+    "name": "Vicks VapoRub Balm",
+    "category": "Fever & Cold"
+  },
+  "MED-FEV-006": {
+    "image": "/products/MED-FEV-006.webp",
+    "status": "DEMO",
+    "name": "Calpol 500mg Tablet",
+    "category": "Fever & Cold"
+  },
+  "MED-FEV-007": {
+    "image": "/products/MED-FEV-007.webp",
+    "status": "DEMO",
+    "name": "Maxtra Oral Drops",
+    "category": "Fever & Cold"
+  },
+  "MED-FEV-008": {
+    "image": "/products/MED-FEV-008.webp",
+    "status": "DEMO",
+    "name": "Otrivin Oxy Fast Relief Nasal Spray",
+    "category": "Fever & Cold"
+  },
+  "MED-FEV-009": {
+    "image": "/products/MED-FEV-009.webp",
+    "status": "DEMO",
+    "name": "Solvin Cold Tablet",
+    "category": "Fever & Cold"
+  },
+  "MED-FEV-010": {
+    "image": "/products/MED-FEV-010.webp",
+    "status": "DEMO",
+    "name": "Vicks Inhaler Keychain",
+    "category": "Fever & Cold"
+  },
+  "MED-FEV-011": {
+    "image": "/products/MED-FEV-011.webp",
+    "status": "DEMO",
+    "name": "Paracip 650 Tablet",
+    "category": "Fever & Cold"
+  },
+  "MED-FEV-012": {
+    "image": "/products/MED-FEV-012.webp",
+    "status": "DEMO",
+    "name": "Febrex Plus Syrup",
+    "category": "Fever & Cold"
+  },
+  "MED-FEV-013": {
+    "image": "/products/MED-FEV-013.webp",
+    "status": "DEMO",
+    "name": "Cofsils Cough & Cold Lozenges",
+    "category": "Fever & Cold"
+  },
+  "MED-FIT-001": {
+    "image": "/products/MED-FIT-001.webp",
+    "status": "DEMO",
+    "name": "MuscleBlaze MB Creatine Monohydrate 100g",
+    "category": "Fitness & Wellness"
+  },
+  "MED-FIT-002": {
+    "image": "/products/MED-FIT-002.webp",
+    "status": "DEMO",
+    "name": "Vicks ZzzQuil Natura Melatonin Sleep Gummies",
+    "category": "Fitness & Wellness"
+  },
+  "MED-FIT-003": {
+    "image": "/products/MED-FIT-003.webp",
+    "status": "DEMO",
+    "name": "Wellbeing Nutrition Marine Collagen Peptides",
+    "category": "Fitness & Wellness"
+  },
+  "MED-FIT-004": {
+    "image": "/products/MED-FIT-004.webp",
+    "status": "DEMO",
+    "name": "Scivation Xtend BCAA Powder Blue Raspberry",
+    "category": "Fitness & Wellness"
+  },
+  "MED-FIT-005": {
+    "image": "/products/MED-FIT-005.webp",
+    "status": "DEMO",
+    "name": "Tetley Green Tea Immune with Vitamin C",
+    "category": "Fitness & Wellness"
+  },
+  "MED-FIT-006": {
+    "image": "/products/MED-FIT-006.webp",
+    "status": "DEMO",
+    "name": "Kapiva Apple Cider Vinegar with Mother",
+    "category": "Fitness & Wellness"
+  },
+  "MED-FIT-007": {
+    "image": "/products/MED-FIT-007.webp",
+    "status": "DEMO",
+    "name": "GNC Pro Performance L-Carnitine Liquid 1500mg",
+    "category": "Fitness & Wellness"
+  },
+  "MED-FIT-008": {
+    "image": "/products/MED-FIT-008.webp",
+    "status": "DEMO",
+    "name": "Fast&Up Charge Effervescent Natural Vitamin C",
+    "category": "Fitness & Wellness"
+  },
+  "MED-FIT-009": {
+    "image": "/products/MED-FIT-009.webp",
+    "status": "DEMO",
+    "name": "GNC Triple Strength Fish Oil 1500mg",
+    "category": "Fitness & Wellness"
+  },
+  "MED-FIT-010": {
+    "image": "/products/MED-FIT-010.webp",
+    "status": "DEMO",
+    "name": "Dr. Vaidya's Herbobuild Muscle Booster",
+    "category": "Fitness & Wellness"
+  },
+  "MED-FIT-011": {
+    "image": "/products/MED-FIT-011.webp",
+    "status": "DEMO",
+    "name": "Myfitness Chocolate Peanut Butter Crispy 1kg",
+    "category": "Fitness & Wellness"
+  },
+  "MED-FIT-012": {
+    "image": "/products/MED-FIT-012.webp",
+    "status": "DEMO",
+    "name": "HealthKart HK Vitals Biotin with Keratin",
+    "category": "Fitness & Wellness"
+  },
+  "MED-FIT-013": {
+    "image": "/products/MED-FIT-013.webp",
+    "status": "DEMO",
+    "name": "Dr. Vaidya's Plant Protein Powder Chocolate",
+    "category": "Fitness & Wellness"
+  },
+  "MED-HAI-001": {
+    "image": "/products/MED-HAI-001.webp",
+    "status": "DEMO",
+    "name": "Tugain 5% Solution (Minoxidil)",
+    "category": "Hair Care"
+  },
+  "MED-HAI-002": {
+    "image": "/products/MED-HAI-002.webp",
+    "status": "DEMO",
+    "name": "Scalpe Pro Anti-Dandruff Shampoo",
+    "category": "Hair Care"
+  },
+  "MED-HAI-003": {
+    "image": "/products/MED-HAI-003.webp",
+    "status": "DEMO",
+    "name": "Biotin 10,000mcg Hair Growth Tablets",
+    "category": "Hair Care"
+  },
+  "MED-HAI-004": {
+    "image": "/products/MED-HAI-004.webp",
+    "status": "DEMO",
+    "name": "Indulekha Bringha Hair Oil",
+    "category": "Hair Care"
+  },
+  "MED-HAI-005": {
+    "image": "/products/MED-HAI-005.webp",
+    "status": "DEMO",
+    "name": "KeraXL Hair Growth Serum",
+    "category": "Hair Care"
+  },
+  "MED-HAI-006": {
+    "image": "/products/MED-HAI-006.webp",
+    "status": "DEMO",
+    "name": "Nizral 2% Dandruff Solution",
+    "category": "Hair Care"
+  },
+  "MED-HAI-007": {
+    "image": "/products/MED-HAI-007.webp",
+    "status": "DEMO",
+    "name": "Sesderma Seskavel Hair Repair Mask",
+    "category": "Hair Care"
+  },
+  "MED-HAI-008": {
+    "image": "/products/MED-HAI-008.webp",
+    "status": "DEMO",
+    "name": "Morr F 5% Solution",
+    "category": "Hair Care"
+  },
+  "MED-HAI-009": {
+    "image": "/products/MED-HAI-009.webp",
+    "status": "DEMO",
+    "name": "Mamaearth Onion Hair Oil",
+    "category": "Hair Care"
+  },
+  "MED-HAI-010": {
+    "image": "/products/MED-HAI-010.webp",
+    "status": "DEMO",
+    "name": "Keraglo Eva Hair Growth Tablets for Women",
+    "category": "Hair Care"
+  },
+  "MED-HAI-011": {
+    "image": "/products/MED-HAI-011.webp",
+    "status": "DEMO",
+    "name": "Sebamed Anti-Dandruff Shampoo",
+    "category": "Hair Care"
+  },
+  "MED-HAI-012": {
+    "image": "/products/MED-HAI-012.webp",
+    "status": "DEMO",
+    "name": "L'Oreal Paris Total Repair 5 Hair Serum",
+    "category": "Hair Care"
+  },
+  "MED-HAI-013": {
+    "image": "/products/MED-HAI-013.webp",
+    "status": "DEMO",
+    "name": "Cipla 8X Anti-Dandruff Shampoo",
+    "category": "Hair Care"
+  },
+  "MED-HRT-001": {
+    "image": "/products/MED-HRT-001.webp",
+    "status": "DEMO",
+    "name": "Telma 40 Tablet",
+    "category": "Heart Care"
+  },
+  "MED-HRT-002": {
+    "image": "/products/MED-HRT-002.webp",
+    "status": "DEMO",
+    "name": "Atorva 10 Tablet",
+    "category": "Heart Care"
+  },
+  "MED-HRT-003": {
+    "image": "/products/MED-HRT-003.webp",
+    "status": "DEMO",
+    "name": "Ecosprin 75 Tablet",
+    "category": "Heart Care"
+  },
+  "MED-HRT-004": {
+    "image": "/products/MED-HRT-004.webp",
+    "status": "DEMO",
+    "name": "Omron HEM 7120 Digital Blood Pressure Monitor",
+    "category": "Heart Care"
+  },
+  "MED-HRT-005": {
+    "image": "/products/MED-HRT-005.webp",
+    "status": "DEMO",
+    "name": "Concor 5 Tablet",
+    "category": "Heart Care"
+  },
+  "MED-HRT-006": {
+    "image": "/products/MED-HRT-006.webp",
+    "status": "DEMO",
+    "name": "Rosuvas 10 Tablet",
+    "category": "Heart Care"
+  },
+  "MED-HRT-007": {
+    "image": "/products/MED-HRT-007.webp",
+    "status": "DEMO",
+    "name": "Amlong 5 Tablet",
+    "category": "Heart Care"
+  },
+  "MED-HRT-008": {
+    "image": "/products/MED-HRT-008.webp",
+    "status": "DEMO",
+    "name": "Arjuna Heart Care Herbal Capsules",
+    "category": "Heart Care"
+  },
+  "MED-HRT-009": {
+    "image": "/products/MED-HRT-009.webp",
+    "status": "DEMO",
+    "name": "Dr. Morepen BP-02 Blood Pressure Monitor",
+    "category": "Heart Care"
+  },
+  "MED-HRT-010": {
+    "image": "/products/MED-HRT-010.webp",
+    "status": "DEMO",
+    "name": "Brilinta 90mg Tablet",
+    "category": "Heart Care"
+  },
+  "MED-HRT-011": {
+    "image": "/products/MED-HRT-011.webp",
+    "status": "DEMO",
+    "name": "Dytor 10 Tablet",
+    "category": "Heart Care"
+  },
+  "MED-HRT-012": {
+    "image": "/products/MED-HRT-012.webp",
+    "status": "DEMO",
+    "name": "Cardiokey CoQ10 100mg Softgels",
+    "category": "Heart Care"
+  },
+  "MED-HRT-013": {
+    "image": "/products/MED-HRT-013.webp",
+    "status": "DEMO",
+    "name": "Clopilet 75 Tablet",
+    "category": "Heart Care"
+  },
+  "MED-IMM-001": {
+    "image": "/products/MED-IMM-001.webp",
+    "status": "DEMO",
+    "name": "Dabur Chyawanprash 2X Immunity",
+    "category": "Immunity Support"
+  },
+  "MED-IMM-002": {
+    "image": "/products/MED-IMM-002.webp",
+    "status": "DEMO",
+    "name": "Celin 500 Chewable Tablet",
+    "category": "Immunity Support"
+  },
+  "MED-IMM-003": {
+    "image": "/products/MED-IMM-003.webp",
+    "status": "DEMO",
+    "name": "Himalaya Septilin Tablets",
+    "category": "Immunity Support"
+  },
+  "MED-IMM-004": {
+    "image": "/products/MED-IMM-004.webp",
+    "status": "DEMO",
+    "name": "Giloy Ghanvati Immunity Tablets",
+    "category": "Immunity Support"
+  },
+  "MED-IMM-005": {
+    "image": "/products/MED-IMM-005.webp",
+    "status": "DEMO",
+    "name": "Baidyanath Pure Shilajit Resin 20g",
+    "category": "Immunity Support"
+  },
+  "MED-IMM-006": {
+    "image": "/products/MED-IMM-006.webp",
+    "status": "DEMO",
+    "name": "Zingavita Vitamin C + Zinc Effervescent 20s",
+    "category": "Immunity Support"
+  },
+  "MED-IMM-007": {
+    "image": "/products/MED-IMM-007.webp",
+    "status": "DEMO",
+    "name": "Patanjali Chyawanprash Special",
+    "category": "Immunity Support"
+  },
+  "MED-IMM-008": {
+    "image": "/products/MED-IMM-008.webp",
+    "status": "DEMO",
+    "name": "Curcumin 95% with Piperine Capsules",
+    "category": "Immunity Support"
+  },
+  "MED-IMM-009": {
+    "image": "/products/MED-IMM-009.webp",
+    "status": "DEMO",
+    "name": "Dabur Honey 100% Pure",
+    "category": "Immunity Support"
+  },
+  "MED-IMM-010": {
+    "image": "/products/MED-IMM-010.webp",
+    "status": "DEMO",
+    "name": "Immune Shield Elderberry Gummies",
+    "category": "Immunity Support"
+  },
+  "MED-IMM-011": {
+    "image": "/products/MED-IMM-011.webp",
+    "status": "DEMO",
+    "name": "Zandu Pure Tulsi Drops",
+    "category": "Immunity Support"
+  },
+  "MED-IMM-012": {
+    "image": "/products/MED-IMM-012.webp",
+    "status": "DEMO",
+    "name": "Kapiva Pure Aloe Vera Juice",
+    "category": "Immunity Support"
+  },
+  "MED-IMM-013": {
+    "image": "/products/MED-IMM-013.webp",
+    "status": "DEMO",
+    "name": "Baidyanath Amla Juice",
+    "category": "Immunity Support"
+  },
+  "MED-NUT-001": {
+    "image": "/products/MED-NUT-001.webp",
+    "status": "DEMO",
+    "name": "Ensure Complete Balanced Nutrition Vanilla",
+    "category": "Nutrition"
+  },
+  "MED-NUT-002": {
+    "image": "/products/MED-NUT-002.webp",
+    "status": "DEMO",
+    "name": "Optimum Nutrition Gold Standard 100% Whey Protein",
+    "category": "Nutrition"
+  },
+  "MED-NUT-003": {
+    "image": "/products/MED-NUT-003.webp",
+    "status": "DEMO",
+    "name": "Glucerna SR Diabetic Care Vanilla",
+    "category": "Nutrition"
+  },
+  "MED-NUT-004": {
+    "image": "/products/MED-NUT-004.webp",
+    "status": "DEMO",
+    "name": "Pediasure Complete Toddler Nutrition Chocolate",
+    "category": "Nutrition"
+  },
+  "MED-NUT-005": {
+    "image": "/products/MED-NUT-005.webp",
+    "status": "DEMO",
+    "name": "MuscleBlaze Biozyme Performance Whey 1kg",
+    "category": "Nutrition"
+  },
+  "MED-NUT-006": {
+    "image": "/products/MED-NUT-006.webp",
+    "status": "DEMO",
+    "name": "Protinex Original High Protein Powder",
+    "category": "Nutrition"
+  },
+  "MED-NUT-007": {
+    "image": "/products/MED-NUT-007.webp",
+    "status": "DEMO",
+    "name": "GNC Mega Men One Daily Multivitamin",
+    "category": "Nutrition"
+  },
+  "MED-NUT-008": {
+    "image": "/products/MED-NUT-008.webp",
+    "status": "DEMO",
+    "name": "Threptin Diskettes High Calorie Protein Biscuits",
+    "category": "Nutrition"
+  },
+  "MED-NUT-009": {
+    "image": "/products/MED-NUT-009.webp",
+    "status": "DEMO",
+    "name": "Isopure Zero Carb 100% Whey Protein Isolate",
+    "category": "Nutrition"
+  },
+  "MED-NUT-010": {
+    "image": "/products/MED-NUT-010.webp",
+    "status": "DEMO",
+    "name": "Horlicks Classic Malt Health Drink",
+    "category": "Nutrition"
+  },
+  "MED-NUT-011": {
+    "image": "/products/MED-NUT-011.webp",
+    "status": "DEMO",
+    "name": "Dymatize ISO100 Hydrolyzed Whey Isolate",
+    "category": "Nutrition"
+  },
+  "MED-NUT-012": {
+    "image": "/products/MED-NUT-012.webp",
+    "status": "DEMO",
+    "name": "B-Protin Nutritional Powder Chocolate",
+    "category": "Nutrition"
+  },
+  "MED-NUT-013": {
+    "image": "/products/MED-NUT-013.webp",
+    "status": "DEMO",
+    "name": "Prohance D Diabetic Nutritional Powder",
+    "category": "Nutrition"
+  },
+  "MED-ORA-001": {
+    "image": "/products/MED-ORA-001.webp",
+    "status": "DEMO",
+    "name": "Sensodyne Rapid Relief Toothpaste",
+    "category": "Oral Care"
+  },
+  "MED-ORA-002": {
+    "image": "/products/MED-ORA-002.webp",
+    "status": "DEMO",
+    "name": "Hexidine Antimicrobial Mouthwash 160ml",
+    "category": "Oral Care"
+  },
+  "MED-ORA-003": {
+    "image": "/products/MED-ORA-003.webp",
+    "status": "DEMO",
+    "name": "Colgate Total Whole Mouth Health Toothpaste",
+    "category": "Oral Care"
+  },
+  "MED-ORA-004": {
+    "image": "/products/MED-ORA-004.webp",
+    "status": "DEMO",
+    "name": "Listerine Cool Mint Antiseptic Mouthwash",
+    "category": "Oral Care"
+  },
+  "MED-ORA-005": {
+    "image": "/products/MED-ORA-005.webp",
+    "status": "DEMO",
+    "name": "Dabur Red Ayurvedic Toothpaste",
+    "category": "Oral Care"
+  },
+  "MED-ORA-006": {
+    "image": "/products/MED-ORA-006.webp",
+    "status": "DEMO",
+    "name": "Pyxistoma Gum Astringent Paint",
+    "category": "Oral Care"
+  },
+  "MED-ORA-007": {
+    "image": "/products/MED-ORA-007.webp",
+    "status": "DEMO",
+    "name": "Colgate PerioGard Chlorhexidine 0.12% Mouthwash",
+    "category": "Oral Care"
+  },
+  "MED-ORA-008": {
+    "image": "/products/MED-ORA-008.webp",
+    "status": "DEMO",
+    "name": "Sensodyne Sensitive Toothbrush (Pack of 3)",
+    "category": "Oral Care"
+  },
+  "MED-ORA-009": {
+    "image": "/products/MED-ORA-009.webp",
+    "status": "DEMO",
+    "name": "Kenacort 0.1% Oral Paste for Mouth Ulcers",
+    "category": "Oral Care"
+  },
+  "MED-ORA-010": {
+    "image": "/products/MED-ORA-010.webp",
+    "status": "DEMO",
+    "name": "Oral-B Essential Dental Floss 50m",
+    "category": "Oral Care"
+  },
+  "MED-ORA-011": {
+    "image": "/products/MED-ORA-011.webp",
+    "status": "DEMO",
+    "name": "Thermokind-F Gel Toothpaste",
+    "category": "Oral Care"
+  },
+  "MED-ORA-012": {
+    "image": "/products/MED-ORA-012.webp",
+    "status": "DEMO",
+    "name": "Himalaya Complete Care Herbal Toothpaste",
+    "category": "Oral Care"
+  },
+  "MED-ORA-013": {
+    "image": "/products/MED-ORA-013.webp",
+    "status": "DEMO",
+    "name": "Dologel CT Oral Gel for Mouth Ulcers",
+    "category": "Oral Care"
+  },
+  "MED-PAIN-001": {
+    "image": "/products/MED-PAIN-001.webp",
+    "status": "DEMO",
+    "name": "Combiflam Tablet",
+    "category": "Pain Relief"
+  },
+  "MED-PAIN-002": {
+    "image": "/products/MED-PAIN-002.webp",
+    "status": "DEMO",
+    "name": "Volini Pain Relief Gel",
+    "category": "Pain Relief"
+  },
+  "MED-PAIN-003": {
+    "image": "/products/MED-PAIN-003.webp",
+    "status": "DEMO",
+    "name": "Zerodol-SP Tablet",
+    "category": "Pain Relief"
+  },
+  "MED-PAIN-004": {
+    "image": "/products/MED-PAIN-004.webp",
+    "status": "DEMO",
+    "name": "Moov Fast Pain Relief Spray",
+    "category": "Pain Relief"
+  },
+  "MED-PAIN-005": {
+    "image": "/products/MED-PAIN-005.webp",
+    "status": "DEMO",
+    "name": "Brufen 400 Tablet",
+    "category": "Pain Relief"
+  },
+  "MED-PAIN-006": {
+    "image": "/products/MED-PAIN-006.webp",
+    "status": "DEMO",
+    "name": "Omnigel Topical Gel",
+    "category": "Pain Relief"
+  },
+  "MED-PAIN-007": {
+    "image": "/products/MED-PAIN-007.webp",
+    "status": "DEMO",
+    "name": "Ultracet Tablet",
+    "category": "Pain Relief"
+  },
+  "MED-PAIN-008": {
+    "image": "/products/MED-PAIN-008.webp",
+    "status": "DEMO",
+    "name": "Ibugesic Plus Suspension",
+    "category": "Pain Relief"
+  },
+  "MED-PAIN-009": {
+    "image": "/products/MED-PAIN-009.webp",
+    "status": "DEMO",
+    "name": "Zandu Balm Ultra Power",
+    "category": "Pain Relief"
+  },
+  "MED-PAIN-010": {
+    "image": "/products/MED-PAIN-010.webp",
+    "status": "DEMO",
+    "name": "Dynapar QPS Pain Relief Solution",
+    "category": "Pain Relief"
+  },
+  "MED-PAIN-011": {
+    "image": "/products/MED-PAIN-011.webp",
+    "status": "DEMO",
+    "name": "Amrutanjan Extra Power Pain Balm",
+    "category": "Pain Relief"
+  },
+  "MED-PAIN-012": {
+    "image": "/products/MED-PAIN-012.webp",
+    "status": "DEMO",
+    "name": "Ketorol DT Tablet",
+    "category": "Pain Relief"
+  },
+  "MED-PAIN-013": {
+    "image": "/products/MED-PAIN-013.webp",
+    "status": "DEMO",
+    "name": "Flamar 3D Tablet",
+    "category": "Pain Relief"
+  },
+  "MED-PER-001": {
+    "image": "/products/MED-PER-001.webp",
+    "status": "DEMO",
+    "name": "Dettol Original Antiseptic Liquid",
+    "category": "Personal Care"
+  },
+  "MED-PER-002": {
+    "image": "/products/MED-PER-002.webp",
+    "status": "DEMO",
+    "name": "Savlon Moisture Shield Germ Protection Liquid",
+    "category": "Personal Care"
+  },
+  "MED-PER-003": {
+    "image": "/products/MED-PER-003.webp",
+    "status": "DEMO",
+    "name": "Lifebuoy Total 10 Hand Sanitizer",
+    "category": "Personal Care"
+  },
+  "MED-PER-004": {
+    "image": "/products/MED-PER-004.webp",
+    "status": "DEMO",
+    "name": "Nivea Soft Light Moisturizing Cream",
+    "category": "Personal Care"
+  },
+  "MED-PER-005": {
+    "image": "/products/MED-PER-005.webp",
+    "status": "DEMO",
+    "name": "Dettol Disinfectant Multi-Use Spray",
+    "category": "Personal Care"
+  },
+  "MED-PER-006": {
+    "image": "/products/MED-PER-006.webp",
+    "status": "DEMO",
+    "name": "Himalaya Pure Hands Antibacterial Hand Wash",
+    "category": "Personal Care"
+  },
+  "MED-PER-007": {
+    "image": "/products/MED-PER-007.webp",
+    "status": "DEMO",
+    "name": "Johnson's Pure Cotton Buds 100s",
+    "category": "Personal Care"
+  },
+  "MED-PER-008": {
+    "image": "/products/MED-PER-008.webp",
+    "status": "DEMO",
+    "name": "Gillette Sensitive Skin Shaving Foam",
+    "category": "Personal Care"
+  },
+  "MED-PER-009": {
+    "image": "/products/MED-PER-009.webp",
+    "status": "DEMO",
+    "name": "Old Spice Original After Shave Lotion",
+    "category": "Personal Care"
+  },
+  "MED-PER-010": {
+    "image": "/products/MED-PER-010.webp",
+    "status": "DEMO",
+    "name": "Dettol Skincare Germ Protection Bathing Bar",
+    "category": "Personal Care"
+  },
+  "MED-PER-011": {
+    "image": "/products/MED-PER-011.webp",
+    "status": "DEMO",
+    "name": "Carefree Plus Large Panty Liners",
+    "category": "Personal Care"
+  },
+  "MED-PER-012": {
+    "image": "/products/MED-PER-012.webp",
+    "status": "DEMO",
+    "name": "BoroPlus Soft Antiseptic Light Cream",
+    "category": "Personal Care"
+  },
+  "MED-PER-013": {
+    "image": "/products/MED-PER-013.webp",
+    "status": "DEMO",
+    "name": "Godrej Protekt Masterstroke Handwash Refill",
+    "category": "Personal Care"
+  },
+  "MED-SKI-001": {
+    "image": "/products/MED-SKI-001.webp",
+    "status": "DEMO",
+    "name": "Cetaphil Gentle Skin Cleanser",
+    "category": "Skin Care"
+  },
+  "MED-SKI-002": {
+    "image": "/products/MED-SKI-002.webp",
+    "status": "DEMO",
+    "name": "Betnovate-N Cream",
+    "category": "Skin Care"
+  },
+  "MED-SKI-003": {
+    "image": "/products/MED-SKI-003.webp",
+    "status": "DEMO",
+    "name": "Sebamed Clear Face Cleansing Foam",
+    "category": "Skin Care"
+  },
+  "MED-SKI-004": {
+    "image": "/products/MED-SKI-004.webp",
+    "status": "DEMO",
+    "name": "Photostable Gold Matte Finish Sunscreen SPF 55",
+    "category": "Skin Care"
+  },
+  "MED-SKI-005": {
+    "image": "/products/MED-SKI-005.webp",
+    "status": "DEMO",
+    "name": "Candid Dusting Powder",
+    "category": "Skin Care"
+  },
+  "MED-SKI-006": {
+    "image": "/products/MED-SKI-006.webp",
+    "status": "DEMO",
+    "name": "Karela Neem Skin Purifier Soap",
+    "category": "Skin Care"
+  },
+  "MED-SKI-007": {
+    "image": "/products/MED-SKI-007.webp",
+    "status": "DEMO",
+    "name": "Epiduo Gel",
+    "category": "Skin Care"
+  },
+  "MED-SKI-008": {
+    "image": "/products/MED-SKI-008.webp",
+    "status": "DEMO",
+    "name": "Boroline Antiseptic Ayurvedic Cream",
+    "category": "Skin Care"
+  },
+  "MED-SKI-009": {
+    "image": "/products/MED-SKI-009.webp",
+    "status": "DEMO",
+    "name": "Moiz Cleansing Lotion",
+    "category": "Skin Care"
+  },
+  "MED-SKI-010": {
+    "image": "/products/MED-SKI-010.webp",
+    "status": "DEMO",
+    "name": "Acrofy Anti-Acne Lotion",
+    "category": "Skin Care"
+  },
+  "MED-SKI-011": {
+    "image": "/products/MED-SKI-011.webp",
+    "status": "DEMO",
+    "name": "Lulican 1% Cream",
+    "category": "Skin Care"
+  },
+  "MED-SKI-012": {
+    "image": "/products/MED-SKI-012.webp",
+    "status": "DEMO",
+    "name": "Saslic DS Foaming Face Wash",
+    "category": "Skin Care"
+  },
+  "MED-SKI-013": {
+    "image": "/products/MED-SKI-013.webp",
+    "status": "DEMO",
+    "name": "Vaseline Intensive Care Cocoa Glow Lotion",
+    "category": "Skin Care"
+  },
+  "MED-VIT-001": {
+    "image": "/products/MED-VIT-001.webp",
+    "status": "DEMO",
+    "name": "Becosules Z Capsules",
+    "category": "Vitamins & Supplements"
+  },
+  "MED-VIT-002": {
+    "image": "/products/MED-VIT-002.webp",
+    "status": "DEMO",
+    "name": "Shelcal 500 Tablet",
+    "category": "Vitamins & Supplements"
+  },
+  "MED-VIT-003": {
+    "image": "/products/MED-VIT-003.webp",
+    "status": "DEMO",
+    "name": "D-Rise 60K Softgel Capsule",
+    "category": "Vitamins & Supplements"
+  },
+  "MED-VIT-004": {
+    "image": "/products/MED-VIT-004.webp",
+    "status": "DEMO",
+    "name": "Neurobion Forte Tablet",
+    "category": "Vitamins & Supplements"
+  },
+  "MED-VIT-005": {
+    "image": "/products/MED-VIT-005.webp",
+    "status": "DEMO",
+    "name": "Limcee 500mg Chewable Vitamin C",
+    "category": "Vitamins & Supplements"
+  },
+  "MED-VIT-006": {
+    "image": "/products/MED-VIT-006.webp",
+    "status": "DEMO",
+    "name": "Supradyn Daily Multivitamin Tablet",
+    "category": "Vitamins & Supplements"
+  },
+  "MED-VIT-007": {
+    "image": "/products/MED-VIT-007.webp",
+    "status": "DEMO",
+    "name": "Revital H Daily Health Supplement",
+    "category": "Vitamins & Supplements"
+  },
+  "MED-VIT-008": {
+    "image": "/products/MED-VIT-008.webp",
+    "status": "DEMO",
+    "name": "Zincovit Tablet",
+    "category": "Vitamins & Supplements"
+  },
+  "MED-VIT-009": {
+    "image": "/products/MED-VIT-009.webp",
+    "status": "DEMO",
+    "name": "Folvite 5mg Tablet",
+    "category": "Vitamins & Supplements"
+  },
+  "MED-VIT-010": {
+    "image": "/products/MED-VIT-010.webp",
+    "status": "DEMO",
+    "name": "HealthKart HK Vitals Fish Oil 1000mg",
+    "category": "Vitamins & Supplements"
+  },
+  "MED-VIT-011": {
+    "image": "/products/MED-VIT-011.webp",
+    "status": "DEMO",
+    "name": "Carbamide Forte Multivitamin for Men",
+    "category": "Vitamins & Supplements"
+  },
+  "MED-VIT-012": {
+    "image": "/products/MED-VIT-012.webp",
+    "status": "DEMO",
+    "name": "Livogen Adult Tonic",
+    "category": "Vitamins & Supplements"
+  },
+  "MED-VIT-013": {
+    "image": "/products/MED-VIT-013.webp",
+    "status": "DEMO",
+    "name": "Wellwoman 50+ Health Supplement",
+    "category": "Vitamins & Supplements"
+  },
+  "MED-VIT-CHEW-500": {
+    "image": "/products/MED-VIT-CHEW-500.webp",
+    "status": "DEMO",
+    "name": "Vitamin C 500mg Chewable",
+    "category": "Pain Relief"
+  },
+  "MED-WOM-001": {
+    "image": "/products/MED-WOM-001.webp",
+    "status": "DEMO",
+    "name": "Meftal-Spas Tablet",
+    "category": "Women's Health"
+  },
+  "MED-WOM-002": {
+    "image": "/products/MED-WOM-002.webp",
+    "status": "DEMO",
+    "name": "Stayfree Secure Cottony Sanitary Pads (XL)",
+    "category": "Women's Health"
+  },
+  "MED-WOM-003": {
+    "image": "/products/MED-WOM-003.webp",
+    "status": "DEMO",
+    "name": "Vwash Plus Intimate Hygiene Wash",
+    "category": "Women's Health"
+  },
+  "MED-WOM-004": {
+    "image": "/products/MED-WOM-004.webp",
+    "status": "DEMO",
+    "name": "SBL Femipink Syrup for Women",
+    "category": "Women's Health"
+  },
+  "MED-WOM-005": {
+    "image": "/products/MED-WOM-005.webp",
+    "status": "DEMO",
+    "name": "Supradyn Daily for Women",
+    "category": "Women's Health"
+  },
+  "MED-WOM-006": {
+    "image": "/products/MED-WOM-006.webp",
+    "status": "DEMO",
+    "name": "Pee Safe Toilet Seat Sanitizer Spray",
+    "category": "Women's Health"
+  },
+  "MED-WOM-007": {
+    "image": "/products/MED-WOM-007.webp",
+    "status": "DEMO",
+    "name": "Cranberry Extract + D-Mannose Tablets",
+    "category": "Women's Health"
+  },
+  "MED-WOM-008": {
+    "image": "/products/MED-WOM-008.webp",
+    "status": "DEMO",
+    "name": "Shatavari Hormonal Balance Capsules",
+    "category": "Women's Health"
+  },
+  "MED-WOM-009": {
+    "image": "/products/MED-WOM-009.webp",
+    "status": "DEMO",
+    "name": "i-can One Step Pregnancy Test Kit",
+    "category": "Women's Health"
+  },
+  "MED-WOM-010": {
+    "image": "/products/MED-WOM-010.webp",
+    "status": "DEMO",
+    "name": "Carmesi Biodegradable Sanitary Pads",
+    "category": "Women's Health"
+  },
+  "MED-WOM-011": {
+    "image": "/products/MED-WOM-011.webp",
+    "status": "DEMO",
+    "name": "Primosa 1000 Evening Primrose Oil Softgels",
+    "category": "Women's Health"
+  },
+  "MED-WOM-012": {
+    "image": "/products/MED-WOM-012.webp",
+    "status": "DEMO",
+    "name": "Whisper Choice Ultra Sanitary Pads (XL)",
+    "category": "Women's Health"
+  },
+  "MED-WOM-013": {
+    "image": "/products/MED-WOM-013.webp",
+    "status": "DEMO",
+    "name": "Nua Cramp Comfort Heat Patches",
+    "category": "Women's Health"
+  },
+  "MS-DEMO-0001": {
+    "image": "/products/MS-DEMO-0001.webp",
+    "status": "DEMO",
+    "name": "Adhesive Bandage Pack - Variant 1",
+    "category": "First Aid"
+  },
+  "MS-DEMO-0002": {
+    "image": "/products/MS-DEMO-0002.webp",
+    "status": "DEMO",
+    "name": "Adhesive Bandage Pack - Variant 2",
+    "category": "First Aid"
+  },
+  "MS-DEMO-0003": {
+    "image": "/products/MS-DEMO-0003.webp",
+    "status": "DEMO",
+    "name": "Adhesive Bandage Pack - Variant 3",
+    "category": "First Aid"
+  },
+  "MS-DEMO-0004": {
+    "image": "/products/MS-DEMO-0004.webp",
+    "status": "DEMO",
+    "name": "Adhesive Bandage Pack - Variant 4",
+    "category": "First Aid"
+  },
+  "MS-DEMO-0005": {
+    "image": "/products/MS-DEMO-0005.webp",
+    "status": "DEMO",
+    "name": "Adhesive Bandage Pack - Variant 5",
+    "category": "First Aid"
+  },
+  "MS-DEMO-0006": {
+    "image": "/products/MS-DEMO-0006.webp",
+    "status": "DEMO",
+    "name": "Sterile Gauze Pads - Variant 1",
+    "category": "First Aid"
+  },
+  "MS-DEMO-0007": {
+    "image": "/products/MS-DEMO-0007.webp",
+    "status": "DEMO",
+    "name": "Sterile Gauze Pads - Variant 2",
+    "category": "First Aid"
+  },
+  "MS-DEMO-0008": {
+    "image": "/products/MS-DEMO-0008.webp",
+    "status": "DEMO",
+    "name": "Sterile Gauze Pads - Variant 3",
+    "category": "First Aid"
+  },
+  "MS-DEMO-0009": {
+    "image": "/products/MS-DEMO-0009.webp",
+    "status": "DEMO",
+    "name": "Sterile Gauze Pads - Variant 4",
+    "category": "First Aid"
+  },
+  "MS-DEMO-0010": {
+    "image": "/products/MS-DEMO-0010.webp",
+    "status": "DEMO",
+    "name": "Sterile Gauze Pads - Variant 5",
+    "category": "First Aid"
+  },
+  "MS-DEMO-0011": {
+    "image": "/products/MS-DEMO-0011.webp",
+    "status": "DEMO",
+    "name": "Elastic Crepe Bandage - Variant 1",
+    "category": "First Aid"
+  },
+  "MS-DEMO-0012": {
+    "image": "/products/MS-DEMO-0012.webp",
+    "status": "DEMO",
+    "name": "Elastic Crepe Bandage - Variant 2",
+    "category": "First Aid"
+  },
+  "MS-DEMO-0013": {
+    "image": "/products/MS-DEMO-0013.webp",
+    "status": "DEMO",
+    "name": "Elastic Crepe Bandage - Variant 3",
+    "category": "First Aid"
+  },
+  "MS-DEMO-0014": {
+    "image": "/products/MS-DEMO-0014.webp",
+    "status": "DEMO",
+    "name": "Elastic Crepe Bandage - Variant 4",
+    "category": "First Aid"
+  },
+  "MS-DEMO-0015": {
+    "image": "/products/MS-DEMO-0015.webp",
+    "status": "DEMO",
+    "name": "Elastic Crepe Bandage - Variant 5",
+    "category": "First Aid"
+  },
+  "MS-DEMO-0016": {
+    "image": "/products/MS-DEMO-0016.webp",
+    "status": "DEMO",
+    "name": "Antiseptic Wound Dressing - Variant 1",
+    "category": "First Aid"
+  },
+  "MS-DEMO-0017": {
+    "image": "/products/MS-DEMO-0017.webp",
+    "status": "DEMO",
+    "name": "Antiseptic Wound Dressing - Variant 2",
+    "category": "First Aid"
+  },
+  "MS-DEMO-0018": {
+    "image": "/products/MS-DEMO-0018.webp",
+    "status": "DEMO",
+    "name": "Antiseptic Wound Dressing - Variant 3",
+    "category": "First Aid"
+  },
+  "MS-DEMO-0019": {
+    "image": "/products/MS-DEMO-0019.webp",
+    "status": "DEMO",
+    "name": "Antiseptic Wound Dressing - Variant 4",
+    "category": "First Aid"
+  },
+  "MS-DEMO-0020": {
+    "image": "/products/MS-DEMO-0020.webp",
+    "status": "DEMO",
+    "name": "Antiseptic Wound Dressing - Variant 5",
+    "category": "First Aid"
+  },
+  "MS-DEMO-0021": {
+    "image": "/products/MS-DEMO-0021.webp",
+    "status": "DEMO",
+    "name": "First Aid Kit - Variant 1",
+    "category": "First Aid"
+  },
+  "MS-DEMO-0022": {
+    "image": "/products/MS-DEMO-0022.webp",
+    "status": "DEMO",
+    "name": "First Aid Kit - Variant 2",
+    "category": "First Aid"
+  },
+  "MS-DEMO-0023": {
+    "image": "/products/MS-DEMO-0023.webp",
+    "status": "DEMO",
+    "name": "First Aid Kit - Variant 3",
+    "category": "First Aid"
+  },
+  "MS-DEMO-0024": {
+    "image": "/products/MS-DEMO-0024.webp",
+    "status": "DEMO",
+    "name": "First Aid Kit - Variant 4",
+    "category": "First Aid"
+  },
+  "MS-DEMO-0025": {
+    "image": "/products/MS-DEMO-0025.webp",
+    "status": "DEMO",
+    "name": "First Aid Kit - Variant 5",
+    "category": "First Aid"
+  },
+  "MS-DEMO-0026": {
+    "image": "/products/MS-DEMO-0026.webp",
+    "status": "DEMO",
+    "name": "Digital Thermometer - Variant 1",
+    "category": "Medical Devices"
+  },
+  "MS-DEMO-0027": {
+    "image": "/products/MS-DEMO-0027.webp",
+    "status": "DEMO",
+    "name": "Digital Thermometer - Variant 2",
+    "category": "Medical Devices"
+  },
+  "MS-DEMO-0028": {
+    "image": "/products/MS-DEMO-0028.webp",
+    "status": "DEMO",
+    "name": "Digital Thermometer - Variant 3",
+    "category": "Medical Devices"
+  },
+  "MS-DEMO-0029": {
+    "image": "/products/MS-DEMO-0029.webp",
+    "status": "DEMO",
+    "name": "Digital Thermometer - Variant 4",
+    "category": "Medical Devices"
+  },
+  "MS-DEMO-0030": {
+    "image": "/products/MS-DEMO-0030.webp",
+    "status": "DEMO",
+    "name": "Digital Thermometer - Variant 5",
+    "category": "Medical Devices"
+  },
+  "MS-DEMO-0031": {
+    "image": "/products/MS-DEMO-0031.webp",
+    "status": "DEMO",
+    "name": "Pulse Oximeter - Variant 1",
+    "category": "Medical Devices"
+  },
+  "MS-DEMO-0032": {
+    "image": "/products/MS-DEMO-0032.webp",
+    "status": "DEMO",
+    "name": "Pulse Oximeter - Variant 2",
+    "category": "Medical Devices"
+  },
+  "MS-DEMO-0033": {
+    "image": "/products/MS-DEMO-0033.webp",
+    "status": "DEMO",
+    "name": "Pulse Oximeter - Variant 3",
+    "category": "Medical Devices"
+  },
+  "MS-DEMO-0034": {
+    "image": "/products/MS-DEMO-0034.webp",
+    "status": "DEMO",
+    "name": "Pulse Oximeter - Variant 4",
+    "category": "Medical Devices"
+  },
+  "MS-DEMO-0035": {
+    "image": "/products/MS-DEMO-0035.webp",
+    "status": "DEMO",
+    "name": "Pulse Oximeter - Variant 5",
+    "category": "Medical Devices"
+  },
+  "MS-DEMO-0036": {
+    "image": "/products/MS-DEMO-0036.webp",
+    "status": "DEMO",
+    "name": "Blood Pressure Monitor - Variant 1",
+    "category": "Medical Devices"
+  },
+  "MS-DEMO-0037": {
+    "image": "/products/MS-DEMO-0037.webp",
+    "status": "DEMO",
+    "name": "Blood Pressure Monitor - Variant 2",
+    "category": "Medical Devices"
+  },
+  "MS-DEMO-0038": {
+    "image": "/products/MS-DEMO-0038.webp",
+    "status": "DEMO",
+    "name": "Blood Pressure Monitor - Variant 3",
+    "category": "Medical Devices"
+  },
+  "MS-DEMO-0039": {
+    "image": "/products/MS-DEMO-0039.webp",
+    "status": "DEMO",
+    "name": "Blood Pressure Monitor - Variant 4",
+    "category": "Medical Devices"
+  },
+  "MS-DEMO-0040": {
+    "image": "/products/MS-DEMO-0040.webp",
+    "status": "DEMO",
+    "name": "Blood Pressure Monitor - Variant 5",
+    "category": "Medical Devices"
+  },
+  "MS-DEMO-0041": {
+    "image": "/products/MS-DEMO-0041.webp",
+    "status": "DEMO",
+    "name": "Nebulizer Machine - Variant 1",
+    "category": "Medical Devices"
+  },
+  "MS-DEMO-0042": {
+    "image": "/products/MS-DEMO-0042.webp",
+    "status": "DEMO",
+    "name": "Nebulizer Machine - Variant 2",
+    "category": "Medical Devices"
+  },
+  "MS-DEMO-0043": {
+    "image": "/products/MS-DEMO-0043.webp",
+    "status": "DEMO",
+    "name": "Nebulizer Machine - Variant 3",
+    "category": "Medical Devices"
+  },
+  "MS-DEMO-0044": {
+    "image": "/products/MS-DEMO-0044.webp",
+    "status": "DEMO",
+    "name": "Nebulizer Machine - Variant 4",
+    "category": "Medical Devices"
+  },
+  "MS-DEMO-0045": {
+    "image": "/products/MS-DEMO-0045.webp",
+    "status": "DEMO",
+    "name": "Nebulizer Machine - Variant 5",
+    "category": "Medical Devices"
+  },
+  "MS-DEMO-0046": {
+    "image": "/products/MS-DEMO-0046.webp",
+    "status": "DEMO",
+    "name": "Heating Pad - Variant 1",
+    "category": "Medical Devices"
+  },
+  "MS-DEMO-0047": {
+    "image": "/products/MS-DEMO-0047.webp",
+    "status": "DEMO",
+    "name": "Heating Pad - Variant 2",
+    "category": "Medical Devices"
+  },
+  "MS-DEMO-0048": {
+    "image": "/products/MS-DEMO-0048.webp",
+    "status": "DEMO",
+    "name": "Heating Pad - Variant 3",
+    "category": "Medical Devices"
+  },
+  "MS-DEMO-0049": {
+    "image": "/products/MS-DEMO-0049.webp",
+    "status": "DEMO",
+    "name": "Heating Pad - Variant 4",
+    "category": "Medical Devices"
+  },
+  "MS-DEMO-0050": {
+    "image": "/products/MS-DEMO-0050.webp",
+    "status": "DEMO",
+    "name": "Heating Pad - Variant 5",
+    "category": "Medical Devices"
+  },
+  "MS-DEMO-0051": {
+    "image": "/products/MS-DEMO-0051.webp",
+    "status": "DEMO",
+    "name": "Hand Sanitizer - Variant 1",
+    "category": "Personal Care"
+  },
+  "MS-DEMO-0052": {
+    "image": "/products/MS-DEMO-0052.webp",
+    "status": "DEMO",
+    "name": "Hand Sanitizer - Variant 2",
+    "category": "Personal Care"
+  },
+  "MS-DEMO-0053": {
+    "image": "/products/MS-DEMO-0053.webp",
+    "status": "DEMO",
+    "name": "Hand Sanitizer - Variant 3",
+    "category": "Personal Care"
+  },
+  "MS-DEMO-0054": {
+    "image": "/products/MS-DEMO-0054.webp",
+    "status": "DEMO",
+    "name": "Hand Sanitizer - Variant 4",
+    "category": "Personal Care"
+  },
+  "MS-DEMO-0055": {
+    "image": "/products/MS-DEMO-0055.webp",
+    "status": "DEMO",
+    "name": "Hand Sanitizer - Variant 5",
+    "category": "Personal Care"
+  },
+  "MS-DEMO-0056": {
+    "image": "/products/MS-DEMO-0056.webp",
+    "status": "DEMO",
+    "name": "Disposable Face Masks - Variant 1",
+    "category": "Personal Care"
+  },
+  "MS-DEMO-0057": {
+    "image": "/products/MS-DEMO-0057.webp",
+    "status": "DEMO",
+    "name": "Disposable Face Masks - Variant 2",
+    "category": "Personal Care"
+  },
+  "MS-DEMO-0058": {
+    "image": "/products/MS-DEMO-0058.webp",
+    "status": "DEMO",
+    "name": "Disposable Face Masks - Variant 3",
+    "category": "Personal Care"
+  },
+  "MS-DEMO-0059": {
+    "image": "/products/MS-DEMO-0059.webp",
+    "status": "DEMO",
+    "name": "Disposable Face Masks - Variant 4",
+    "category": "Personal Care"
+  },
+  "MS-DEMO-0060": {
+    "image": "/products/MS-DEMO-0060.webp",
+    "status": "DEMO",
+    "name": "Disposable Face Masks - Variant 5",
+    "category": "Personal Care"
+  },
+  "MS-DEMO-0061": {
+    "image": "/products/MS-DEMO-0061.webp",
+    "status": "DEMO",
+    "name": "Cotton Swabs - Variant 1",
+    "category": "Personal Care"
+  },
+  "MS-DEMO-0062": {
+    "image": "/products/MS-DEMO-0062.webp",
+    "status": "DEMO",
+    "name": "Cotton Swabs - Variant 2",
+    "category": "Personal Care"
+  },
+  "MS-DEMO-0063": {
+    "image": "/products/MS-DEMO-0063.webp",
+    "status": "DEMO",
+    "name": "Cotton Swabs - Variant 3",
+    "category": "Personal Care"
+  },
+  "MS-DEMO-0064": {
+    "image": "/products/MS-DEMO-0064.webp",
+    "status": "DEMO",
+    "name": "Cotton Swabs - Variant 4",
+    "category": "Personal Care"
+  },
+  "MS-DEMO-0065": {
+    "image": "/products/MS-DEMO-0065.webp",
+    "status": "DEMO",
+    "name": "Cotton Swabs - Variant 5",
+    "category": "Personal Care"
+  },
+  "MS-DEMO-0066": {
+    "image": "/products/MS-DEMO-0066.webp",
+    "status": "DEMO",
+    "name": "Wet Wipes - Variant 1",
+    "category": "Personal Care"
+  },
+  "MS-DEMO-0067": {
+    "image": "/products/MS-DEMO-0067.webp",
+    "status": "DEMO",
+    "name": "Wet Wipes - Variant 2",
+    "category": "Personal Care"
+  },
+  "MS-DEMO-0068": {
+    "image": "/products/MS-DEMO-0068.webp",
+    "status": "DEMO",
+    "name": "Wet Wipes - Variant 3",
+    "category": "Personal Care"
+  },
+  "MS-DEMO-0069": {
+    "image": "/products/MS-DEMO-0069.webp",
+    "status": "DEMO",
+    "name": "Wet Wipes - Variant 4",
+    "category": "Personal Care"
+  },
+  "MS-DEMO-0070": {
+    "image": "/products/MS-DEMO-0070.webp",
+    "status": "DEMO",
+    "name": "Wet Wipes - Variant 5",
+    "category": "Personal Care"
+  },
+  "MS-DEMO-0071": {
+    "image": "/products/MS-DEMO-0071.webp",
+    "status": "DEMO",
+    "name": "Travel Hygiene Kit - Variant 1",
+    "category": "Personal Care"
+  },
+  "MS-DEMO-0072": {
+    "image": "/products/MS-DEMO-0072.webp",
+    "status": "DEMO",
+    "name": "Travel Hygiene Kit - Variant 2",
+    "category": "Personal Care"
+  },
+  "MS-DEMO-0073": {
+    "image": "/products/MS-DEMO-0073.webp",
+    "status": "DEMO",
+    "name": "Travel Hygiene Kit - Variant 3",
+    "category": "Personal Care"
+  },
+  "MS-DEMO-0074": {
+    "image": "/products/MS-DEMO-0074.webp",
+    "status": "DEMO",
+    "name": "Travel Hygiene Kit - Variant 4",
+    "category": "Personal Care"
+  },
+  "MS-DEMO-0075": {
+    "image": "/products/MS-DEMO-0075.webp",
+    "status": "DEMO",
+    "name": "Travel Hygiene Kit - Variant 5",
+    "category": "Personal Care"
+  },
+  "MS-DEMO-0076": {
+    "image": "/products/MS-DEMO-0076.webp",
+    "status": "DEMO",
+    "name": "Soft Toothbrush - Variant 1",
+    "category": "Oral Care"
+  },
+  "MS-DEMO-0077": {
+    "image": "/products/MS-DEMO-0077.webp",
+    "status": "DEMO",
+    "name": "Soft Toothbrush - Variant 2",
+    "category": "Oral Care"
+  },
+  "MS-DEMO-0078": {
+    "image": "/products/MS-DEMO-0078.webp",
+    "status": "DEMO",
+    "name": "Soft Toothbrush - Variant 3",
+    "category": "Oral Care"
+  },
+  "MS-DEMO-0079": {
+    "image": "/products/MS-DEMO-0079.webp",
+    "status": "DEMO",
+    "name": "Soft Toothbrush - Variant 4",
+    "category": "Oral Care"
+  },
+  "MS-DEMO-0080": {
+    "image": "/products/MS-DEMO-0080.webp",
+    "status": "DEMO",
+    "name": "Soft Toothbrush - Variant 5",
+    "category": "Oral Care"
+  },
+  "MS-DEMO-0081": {
+    "image": "/products/MS-DEMO-0081.webp",
+    "status": "DEMO",
+    "name": "Sensitive Care Toothpaste - Variant 1",
+    "category": "Oral Care"
+  },
+  "MS-DEMO-0082": {
+    "image": "/products/MS-DEMO-0082.webp",
+    "status": "DEMO",
+    "name": "Sensitive Care Toothpaste - Variant 2",
+    "category": "Oral Care"
+  },
+  "MS-DEMO-0083": {
+    "image": "/products/MS-DEMO-0083.webp",
+    "status": "DEMO",
+    "name": "Sensitive Care Toothpaste - Variant 3",
+    "category": "Oral Care"
+  },
+  "MS-DEMO-0084": {
+    "image": "/products/MS-DEMO-0084.webp",
+    "status": "DEMO",
+    "name": "Sensitive Care Toothpaste - Variant 4",
+    "category": "Oral Care"
+  },
+  "MS-DEMO-0085": {
+    "image": "/products/MS-DEMO-0085.webp",
+    "status": "DEMO",
+    "name": "Sensitive Care Toothpaste - Variant 5",
+    "category": "Oral Care"
+  },
+  "MS-DEMO-0086": {
+    "image": "/products/MS-DEMO-0086.webp",
+    "status": "DEMO",
+    "name": "Dental Floss - Variant 1",
+    "category": "Oral Care"
+  },
+  "MS-DEMO-0087": {
+    "image": "/products/MS-DEMO-0087.webp",
+    "status": "DEMO",
+    "name": "Dental Floss - Variant 2",
+    "category": "Oral Care"
+  },
+  "MS-DEMO-0088": {
+    "image": "/products/MS-DEMO-0088.webp",
+    "status": "DEMO",
+    "name": "Dental Floss - Variant 3",
+    "category": "Oral Care"
+  },
+  "MS-DEMO-0089": {
+    "image": "/products/MS-DEMO-0089.webp",
+    "status": "DEMO",
+    "name": "Dental Floss - Variant 4",
+    "category": "Oral Care"
+  },
+  "MS-DEMO-0090": {
+    "image": "/products/MS-DEMO-0090.webp",
+    "status": "DEMO",
+    "name": "Dental Floss - Variant 5",
+    "category": "Oral Care"
+  },
+  "MS-DEMO-0091": {
+    "image": "/products/MS-DEMO-0091.webp",
+    "status": "DEMO",
+    "name": "Mouthwash - Variant 1",
+    "category": "Oral Care"
+  },
+  "MS-DEMO-0092": {
+    "image": "/products/MS-DEMO-0092.webp",
+    "status": "DEMO",
+    "name": "Mouthwash - Variant 2",
+    "category": "Oral Care"
+  },
+  "MS-DEMO-0093": {
+    "image": "/products/MS-DEMO-0093.webp",
+    "status": "DEMO",
+    "name": "Mouthwash - Variant 3",
+    "category": "Oral Care"
+  },
+  "MS-DEMO-0094": {
+    "image": "/products/MS-DEMO-0094.webp",
+    "status": "DEMO",
+    "name": "Mouthwash - Variant 4",
+    "category": "Oral Care"
+  },
+  "MS-DEMO-0095": {
+    "image": "/products/MS-DEMO-0095.webp",
+    "status": "DEMO",
+    "name": "Mouthwash - Variant 5",
+    "category": "Oral Care"
+  },
+  "MS-DEMO-0096": {
+    "image": "/products/MS-DEMO-0096.webp",
+    "status": "DEMO",
+    "name": "Tongue Cleaner - Variant 1",
+    "category": "Oral Care"
+  },
+  "MS-DEMO-0097": {
+    "image": "/products/MS-DEMO-0097.webp",
+    "status": "DEMO",
+    "name": "Tongue Cleaner - Variant 2",
+    "category": "Oral Care"
+  },
+  "MS-DEMO-0098": {
+    "image": "/products/MS-DEMO-0098.webp",
+    "status": "DEMO",
+    "name": "Tongue Cleaner - Variant 3",
+    "category": "Oral Care"
+  },
+  "MS-DEMO-0099": {
+    "image": "/products/MS-DEMO-0099.webp",
+    "status": "DEMO",
+    "name": "Tongue Cleaner - Variant 4",
+    "category": "Oral Care"
+  },
+  "MS-DEMO-0100": {
+    "image": "/products/MS-DEMO-0100.webp",
+    "status": "DEMO",
+    "name": "Tongue Cleaner - Variant 5",
+    "category": "Oral Care"
+  },
+  "MS-DEMO-0101": {
+    "image": "/products/MS-DEMO-0101.webp",
+    "status": "DEMO",
+    "name": "Gentle Face Cleanser - Variant 1",
+    "category": "Skin Care"
+  },
+  "MS-DEMO-0102": {
+    "image": "/products/MS-DEMO-0102.webp",
+    "status": "DEMO",
+    "name": "Gentle Face Cleanser - Variant 2",
+    "category": "Skin Care"
+  },
+  "MS-DEMO-0103": {
+    "image": "/products/MS-DEMO-0103.webp",
+    "status": "DEMO",
+    "name": "Gentle Face Cleanser - Variant 3",
+    "category": "Skin Care"
+  },
+  "MS-DEMO-0104": {
+    "image": "/products/MS-DEMO-0104.webp",
+    "status": "DEMO",
+    "name": "Gentle Face Cleanser - Variant 4",
+    "category": "Skin Care"
+  },
+  "MS-DEMO-0105": {
+    "image": "/products/MS-DEMO-0105.webp",
+    "status": "DEMO",
+    "name": "Gentle Face Cleanser - Variant 5",
+    "category": "Skin Care"
+  },
+  "MS-DEMO-0106": {
+    "image": "/products/MS-DEMO-0106.webp",
+    "status": "DEMO",
+    "name": "Moisturizing Lotion - Variant 1",
+    "category": "Skin Care"
+  },
+  "MS-DEMO-0107": {
+    "image": "/products/MS-DEMO-0107.webp",
+    "status": "DEMO",
+    "name": "Moisturizing Lotion - Variant 2",
+    "category": "Skin Care"
+  },
+  "MS-DEMO-0108": {
+    "image": "/products/MS-DEMO-0108.webp",
+    "status": "DEMO",
+    "name": "Moisturizing Lotion - Variant 3",
+    "category": "Skin Care"
+  },
+  "MS-DEMO-0109": {
+    "image": "/products/MS-DEMO-0109.webp",
+    "status": "DEMO",
+    "name": "Moisturizing Lotion - Variant 4",
+    "category": "Skin Care"
+  },
+  "MS-DEMO-0110": {
+    "image": "/products/MS-DEMO-0110.webp",
+    "status": "DEMO",
+    "name": "Moisturizing Lotion - Variant 5",
+    "category": "Skin Care"
+  },
+  "MS-DEMO-0111": {
+    "image": "/products/MS-DEMO-0111.webp",
+    "status": "DEMO",
+    "name": "Sunscreen Lotion - Variant 1",
+    "category": "Skin Care"
+  },
+  "MS-DEMO-0112": {
+    "image": "/products/MS-DEMO-0112.webp",
+    "status": "DEMO",
+    "name": "Sunscreen Lotion - Variant 2",
+    "category": "Skin Care"
+  },
+  "MS-DEMO-0113": {
+    "image": "/products/MS-DEMO-0113.webp",
+    "status": "DEMO",
+    "name": "Sunscreen Lotion - Variant 3",
+    "category": "Skin Care"
+  },
+  "MS-DEMO-0114": {
+    "image": "/products/MS-DEMO-0114.webp",
+    "status": "DEMO",
+    "name": "Sunscreen Lotion - Variant 4",
+    "category": "Skin Care"
+  },
+  "MS-DEMO-0115": {
+    "image": "/products/MS-DEMO-0115.webp",
+    "status": "DEMO",
+    "name": "Sunscreen Lotion - Variant 5",
+    "category": "Skin Care"
+  },
+  "MS-DEMO-0116": {
+    "image": "/products/MS-DEMO-0116.webp",
+    "status": "DEMO",
+    "name": "Aloe Vera Gel - Variant 1",
+    "category": "Skin Care"
+  },
+  "MS-DEMO-0117": {
+    "image": "/products/MS-DEMO-0117.webp",
+    "status": "DEMO",
+    "name": "Aloe Vera Gel - Variant 2",
+    "category": "Skin Care"
+  },
+  "MS-DEMO-0118": {
+    "image": "/products/MS-DEMO-0118.webp",
+    "status": "DEMO",
+    "name": "Aloe Vera Gel - Variant 3",
+    "category": "Skin Care"
+  },
+  "MS-DEMO-0119": {
+    "image": "/products/MS-DEMO-0119.webp",
+    "status": "DEMO",
+    "name": "Aloe Vera Gel - Variant 4",
+    "category": "Skin Care"
+  },
+  "MS-DEMO-0120": {
+    "image": "/products/MS-DEMO-0120.webp",
+    "status": "DEMO",
+    "name": "Aloe Vera Gel - Variant 5",
+    "category": "Skin Care"
+  },
+  "MS-DEMO-0121": {
+    "image": "/products/MS-DEMO-0121.webp",
+    "status": "DEMO",
+    "name": "Lip Care Balm - Variant 1",
+    "category": "Skin Care"
+  },
+  "MS-DEMO-0122": {
+    "image": "/products/MS-DEMO-0122.webp",
+    "status": "DEMO",
+    "name": "Lip Care Balm - Variant 2",
+    "category": "Skin Care"
+  },
+  "MS-DEMO-0123": {
+    "image": "/products/MS-DEMO-0123.webp",
+    "status": "DEMO",
+    "name": "Lip Care Balm - Variant 3",
+    "category": "Skin Care"
+  },
+  "MS-DEMO-0124": {
+    "image": "/products/MS-DEMO-0124.webp",
+    "status": "DEMO",
+    "name": "Lip Care Balm - Variant 4",
+    "category": "Skin Care"
+  },
+  "MS-DEMO-0125": {
+    "image": "/products/MS-DEMO-0125.webp",
+    "status": "DEMO",
+    "name": "Lip Care Balm - Variant 5",
+    "category": "Skin Care"
+  },
+  "MS-DEMO-0126": {
+    "image": "/products/MS-DEMO-0126.webp",
+    "status": "DEMO",
+    "name": "Mild Shampoo - Variant 1",
+    "category": "Hair Care"
+  },
+  "MS-DEMO-0127": {
+    "image": "/products/MS-DEMO-0127.webp",
+    "status": "DEMO",
+    "name": "Mild Shampoo - Variant 2",
+    "category": "Hair Care"
+  },
+  "MS-DEMO-0128": {
+    "image": "/products/MS-DEMO-0128.webp",
+    "status": "DEMO",
+    "name": "Mild Shampoo - Variant 3",
+    "category": "Hair Care"
+  },
+  "MS-DEMO-0129": {
+    "image": "/products/MS-DEMO-0129.webp",
+    "status": "DEMO",
+    "name": "Mild Shampoo - Variant 4",
+    "category": "Hair Care"
+  },
+  "MS-DEMO-0130": {
+    "image": "/products/MS-DEMO-0130.webp",
+    "status": "DEMO",
+    "name": "Mild Shampoo - Variant 5",
+    "category": "Hair Care"
+  },
+  "MS-DEMO-0131": {
+    "image": "/products/MS-DEMO-0131.webp",
+    "status": "DEMO",
+    "name": "Conditioner - Variant 1",
+    "category": "Hair Care"
+  },
+  "MS-DEMO-0132": {
+    "image": "/products/MS-DEMO-0132.webp",
+    "status": "DEMO",
+    "name": "Conditioner - Variant 2",
+    "category": "Hair Care"
+  },
+  "MS-DEMO-0133": {
+    "image": "/products/MS-DEMO-0133.webp",
+    "status": "DEMO",
+    "name": "Conditioner - Variant 3",
+    "category": "Hair Care"
+  },
+  "MS-DEMO-0134": {
+    "image": "/products/MS-DEMO-0134.webp",
+    "status": "DEMO",
+    "name": "Conditioner - Variant 4",
+    "category": "Hair Care"
+  },
+  "MS-DEMO-0135": {
+    "image": "/products/MS-DEMO-0135.webp",
+    "status": "DEMO",
+    "name": "Conditioner - Variant 5",
+    "category": "Hair Care"
+  },
+  "MS-DEMO-0136": {
+    "image": "/products/MS-DEMO-0136.webp",
+    "status": "DEMO",
+    "name": "Hair Oil - Variant 1",
+    "category": "Hair Care"
+  },
+  "MS-DEMO-0137": {
+    "image": "/products/MS-DEMO-0137.webp",
+    "status": "DEMO",
+    "name": "Hair Oil - Variant 2",
+    "category": "Hair Care"
+  },
+  "MS-DEMO-0138": {
+    "image": "/products/MS-DEMO-0138.webp",
+    "status": "DEMO",
+    "name": "Hair Oil - Variant 3",
+    "category": "Hair Care"
+  },
+  "MS-DEMO-0139": {
+    "image": "/products/MS-DEMO-0139.webp",
+    "status": "DEMO",
+    "name": "Hair Oil - Variant 4",
+    "category": "Hair Care"
+  },
+  "MS-DEMO-0140": {
+    "image": "/products/MS-DEMO-0140.webp",
+    "status": "DEMO",
+    "name": "Hair Oil - Variant 5",
+    "category": "Hair Care"
+  },
+  "MS-DEMO-0141": {
+    "image": "/products/MS-DEMO-0141.webp",
+    "status": "DEMO",
+    "name": "Scalp Care Lotion - Variant 1",
+    "category": "Hair Care"
+  },
+  "MS-DEMO-0142": {
+    "image": "/products/MS-DEMO-0142.webp",
+    "status": "DEMO",
+    "name": "Scalp Care Lotion - Variant 2",
+    "category": "Hair Care"
+  },
+  "MS-DEMO-0143": {
+    "image": "/products/MS-DEMO-0143.webp",
+    "status": "DEMO",
+    "name": "Scalp Care Lotion - Variant 3",
+    "category": "Hair Care"
+  },
+  "MS-DEMO-0144": {
+    "image": "/products/MS-DEMO-0144.webp",
+    "status": "DEMO",
+    "name": "Scalp Care Lotion - Variant 4",
+    "category": "Hair Care"
+  },
+  "MS-DEMO-0145": {
+    "image": "/products/MS-DEMO-0145.webp",
+    "status": "DEMO",
+    "name": "Scalp Care Lotion - Variant 5",
+    "category": "Hair Care"
+  },
+  "MS-DEMO-0146": {
+    "image": "/products/MS-DEMO-0146.webp",
+    "status": "DEMO",
+    "name": "Wide Tooth Comb - Variant 1",
+    "category": "Hair Care"
+  },
+  "MS-DEMO-0147": {
+    "image": "/products/MS-DEMO-0147.webp",
+    "status": "DEMO",
+    "name": "Wide Tooth Comb - Variant 2",
+    "category": "Hair Care"
+  },
+  "MS-DEMO-0148": {
+    "image": "/products/MS-DEMO-0148.webp",
+    "status": "DEMO",
+    "name": "Wide Tooth Comb - Variant 3",
+    "category": "Hair Care"
+  },
+  "MS-DEMO-0149": {
+    "image": "/products/MS-DEMO-0149.webp",
+    "status": "DEMO",
+    "name": "Wide Tooth Comb - Variant 4",
+    "category": "Hair Care"
+  },
+  "MS-DEMO-0150": {
+    "image": "/products/MS-DEMO-0150.webp",
+    "status": "DEMO",
+    "name": "Wide Tooth Comb - Variant 5",
+    "category": "Hair Care"
+  },
+  "MS-DEMO-0151": {
+    "image": "/products/MS-DEMO-0151.webp",
+    "status": "DEMO",
+    "name": "Baby Wipes - Variant 1",
+    "category": "Baby Care"
+  },
+  "MS-DEMO-0152": {
+    "image": "/products/MS-DEMO-0152.webp",
+    "status": "DEMO",
+    "name": "Baby Wipes - Variant 2",
+    "category": "Baby Care"
+  },
+  "MS-DEMO-0153": {
+    "image": "/products/MS-DEMO-0153.webp",
+    "status": "DEMO",
+    "name": "Baby Wipes - Variant 3",
+    "category": "Baby Care"
+  },
+  "MS-DEMO-0154": {
+    "image": "/products/MS-DEMO-0154.webp",
+    "status": "DEMO",
+    "name": "Baby Wipes - Variant 4",
+    "category": "Baby Care"
+  },
+  "MS-DEMO-0155": {
+    "image": "/products/MS-DEMO-0155.webp",
+    "status": "DEMO",
+    "name": "Baby Wipes - Variant 5",
+    "category": "Baby Care"
+  },
+  "MS-DEMO-0156": {
+    "image": "/products/MS-DEMO-0156.webp",
+    "status": "DEMO",
+    "name": "Baby Lotion - Variant 1",
+    "category": "Baby Care"
+  },
+  "MS-DEMO-0157": {
+    "image": "/products/MS-DEMO-0157.webp",
+    "status": "DEMO",
+    "name": "Baby Lotion - Variant 2",
+    "category": "Baby Care"
+  },
+  "MS-DEMO-0158": {
+    "image": "/products/MS-DEMO-0158.webp",
+    "status": "DEMO",
+    "name": "Baby Lotion - Variant 3",
+    "category": "Baby Care"
+  },
+  "MS-DEMO-0159": {
+    "image": "/products/MS-DEMO-0159.webp",
+    "status": "DEMO",
+    "name": "Baby Lotion - Variant 4",
+    "category": "Baby Care"
+  },
+  "MS-DEMO-0160": {
+    "image": "/products/MS-DEMO-0160.webp",
+    "status": "DEMO",
+    "name": "Baby Lotion - Variant 5",
+    "category": "Baby Care"
+  },
+  "MS-DEMO-0161": {
+    "image": "/products/MS-DEMO-0161.webp",
+    "status": "DEMO",
+    "name": "Baby Shampoo - Variant 1",
+    "category": "Baby Care"
+  },
+  "MS-DEMO-0162": {
+    "image": "/products/MS-DEMO-0162.webp",
+    "status": "DEMO",
+    "name": "Baby Shampoo - Variant 2",
+    "category": "Baby Care"
+  },
+  "MS-DEMO-0163": {
+    "image": "/products/MS-DEMO-0163.webp",
+    "status": "DEMO",
+    "name": "Baby Shampoo - Variant 3",
+    "category": "Baby Care"
+  },
+  "MS-DEMO-0164": {
+    "image": "/products/MS-DEMO-0164.webp",
+    "status": "DEMO",
+    "name": "Baby Shampoo - Variant 4",
+    "category": "Baby Care"
+  },
+  "MS-DEMO-0165": {
+    "image": "/products/MS-DEMO-0165.webp",
+    "status": "DEMO",
+    "name": "Baby Shampoo - Variant 5",
+    "category": "Baby Care"
+  },
+  "MS-DEMO-0166": {
+    "image": "/products/MS-DEMO-0166.webp",
+    "status": "DEMO",
+    "name": "Baby Diaper Pack - Variant 1",
+    "category": "Baby Care"
+  },
+  "MS-DEMO-0167": {
+    "image": "/products/MS-DEMO-0167.webp",
+    "status": "DEMO",
+    "name": "Baby Diaper Pack - Variant 2",
+    "category": "Baby Care"
+  },
+  "MS-DEMO-0168": {
+    "image": "/products/MS-DEMO-0168.webp",
+    "status": "DEMO",
+    "name": "Baby Diaper Pack - Variant 3",
+    "category": "Baby Care"
+  },
+  "MS-DEMO-0169": {
+    "image": "/products/MS-DEMO-0169.webp",
+    "status": "DEMO",
+    "name": "Baby Diaper Pack - Variant 4",
+    "category": "Baby Care"
+  },
+  "MS-DEMO-0170": {
+    "image": "/products/MS-DEMO-0170.webp",
+    "status": "DEMO",
+    "name": "Baby Diaper Pack - Variant 5",
+    "category": "Baby Care"
+  },
+  "MS-DEMO-0171": {
+    "image": "/products/MS-DEMO-0171.webp",
+    "status": "DEMO",
+    "name": "Baby Bath Wash - Variant 1",
+    "category": "Baby Care"
+  },
+  "MS-DEMO-0172": {
+    "image": "/products/MS-DEMO-0172.webp",
+    "status": "DEMO",
+    "name": "Baby Bath Wash - Variant 2",
+    "category": "Baby Care"
+  },
+  "MS-DEMO-0173": {
+    "image": "/products/MS-DEMO-0173.webp",
+    "status": "DEMO",
+    "name": "Baby Bath Wash - Variant 3",
+    "category": "Baby Care"
+  },
+  "MS-DEMO-0174": {
+    "image": "/products/MS-DEMO-0174.webp",
+    "status": "DEMO",
+    "name": "Baby Bath Wash - Variant 4",
+    "category": "Baby Care"
+  },
+  "MS-DEMO-0175": {
+    "image": "/products/MS-DEMO-0175.webp",
+    "status": "DEMO",
+    "name": "Baby Bath Wash - Variant 5",
+    "category": "Baby Care"
+  },
+  "MS-DEMO-0176": {
+    "image": "/products/MS-DEMO-0176.webp",
+    "status": "DEMO",
+    "name": "Cotton Sanitary Pads - Variant 1",
+    "category": "Women's Wellness"
+  },
+  "MS-DEMO-0177": {
+    "image": "/products/MS-DEMO-0177.webp",
+    "status": "DEMO",
+    "name": "Cotton Sanitary Pads - Variant 2",
+    "category": "Women's Wellness"
+  },
+  "MS-DEMO-0178": {
+    "image": "/products/MS-DEMO-0178.webp",
+    "status": "DEMO",
+    "name": "Cotton Sanitary Pads - Variant 3",
+    "category": "Women's Wellness"
+  },
+  "MS-DEMO-0179": {
+    "image": "/products/MS-DEMO-0179.webp",
+    "status": "DEMO",
+    "name": "Cotton Sanitary Pads - Variant 4",
+    "category": "Women's Wellness"
+  },
+  "MS-DEMO-0180": {
+    "image": "/products/MS-DEMO-0180.webp",
+    "status": "DEMO",
+    "name": "Cotton Sanitary Pads - Variant 5",
+    "category": "Women's Wellness"
+  },
+  "MS-DEMO-0181": {
+    "image": "/products/MS-DEMO-0181.webp",
+    "status": "DEMO",
+    "name": "Panty Liners - Variant 1",
+    "category": "Women's Wellness"
+  },
+  "MS-DEMO-0182": {
+    "image": "/products/MS-DEMO-0182.webp",
+    "status": "DEMO",
+    "name": "Panty Liners - Variant 2",
+    "category": "Women's Wellness"
+  },
+  "MS-DEMO-0183": {
+    "image": "/products/MS-DEMO-0183.webp",
+    "status": "DEMO",
+    "name": "Panty Liners - Variant 3",
+    "category": "Women's Wellness"
+  },
+  "MS-DEMO-0184": {
+    "image": "/products/MS-DEMO-0184.webp",
+    "status": "DEMO",
+    "name": "Panty Liners - Variant 4",
+    "category": "Women's Wellness"
+  },
+  "MS-DEMO-0185": {
+    "image": "/products/MS-DEMO-0185.webp",
+    "status": "DEMO",
+    "name": "Panty Liners - Variant 5",
+    "category": "Women's Wellness"
+  },
+  "MS-DEMO-0186": {
+    "image": "/products/MS-DEMO-0186.webp",
+    "status": "DEMO",
+    "name": "Menstrual Heat Patch - Variant 1",
+    "category": "Women's Wellness"
+  },
+  "MS-DEMO-0187": {
+    "image": "/products/MS-DEMO-0187.webp",
+    "status": "DEMO",
+    "name": "Menstrual Heat Patch - Variant 2",
+    "category": "Women's Wellness"
+  },
+  "MS-DEMO-0188": {
+    "image": "/products/MS-DEMO-0188.webp",
+    "status": "DEMO",
+    "name": "Menstrual Heat Patch - Variant 3",
+    "category": "Women's Wellness"
+  },
+  "MS-DEMO-0189": {
+    "image": "/products/MS-DEMO-0189.webp",
+    "status": "DEMO",
+    "name": "Menstrual Heat Patch - Variant 4",
+    "category": "Women's Wellness"
+  },
+  "MS-DEMO-0190": {
+    "image": "/products/MS-DEMO-0190.webp",
+    "status": "DEMO",
+    "name": "Menstrual Heat Patch - Variant 5",
+    "category": "Women's Wellness"
+  },
+  "MS-DEMO-0191": {
+    "image": "/products/MS-DEMO-0191.webp",
+    "status": "DEMO",
+    "name": "Intimate Care Wash - Variant 1",
+    "category": "Women's Wellness"
+  },
+  "MS-DEMO-0192": {
+    "image": "/products/MS-DEMO-0192.webp",
+    "status": "DEMO",
+    "name": "Intimate Care Wash - Variant 2",
+    "category": "Women's Wellness"
+  },
+  "MS-DEMO-0193": {
+    "image": "/products/MS-DEMO-0193.webp",
+    "status": "DEMO",
+    "name": "Intimate Care Wash - Variant 3",
+    "category": "Women's Wellness"
+  },
+  "MS-DEMO-0194": {
+    "image": "/products/MS-DEMO-0194.webp",
+    "status": "DEMO",
+    "name": "Intimate Care Wash - Variant 4",
+    "category": "Women's Wellness"
+  },
+  "MS-DEMO-0195": {
+    "image": "/products/MS-DEMO-0195.webp",
+    "status": "DEMO",
+    "name": "Intimate Care Wash - Variant 5",
+    "category": "Women's Wellness"
+  },
+  "MS-DEMO-0196": {
+    "image": "/products/MS-DEMO-0196.webp",
+    "status": "DEMO",
+    "name": "Reusable Hot Water Bag - Variant 1",
+    "category": "Women's Wellness"
+  },
+  "MS-DEMO-0197": {
+    "image": "/products/MS-DEMO-0197.webp",
+    "status": "DEMO",
+    "name": "Reusable Hot Water Bag - Variant 2",
+    "category": "Women's Wellness"
+  },
+  "MS-DEMO-0198": {
+    "image": "/products/MS-DEMO-0198.webp",
+    "status": "DEMO",
+    "name": "Reusable Hot Water Bag - Variant 3",
+    "category": "Women's Wellness"
+  },
+  "MS-DEMO-0199": {
+    "image": "/products/MS-DEMO-0199.webp",
+    "status": "DEMO",
+    "name": "Reusable Hot Water Bag - Variant 4",
+    "category": "Women's Wellness"
+  },
+  "MS-DEMO-0200": {
+    "image": "/products/MS-DEMO-0200.webp",
+    "status": "DEMO",
+    "name": "Reusable Hot Water Bag - Variant 5",
+    "category": "Women's Wellness"
+  },
+  "MS-DEMO-0201": {
+    "image": "/products/MS-DEMO-0201.webp",
+    "status": "DEMO",
+    "name": "Reusable Water Bottle - Variant 1",
+    "category": "Fitness & Wellness"
+  },
+  "MS-DEMO-0202": {
+    "image": "/products/MS-DEMO-0202.webp",
+    "status": "DEMO",
+    "name": "Reusable Water Bottle - Variant 2",
+    "category": "Fitness & Wellness"
+  },
+  "MS-DEMO-0203": {
+    "image": "/products/MS-DEMO-0203.webp",
+    "status": "DEMO",
+    "name": "Reusable Water Bottle - Variant 3",
+    "category": "Fitness & Wellness"
+  },
+  "MS-DEMO-0204": {
+    "image": "/products/MS-DEMO-0204.webp",
+    "status": "DEMO",
+    "name": "Reusable Water Bottle - Variant 4",
+    "category": "Fitness & Wellness"
+  },
+  "MS-DEMO-0205": {
+    "image": "/products/MS-DEMO-0205.webp",
+    "status": "DEMO",
+    "name": "Reusable Water Bottle - Variant 5",
+    "category": "Fitness & Wellness"
+  },
+  "MS-DEMO-0206": {
+    "image": "/products/MS-DEMO-0206.webp",
+    "status": "DEMO",
+    "name": "Yoga Mat - Variant 1",
+    "category": "Fitness & Wellness"
+  },
+  "MS-DEMO-0207": {
+    "image": "/products/MS-DEMO-0207.webp",
+    "status": "DEMO",
+    "name": "Yoga Mat - Variant 2",
+    "category": "Fitness & Wellness"
+  },
+  "MS-DEMO-0208": {
+    "image": "/products/MS-DEMO-0208.webp",
+    "status": "DEMO",
+    "name": "Yoga Mat - Variant 3",
+    "category": "Fitness & Wellness"
+  },
+  "MS-DEMO-0209": {
+    "image": "/products/MS-DEMO-0209.webp",
+    "status": "DEMO",
+    "name": "Yoga Mat - Variant 4",
+    "category": "Fitness & Wellness"
+  },
+  "MS-DEMO-0210": {
+    "image": "/products/MS-DEMO-0210.webp",
+    "status": "DEMO",
+    "name": "Yoga Mat - Variant 5",
+    "category": "Fitness & Wellness"
+  },
+  "MS-DEMO-0211": {
+    "image": "/products/MS-DEMO-0211.webp",
+    "status": "DEMO",
+    "name": "Resistance Band - Variant 1",
+    "category": "Fitness & Wellness"
+  },
+  "MS-DEMO-0212": {
+    "image": "/products/MS-DEMO-0212.webp",
+    "status": "DEMO",
+    "name": "Resistance Band - Variant 2",
+    "category": "Fitness & Wellness"
+  },
+  "MS-DEMO-0213": {
+    "image": "/products/MS-DEMO-0213.webp",
+    "status": "DEMO",
+    "name": "Resistance Band - Variant 3",
+    "category": "Fitness & Wellness"
+  },
+  "MS-DEMO-0214": {
+    "image": "/products/MS-DEMO-0214.webp",
+    "status": "DEMO",
+    "name": "Resistance Band - Variant 4",
+    "category": "Fitness & Wellness"
+  },
+  "MS-DEMO-0215": {
+    "image": "/products/MS-DEMO-0215.webp",
+    "status": "DEMO",
+    "name": "Resistance Band - Variant 5",
+    "category": "Fitness & Wellness"
+  },
+  "MS-DEMO-0216": {
+    "image": "/products/MS-DEMO-0216.webp",
+    "status": "DEMO",
+    "name": "Foam Roller - Variant 1",
+    "category": "Fitness & Wellness"
+  },
+  "MS-DEMO-0217": {
+    "image": "/products/MS-DEMO-0217.webp",
+    "status": "DEMO",
+    "name": "Foam Roller - Variant 2",
+    "category": "Fitness & Wellness"
+  },
+  "MS-DEMO-0218": {
+    "image": "/products/MS-DEMO-0218.webp",
+    "status": "DEMO",
+    "name": "Foam Roller - Variant 3",
+    "category": "Fitness & Wellness"
+  },
+  "MS-DEMO-0219": {
+    "image": "/products/MS-DEMO-0219.webp",
+    "status": "DEMO",
+    "name": "Foam Roller - Variant 4",
+    "category": "Fitness & Wellness"
+  },
+  "MS-DEMO-0220": {
+    "image": "/products/MS-DEMO-0220.webp",
+    "status": "DEMO",
+    "name": "Foam Roller - Variant 5",
+    "category": "Fitness & Wellness"
+  },
+  "MS-DEMO-0221": {
+    "image": "/products/MS-DEMO-0221.webp",
+    "status": "DEMO",
+    "name": "Sleep Mask - Variant 1",
+    "category": "Fitness & Wellness"
+  },
+  "MS-DEMO-0222": {
+    "image": "/products/MS-DEMO-0222.webp",
+    "status": "DEMO",
+    "name": "Sleep Mask - Variant 2",
+    "category": "Fitness & Wellness"
+  },
+  "MS-DEMO-0223": {
+    "image": "/products/MS-DEMO-0223.webp",
+    "status": "DEMO",
+    "name": "Sleep Mask - Variant 3",
+    "category": "Fitness & Wellness"
+  },
+  "MS-DEMO-0224": {
+    "image": "/products/MS-DEMO-0224.webp",
+    "status": "DEMO",
+    "name": "Sleep Mask - Variant 4",
+    "category": "Fitness & Wellness"
+  },
+  "MS-DEMO-0225": {
+    "image": "/products/MS-DEMO-0225.webp",
+    "status": "DEMO",
+    "name": "Sleep Mask - Variant 5",
+    "category": "Fitness & Wellness"
+  },
+  "MS-DEMO-0226": {
+    "image": "/products/MS-DEMO-0226.webp",
+    "status": "DEMO",
+    "name": "Herbal Tea Blend - Variant 1",
+    "category": "Ayurveda & Wellness"
+  },
+  "MS-DEMO-0227": {
+    "image": "/products/MS-DEMO-0227.webp",
+    "status": "DEMO",
+    "name": "Herbal Tea Blend - Variant 2",
+    "category": "Ayurveda & Wellness"
+  },
+  "MS-DEMO-0228": {
+    "image": "/products/MS-DEMO-0228.webp",
+    "status": "DEMO",
+    "name": "Herbal Tea Blend - Variant 3",
+    "category": "Ayurveda & Wellness"
+  },
+  "MS-DEMO-0229": {
+    "image": "/products/MS-DEMO-0229.webp",
+    "status": "DEMO",
+    "name": "Herbal Tea Blend - Variant 4",
+    "category": "Ayurveda & Wellness"
+  },
+  "MS-DEMO-0230": {
+    "image": "/products/MS-DEMO-0230.webp",
+    "status": "DEMO",
+    "name": "Herbal Tea Blend - Variant 5",
+    "category": "Ayurveda & Wellness"
+  },
+  "MS-DEMO-0231": {
+    "image": "/products/MS-DEMO-0231.webp",
+    "status": "DEMO",
+    "name": "Aromatic Balm - Variant 1",
+    "category": "Ayurveda & Wellness"
+  },
+  "MS-DEMO-0232": {
+    "image": "/products/MS-DEMO-0232.webp",
+    "status": "DEMO",
+    "name": "Aromatic Balm - Variant 2",
+    "category": "Ayurveda & Wellness"
+  },
+  "MS-DEMO-0233": {
+    "image": "/products/MS-DEMO-0233.webp",
+    "status": "DEMO",
+    "name": "Aromatic Balm - Variant 3",
+    "category": "Ayurveda & Wellness"
+  },
+  "MS-DEMO-0234": {
+    "image": "/products/MS-DEMO-0234.webp",
+    "status": "DEMO",
+    "name": "Aromatic Balm - Variant 4",
+    "category": "Ayurveda & Wellness"
+  },
+  "MS-DEMO-0235": {
+    "image": "/products/MS-DEMO-0235.webp",
+    "status": "DEMO",
+    "name": "Aromatic Balm - Variant 5",
+    "category": "Ayurveda & Wellness"
+  },
+  "MS-DEMO-0236": {
+    "image": "/products/MS-DEMO-0236.webp",
+    "status": "DEMO",
+    "name": "Herbal Bath Powder - Variant 1",
+    "category": "Ayurveda & Wellness"
+  },
+  "MS-DEMO-0237": {
+    "image": "/products/MS-DEMO-0237.webp",
+    "status": "DEMO",
+    "name": "Herbal Bath Powder - Variant 2",
+    "category": "Ayurveda & Wellness"
+  },
+  "MS-DEMO-0238": {
+    "image": "/products/MS-DEMO-0238.webp",
+    "status": "DEMO",
+    "name": "Herbal Bath Powder - Variant 3",
+    "category": "Ayurveda & Wellness"
+  },
+  "MS-DEMO-0239": {
+    "image": "/products/MS-DEMO-0239.webp",
+    "status": "DEMO",
+    "name": "Herbal Bath Powder - Variant 4",
+    "category": "Ayurveda & Wellness"
+  },
+  "MS-DEMO-0240": {
+    "image": "/products/MS-DEMO-0240.webp",
+    "status": "DEMO",
+    "name": "Herbal Bath Powder - Variant 5",
+    "category": "Ayurveda & Wellness"
+  },
+  "MS-DEMO-0241": {
+    "image": "/products/MS-DEMO-0241.webp",
+    "status": "DEMO",
+    "name": "Neem Soap - Variant 1",
+    "category": "Ayurveda & Wellness"
+  },
+  "MS-DEMO-0242": {
+    "image": "/products/MS-DEMO-0242.webp",
+    "status": "DEMO",
+    "name": "Neem Soap - Variant 2",
+    "category": "Ayurveda & Wellness"
+  },
+  "MS-DEMO-0243": {
+    "image": "/products/MS-DEMO-0243.webp",
+    "status": "DEMO",
+    "name": "Neem Soap - Variant 3",
+    "category": "Ayurveda & Wellness"
+  },
+  "MS-DEMO-0244": {
+    "image": "/products/MS-DEMO-0244.webp",
+    "status": "DEMO",
+    "name": "Neem Soap - Variant 4",
+    "category": "Ayurveda & Wellness"
+  },
+  "MS-DEMO-0245": {
+    "image": "/products/MS-DEMO-0245.webp",
+    "status": "DEMO",
+    "name": "Neem Soap - Variant 5",
+    "category": "Ayurveda & Wellness"
+  },
+  "MS-DEMO-0246": {
+    "image": "/products/MS-DEMO-0246.webp",
+    "status": "DEMO",
+    "name": "Herbal Massage Oil - Variant 1",
+    "category": "Ayurveda & Wellness"
+  },
+  "MS-DEMO-0247": {
+    "image": "/products/MS-DEMO-0247.webp",
+    "status": "DEMO",
+    "name": "Herbal Massage Oil - Variant 2",
+    "category": "Ayurveda & Wellness"
+  },
+  "MS-DEMO-0248": {
+    "image": "/products/MS-DEMO-0248.webp",
+    "status": "DEMO",
+    "name": "Herbal Massage Oil - Variant 3",
+    "category": "Ayurveda & Wellness"
+  },
+  "MS-DEMO-0249": {
+    "image": "/products/MS-DEMO-0249.webp",
+    "status": "DEMO",
+    "name": "Herbal Massage Oil - Variant 4",
+    "category": "Ayurveda & Wellness"
+  },
+  "MS-DEMO-0250": {
+    "image": "/products/MS-DEMO-0250.webp",
+    "status": "DEMO",
+    "name": "Herbal Massage Oil - Variant 5",
+    "category": "Ayurveda & Wellness"
+  }
+}

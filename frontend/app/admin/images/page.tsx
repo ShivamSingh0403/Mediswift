@@ -1696,7 +1696,7 @@ export default function AdminImageManagementPage() {
                   <p className="text-[11px] text-slate-500">
                     {editStatus === 'VERIFIED'
                       ? 'Displaying authentic verified packaging photograph with Verified image badge.'
-                      : 'Displaying MediSwift custom verification placeholder with "Product image under verification".'}
+                      : 'Displaying MediSwift healthcare product visual or demo asset.'}
                   </p>
                   {selectedProduct.image_url && (
                     <button

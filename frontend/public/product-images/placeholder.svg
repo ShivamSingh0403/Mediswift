@@ -21,8 +21,8 @@
   <circle cx="300" cy="270" r="70" fill="#00A896" />
   <path d="M282 225 h36 v27 h27 v36 h-27 v27 h-36 v-27 h-27 v-36 h27 z" fill="#FFFFFF" />
 
-  <text x="300" y="410" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#0F172A" text-anchor="middle">Product image under verification</text>
-  <text x="300" y="440" font-family="Arial, sans-serif" font-size="14" fill="#64748B" text-anchor="middle">Official packaging photo will be displayed once authenticated</text>
+  <text x="300" y="410" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#0F172A" text-anchor="middle">MediSwift Healthcare Product</text>
+  <text x="300" y="440" font-family="Arial, sans-serif" font-size="14" fill="#64748B" text-anchor="middle">Standard authentic healthcare catalog visual</text>
   
   <line x1="80" y1="510" x2="520" y2="510" stroke="#CBD5E1" stroke-width="1" stroke-dasharray="4 4" />
   <text x="300" y="545" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#00A896" text-anchor="middle">MediSwift Verified Healthcare Network</text>

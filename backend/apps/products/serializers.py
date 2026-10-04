@@ -1,3 +1,5 @@
+from pathlib import Path
+from django.conf import settings
 from rest_framework import serializers
 from apps.products.models import Category, Brand, Product, ProductImage
 
@@ -6,9 +8,9 @@ def resolve_product_image_url(obj, request=None):
     """
     Authoritative 4-tier image resolution:
     1. VERIFIED REAL PRODUCT IMAGE
-    2. APPROVED / PENDING AUTHORIZED IMAGE
-    3. AI DEMO IMAGE
-    4. MEDISWIFT PLACEHOLDER / NONE
+    2. USER UPLOADED / PENDING AUTHORIZED IMAGE
+    3. DEMO IMAGE (on disk or relation)
+    4. GENERIC HEALTHCARE FALLBACK
     """
     # 1. Check for VERIFIED image in relations
     ver_img = obj.images.filter(image_status='VERIFIED').first()
@@ -21,8 +23,8 @@ def resolve_product_image_url(obj, request=None):
                 return request.build_absolute_uri(ver_img.image_url) if request else ver_img.image_url
             return ver_img.image_url
 
-    # 2. Check for PENDING_REVIEW / DOWNLOADED image in relations
-    pending_img = obj.images.filter(image_status__in=['PENDING_REVIEW', 'DOWNLOADED']).first()
+    # 2. Check for USER_UPLOADED / PENDING_REVIEW / DOWNLOADED image in relations
+    pending_img = obj.images.filter(image_status__in=['USER_UPLOADED', 'PENDING_REVIEW', 'DOWNLOADED']).first()
     if pending_img:
         f = pending_img.image_file or pending_img.image
         if f and f.name:
@@ -32,8 +34,30 @@ def resolve_product_image_url(obj, request=None):
                 return request.build_absolute_uri(pending_img.image_url) if request else pending_img.image_url
             return pending_img.image_url
 
-    # 3. Check for AI_DEMO_ONLY image in relations
-    demo_img = obj.images.filter(image_status='AI_DEMO_ONLY').first()
+    # 3. Check for LICENSED image in relations
+    lic_img = obj.images.filter(image_status='LICENSED').first()
+    if lic_img:
+        f = lic_img.image_file or lic_img.image
+        if f and f.name:
+            return request.build_absolute_uri(f.url) if request else f.url
+        if lic_img.image_url:
+            return request.build_absolute_uri(lic_img.image_url) if request and lic_img.image_url.startswith('/media/') else lic_img.image_url
+
+    # 4. Check on-disk local media/products/<SKU>.webp or media/product_images/ai_demo/<SKU>.webp
+    if obj.sku:
+        sku = obj.sku.strip()
+        prod_path = Path(settings.MEDIA_ROOT) / 'products' / f"{sku}.webp"
+        if prod_path.exists():
+            rel_url = f"/media/products/{sku}.webp"
+            return request.build_absolute_uri(rel_url) if request else rel_url
+
+        demo_path = Path(settings.MEDIA_ROOT) / 'product_images' / 'ai_demo' / f"{sku}.webp"
+        if demo_path.exists():
+            rel_url = f"/media/product_images/ai_demo/{sku}.webp"
+            return request.build_absolute_uri(rel_url) if request else rel_url
+
+    # 5. Check AI_DEMO_ONLY or DEMO image in relations
+    demo_img = obj.images.filter(image_status__in=['AI_DEMO_ONLY', 'DEMO']).first()
     if demo_img:
         f = demo_img.image_file or demo_img.image
         if f and f.name:
@@ -43,13 +67,13 @@ def resolve_product_image_url(obj, request=None):
                 return request.build_absolute_uri(demo_img.image_url) if request else demo_img.image_url
             return demo_img.image_url
 
-    # 4. Fallback to product.image_url if populated
+    # 6. Fallback to product.image_url if populated
     if obj.image_url:
         if obj.image_url.startswith('/media/'):
             return request.build_absolute_uri(obj.image_url) if request else obj.image_url
         return obj.image_url
 
-    # Any primary image
+    # 7. Any primary image
     pimg = obj.images.filter(is_primary=True).first() or obj.images.first()
     if pimg:
         f = pimg.image_file or pimg.image
@@ -60,7 +84,35 @@ def resolve_product_image_url(obj, request=None):
                 return request.build_absolute_uri(pimg.image_url) if request else pimg.image_url
             return pimg.image_url
 
+    # 8. Fallback to generic visual if exists
+    fallback_path = Path(settings.MEDIA_ROOT) / 'products' / 'fallback-generic.webp'
+    if fallback_path.exists():
+        rel_url = '/media/products/fallback-generic.webp'
+        return request.build_absolute_uri(rel_url) if request else rel_url
+
     return None
+
+
+def resolve_canonical_image_status(obj):
+    """
+    Returns one of: DEMO, USER_UPLOADED, LICENSED, VERIFIED, MISSING
+    """
+    raw = (obj.image_status or '').upper()
+    if raw == 'VERIFIED' and obj.is_real_product_photo:
+        return 'VERIFIED'
+    if raw in ('USER_UPLOADED', 'PENDING_REVIEW', 'DOWNLOADED'):
+        return 'USER_UPLOADED'
+    if raw == 'LICENSED':
+        return 'LICENSED'
+    if raw in ('AI_DEMO_ONLY', 'DEMO'):
+        return 'DEMO'
+    if raw == 'BROKEN':
+        return 'BROKEN'
+    if raw == 'DUPLICATE':
+        return 'DUPLICATE'
+    if resolve_product_image_url(obj):
+        return 'DEMO'
+    return 'MISSING'
 
 
 class ProductImageSerializer(serializers.ModelSerializer):
@@ -113,8 +165,10 @@ class BrandSerializer(serializers.ModelSerializer):
 class RelatedProductSerializer(serializers.ModelSerializer):
     category_name = serializers.CharField(source='category.name', read_only=True)
     brand_name = serializers.CharField(source='brand.name', read_only=True, default='')
+    image = serializers.SerializerMethodField()
     primary_image = serializers.SerializerMethodField()
     image_url = serializers.SerializerMethodField()
+    image_status = serializers.SerializerMethodField()
     image_alt = serializers.CharField(source='image_alt_text', read_only=True)
     is_real_product_photo = serializers.BooleanField(read_only=True)
     discounted_price = serializers.DecimalField(max_digits=10, decimal_places=2, read_only=True)
@@ -127,8 +181,11 @@ class RelatedProductSerializer(serializers.ModelSerializer):
             'dosage_form', 'strength', 'pack_size', 'price', 'discount_percent',
             'discounted_price', 'stock_quantity', 'in_stock', 'rating', 'review_count',
             'prescription_required', 'requires_prescription',
-            'image_url', 'image_status', 'image_alt', 'is_real_product_photo', 'primary_image'
+            'image', 'image_url', 'image_status', 'image_alt', 'is_real_product_photo', 'primary_image'
         )
+
+    def get_image(self, obj):
+        return resolve_product_image_url(obj, self.context.get('request'))
 
     def get_primary_image(self, obj):
         return resolve_product_image_url(obj, self.context.get('request'))
@@ -136,13 +193,18 @@ class RelatedProductSerializer(serializers.ModelSerializer):
     def get_image_url(self, obj):
         return resolve_product_image_url(obj, self.context.get('request'))
 
+    def get_image_status(self, obj):
+        return resolve_canonical_image_status(obj)
+
 
 class ProductListSerializer(serializers.ModelSerializer):
     category_name = serializers.CharField(source='category.name', read_only=True)
     category_slug = serializers.CharField(source='category.slug', read_only=True)
     brand_name = serializers.CharField(source='brand.name', read_only=True, default='')
+    image = serializers.SerializerMethodField()
     primary_image = serializers.SerializerMethodField()
     image_url = serializers.SerializerMethodField()
+    image_status = serializers.SerializerMethodField()
     image_alt = serializers.CharField(source='image_alt_text', read_only=True)
     is_real_product_photo = serializers.BooleanField(read_only=True)
     discounted_price = serializers.DecimalField(max_digits=10, decimal_places=2, read_only=True)
@@ -160,17 +222,23 @@ class ProductListSerializer(serializers.ModelSerializer):
             'price', 'price_inr', 'original_price_inr', 'discount_percent', 'discount_percentage',
             'discounted_price', 'stock_quantity', 'in_stock', 'rating', 'review_count',
             'prescription_required', 'requires_prescription', 'featured', 'trending', 'bestseller',
-            'primary_image', 'image_url', 'image_status', 'image_alt', 'image_alt_text',
+            'image', 'primary_image', 'image_url', 'image_status', 'image_alt', 'image_alt_text',
             'is_real_product_photo', 'image_source', 'source_url', 'image_license',
             'verified_by', 'verified_at', 'is_demo_data',
             'short_description', 'tags'
         )
+
+    def get_image(self, obj):
+        return resolve_product_image_url(obj, self.context.get('request'))
 
     def get_primary_image(self, obj):
         return resolve_product_image_url(obj, self.context.get('request'))
 
     def get_image_url(self, obj):
         return resolve_product_image_url(obj, self.context.get('request'))
+
+    def get_image_status(self, obj):
+        return resolve_canonical_image_status(obj)
 
 
 class ProductDetailSerializer(serializers.ModelSerializer):
@@ -185,8 +253,10 @@ class ProductDetailSerializer(serializers.ModelSerializer):
     discount_percentage = serializers.DecimalField(max_digits=5, decimal_places=2, read_only=True)
     in_stock = serializers.BooleanField(read_only=True)
     requires_prescription = serializers.BooleanField(read_only=True)
+    image = serializers.SerializerMethodField()
     primary_image = serializers.SerializerMethodField()
     image_url = serializers.SerializerMethodField()
+    image_status = serializers.SerializerMethodField()
     image_alt = serializers.CharField(source='image_alt_text', read_only=True)
     is_real_product_photo = serializers.BooleanField(read_only=True)
     gallery_images = serializers.SerializerMethodField()
@@ -200,7 +270,7 @@ class ProductDetailSerializer(serializers.ModelSerializer):
             'price', 'price_inr', 'original_price_inr', 'discount_percent', 'discount_percentage',
             'discounted_price', 'stock_quantity', 'in_stock', 'rating', 'review_count',
             'prescription_required', 'requires_prescription', 'featured', 'trending', 'bestseller',
-            'image_url', 'image_status', 'image_alt', 'image_alt_text', 'is_real_product_photo',
+            'image', 'image_url', 'image_status', 'image_alt', 'image_alt_text', 'is_real_product_photo',
             'image_source', 'source_url', 'image_license',
             'verified_by', 'verified_at', 'is_demo_data', 'additional_images', 'primary_image', 'gallery_images', 'images',
             'short_description', 'detailed_description', 'description',
@@ -209,11 +279,17 @@ class ProductDetailSerializer(serializers.ModelSerializer):
             'related_products', 'is_active', 'created_at', 'updated_at'
         )
 
+    def get_image(self, obj):
+        return resolve_product_image_url(obj, self.context.get('request'))
+
     def get_primary_image(self, obj):
         return resolve_product_image_url(obj, self.context.get('request'))
 
     def get_image_url(self, obj):
         return resolve_product_image_url(obj, self.context.get('request'))
+
+    def get_image_status(self, obj):
+        return resolve_canonical_image_status(obj)
 
     def get_gallery_images(self, obj):
         urls = []

@@ -1,7 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
-import Image from 'next/image';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useUiStore } from '@/store/ui-store';
@@ -11,26 +10,36 @@ import { useWishlistStore } from '@/store/wishlist-store';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { formatCurrency } from '@/lib/utils';
-import { MedicineImage } from '@/components/ui/medicine-image';
+import { ProductImage } from '@/components/ProductImage';
 import {
   X,
   Plus,
   Minus,
   Star,
-  Pill,
   Heart,
-  ShieldCheck,
-  Truck,
   ArrowRight,
   AlertCircle,
 } from 'lucide-react';
 
 export function ProductQuickViewModal() {
-  const { quickViewProduct, setQuickViewProduct, setPrescriptionModalOpen, setCartDrawerOpen } = useUiStore();
+  const { quickViewProduct, setQuickViewProduct, setCartDrawerOpen } = useUiStore();
   const { addItem } = useCartStore();
   const { addToast } = useNotificationStore();
   const { hasProduct, toggleProduct } = useWishlistStore();
   const [quantity, setQuantity] = useState(1);
+
+  // Keyboard accessibility: Escape key to close modal
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setQuickViewProduct(null);
+      }
+    };
+    if (quickViewProduct) {
+      window.addEventListener('keydown', handleKeyDown);
+    }
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [quickViewProduct, setQuickViewProduct]);
 
   if (!quickViewProduct) return null;
 
@@ -53,7 +62,12 @@ export function ProductQuickViewModal() {
 
   return (
     <AnimatePresence>
-      <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
+      <div
+        className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 overflow-y-auto"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="quick-view-title"
+      >
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -73,6 +87,7 @@ export function ProductQuickViewModal() {
           <button
             onClick={() => setQuickViewProduct(null)}
             className="absolute top-4 right-4 z-20 p-2 rounded-full bg-slate-100/80 hover:bg-slate-200 text-slate-500 hover:text-slate-800 transition-colors"
+            aria-label="Close modal"
           >
             <X className="h-5 w-5" />
           </button>
@@ -80,14 +95,14 @@ export function ProductQuickViewModal() {
           <div className="grid grid-cols-1 sm:grid-cols-2">
             {/* Image section */}
             <div className="relative aspect-square sm:aspect-auto bg-slate-50 flex items-center justify-center border-b sm:border-b-0 sm:border-r border-slate-100 min-h-[260px] overflow-hidden">
-              <MedicineImage
+              <ProductImage
                 product={product}
                 className="w-full h-full"
                 sizes="(max-width: 640px) 100vw, 50vw"
               />
 
               {/* Rx Badge */}
-              <div className="absolute top-4 left-4 flex flex-col gap-1.5">
+              <div className="absolute top-4 left-4 flex flex-col gap-1.5 pointer-events-none">
                 {product.prescription_required ? (
                   <Badge variant="rx" className="shadow-xs font-bold text-[10px]">Rx Required</Badge>
                 ) : (
@@ -110,7 +125,7 @@ export function ProductQuickViewModal() {
                   </div>
                 </div>
 
-                <h3 className="font-extrabold text-lg text-slate-900 leading-snug">
+                <h3 id="quick-view-title" className="font-extrabold text-lg text-slate-900 leading-snug">
                   {product.name}
                 </h3>
                 <p className="text-xs text-slate-500 mt-1 line-clamp-2">
@@ -159,6 +174,7 @@ export function ProductQuickViewModal() {
                       type="button"
                       onClick={() => setQuantity(Math.max(1, quantity - 1))}
                       className="p-1.5 text-slate-600 hover:text-slate-900 rounded-lg hover:bg-white"
+                      aria-label="Decrease quantity"
                     >
                       <Minus className="h-3.5 w-3.5" />
                     </button>
@@ -169,6 +185,7 @@ export function ProductQuickViewModal() {
                       type="button"
                       onClick={() => setQuantity(quantity + 1)}
                       className="p-1.5 text-slate-600 hover:text-slate-900 rounded-lg hover:bg-white"
+                      aria-label="Increase quantity"
                     >
                       <Plus className="h-3.5 w-3.5" />
                     </button>
@@ -178,20 +195,27 @@ export function ProductQuickViewModal() {
                     variant="primary"
                     size="md"
                     onClick={handleAddToCart}
-                    className="flex-1 rounded-xl font-bold shadow-sm shadow-[#00A896]/20"
+                    className="flex-1 rounded-xl font-bold shadow-xs hover:shadow-teal-500/20"
                   >
-                    Add to Cart
+                    <span>Add to Cart</span>
                   </Button>
 
                   <button
                     type="button"
-                    onClick={() => toggleProduct(product.id)}
-                    className={`p-2.5 rounded-xl border transition-colors ${
+                    onClick={() => {
+                      toggleProduct(product.id);
+                      addToast({
+                        type: 'info',
+                        title: isWishlisted ? 'Removed from Wishlist' : 'Saved to Wishlist',
+                        message: `${product.name} ${isWishlisted ? 'removed from' : 'saved to'} favorites.`,
+                      });
+                    }}
+                    className={`p-3 rounded-xl border transition-colors ${
                       isWishlisted
                         ? 'border-rose-200 bg-rose-50 text-rose-600'
-                        : 'border-slate-200 text-slate-400 hover:text-slate-700 hover:bg-slate-50'
+                        : 'border-slate-200 bg-white text-slate-600 hover:bg-slate-50'
                     }`}
-                    title={isWishlisted ? 'Remove from wishlist' : 'Save to wishlist'}
+                    aria-label={isWishlisted ? 'Remove from wishlist' : 'Save to wishlist'}
                   >
                     <Heart className={`h-4 w-4 ${isWishlisted ? 'fill-rose-500 text-rose-500' : ''}`} />
                   </button>
@@ -200,9 +224,9 @@ export function ProductQuickViewModal() {
                 <Link
                   href={`/medicines/${product.slug}`}
                   onClick={() => setQuickViewProduct(null)}
-                  className="inline-flex items-center justify-center gap-1.5 text-xs font-semibold text-[#00A896] hover:underline w-full text-center"
+                  className="flex items-center justify-center gap-1.5 text-xs font-bold text-[#00A896] hover:text-[#0A2540] py-1 transition-colors"
                 >
-                  <span>View Full Product Details & Clinical Information</span>
+                  <span>View Complete Details & Formulation</span>
                   <ArrowRight className="h-3.5 w-3.5" />
                 </Link>
               </div>

@@ -9,7 +9,7 @@ import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Heart, ShoppingBag, Trash2, ArrowRight } from 'lucide-react';
 import { formatCurrency } from '@/lib/utils';
-import { MedicineImage } from '@/components/ui/medicine-image';
+import { ProductImage } from '@/components/ProductImage';
 
 export default function WishlistPage() {
   const { products, removeProduct, moveToCart, clearWishlist } = useWishlistStore();
@@ -63,7 +63,7 @@ export default function WishlistPage() {
           <p className="text-xs text-slate-500 mt-1 mb-6 max-w-sm mx-auto">
             Explore our verified pharmacy catalog and tap the heart icon on any medicine to save it for later.
           </p>
-          <Link href="/products">
+          <Link href="/medicines">
             <Button variant="primary" size="md">
               Explore Pharmacy Catalog
             </Button>
@@ -75,7 +75,7 @@ export default function WishlistPage() {
             <Card key={product.id} className="p-4 rounded-2xl border border-slate-200 bg-white flex flex-col justify-between shadow-xs overflow-hidden">
               <div>
                 <Link href={`/medicines/${product.slug}`} className="block relative h-40 rounded-xl overflow-hidden mb-3 border border-slate-100">
-                  <MedicineImage
+                  <ProductImage
                     product={product}
                     className="w-full h-full"
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"

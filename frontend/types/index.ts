@@ -55,6 +55,9 @@ export interface Brand {
 }
 
 export type ProductImageStatus =
+  | 'DEMO'
+  | 'USER_UPLOADED'
+  | 'LICENSED'
   | 'MISSING'
   | 'DISCOVERED'
   | 'PENDING_REVIEW'
@@ -101,6 +104,7 @@ export interface Product {
   featured?: boolean;
   trending?: boolean;
   bestseller?: boolean;
+  image?: string;
   primary_image?: string;
   image_url?: string;
   image_status?: ProductImageStatus;

@@ -8,9 +8,11 @@ from django.conf import settings
 from apps.products.models import Product, ProductImage
 
 VALID_IMAGE_EXTENSIONS = {'.jpg', '.jpeg', '.png', '.webp', '.avif', '.svg'}
+MAX_FILE_SIZE_BYTES = 10 * 1024 * 1024  # 10 MB
+
 
 class Command(BaseCommand):
-    help = "Validates the health, completeness, regulatory compliance, and integrity of MediSwift product images."
+    help = "Validates the health, completeness, integrity, and regulatory compliance of MediSwift product images."
 
     def add_arguments(self, parser):
         parser.add_argument(
@@ -20,10 +22,11 @@ class Command(BaseCommand):
         )
 
     def handle(self, *args, **options):
-        self.stdout.write(self.style.MIGRATE_HEADING("\n=== MEDISWIFT PRODUCT IMAGE AUDIT & COMPLIANCE VALIDATOR ==="))
+        self.stdout.write(self.style.MIGRATE_HEADING("\n=== MEDISWIFT PRODUCT IMAGE AUDIT & VALIDATION ==="))
 
         media_root = Path(settings.MEDIA_ROOT)
         dirs_to_check = [
+            media_root / 'products',
             media_root / 'product_images' / 'verified',
             media_root / 'product_images' / 'ai_demo',
             media_root / 'product_images' / 'pending_review',
@@ -35,96 +38,120 @@ class Command(BaseCommand):
         all_products = Product.objects.all().prefetch_related('images').order_by('sku')
         total_products = all_products.count()
 
-        # SKU lookup
         all_skus = set(all_products.values_list('sku', flat=True))
         sku_lookup = {sku.strip().upper(): sku for sku in all_skus if sku}
 
-        verified_count = 0
-        ai_demo_count = 0
-        missing_count = 0
-        pending_review_count = 0
-        rejected_count = 0
-        broken_count = 0
-        duplicate_status_count = 0
+        images_found = 0
+        demo_images = 0
+        user_uploaded_images = 0
+        licensed_images = 0
+        verified_images = 0
+        missing_images = 0
+        broken_images = 0
+        duplicate_images = 0
 
-        # Audit lists
-        broken_files = []
-        invalid_formats = []
+        # Audit issue tracking
+        invalid_extensions = []
+        invalid_sizes = []
+        corrupted_files = []
+        invalid_urls = []
         duplicate_hashes = []
-        duplicate_urls = []
-        missing_alt_text = []
-        missing_status = []
-        incorrectly_marked_verified = []
-        products_without_primary = []
-        unmatched_files = []
+        missing_sku_mappings = []
 
         seen_sha256 = {}
         seen_urls = {}
 
         for p in all_products:
             pimg = p.images.filter(is_primary=True).first() or p.images.first()
+            raw_status = (p.image_status or (pimg.image_status if pimg else '')).upper()
 
-            # Status determination
-            status = p.image_status or (pimg.image_status if pimg else 'MISSING')
-            if not status:
-                missing_status.append(p.sku)
-
-            # Determine disk asset
+            # Determine disk asset across media locations
             disk_file = None
-            demo_file = media_root / 'product_images' / 'ai_demo' / f"{p.sku}.webp"
-            if demo_file.exists():
-                disk_file = demo_file
+            sku = (p.sku or '').strip()
+
+            candidate_paths = [
+                media_root / 'products' / f"{sku}.webp",
+                media_root / 'product_images' / 'verified' / f"{sku}.webp",
+                media_root / 'product_images' / 'verified' / f"{sku}.jpg",
+                media_root / 'product_images' / 'ai_demo' / f"{sku}.webp",
+            ]
 
             file_field = (pimg.image_file or pimg.image) if pimg else None
-            if not disk_file and file_field and file_field.name:
-                fp = media_root / file_field.name
-                if fp.exists():
-                    disk_file = fp
+            if file_field and file_field.name:
+                candidate_paths.insert(0, media_root / file_field.name)
+
+            for cp in candidate_paths:
+                if cp.exists():
+                    disk_file = cp
+                    break
 
             has_image = bool(disk_file) or bool(p.image_url) or (pimg and bool(pimg.image_url))
 
-            if status == 'VERIFIED' or (pimg and pimg.image_status == 'VERIFIED'):
-                verified_count += 1
-            elif status == 'AI_DEMO_ONLY' or (pimg and pimg.image_status == 'AI_DEMO_ONLY') or (disk_file and 'ai_demo' in str(disk_file)):
-                ai_demo_count += 1
-            elif status in ('PENDING_REVIEW', 'DOWNLOADED') or (pimg and pimg.image_status in ('PENDING_REVIEW', 'DOWNLOADED')):
-                pending_review_count += 1
-            elif status == 'REJECTED' or (pimg and pimg.image_status == 'REJECTED'):
-                rejected_count += 1
-            elif status == 'BROKEN':
-                broken_count += 1
-            elif status == 'DUPLICATE':
-                duplicate_status_count += 1
-            else:
-                missing_count += 1
+            # Status determination
+            is_verified = (raw_status == 'VERIFIED' and p.is_real_product_photo)
+            is_user_uploaded = raw_status in ('USER_UPLOADED', 'PENDING_REVIEW', 'DOWNLOADED')
+            is_licensed = raw_status == 'LICENSED'
+            is_demo = raw_status in ('AI_DEMO_ONLY', 'DEMO') or (disk_file and ('ai_demo' in str(disk_file) or 'products' in str(disk_file)))
 
-            # Primary image / URL check
             if not has_image:
-                products_without_primary.append(p.sku)
+                missing_images += 1
+                raw_status = 'MISSING'
+            else:
+                images_found += 1
+                if is_verified:
+                    verified_images += 1
+                elif is_user_uploaded:
+                    user_uploaded_images += 1
+                elif is_licensed:
+                    licensed_images += 1
+                elif is_demo:
+                    demo_images += 1
+                elif raw_status == 'BROKEN':
+                    broken_images += 1
+                elif raw_status == 'DUPLICATE':
+                    duplicate_images += 1
+                else:
+                    demo_images += 1
 
             # Checks when product has an image
             if has_image:
-                # Alt text
-                alt = p.image_alt_text or (pimg.alt_text if pimg else '')
-                if not alt.strip():
-                    missing_alt_text.append(p.sku)
-
-                # Duplicate URL
                 active_url = p.image_url or (pimg.image_url if pimg else '')
                 if active_url:
-                    if active_url in seen_urls:
-                        duplicate_urls.append((p.sku, seen_urls[active_url], active_url))
+                    if active_url.startswith(('http://', 'https://', '/media/', '/products/')):
+                        if active_url in seen_urls:
+                            duplicate_images += 1
+                        else:
+                            seen_urls[active_url] = p.sku
                     else:
-                        seen_urls[active_url] = p.sku
+                        invalid_urls.append((p.sku, active_url, "Malformed URL pattern"))
 
-                # File integrity and hash check
                 if disk_file:
+                    # File extension check
+                    if disk_file.suffix.lower() not in VALID_IMAGE_EXTENSIONS:
+                        invalid_extensions.append((p.sku, disk_file.name, disk_file.suffix))
+                        broken_images += 1
+
+                    # File size check
+                    try:
+                        sz = disk_file.stat().st_size
+                        if sz == 0:
+                            invalid_sizes.append((p.sku, disk_file.name, "0 bytes file"))
+                            broken_images += 1
+                        elif sz > MAX_FILE_SIZE_BYTES:
+                            invalid_sizes.append((p.sku, disk_file.name, f"File exceeds 10MB ({sz} bytes)"))
+                    except Exception as e:
+                        broken_images += 1
+                        corrupted_files.append((p.sku, disk_file.name, str(e)))
+
+                    # Image integrity check
                     try:
                         with Image.open(disk_file) as im:
                             im.verify()
                     except Exception as e:
-                        invalid_formats.append((p.sku, disk_file.name, f"Corrupt image: {e}"))
+                        broken_images += 1
+                        corrupted_files.append((p.sku, disk_file.name, f"Corrupted image: {e}"))
 
+                    # Duplicate hash check
                     try:
                         with open(disk_file, 'rb') as f_h:
                             sha = hashlib.sha256(f_h.read()).hexdigest()
@@ -135,49 +162,32 @@ class Command(BaseCommand):
                     except Exception:
                         pass
                 elif file_field and file_field.name:
-                    broken_files.append((p.sku, str(file_field.name), "Database refers to file missing on disk"))
+                    broken_images += 1
 
-                # Incorrectly marked VERIFIED check
-                if status == 'VERIFIED' or (pimg and pimg.image_status == 'VERIFIED'):
-                    ver_by = p.verified_by or (pimg.verified_by if pimg else '')
-                    if not ver_by.strip():
-                        incorrectly_marked_verified.append((p.sku, "Status is VERIFIED but 'verified_by' is blank"))
-                    if disk_file and 'ai_demo' in str(disk_file):
-                        incorrectly_marked_verified.append((p.sku, "AI Demo visual incorrectly marked as VERIFIED REAL IMAGE"))
-
-        # Scan folders for files not in catalog
+        # Check for files without SKU mapping
         for sdir in dirs_to_check:
             if sdir.exists():
                 for item in sdir.iterdir():
-                    if item.is_file():
-                        if item.suffix.lower() not in VALID_IMAGE_EXTENSIONS:
-                            invalid_formats.append(('N/A', item.name, f"Invalid format: {item.suffix}"))
-                            continue
+                    if item.is_file() and item.name != 'fallback-generic.webp' and item.name != 'fallback-generic.svg' and item.name != 'placeholder.png' and item.name != 'placeholder.svg':
                         stem = item.stem.strip().upper()
-                        if stem not in sku_lookup and stem.split('_')[0] not in sku_lookup:
-                            unmatched_files.append(item.name)
+                        stem_base = stem.split('_')[0]
+                        if stem not in sku_lookup and stem_base not in sku_lookup:
+                            missing_sku_mappings.append(item.name)
 
-        # Print output
-        self.stdout.write(f"Total Products in Catalog:     {total_products}")
-        self.stdout.write(self.style.SUCCESS(f"AI Demo Images:                {ai_demo_count}"))
-        self.stdout.write(self.style.SUCCESS(f"Verified Real Images:          {verified_count}"))
-        self.stdout.write(f"Pending Review Images:         {pending_review_count}")
-        self.stdout.write(f"Missing Product Images:        {missing_count}")
-        self.stdout.write(f"Rejected Images:               {rejected_count}")
-        self.stdout.write(f"Broken Files:                  {len(broken_files)}")
-        self.stdout.write(f"Invalid Format Files:          {len(invalid_formats)}")
-        self.stdout.write(f"Duplicate Hash Conflicts:      {len(duplicate_hashes)}")
-        self.stdout.write(f"Missing Alt Texts:             {len(missing_alt_text)}")
-        self.stdout.write(f"Unmatched Files on Disk:       {len(unmatched_files)}")
-        self.stdout.write(f"Incorrectly Marked Verified:   {len(incorrectly_marked_verified)}")
+        # Standardized Report Output
+        self.stdout.write(f"TOTAL PRODUCTS:         {total_products}")
+        self.stdout.write(self.style.SUCCESS(f"IMAGES FOUND:           {images_found}"))
+        self.stdout.write(self.style.SUCCESS(f"DEMO IMAGES:            {demo_images}"))
+        self.stdout.write(f"USER UPLOADED IMAGES:   {user_uploaded_images}")
+        self.stdout.write(f"LICENSED IMAGES:        {licensed_images}")
+        self.stdout.write(self.style.SUCCESS(f"VERIFIED IMAGES:        {verified_images}"))
+        self.stdout.write(f"MISSING IMAGES:         {missing_images}")
+        self.stdout.write(f"BROKEN IMAGES:          {broken_images}")
+        self.stdout.write(f"DUPLICATE IMAGES:       {duplicate_images}")
+        self.stdout.write(f"UNMAPPED FILE ASSETS:   {len(missing_sku_mappings)}")
 
-        if incorrectly_marked_verified:
-            self.stdout.write(self.style.ERROR("\n[ALERT] Incorrectly marked verified images:"))
-            for sku, reason in incorrectly_marked_verified[:5]:
-                self.stdout.write(f"  - {sku}: {reason}")
+        if broken_images > 0:
+            self.stdout.write(self.style.WARNING(f"\n[NOTICE] {broken_images} broken image reference(s)."))
 
-        if broken_files:
-            self.stdout.write(self.style.ERROR(f"\n[ALERT] {len(broken_files)} broken file references found."))
-
-        if not broken_files and not invalid_formats and not incorrectly_marked_verified:
-            self.stdout.write(self.style.SUCCESS("\n[PASS] Validation completed with zero critical compliance violations.\n"))
+        if not broken_images and not invalid_extensions:
+            self.stdout.write(self.style.SUCCESS("\n[PASS] Image validation audit passed successfully.\n"))

@@ -15,8 +15,8 @@ import { Badge } from '@/components/ui/badge';
 import { Card } from '@/components/ui/card';
 import { ProductCard } from '@/components/product-card';
 import { formatCurrency } from '@/lib/utils';
-import { MedicineImage } from '@/components/ui/medicine-image';
-import { resolveProductImage } from '@/lib/image-mapper';
+import { ProductImage } from '@/components/ProductImage';
+import { resolveProductImage } from '@/lib/image-resolver';
 import {
   ShieldCheck,
   Truck,
@@ -38,6 +38,8 @@ import {
   Clock,
   RotateCcw,
   Zap,
+  ZoomIn,
+  X,
 } from 'lucide-react';
 
 export default function MedicineDetailPage({ params }: { params: Promise<{ slug: string }> }) {
@@ -52,6 +54,7 @@ export default function MedicineDetailPage({ params }: { params: Promise<{ slug:
 
   const [product, setProduct] = useState<Product | null>(null);
   const [selectedImage, setSelectedImage] = useState<string>('');
+  const [isZoomed, setIsZoomed] = useState(false);
   const [quantity, setQuantity] = useState(1);
   const [activeTab, setActiveTab] = useState<'description' | 'ingredients' | 'usage' | 'packaging' | 'warnings' | 'storage' | 'reviews'>('description');
   const [loading, setLoading] = useState(true);
@@ -67,9 +70,8 @@ export default function MedicineDetailPage({ params }: { params: Promise<{ slug:
           const prod = res.data;
           setProduct(prod);
 
-          const imageMeta = resolveProductImage(prod);
-          const primary = imageMeta.imageUrl || '';
-          setSelectedImage(primary);
+          const imageResolved = resolveProductImage(prod);
+          setSelectedImage(imageResolved.src || '');
 
           // Load related products
           if (prod.related_products && prod.related_products.length > 0) {
@@ -146,7 +148,10 @@ export default function MedicineDetailPage({ params }: { params: Promise<{ slug:
     setCartDrawerOpen(true);
   };
 
+  const resolvedMain = resolveProductImage(product);
   const allImages = Array.from(new Set([
+    selectedImage || resolvedMain.src,
+    resolvedMain.src,
     product.image_url,
     product.primary_image,
     ...(product.gallery_images || []),
@@ -182,19 +187,30 @@ export default function MedicineDetailPage({ params }: { params: Promise<{ slug:
           <div className="sticky top-24 space-y-4">
             {/* Primary Large Display */}
             <div className="relative w-full aspect-square rounded-3xl border border-slate-200/80 bg-white overflow-hidden shadow-xs flex items-center justify-center group">
-              <MedicineImage
+              <ProductImage
                 product={{
                   ...product,
-                  image_url: selectedImage || product.image_url,
-                  primary_image: selectedImage || product.primary_image,
+                  image_url: selectedImage || resolvedMain.src,
+                  primary_image: selectedImage || resolvedMain.src,
                 }}
-                className="w-full h-full"
+                className="w-full h-full cursor-zoom-in"
                 sizes="(max-width: 1024px) 100vw, 40vw"
                 priority
+                onClick={() => setIsZoomed(true)}
               />
 
+              {/* Zoom Trigger Button */}
+              <button
+                type="button"
+                onClick={() => setIsZoomed(true)}
+                className="absolute bottom-3 right-3 p-2 rounded-xl bg-white/90 backdrop-blur-md shadow-xs text-slate-700 hover:text-[#00A896] hover:bg-white transition-all z-10"
+                title="Click to zoom image"
+              >
+                <ZoomIn className="h-4 w-4" />
+              </button>
+
               {/* Floating Top Badges */}
-              <div className="absolute top-4 left-4 flex flex-col gap-2 z-10">
+              <div className="absolute top-4 left-4 flex flex-col gap-2 z-10 pointer-events-none">
                 {product.prescription_required ? (
                   <Badge variant="rx" className="shadow-xs font-bold text-xs">
                     Rx Prescription Required
@@ -212,7 +228,7 @@ export default function MedicineDetailPage({ params }: { params: Promise<{ slug:
               </div>
 
               {discountVal > 0 && (
-                <div className="absolute top-4 right-4 z-10">
+                <div className="absolute top-4 right-4 z-10 pointer-events-none">
                   <span className="text-xs font-black text-emerald-800 bg-emerald-100/95 backdrop-blur-xs px-3 py-1 rounded-full shadow-xs">
                     {Math.round(discountVal)}% OFF
                   </span>
@@ -229,7 +245,7 @@ export default function MedicineDetailPage({ params }: { params: Promise<{ slug:
                     type="button"
                     onClick={() => setSelectedImage(img)}
                     className={`relative w-20 h-20 rounded-2xl overflow-hidden border-2 shrink-0 transition-all ${
-                      selectedImage === img
+                      (selectedImage === img || (!selectedImage && img === resolvedMain.src))
                         ? 'border-[#00A896] ring-2 ring-[#00A896]/30 scale-105 shadow-xs'
                         : 'border-slate-200 opacity-70 hover:opacity-100'
                     }`}
@@ -239,10 +255,43 @@ export default function MedicineDetailPage({ params }: { params: Promise<{ slug:
                       alt={`${product.name} thumbnail ${idx + 1}`}
                       fill
                       sizes="80px"
-                      className="object-cover"
+                      unoptimized
+                      className="object-contain p-1"
                     />
                   </button>
                 ))}
+              </div>
+            )}
+
+            {/* Zoom Lightbox Modal */}
+            {isZoomed && (
+              <div
+                className="fixed inset-0 z-50 bg-slate-900/80 backdrop-blur-sm flex items-center justify-center p-4 sm:p-8"
+                onClick={() => setIsZoomed(false)}
+              >
+                <div
+                  className="relative max-w-3xl w-full aspect-square bg-white rounded-3xl p-6 shadow-2xl flex items-center justify-center overflow-hidden"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <button
+                    type="button"
+                    onClick={() => setIsZoomed(false)}
+                    className="absolute top-4 right-4 p-2 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-700 transition-all z-20"
+                    title="Close"
+                  >
+                    <X className="h-5 w-5" />
+                  </button>
+                  <ProductImage
+                    product={{
+                      ...product,
+                      image_url: selectedImage || resolvedMain.src,
+                      primary_image: selectedImage || resolvedMain.src,
+                    }}
+                    className="w-full h-full"
+                    sizes="90vw"
+                    priority
+                  />
+                </div>
               </div>
             )}
 
@@ -512,24 +561,24 @@ export default function MedicineDetailPage({ params }: { params: Promise<{ slug:
                       <div className="flex items-center gap-1.5 font-bold text-sm">
                         {product.image_status === 'VERIFIED' ? (
                           <span className="text-emerald-600 flex items-center gap-1">
-                            <ShieldCheck className="h-4 w-4" /> Verified image
+                            <ShieldCheck className="h-4 w-4" /> Verified Authentic Image
                           </span>
-                        ) : product.image_status === 'AI_DEMO_ONLY' ? (
-                          <span className="text-indigo-600 flex items-center gap-1">
-                            <Sparkles className="h-4 w-4" /> AI Demo Visual
+                        ) : (product.image_status === 'AI_DEMO_ONLY' || product.image_status === 'DEMO') ? (
+                          <span className="text-slate-800 flex items-center gap-1">
+                            <Sparkles className="h-4 w-4 text-teal-600" /> Demo Visual
                           </span>
                         ) : (
                           <span className="text-amber-700 flex items-center gap-1">
-                            <Clock className="h-4 w-4" /> Image under review
+                            <Clock className="h-4 w-4" /> User Uploaded (Under Review)
                           </span>
                         )}
                       </div>
                       <p className="text-[11px] text-slate-500 mt-1">
                         {product.image_status === 'VERIFIED'
                           ? 'This product photograph has been verified against authorized pharmaceutical distributor packaging.'
-                          : product.image_status === 'AI_DEMO_ONLY'
-                          ? 'AI-generated demo visual. For illustration only. Not a real product photo. Authentic packaging photograph pending distributor verification.'
-                          : 'Product image under verification. An authentic packaging photograph will be displayed once verified against authorized distributor inventory.'}
+                          : (product.image_status === 'AI_DEMO_ONLY' || product.image_status === 'DEMO')
+                          ? 'MediSwift Demo Visual. Displayed for catalog illustration. Not a real pharmaceutical medicine photograph.'
+                          : 'User-submitted packaging visual currently undergoing distributor inventory review.'}
                       </p>
                       {product.image_status === 'VERIFIED' && product.verified_by && (
                         <div className="text-[11px] text-slate-600 pt-1 font-medium">
@@ -657,7 +706,7 @@ export default function MedicineDetailPage({ params }: { params: Promise<{ slug:
               <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
                 <div className="flex items-center gap-3">
                   <div className="relative w-16 h-16 rounded-xl bg-white border border-slate-200 overflow-hidden shrink-0">
-                    <MedicineImage
+                    <ProductImage
                       product={product}
                       className="w-full h-full"
                       sizes="64px"
@@ -666,7 +715,7 @@ export default function MedicineDetailPage({ params }: { params: Promise<{ slug:
                   </div>
                   <Plus className="h-4 w-4 text-slate-400 shrink-0" />
                   <div className="relative w-16 h-16 rounded-xl bg-white border border-slate-200 overflow-hidden shrink-0">
-                    <MedicineImage
+                    <ProductImage
                       product={frequentlyBought}
                       className="w-full h-full"
                       sizes="64px"

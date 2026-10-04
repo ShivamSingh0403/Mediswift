@@ -11,7 +11,7 @@ import { useUiStore } from '@/store/ui-store';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { formatCurrency } from '@/lib/utils';
-import { MedicineImage } from '@/components/ui/medicine-image';
+import { ProductImage } from '@/components/ProductImage';
 import { Plus, Star, Sparkles, TrendingUp, Heart, Eye } from 'lucide-react';
 
 interface ProductListRowProps {
@@ -57,11 +57,10 @@ export function ProductListRow({ product }: ProductListRowProps) {
       <div className="flex items-start gap-4 min-w-0 flex-1">
         {/* Thumbnail */}
         <Link href={`/medicines/${product.slug}`} className="relative w-24 h-24 sm:w-28 sm:h-28 rounded-xl bg-slate-50 border border-slate-100 overflow-hidden shrink-0 flex items-center justify-center">
-          <MedicineImage
+          <ProductImage
             product={product}
             className="w-full h-full"
             sizes="112px"
-            compact={false}
           />
         </Link>
 

@@ -124,9 +124,19 @@ This seeds initial active promotional coupons:
 - `FREEDEL`: Free delivery discount (Min. order ₹249)
 - `MEGA25`: 25% OFF up to ₹500 (Min. order ₹1,499)
 
-### 6. Running the Final Major Test Suite
+### 6. Product Image Pipeline & Catalog Commands
+```bash
+# Validate integrity of product images across catalog
+python manage.py validate_product_images
+
+# Assign deterministic demo healthcare visuals to active products
+python manage.py assign_demo_images
+```
+
+### 7. Running the Final Major Test Suite
 ```bash
 python test_final_suite.py
+python test_image_discovery_suite.py
 ```
 Validates:
 1. Indian Address CRUD and default setting.
@@ -137,11 +147,37 @@ Validates:
 6. Authoritative payment verification with gateway simulation and status transitions.
 7. In-app notification creation across categories.
 8. One-click order reordering.
+9. Deterministic product image discovery, verification statuses, and generic fallbacks.
 
-### 7. Running with Docker Compose
+### 8. Frontend Validation & Production Build
+```bash
+cd frontend
+# Typecheck
+npx tsc --noEmit
+# Production build
+npm run build
+```
+
+### 9. Running with Docker Compose
 ```bash
 docker compose up --build
 ```
+
+---
+
+## 🛍 Marketplace 3.0 & Centralized Image System
+
+- **Unified Image Resolution (`resolveProductImage(product)`)**:
+  - Centralized in `frontend/lib/image-resolver.ts` and `frontend/components/ProductImage.tsx`.
+  - Used uniformly by `ProductCard`, `ProductDetail`, `QuickView`, `Cart`, `Wishlist`, and `SearchOverlay`.
+  - 4-tier priority: Verified uploaded image ➔ Approved local/manifest image ➔ Deterministic fictional demo visual (`AI_DEMO_ONLY`) ➔ Generic healthcare fallback (`fallback-generic.webp`).
+  - No fabricated medicine packaging; strictly compliant healthcare visuals.
+- **Search, Filtering & Responsive Grid**:
+  - Debounced real-time product search with SKU, brand, and name indexing.
+  - Sticky desktop filter sidebar & animated mobile drawer.
+  - 2-column mobile (360px–430px), 3-column tablet (768px), 4-column desktop (1024px–1440px), 5-column wide (1920px).
+  - Quick View modal with Escape key accessibility, focus trapping, and ARIA dialog roles.
+  - Authentic INR (`₹`) formatting across all price displays and totals.
 
 ---
 
