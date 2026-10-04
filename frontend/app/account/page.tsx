@@ -53,7 +53,7 @@ function AccountDashboardContent() {
   const searchParams = useSearchParams();
   const initialTab = searchParams.get('tab') || 'overview';
 
-  const { user, isAuthenticated, logout } = useAuthStore();
+  const { user, isAuthenticated, logout, setUser } = useAuthStore();
   const { addToast } = useNotificationStore();
   const { productIds, toggleProduct } = useWishlistStore();
   const { addItem } = useCartStore();
@@ -83,6 +83,33 @@ function AccountDashboardContent() {
     address_type: 'HOME' as 'HOME' | 'WORK' | 'OTHER',
     is_default: false,
   });
+
+  // Profile Edit State
+  const [profileForm, setProfileForm] = useState({
+    first_name: user?.first_name || '',
+    last_name: user?.last_name || '',
+    phone_number: user?.phone_number || '',
+  });
+  const [profileUpdating, setProfileUpdating] = useState(false);
+
+  // Security Password State
+  const [passwordForm, setPasswordForm] = useState({
+    current_password: '',
+    new_password: '',
+    confirm_password: '',
+  });
+  const [passwordUpdating, setPasswordUpdating] = useState(false);
+
+  // Update profile form when user changes
+  useEffect(() => {
+    if (user) {
+      setProfileForm({
+        first_name: user.first_name || '',
+        last_name: user.last_name || '',
+        phone_number: user.phone_number || '',
+      });
+    }
+  }, [user]);
 
   // Fetch live user data when authenticated
   useEffect(() => {
@@ -219,6 +246,80 @@ function AccountDashboardContent() {
         title: 'Error',
         message: 'Failed to delete address.',
       });
+    }
+  };
+
+  const handleUpdateProfile = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setProfileUpdating(true);
+    try {
+      const res = await authService.updateProfile({
+        first_name: profileForm.first_name,
+        last_name: profileForm.last_name,
+        phone_number: profileForm.phone_number,
+      } as any);
+      if (res?.data) {
+        setUser(res.data);
+        addToast({
+          type: 'success',
+          title: 'Profile Updated',
+          message: 'Your personal information has been saved successfully.',
+        });
+      }
+    } catch {
+      addToast({
+        type: 'error',
+        title: 'Update Failed',
+        message: 'Could not update profile details. Please try again.',
+      });
+    } finally {
+      setProfileUpdating(false);
+    }
+  };
+
+  const handleUpdatePassword = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (passwordForm.new_password !== passwordForm.confirm_password) {
+      addToast({
+        type: 'error',
+        title: 'Password Mismatch',
+        message: 'New password and confirmation do not match.',
+      });
+      return;
+    }
+    if (passwordForm.new_password.length < 6) {
+      addToast({
+        type: 'error',
+        title: 'Weak Password',
+        message: 'New password must be at least 6 characters.',
+      });
+      return;
+    }
+    setPasswordUpdating(true);
+    try {
+      await authService.updateProfile({
+        current_password: passwordForm.current_password,
+        new_password: passwordForm.new_password,
+      } as any);
+      setPasswordForm({
+        current_password: '',
+        new_password: '',
+        confirm_password: '',
+      });
+      addToast({
+        type: 'success',
+        title: 'Password Changed',
+        message: 'Your account password has been updated securely.',
+      });
+    } catch (err: any) {
+      const errMsg = err?.response?.data?.message || 'Failed to update password. Please check your current password.';
+      addToast({
+        type: 'error',
+        title: 'Password Error',
+        message: errMsg,
+      });
+    } finally {
+      setPasswordUpdating(false);
     }
   };
 
@@ -440,10 +541,12 @@ function AccountDashboardContent() {
       <div className="flex border-b border-slate-200 overflow-x-auto mb-8 gap-2">
         {[
           { id: 'overview', label: 'Overview' },
-          { id: 'orders', label: `My Orders (${orders.length})` },
-          { id: 'prescriptions', label: `Prescriptions (${prescriptions.length})` },
+          { id: 'profile', label: 'Profile' },
+          { id: 'orders', label: `Orders (${orders.length})` },
           { id: 'wishlist', label: `Wishlist (${productIds.length})` },
-          { id: 'addresses', label: `Saved Addresses (${addresses.length})` },
+          { id: 'addresses', label: `Addresses (${addresses.length})` },
+          { id: 'prescriptions', label: `Prescription Area (${prescriptions.length})` },
+          { id: 'security', label: 'Security' },
         ].map((tab) => (
           <button
             key={tab.id}
@@ -465,6 +568,14 @@ function AccountDashboardContent() {
           <Calendar className="h-3.5 w-3.5 text-[#00A896]" />
           <span>Doctor Appointments</span>
         </Link>
+        <button
+          type="button"
+          onClick={handleLogout}
+          className="pb-3 px-4 text-xs font-bold text-rose-500 hover:text-rose-700 transition-all border-b-2 border-transparent whitespace-nowrap flex items-center gap-1.5 ml-auto cursor-pointer"
+        >
+          <LogOut className="h-3.5 w-3.5" />
+          <span>Logout</span>
+        </button>
       </div>
 
       {/* Tab 1: Overview */}
@@ -914,6 +1025,172 @@ function AccountDashboardContent() {
               </div>
             </div>
           )}
+        </div>
+      )}
+
+      {/* Tab: Profile */}
+      {activeTab === 'profile' && (
+        <div className="max-w-2xl">
+          <Card className="p-6 sm:p-8 bg-white rounded-3xl border border-slate-200/80 shadow-xs">
+            <div className="flex items-center gap-3 pb-6 border-b border-slate-100">
+              <div className="w-12 h-12 rounded-2xl bg-teal-50 text-[#00A896] flex items-center justify-center">
+                <User className="h-6 w-6" />
+              </div>
+              <div>
+                <h3 className="font-bold text-base text-[#0A2540]">Personal Information</h3>
+                <p className="text-xs text-slate-500">Update your account name, mobile number, and identity records.</p>
+              </div>
+            </div>
+
+            <form onSubmit={handleUpdateProfile} className="space-y-4 mt-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label className="text-xs font-bold text-slate-700 block mb-1">First Name</label>
+                  <Input
+                    value={profileForm.first_name}
+                    onChange={(e) => setProfileForm({ ...profileForm, first_name: e.target.value })}
+                    required
+                    className="rounded-xl text-xs"
+                    placeholder="First Name"
+                  />
+                </div>
+                <div>
+                  <label className="text-xs font-bold text-slate-700 block mb-1">Last Name</label>
+                  <Input
+                    value={profileForm.last_name}
+                    onChange={(e) => setProfileForm({ ...profileForm, last_name: e.target.value })}
+                    className="rounded-xl text-xs"
+                    placeholder="Last Name"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="text-xs font-bold text-slate-700 block mb-1">Mobile Number</label>
+                <div className="relative">
+                  <Phone className="h-4 w-4 absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
+                  <Input
+                    value={profileForm.phone_number}
+                    onChange={(e) => setProfileForm({ ...profileForm, phone_number: e.target.value })}
+                    className="rounded-xl text-xs pl-9"
+                    placeholder="+91 98765 43210"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="text-xs font-bold text-slate-700 block mb-1">Email Address</label>
+                <div className="relative">
+                  <Mail className="h-4 w-4 absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
+                  <Input
+                    value={user.email}
+                    disabled
+                    className="rounded-xl text-xs pl-9 bg-slate-50 text-slate-500 cursor-not-allowed"
+                  />
+                </div>
+                <p className="text-[11px] text-slate-400 mt-1">Verified MediSwift login identity.</p>
+              </div>
+
+              <div className="pt-2">
+                <Button
+                  type="submit"
+                  variant="primary"
+                  disabled={profileUpdating}
+                  className="rounded-xl font-bold text-xs h-10 px-6"
+                >
+                  {profileUpdating ? 'Saving...' : 'Save Profile Changes'}
+                </Button>
+              </div>
+            </form>
+          </Card>
+        </div>
+      )}
+
+      {/* Tab: Security */}
+      {activeTab === 'security' && (
+        <div className="max-w-2xl space-y-6">
+          <Card className="p-6 sm:p-8 bg-white rounded-3xl border border-slate-200/80 shadow-xs">
+            <div className="flex items-center gap-3 pb-6 border-b border-slate-100">
+              <div className="w-12 h-12 rounded-2xl bg-teal-50 text-[#00A896] flex items-center justify-center">
+                <Lock className="h-6 w-6" />
+              </div>
+              <div>
+                <h3 className="font-bold text-base text-[#0A2540]">Password &amp; Security</h3>
+                <p className="text-xs text-slate-500">Manage your password and session encryption controls.</p>
+              </div>
+            </div>
+
+            <form onSubmit={handleUpdatePassword} className="space-y-4 mt-6">
+              <div>
+                <label className="text-xs font-bold text-slate-700 block mb-1">Current Password</label>
+                <Input
+                  type="password"
+                  value={passwordForm.current_password}
+                  onChange={(e) => setPasswordForm({ ...passwordForm, current_password: e.target.value })}
+                  required
+                  placeholder="Enter current password"
+                  className="rounded-xl text-xs"
+                />
+              </div>
+
+              <div>
+                <label className="text-xs font-bold text-slate-700 block mb-1">New Password</label>
+                <Input
+                  type="password"
+                  value={passwordForm.new_password}
+                  onChange={(e) => setPasswordForm({ ...passwordForm, new_password: e.target.value })}
+                  required
+                  placeholder="At least 6 characters"
+                  className="rounded-xl text-xs"
+                />
+              </div>
+
+              <div>
+                <label className="text-xs font-bold text-slate-700 block mb-1">Confirm New Password</label>
+                <Input
+                  type="password"
+                  value={passwordForm.confirm_password}
+                  onChange={(e) => setPasswordForm({ ...passwordForm, confirm_password: e.target.value })}
+                  required
+                  placeholder="Re-enter new password"
+                  className="rounded-xl text-xs"
+                />
+              </div>
+
+              <div className="pt-2">
+                <Button
+                  type="submit"
+                  variant="primary"
+                  disabled={passwordUpdating}
+                  className="rounded-xl font-bold text-xs h-10 px-6"
+                >
+                  {passwordUpdating ? 'Updating...' : 'Update Password'}
+                </Button>
+              </div>
+            </form>
+          </Card>
+
+          <Card className="p-6 bg-white rounded-3xl border border-slate-200/80 shadow-xs">
+            <div className="flex items-center justify-between">
+              <div>
+                <h4 className="font-bold text-sm text-[#0A2540]">Active Session</h4>
+                <p className="text-xs text-slate-500 mt-0.5">Signed in as {user.email}</p>
+                <div className="flex items-center gap-1.5 text-xs text-emerald-600 font-semibold mt-2">
+                  <ShieldCheck className="h-4 w-4" />
+                  <span>256-Bit Encrypted Patient Session</span>
+                </div>
+              </div>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={handleLogout}
+                className="rounded-xl text-rose-600 border-rose-200 hover:bg-rose-50 text-xs font-bold"
+              >
+                <LogOut className="h-4 w-4 mr-1.5" />
+                <span>Sign Out</span>
+              </Button>
+            </div>
+          </Card>
         </div>
       )}
     </div>

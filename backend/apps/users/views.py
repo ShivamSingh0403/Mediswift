@@ -49,6 +49,18 @@ class CurrentUserView(APIView):
 
     def patch(self, request):
         user = request.user
+
+        # Support secure password update
+        new_password = request.data.get('new_password')
+        current_password = request.data.get('current_password')
+        if new_password:
+            if not current_password or not user.check_password(current_password):
+                return api_response(message="Current password is incorrect.", status_code=status.HTTP_400_BAD_REQUEST)
+            if len(new_password) < 6:
+                return api_response(message="New password must be at least 6 characters.", status_code=status.HTTP_400_BAD_REQUEST)
+            user.set_password(new_password)
+            user.save()
+
         serializer = UserSerializer(user, data=request.data, partial=True)
         serializer.is_valid(raise_exception=True)
         serializer.save()

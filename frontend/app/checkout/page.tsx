@@ -36,21 +36,23 @@ import { addressService, AddressPayload } from '@/services/address-service';
 import { orderService, CouponValidationResult } from '@/services/order-service';
 import { paymentService } from '@/services/payment-service';
 import { prescriptionService } from '@/services/prescription-service';
-import { Address, Coupon, Prescription, PaymentProvider } from '@/types';
+import { Address, Coupon, Prescription, PaymentProvider, Order, OrderItem } from '@/types';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
+import { ProductImage } from '@/components/ProductImage';
 import { formatCurrency } from '@/lib/utils';
 
-type StepNumber = 1 | 2 | 3 | 4 | 5;
+type StepNumber = 1 | 2 | 3 | 4 | 5 | 6;
 
 const STEPS: { num: StepNumber; title: string; subtitle: string; icon: any }[] = [
   { num: 1, title: 'Cart Review', subtitle: 'Review items & quantities', icon: ShoppingBag },
   { num: 2, title: 'Delivery Address', subtitle: 'Select destination', icon: MapPin },
   { num: 3, title: 'Prescription', subtitle: 'Verification check', icon: FileText },
-  { num: 4, title: 'Order Summary', subtitle: 'Discounts & charges', icon: Tag },
+  { num: 4, title: 'Order Review', subtitle: 'Discounts & charges', icon: Tag },
   { num: 5, title: 'Payment Gateway', subtitle: 'Secure payment', icon: CreditCard },
+  { num: 6, title: 'Confirmation', subtitle: 'Order status', icon: CheckCircle2 },
 ];
 
 const INDIAN_STATES = [
@@ -67,6 +69,7 @@ export default function CheckoutPage() {
 
   // Step state
   const [currentStep, setCurrentStep] = useState<StepNumber>(1);
+  const [confirmedOrder, setConfirmedOrder] = useState<Order | null>(null);
 
   // Address state
   const [addresses, setAddresses] = useState<Address[]>([]);
@@ -404,12 +407,14 @@ export default function CheckoutPage() {
       if (selectedProvider === 'COD') {
         // COD does not require immediate payment gateway capture
         clearCart();
+        setConfirmedOrder(orderData);
+        setCurrentStep(6);
         addToast({
           type: 'success',
           title: 'Order Confirmed (Cash on Delivery)',
           message: `Order #${orderData.order_number} confirmed. Express dispatch initiated!`,
         });
-        router.push(`/orders/${orderData.id}`);
+        setIsProcessingPayment(false);
         return;
       }
 
@@ -438,12 +443,14 @@ export default function CheckoutPage() {
 
       // Success
       clearCart();
+      setConfirmedOrder(orderData);
+      setCurrentStep(6);
       addToast({
         type: 'success',
         title: 'Payment Confirmed!',
         message: `Order #${orderData.order_number} confirmed with payment reference ${verifyRes.data.payment.internal_transaction_id}.`,
       });
-      router.push(`/orders/${orderData.id}`);
+      setIsProcessingPayment(false);
     } catch (err: any) {
       const msg = err?.response?.data?.message || err?.message || 'Payment or order processing failed.';
       addToast({
@@ -455,8 +462,8 @@ export default function CheckoutPage() {
     }
   };
 
-  // If cart is empty and user not in final order processing
-  if (items.length === 0 && !isProcessingPayment) {
+  // If cart is empty and user not in final order processing or confirmation
+  if (items.length === 0 && !isProcessingPayment && !confirmedOrder) {
     return (
       <div className="max-w-3xl mx-auto px-4 py-24 text-center">
         <div className="w-20 h-20 rounded-full bg-teal-50 text-[#00A896] flex items-center justify-center mx-auto mb-6 shadow-sm">
@@ -466,7 +473,7 @@ export default function CheckoutPage() {
         <p className="text-sm text-slate-500 max-w-md mx-auto mb-8">
           You haven&apos;t added any medicines or health products to your cart yet. Explore our verified pharmacy catalog.
         </p>
-        <Link href="/products">
+        <Link href="/medicines">
           <Button variant="primary" size="lg" className="rounded-xl px-8 shadow-md">
             Browse Medicines & Healthcare
           </Button>
@@ -559,8 +566,12 @@ export default function CheckoutPage() {
                 {items.map((item) => (
                   <div key={item.id} className="py-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                     <div className="flex items-start gap-3">
-                      <div className="w-14 h-14 rounded-2xl bg-teal-50/50 border border-teal-100/50 flex items-center justify-center shrink-0 p-2">
-                        <span className="text-xl">💊</span>
+                      <div className="relative w-14 h-14 rounded-2xl bg-white border border-slate-200/80 overflow-hidden shrink-0 flex items-center justify-center">
+                        <ProductImage
+                          product={item.product}
+                          className="w-full h-full"
+                          sizes="56px"
+                        />
                       </div>
                       <div>
                         <h4 className="text-sm font-bold text-slate-900 line-clamp-1">{item.product.name}</h4>
@@ -919,11 +930,38 @@ export default function CheckoutPage() {
               <div className="border-b border-slate-100 pb-4">
                 <h2 className="text-lg font-bold text-[#0A2540] flex items-center gap-2">
                   <Tag className="h-5 w-5 text-[#00A896]" />
-                  <span>Step 4: Order Summary & Coupons</span>
+                  <span>Step 4: Order Review & Summary</span>
                 </h2>
                 <p className="text-xs text-slate-400 mt-0.5">
-                  Apply discounts, add delivery instructions, and review your order breakdown.
+                  Confirm medicines, apply promotional discounts, and review delivery instructions.
                 </p>
+              </div>
+
+              {/* Itemized Order Review */}
+              <div className="space-y-3">
+                <span className="text-xs font-bold text-slate-700 block">Itemized Medicines ({items.length})</span>
+                <div className="divide-y divide-slate-100 rounded-2xl border border-slate-100 p-3 bg-slate-50/50">
+                  {items.map((item) => (
+                    <div key={item.id} className="py-2.5 flex items-center justify-between gap-3 text-xs">
+                      <div className="flex items-center gap-3">
+                        <div className="relative w-12 h-12 rounded-xl bg-white border border-slate-200/80 overflow-hidden shrink-0 flex items-center justify-center">
+                          <ProductImage
+                            product={item.product}
+                            className="w-full h-full"
+                            sizes="48px"
+                          />
+                        </div>
+                        <div>
+                          <span className="font-bold text-slate-900 block truncate max-w-[200px] sm:max-w-xs">{item.product.name}</span>
+                          <span className="text-[11px] text-slate-400">Qty: {item.quantity} × {formatCurrency(item.product.discounted_price || item.product.price)}</span>
+                        </div>
+                      </div>
+                      <span className="font-bold text-slate-900">
+                        {formatCurrency(parseFloat(item.product.discounted_price || item.product.price) * item.quantity)}
+                      </span>
+                    </div>
+                  ))}
+                </div>
               </div>
 
               {/* Delivery snapshot recap */}
@@ -1188,6 +1226,113 @@ export default function CheckoutPage() {
                 >
                   Pay {formatCurrency(grandTotal)} Now
                 </Button>
+              </div>
+            </Card>
+          )}
+
+          {/* ================= STEP 6: ORDER CONFIRMATION ================= */}
+          {currentStep === 6 && confirmedOrder && (
+            <Card className="p-6 sm:p-8 rounded-3xl border border-slate-200 bg-white shadow-md space-y-6">
+              <div className="text-center pb-4 border-b border-slate-100">
+                <div className="w-16 h-16 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center mx-auto mb-3 shadow-md shadow-emerald-500/10">
+                  <CheckCircle2 className="h-8 w-8 stroke-[2.5]" />
+                </div>
+                <h2 className="text-2xl font-black text-[#0A2540]">Order Confirmed!</h2>
+                <p className="text-xs text-slate-500 mt-1">
+                  Your order has been placed and received by our licensed fulfillment dispensary.
+                </p>
+                <div className="mt-3 inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 text-xs font-bold text-slate-700">
+                  <span>Order Number:</span>
+                  <span className="font-mono text-[#00A896]">{confirmedOrder.order_number}</span>
+                </div>
+              </div>
+
+              {/* Items List */}
+              <div>
+                <h3 className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">
+                  Ordered Medications ({confirmedOrder.items?.length || 0})
+                </h3>
+                <div className="divide-y divide-slate-100 rounded-2xl border border-slate-100 p-3 bg-slate-50/40">
+                  {confirmedOrder.items?.map((item: OrderItem) => (
+                    <div key={item.id} className="py-2.5 flex items-center justify-between text-xs">
+                      <div className="flex items-center gap-3">
+                        <div className="relative w-10 h-10 rounded-xl bg-white border border-slate-200/80 overflow-hidden shrink-0 flex items-center justify-center">
+                          <ProductImage
+                            product={{
+                              name: item.product_name,
+                              image_url: item.product_image,
+                              primary_image: item.product_image,
+                              dosage_form: 'MEDICINE',
+                              category_name: 'Pharmacy',
+                            }}
+                            className="w-full h-full"
+                            sizes="40px"
+                          />
+                        </div>
+                        <div>
+                          <span className="font-bold text-slate-900 block truncate max-w-[200px] sm:max-w-xs">{item.product_name}</span>
+                          <span className="text-[11px] text-slate-400">Qty: {item.quantity} × {formatCurrency(item.unit_price)}</span>
+                        </div>
+                      </div>
+                      <span className="font-bold text-slate-900">{formatCurrency(item.total_price)}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Delivery Address & Payment Status */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs pt-3 border-t border-slate-100">
+                <div className="p-3.5 rounded-2xl bg-slate-50 border border-slate-100">
+                  <span className="font-bold text-slate-400 uppercase text-[10px] tracking-wider block mb-1 flex items-center gap-1">
+                    <MapPin className="h-3.5 w-3.5 text-[#00A896]" /> Delivery Destination
+                  </span>
+                  {confirmedOrder.shipping_address_snapshot || confirmedOrder.shipping_address ? (
+                    <div className="text-slate-600 space-y-0.5">
+                      <span className="font-bold text-slate-900 block">
+                        {(confirmedOrder.shipping_address_snapshot || confirmedOrder.shipping_address).full_name}
+                      </span>
+                      <span>{(confirmedOrder.shipping_address_snapshot || confirmedOrder.shipping_address).address_line1}</span>
+                      <span className="block">
+                        {(confirmedOrder.shipping_address_snapshot || confirmedOrder.shipping_address).city},{' '}
+                        {(confirmedOrder.shipping_address_snapshot || confirmedOrder.shipping_address).state} -{' '}
+                        {(confirmedOrder.shipping_address_snapshot || confirmedOrder.shipping_address).postal_code}
+                      </span>
+                    </div>
+                  ) : null}
+                </div>
+
+                <div className="p-3.5 rounded-2xl bg-slate-50 border border-slate-100">
+                  <span className="font-bold text-slate-400 uppercase text-[10px] tracking-wider block mb-1 flex items-center gap-1">
+                    <CreditCard className="h-3.5 w-3.5 text-[#00A896]" /> Payment Status
+                  </span>
+                  <div className="space-y-1 text-slate-600">
+                    <div className="flex justify-between items-center">
+                      <span>Status:</span>
+                      <Badge variant={confirmedOrder.status === 'CONFIRMED' || confirmedOrder.payment_status === 'PAID' ? 'success' : 'warning'}>
+                        {confirmedOrder.payment_status || (confirmedOrder.status === 'CONFIRMED' ? 'PAID' : 'PENDING')}
+                      </Badge>
+                    </div>
+                    <div className="flex justify-between items-center font-bold text-slate-800 pt-1">
+                      <span>Total:</span>
+                      <span className="text-[#00A896] text-sm">{formatCurrency(confirmedOrder.total_amount)}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Action Buttons */}
+              <div className="pt-4 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-3">
+                <Link href="/medicines" className="w-full sm:w-auto">
+                  <Button variant="outline" size="md" className="w-full rounded-2xl">
+                    <ShoppingBag className="h-4 w-4 mr-1.5" /> Continue Shopping
+                  </Button>
+                </Link>
+                <Link href={`/account/orders/${confirmedOrder.id}`} className="w-full sm:w-auto">
+                  <Button variant="primary" size="md" className="w-full rounded-2xl font-bold shadow-md shadow-[#00A896]/20">
+                    <span>View Order Details</span>
+                    <ArrowRight className="h-4 w-4 ml-1.5" />
+                  </Button>
+                </Link>
               </div>
             </Card>
           )}

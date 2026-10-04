@@ -65,17 +65,34 @@ class OrderSerializer(serializers.ModelSerializer):
     coupon = CouponSerializer(read_only=True)
     payments = OrderPaymentSerializer(many=True, read_only=True)
     status_display = serializers.CharField(source='get_status_display', read_only=True)
+    payment_status = serializers.SerializerMethodField()
+    payment_method = serializers.SerializerMethodField()
 
     class Meta:
         model = Order
         fields = (
             'id', 'order_number', 'status', 'status_display', 'subtotal',
-            'discount_amount', 'delivery_fee', 'platform_fee', 'total_amount',
+            'discount_amount', 'delivery_fee', 'platform_fee', 'tax_amount', 'total_amount',
+            'payment_status', 'payment_method',
             'shipping_address', 'shipping_address_snapshot', 'coupon', 'coupon_code',
             'prescription', 'courier_name', 'courier_tracking_url', 'tracking_number',
             'estimated_delivery', 'delivery_notes', 'delivery_timeline', 'items',
             'payments', 'created_at', 'updated_at'
         )
+
+    def get_payment_status(self, obj):
+        payment = obj.payments.order_by('-created_at').first()
+        if payment:
+            return payment.status
+        if obj.status == Order.Status.CONFIRMED:
+            return Payment.Status.PAID
+        return Payment.Status.PENDING
+
+    def get_payment_method(self, obj):
+        payment = obj.payments.order_by('-created_at').first()
+        if payment:
+            return payment.provider
+        return 'RAZORPAY'
 
 class CheckoutSerializer(serializers.Serializer):
     shipping_address_id = serializers.UUIDField()

@@ -10,9 +10,9 @@ from apps.products.models import Product
 from apps.prescriptions.models import Prescription
 
 def generate_order_number():
-    timestamp = timezone.now().strftime('%Y%m%d')
+    year = timezone.now().strftime('%Y')
     random_str = ''.join(random.choices(string.ascii_uppercase + string.digits, k=6))
-    return f"MS-{timestamp}-{random_str}"
+    return f"MS-{year}-{random_str}"
 
 class Coupon(TimeStampedModel):
     class DiscountType(models.TextChoices):
@@ -86,6 +86,7 @@ class Order(TimeStampedModel):
     discount_amount = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
     delivery_fee = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
     platform_fee = models.DecimalField(max_digits=10, decimal_places=2, default=5.00)
+    tax_amount = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
     total_amount = models.DecimalField(max_digits=10, decimal_places=2)
 
     coupon = models.ForeignKey(Coupon, on_delete=models.SET_NULL, null=True, blank=True, related_name='orders')

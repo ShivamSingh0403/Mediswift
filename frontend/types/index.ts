@@ -334,8 +334,11 @@ export interface Order {
   subtotal: string;
   discount_amount: string;
   delivery_fee: string;
+  tax_amount?: string;
   platform_fee?: string;
   total_amount: string;
+  payment_status?: string;
+  payment_method?: string;
   shipping_address: Address;
   shipping_address_snapshot?: Partial<Address>;
   coupon?: Coupon | null;

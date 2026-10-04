@@ -11,7 +11,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Card } from '@/components/ui/card';
 import { formatCurrency, formatDate } from '@/lib/utils';
-import { MedicineImage } from '@/components/ui/medicine-image';
+import { ProductImage } from '@/components/ProductImage';
 import {
   CheckCircle2,
   Clock,
@@ -283,10 +283,10 @@ export default function OrderTrackingDetailPage({ params }: { params: Promise<{ 
                 <div key={item.id} className="py-3 flex items-center justify-between text-xs">
                   <div className="flex items-center gap-3">
                     <div className="w-12 h-12 rounded-xl overflow-hidden shrink-0 border border-slate-200">
-                      <MedicineImage
-                        compact
-                        product={{ name: item.product_name, dosage_form: 'ITEM', category_name: 'Medication' }}
+                      <ProductImage
+                        product={{ name: item.product_name, dosage_form: 'ITEM', category_name: 'Medication', image_url: item.product_image }}
                         className="w-full h-full"
+                        sizes="48px"
                       />
                     </div>
                     <div>

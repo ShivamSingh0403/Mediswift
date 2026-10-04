@@ -22,6 +22,7 @@ from apps.orders.serializers import (
 )
 from apps.cart.models import Cart, CartItem
 from apps.users.models import Address
+from apps.products.models import Product
 from apps.prescriptions.models import Prescription
 from apps.payments.models import Payment
 from apps.notifications.models import Notification
@@ -187,17 +188,29 @@ class CheckoutView(APIView):
         if not cart_items:
             return api_response(message="Shopping cart is empty.", status_code=status.HTTP_400_BAD_REQUEST, success=False)
 
-        # 1. Inventory pre-check
+        # 1. Inventory pre-check & row locking to eliminate race conditions
+        product_ids = [item.product_id for item in cart_items]
+        locked_products = {
+            p.id: p for p in Product.objects.select_for_update().filter(id__in=product_ids)
+        }
+
         for item in cart_items:
-            if not item.product or not item.product.is_active:
+            prod = locked_products.get(item.product_id)
+            if not prod or not prod.is_active:
                 return api_response(
                     message=f"'{item.product_name}' is currently unavailable for order.",
                     status_code=status.HTTP_400_BAD_REQUEST,
                     success=False
                 )
-            if item.product.stock_quantity < item.quantity:
+            if item.quantity <= 0:
                 return api_response(
-                    message=f"Insufficient inventory for '{item.product_name}'. Only {item.product.stock_quantity} units available.",
+                    message=f"Invalid order quantity for '{item.product_name}'.",
+                    status_code=status.HTTP_400_BAD_REQUEST,
+                    success=False
+                )
+            if prod.stock_quantity < item.quantity:
+                return api_response(
+                    message=f"Insufficient inventory for '{item.product_name}'. Only {prod.stock_quantity} units available.",
                     status_code=status.HTTP_400_BAD_REQUEST,
                     success=False
                 )
@@ -332,6 +345,7 @@ class CheckoutView(APIView):
             discount_amount=discount_amount,
             delivery_fee=delivery_fee,
             platform_fee=platform_fee,
+            tax_amount=Decimal('0.00'),
             total_amount=total_amount,
             coupon=coupon,
             coupon_code=coupon.code if coupon else '',
@@ -345,21 +359,22 @@ class CheckoutView(APIView):
             status=Order.Status.CONFIRMED if payment_method == Payment.Provider.COD else Order.Status.PENDING,
         )
 
-        # 7. Create Order items and decrement inventory atomically
+        # 7. Create Order items and decrement inventory atomically using locked models
         order_items = []
         for item in cart_items:
+            prod = locked_products.get(item.product_id, item.product)
             order_items.append(
                 OrderItem(
                     order=order,
-                    product=item.product,
-                    product_name=item.product.name,
+                    product=prod,
+                    product_name=prod.name,
                     unit_price=item.unit_price,
                     quantity=item.quantity,
                     total_price=item.total_price,
                 )
             )
-            item.product.stock_quantity -= item.quantity
-            item.product.save(update_fields=['stock_quantity'])
+            prod.stock_quantity -= item.quantity
+            prod.save(update_fields=['stock_quantity'])
 
         OrderItem.objects.bulk_create(order_items)
 

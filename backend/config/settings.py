@@ -190,3 +190,8 @@ CORS_ALLOWED_ORIGINS = [
     origin.strip() for origin in os.getenv('CORS_ALLOWED_ORIGINS', 'http://localhost:3000,http://127.0.0.1:3000').split(',') if origin.strip()
 ]
 CORS_ALLOW_CREDENTIALS = True
+
+# Payment Configuration
+PAYMENT_PROVIDER = os.getenv('PAYMENT_PROVIDER', os.getenv('DEFAULT_PAYMENT_PROVIDER', 'RAZORPAY'))
+PAYMENT_KEY_ID = os.getenv('PAYMENT_KEY_ID', os.getenv('RAZORPAY_KEY_ID', 'rzp_test_mediswift_live'))
+PAYMENT_KEY_SECRET = os.getenv('PAYMENT_KEY_SECRET', os.getenv('RAZORPAY_KEY_SECRET', ''))
